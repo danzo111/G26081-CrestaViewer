@@ -171,7 +171,7 @@ export class UIManager {
     }
 
     this.elements.popupType.className = 'type-tag manhole';
-    this.elements.popupType.textContent = (mh.type || 'MANHOLE').toUpperCase();
+    this.elements.popupType.textContent = (mh.type ? mh.type.toUpperCase() + ' MANHOLE' : 'MANHOLE');
     this.elements.popupTitle.textContent = mh.name || 'Unknown';
 
     let html = '';
@@ -181,7 +181,7 @@ export class UIManager {
       mh.depth === 0.33 ? "Can't Measure" : `${Math.max(mh.depth || 0, 0).toFixed(2)} m`, 
       'amber'
     );
-    html += this._row('Y (m)', ((mh.x || 0)).toFixed(2));
+    html += this._row('Y (m)', (-(mh.x || 0)).toFixed(2));
     html += this._row('X (m)', ((mh.y || 0)).toFixed(2));
 
     if (mh.images && mh.images.length > 0) {
@@ -223,15 +223,15 @@ export class UIManager {
     }
 
     this.elements.popupType.className = 'type-tag pipe';
-    this.elements.popupType.textContent = 'PIPE';
+    this.elements.popupType.textContent = pd.isStormwater ? 'STORMWATER PIPE' : 'SEWER PIPE';
     this.elements.popupTitle.textContent = pd.id || 'Unknown';
 
     let html = '';
     html += this._row('Diameter', `${pd.diameter_mm || 0} mm`, 'amber');
     html += this._row('From', pd.fromMH?.name || 'Unknown', 'accent');
     html += this._row('To', pd.toMH?.name || 'Unknown', 'accent');
-    html += this._row('Upstream Inv.', `${(pd.fromInvert || 0).toFixed(3)} m`, 'green');
-    html += this._row('Downstream Inv.', `${(pd.toInvert || 0).toFixed(3)} m`, 'green');
+    html += this._row('Upstream Inv.', `${(pd.fromInvert || 0).toFixed(2)} m`, 'green');
+    html += this._row('Downstream Inv.', `${(pd.toInvert || 0).toFixed(2)} m`, 'green');
     html += this._row('Length', `${(pd.length || 0).toFixed(2)} m`);
     html += this._row('Grade', 
       `${(pd.grade > 0 ? '+' : '')}${(pd.grade || 0).toFixed(2)} %`,
@@ -259,15 +259,15 @@ export class UIManager {
     }
 
     this.elements.popupType.className = 'type-tag pipe';
-    this.elements.popupType.textContent = 'PIPE';
+    this.elements.popupType.textContent = pd.isStormwater ? 'STORMWATER PIPE' : 'SEWER PIPE';
     this.elements.popupTitle.textContent = pd.id || 'Unknown';
 
     let html = '';
     html += this._row('Diameter', `${pd.diameter_mm || 0} mm`, 'amber');
     html += this._row('From', pd.fromMH?.name || 'Unknown', 'accent');
     html += this._row('To', pd.toMH?.name || 'Unknown', 'accent');
-    html += this._row('Upstream Inv.', `${(pd.fromInvert || 0).toFixed(3)} m`, 'green');
-    html += this._row('Downstream Inv.', `${(pd.toInvert || 0).toFixed(3)} m`, 'green');
+    html += this._row('Upstream Inv.', `${(pd.fromInvert || 0).toFixed(2)} m`, 'green');
+    html += this._row('Downstream Inv.', `${(pd.toInvert || 0).toFixed(2)} m`, 'green');
     html += this._row('Length', `${(pd.length || 0).toFixed(2)} m`);
     html += this._row('Grade', 
       `${(pd.grade > 0 ? '+' : '')}${(pd.grade || 0).toFixed(2)} %`,
