@@ -208,8 +208,8 @@ export class UIManager {
       mh.depth === 0.33 ? "Can't Measure" : `${Math.max(mh.depth || 0, 0).toFixed(2)} m`, 
       'amber'
     );
-    html += this._row('X (m)', (-(mh.y || 0)).toFixed(2));
-    html += this._row('Y (m)', ((mh.x || 0)).toFixed(2));
+    html += this._row('Y (m)', (-(mh.y || 0)).toFixed(2));
+    html += this._row('X (m)', (-(mh.x || 0)).toFixed(2));
 
     if (mh.images && mh.images.length > 0) {
       html += this._buildImageGallery(mh.images, mh.name);
