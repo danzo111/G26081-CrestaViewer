@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Stormwater and sewer network viewer with 2D Map and 3D technical views">
+<meta name="theme-color" content="#0D1E35">
+<title>NetView — Stormwater & Sewer Network</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Source+Sans+3:wght@400;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+<base target="_blank">
+<base target="_blank">
+<base target="_blank">
+</head>
+<body>
+
+<!-- Error Banner -->
+<div id="error-banner">
+  <span>⚠</span>
+  <span class="error-text">Error message</span>
+  <button class="error-close">×</button>
+</div>
+
+<!-- Loading Screen -->
+<div id="loading">
+  <div class="load-ring"></div>
+  <div id="load-label">INITIALISING…</div>
+  <div id="load-bar-wrap"><div id="load-bar"></div></div>
+</div>
+
+<!-- Header -->
+<div id="header">
+  <span class="logo" title="Double-click to reset view">⬡ NetView 3D</span>
+  <span class="divider"></span>
+  <span class="hint">Click <span>manhole</span> or <span>pipe</span> for details</span>
+  <span id="stats-label"></span>
+  <span id="crs-label">CRS: survey</span>
+</div>
+
+<!-- 3D Viewport -->
+<div id="viewport"></div>
+
+<!-- View Buttons -->
+<div id="view-buttons">
+  <button class="view-btn active" data-view="iso">ISO</button>
+  <button class="view-btn" data-view="top">Top</button>
+  <button class="view-btn" data-view="front">Front</button>
+  <button class="view-btn" data-view="right">Right</button>
+  <button class="view-btn" data-view="left">Left</button>
+  <button class="view-btn" data-view="back">Back</button>
+</div>
+
+<!-- Right Control Panel -->
+<div id="control-panel">
+
+  <!-- Layers Section -->
+  <div class="cp-section">
+    <h4>Layers</h4>
+    <div class="cp-row">
+      <input type="checkbox" id="layer-mh" checked>
+      <label for="layer-mh">Manholes</label>
+    </div>
+    <div class="cp-row">
+      <input type="checkbox" id="layer-pipes" checked>
+      <label for="layer-pipes">Pipes</label>
+    </div>
+    <div class="cp-row">
+      <input type="checkbox" id="layer-basemap" checked>
+      <label for="layer-basemap">Basemap</label>
+    </div>
+    <div class="cp-row">
+      <input type="checkbox" id="layer-ground" checked>
+      <label for="layer-ground">Ground Plane</label>
+    </div>
+  </div>
+
+  <!-- Basemap Settings Section -->
+  <div class="cp-section">
+    <h4>Basemap</h4>
+    <div class="cp-row">
+      <label style="font-size:10px;color:#888;min-width:50px;">Offset</label>
+      <input type="range" id="elev-slider" min="0" max="20" step="0.1" value="0">
+      <span class="cp-value" id="elev-display">0.0m</span>
+    </div>
+    <div class="cp-hint" id="elev-abs">Base: 1546.83m</div>
+    <div class="cp-row" style="margin-top:8px;">
+      <label style="font-size:10px;color:#888;min-width:50px;">Opacity</label>
+      <input type="range" id="opacity-slider" min="0" max="100" step="1" value="100">
+      <span class="cp-value" id="opacity-display">100%</span>
+    </div>
+  </div>
+
+  <!-- Legend Section -->
+  <div class="cp-section">
+    <h4>Legend</h4>
+    <div class="leg-row">
+      <div style="width:14px;height:14px;background:#D4880F;border-radius:50%;flex-shrink:0;"></div>
+      <span>Sewer Manhole Cover</span>
+    </div>
+    <div class="leg-row">
+      <div style="width:14px;height:14px;background:#00c8ff;border-radius:50%;flex-shrink:0;"></div>
+      <span>Stormwater Manhole Cover</span>
+    </div>
+    <div class="leg-row">
+      <div style="width:12px;height:10px;background:#1C3557;border:1px solid #2a4a6f;border-radius:2px;flex-shrink:0;"></div>
+      <span>Manhole Shaft</span>
+    </div>
+    <div class="leg-row">
+      <div style="width:14px;height:8px;background:#4A90D9;border-radius:2px;flex-shrink:0;"></div>
+      <span>Stormwater Pipe</span>
+    </div>
+    <div class="leg-row">
+      <div style="width:14px;height:8px;background:#D4880F;border-radius:2px;flex-shrink:0;"></div>
+      <span>Sewer Pipe</span>
+    </div>
+    <div class="leg-row flow-arrow" style="margin-top:8px;">
+      <div class="flow-arrow-icon" style="width:0;height:0;border-left:6px solid transparent;border-right:6px solid transparent;border-bottom:10px solid #00aaff;filter:drop-shadow(0 0 2px rgba(0,170,255,0.4));flex-shrink:0;"></div>
+      <span>Flow Direction</span>
+    </div>
+  </div>
+
+  <!-- Navigation Section -->
+  <div class="cp-section">
+    <h4>Navigation</h4>
+    <div class="nav-row"><span class="nav-key">Drag</span><span class="nav-desc">Orbit</span></div>
+    <div class="nav-row"><span class="nav-key">Right-drag</span><span class="nav-desc">Pan</span></div>
+    <div class="nav-row"><span class="nav-key">Scroll</span><span class="nav-desc">Zoom</span></div>
+    <div class="nav-row"><span class="nav-key">Click</span><span class="nav-desc">Select</span></div>
+    <div class="nav-row"><span class="nav-key">1-6</span><span class="nav-desc">Views</span></div>
+    <div class="nav-row"><span class="nav-key">M</span><span class="nav-desc">Measure</span></div>
+    <div class="nav-row"><span class="nav-key">Esc</span><span class="nav-desc">Cancel</span></div>
+  </div>
+
+  <!-- Measure Tool -->
+  <div class="cp-section">
+    <button class="measure-btn" id="measure-btn">MEASURE DISTANCE</button>
+  </div>
+
+</div>
+
+<!-- Popup -->
+<div id="popup">
+  <div class="popup-card">
+    <div class="popup-header">
+      <span class="type-tag" id="popup-type">MANHOLE</span>
+      <button class="popup-close" id="popup-close">×</button>
+    </div>
+    <div class="popup-title" id="popup-title"></div>
+    <div class="popup-body" id="popup-body"></div>
+  </div>
+</div>
+
+<!-- Elevation Profile Panel -->
+<div id="profile-panel">
+  <div class="profile-header">
+    <h3>⬡ Elevation Profile</h3>
+    <button class="profile-close" id="profile-close">×</button>
+  </div>
+  <div class="profile-canvas-wrap">
+    <canvas id="profile-canvas" width="300" height="180"></canvas>
+  </div>
+  <div class="profile-stats" id="profile-stats"></div>
+</div>
+
+<!-- Measure Result Panel -->
+<div id="measure-panel">
+  <h4>⬡ Measure Distance</h4>
+  <p style="font-size:11px;color:#888;margin-bottom:8px;">Click two points on the ground to measure</p>
+  <div class="measure-result" id="measure-result">—</div>
+  <button id="measure-close" style="margin-top:10px;width:100%;padding:6px;background:#1C3557;color:#fff;border:none;border-radius:4px;cursor:pointer;font-family:var(--mono);font-size:11px;">Close</button>
+</div>
+
+<!-- Import Map -->
+<script type="importmap">
+{
+  "imports": {
+    "three": "https://unpkg.com/three@0.160.0/build/three.module.js",
+    "three/addons/": "https://unpkg.com/three@0.160.0/examples/jsm/",
+    "three-mesh-bvh": "https://unpkg.com/three-mesh-bvh@0.9.0/build/index.module.js"
+  }
+}
+</script>
+
+<!-- Application Entry Point -->
+<script type="module" src="main.js"></script>
+
+</body>
+</html>
