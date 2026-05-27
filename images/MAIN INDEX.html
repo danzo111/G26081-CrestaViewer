@@ -1,0 +1,1963 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=2.0">
+<title>Network Viewer — 3D</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Source+Sans+3:wght@400;600&display=swap" rel="stylesheet">
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Source+Sans+3:wght@400;600&display=swap');
+
+  :root {
+    --bg:     #ffffff;
+    --panel:  #ffffff;
+    --border: #D4B483;
+    --accent: #D4880F;
+    --amber:  #D4880F;
+    --green:  #2E8B57;
+    --red:    #C0392B;
+    --muted:  #D4B483;
+    --text:   #1C3557;
+    --mono:   'Source Sans 3', sans-serif;
+    --sans:   'Source Sans 3', sans-serif;
+    --heading: 'Playfair Display', Georgia, serif;
+  }
+  * { margin:0; padding:0; box-sizing:border-box; }
+  html, body { width:100%; height:100%; overflow:hidden; background:#ffffff; color:var(--text); font-family:var(--sans); }
+
+  #header {
+    position:fixed; top:0; left:0; right:0; z-index:20; height:48px;
+    background:rgba(255,255,255,0.98); border-bottom:1px solid #D4B483;
+    display:flex; align-items:center; gap:16px; padding:0 20px;
+    backdrop-filter:blur(8px);
+  }
+  .logo    { font-family:var(--heading); font-size:15px; color:#1C3557; letter-spacing:2px; text-transform:uppercase; font-weight:700; cursor:pointer; }
+  .logo:hover { color:#D4880F; }
+  .divider { width:1px; height:20px; background:#D4B483; }
+  .hint    { font-size:12px; color:#666; font-family:var(--sans); }
+  .hint span { color:#D4880F; font-weight:600; }
+  #crs-label { margin-left:auto; font-family:var(--mono); font-size:10px; color:#666; letter-spacing:1px; }
+  #stats-label { margin-left:12px; font-family:var(--mono); font-size:10px; color:#1C3557; }
+
+  #viewport { 
+    position:fixed; 
+    top:48px; 
+    left:0; 
+    width:calc(100% - 240px); 
+    bottom:0; 
+  }
+  #viewport canvas { 
+    display:block; 
+    background:transparent; 
+  }
+
+  /* ── View Buttons ─────────────────────────── */
+  #view-buttons {
+    position:fixed; top:60px; left:50%; transform:translateX(-50%); z-index:25;
+    display:flex; gap:4px; background:rgba(255,255,255,0.98); border:1px solid #D4B483;
+    border-radius:6px; padding:4px; backdrop-filter:blur(8px);
+    box-shadow:0 2px 12px rgba(0,0,0,0.1);
+  }
+  .view-btn {
+    background:#fff; border:1px solid #D4B483; color:#1C3557; font-family:var(--mono);
+    font-size:10px; letter-spacing:1px; padding:6px 12px; border-radius:4px;
+    cursor:pointer; transition:all 0.15s; text-transform:uppercase; font-weight:600;
+  }
+  .view-btn:hover { background:#D4880F; color:#fff; border-color:#D4880F; }
+  .view-btn.active { background:#1C3557; color:#fff; border-color:#1C3557; }
+
+  /* ── Right Control Panel (Fixed Sidebar) ──── */
+  #control-panel {
+    position:fixed; top:48px; right:0; bottom:0; z-index:25;
+    width:240px; overflow:hidden;
+    background:#ffffff; border-left:1px solid #D4B483;
+    padding:0; box-shadow:-2px 0 12px rgba(0,0,0,0.08);
+    display:flex; flex-direction:column;
+  }
+  .cp-section {
+    padding:12px 14px; border-bottom:1px solid rgba(212,180,131,0.3);
+  }
+  .cp-section:last-child { border-bottom:none; }
+  .cp-section h4 {
+    font-family:var(--heading); font-size:11px; color:#1C3557; letter-spacing:1px;
+    text-transform:uppercase; margin-bottom:10px; font-weight:700;
+  }
+  .cp-row {
+    display:flex; align-items:center; gap:8px; margin-bottom:6px;
+  }
+  .cp-row:last-child { margin-bottom:0; }
+  .cp-row label {
+    font-size:11px; color:#444; font-family:var(--sans); cursor:pointer; flex:1;
+  }
+  .cp-row input[type="checkbox"] {
+    accent-color:#D4880F; width:14px; height:14px; cursor:pointer;
+  }
+  .cp-row input[type="range"] {
+    flex:1; accent-color:#D4880F; cursor:pointer;
+  }
+  .cp-value {
+    font-family:var(--mono); font-size:10px; color:#1C3557; font-weight:600; min-width:40px; text-align:right;
+  }
+  .cp-hint {
+    font-size:9px; color:#888; font-family:var(--mono); margin-top:4px;
+  }
+
+  /* ── Legend Section ───────────────────────── */
+  .leg-row {
+    display:flex; align-items:center; gap:10px; margin-bottom:6px; font-size:11px; color:#1C3557;
+  }
+  .leg-row:last-child { margin-bottom:0; }
+
+  /* ── Navigation Section ───────────────────── */
+  .nav-row {
+    display:flex; justify-content:space-between; gap:12px; font-size:11px; margin-bottom:4px; color:#1C3557;
+  }
+  .nav-row:last-child { margin-bottom:0; }
+  .nav-key {
+    font-family:var(--mono); color:#D4880F; font-weight:600; font-size:10px;
+  }
+  .nav-desc { color:#666; font-size:10px; }
+
+  /* ── Measure Button ───────────────────────── */
+  .measure-btn {
+    display:block; width:100%; padding:8px; background:#D4880F; color:#fff;
+    border:none; border-radius:4px; font-family:var(--mono); font-size:11px;
+    letter-spacing:1px; cursor:pointer; text-align:center; transition:background 0.15s;
+  }
+  .measure-btn:hover { background:#b8760d; }
+  .measure-btn.active { background:#C0392B; }
+
+  /* ── Popup ───────────────────────────────── */
+  #popup {
+    position:fixed; top:60px; left:20px; z-index:30; pointer-events:none;
+    opacity:0; transform:translateY(6px) scale(0.97);
+    transition:opacity 0.16s ease, transform 0.16s ease; max-width:320px;
+  }
+  #popup.visible { opacity:1; transform:translateY(0) scale(1); pointer-events:auto; }
+  .popup-card {
+    background:rgba(255,255,255,0.98); border:1px solid #D4B483;
+    border-radius:8px; overflow:hidden;
+    box-shadow:0 8px 32px rgba(0,0,0,0.15);
+  }
+  .popup-header {
+    padding:10px 14px; display:flex; align-items:center; justify-content:space-between;
+    border-bottom:1px solid #D4B483; background:#faf8f5;
+  }
+  .type-tag { font-family:var(--mono); font-size:9px; letter-spacing:2px; text-transform:uppercase; padding:2px 7px; border-radius:2px; }
+  .type-tag.manhole { background:rgba(212,136,15,0.15); color:#D4880F; }
+  .type-tag.pipe    { background:rgba(74,144,217,0.15);  color:#4A90D9; }
+  .popup-close {
+    width:20px; height:20px; background:none; border:none; color:#666;
+    cursor:pointer; pointer-events:auto; font-size:16px;
+    display:flex; align-items:center; justify-content:center; border-radius:3px;
+    transition:color 0.15s, background 0.15s;
+  }
+  .popup-close:hover { color:#1C3557; background:rgba(0,0,0,0.06); }
+  .popup-title { font-size:14px; font-weight:600; color:#1C3557; padding:10px 14px 2px; font-family:var(--heading); }
+  .popup-body  { padding:4px 14px 14px; }
+  .popup-row   { display:flex; justify-content:space-between; align-items:baseline; padding:5px 0; border-bottom:1px solid rgba(212,180,131,0.3); }
+  .popup-row:last-child { border-bottom:none; }
+  .popup-label { font-size:11px; color:#888; }
+  .popup-value { font-family:var(--mono); font-size:12px; color:#1C3557; }
+  .popup-value.accent { color:#D4880F; }
+  .popup-value.amber  { color:#D4880F;  }
+  .popup-value.green  { color:#2E8B57;  }
+  .popup-value.red    { color:#C0392B;    }
+
+  /* ── Image Gallery in Popup ──────────────── */
+  .img-gallery {
+    margin-top:10px; border:1px solid #D4B483; border-radius:6px; overflow:hidden;
+    background:rgba(0,0,0,0.05);
+  }
+  .img-scroll {
+    display:flex; overflow-x:auto; scroll-snap-type:x mandatory; scroll-behavior:smooth;
+    scrollbar-width:thin; scrollbar-color:#D4B483 transparent;
+  }
+  .img-scroll::-webkit-scrollbar { height:4px; }
+  .img-scroll::-webkit-scrollbar-thumb { background:#D4B483; border-radius:2px; }
+  .img-item {
+    flex:0 0 100%; scroll-snap-align:start; position:relative;
+    display:flex; align-items:center; justify-content:center; min-height:160px;
+    background:rgba(0,0,0,0.03);
+  }
+  .img-item img {
+    max-width:100%; max-height:200px; object-fit:contain; display:block;
+  }
+  .img-item .img-label {
+    position:absolute; bottom:0; left:0; right:0;
+    background:rgba(0,0,0,0.7); padding:4px 8px;
+    font-family:var(--mono); font-size:9px; color:#D4B483; letter-spacing:1px;
+  }
+  .img-dots {
+    display:flex; justify-content:center; gap:6px; padding:6px;
+    border-top:1px solid #D4B483;
+  }
+  .img-dot {
+    width:6px; height:6px; border-radius:50%; background:#D4B483;
+    cursor:pointer; transition:background 0.2s;
+  }
+  .img-dot.active { background:#D4880F; }
+
+  /* ── Elevation Profile Panel ─────────────── */
+  #profile-panel {
+    position:fixed; top:60px; left:20px; z-index:25;
+    width:340px; max-height:calc(100vh - 80px); overflow-y:auto;
+    background:rgba(255,255,255,0.98); border:1px solid #D4B483;
+    border-radius:8px; padding:14px;
+    box-shadow:0 8px 32px rgba(0,0,0,0.15);
+    opacity:0; transform:translateX(-20px) scale(0.97);
+    transition:opacity 0.2s ease, transform 0.2s ease; pointer-events:none;
+  }
+  #profile-panel.visible { opacity:1; transform:translateX(0) scale(1); pointer-events:auto; }
+  .profile-header {
+    display:flex; align-items:center; justify-content:space-between;
+    margin-bottom:12px; padding-bottom:8px; border-bottom:1px solid #D4B483;
+  }
+  .profile-header h3 {
+    font-family:var(--heading); font-size:13px; color:#D4880F; letter-spacing:2px; text-transform:uppercase; font-weight:700;
+  }
+  .profile-close {
+    width:22px; height:22px; background:none; border:none; color:#666;
+    cursor:pointer; font-size:18px; display:flex; align-items:center; justify-content:center;
+    border-radius:3px; transition:color 0.15s;
+  }
+  .profile-close:hover { color:#1C3557; }
+  .profile-canvas-wrap {
+    background:rgba(0,0,0,0.03); border:1px solid #D4B483; border-radius:4px;
+    padding:8px; margin-bottom:12px;
+  }
+  #profile-canvas { width:100%; height:180px; display:block; }
+  .profile-stats {
+    display:grid; grid-template-columns:1fr 1fr; gap:8px;
+  }
+  .profile-stat {
+    background:rgba(0,0,0,0.03); border:1px solid rgba(212,180,131,0.3);
+    border-radius:4px; padding:8px 10px;
+  }
+  .profile-stat-label { font-size:10px; color:#888; text-transform:uppercase; letter-spacing:1px; margin-bottom:2px; }
+  .profile-stat-value { font-family:var(--mono); font-size:13px; color:#1C3557; }
+  .profile-stat-value.up { color:#2E8B57; }
+  .profile-stat-value.down { color:#C0392B; }
+
+  /* ── Elevation Profile Button in Pipe Popup ─ */
+  .profile-btn {
+    display:block; width:100%; margin-top:10px; padding:8px 12px;
+    background:rgba(212,136,15,0.12); border:1px solid rgba(212,136,15,0.3);
+    border-radius:4px; color:#D4880F; font-size:12px;
+    font-family:var(--mono); letter-spacing:1px; cursor:pointer;
+    text-align:center; transition:background 0.15s, border-color 0.15s, box-shadow 0.15s;
+    box-shadow: 0 0 0 2px rgba(212,136,15,0.15), 0 2px 6px rgba(212,136,15,0.2);
+  }
+  .profile-btn:hover { 
+    background:rgba(212,136,15,0.2); border-color:rgba(212,136,15,0.5); 
+    box-shadow: 0 0 0 3px rgba(212,136,15,0.25), 0 4px 10px rgba(212,136,15,0.3);
+    transform: translateY(-1px);
+  }
+
+  /* ── Loading screen ──────────────────────── */
+  #loading {
+    position:fixed; inset:0; z-index:100; background:#ffffff;
+    display:flex; flex-direction:column; align-items:center; justify-content:center; gap:16px;
+    transition:opacity 0.5s;
+  }
+  #loading.hidden { opacity:0; pointer-events:none; }
+  .load-ring {
+    width:44px; height:44px; border:2px solid #D4B483;
+    border-top-color:#D4880F; border-radius:50%; animation:spin 0.8s linear infinite;
+  }
+  @keyframes spin { to { transform:rotate(360deg); } }
+  #load-label { font-family:var(--mono); font-size:11px; color:#888; letter-spacing:2px; min-width:240px; text-align:center; }
+  #load-bar-wrap { width:240px; height:3px; background:#D4B483; border-radius:2px; overflow:hidden; }
+  #load-bar { height:100%; width:0%; background:#D4880F; border-radius:2px; transition:width 0.25s ease; }
+
+  /* ── Measure Panel ────────────────────────── */
+  #measure-panel {
+    position:fixed; top:50%; left:calc(50% - 120px); transform:translate(-50%,-50%); z-index:40;
+    background:rgba(255,255,255,0.98); border:1px solid #D4B483;
+    border-radius:8px; padding:16px; backdrop-filter:blur(8px);
+    box-shadow:0 8px 32px rgba(0,0,0,0.15); display:none; min-width:280px;
+  }
+  #measure-panel.visible { display:block; }
+  #measure-panel h4 {
+    font-family:var(--heading); font-size:13px; color:#1C3557; margin-bottom:10px;
+  }
+  .measure-result {
+    font-family:var(--mono); font-size:14px; color:#D4880F; font-weight:600;
+  }
+</style>
+<base target="_blank">
+</head>
+<body>
+
+<div id="loading">
+  <div class="load-ring"></div>
+  <div id="load-label">INITIALISING…</div>
+  <div id="load-bar-wrap"><div id="load-bar"></div></div>
+</div>
+
+<div id="header">
+  <span class="logo" title="Double-click to reset view">⬡ NetView 3D</span>
+  <span class="divider"></span>
+  <span class="hint">Click <span>manhole</span> or <span>pipe</span> for details</span>
+  <span id="stats-label"></span>
+  <span id="crs-label">CRS: survey</span>
+</div>
+
+<div id="viewport"></div>
+
+<!-- View Buttons (top center) -->
+<div id="view-buttons">
+  <button class="view-btn active" data-view="iso">ISO</button>
+  <button class="view-btn" data-view="top">Top</button>
+  <button class="view-btn" data-view="front">Front</button>
+  <button class="view-btn" data-view="right">Right</button>
+  <button class="view-btn" data-view="left">Left</button>
+  <button class="view-btn" data-view="back">Back</button>
+</div>
+
+<!-- Unified Right Control Panel -->
+<div id="control-panel">
+
+  <!-- Layers Section -->
+  <div class="cp-section">
+    <h4>Layers</h4>
+    <div class="cp-row">
+      <input type="checkbox" id="layer-mh" checked>
+      <label for="layer-mh">Manholes</label>
+    </div>
+    <div class="cp-row">
+      <input type="checkbox" id="layer-pipes" checked>
+      <label for="layer-pipes">Pipes</label>
+    </div>
+    <div class="cp-row">
+      <input type="checkbox" id="layer-basemap" checked>
+      <label for="layer-basemap">Basemap</label>
+    </div>
+    <div class="cp-row">
+      <input type="checkbox" id="layer-ground" checked>
+      <label for="layer-ground">Ground Plane</label>
+    </div>
+  </div>
+
+  <!-- Basemap Settings Section -->
+  <div class="cp-section">
+    <h4>Basemap</h4>
+    <div class="cp-row">
+      <label style="font-size:10px;color:#888;min-width:50px;">Offset</label>
+      <input type="range" id="elev-slider" min="0" max="20" step="0.1" value="0">
+      <span class="cp-value" id="elev-display">0.0m</span>
+    </div>
+    <div class="cp-hint" id="elev-abs">Base: 1546.83m</div>
+    <div class="cp-row" style="margin-top:8px;">
+      <label style="font-size:10px;color:#888;min-width:50px;">Opacity</label>
+      <input type="range" id="opacity-slider" min="0" max="100" step="1" value="100">
+      <span class="cp-value" id="opacity-display">100%</span>
+    </div>
+  </div>
+
+  <!-- Legend Section -->
+  <div class="cp-section">
+    <h4>Legend</h4>
+    <div class="leg-row">
+      <div style="width:14px;height:14px;background:#00c8ff;border-radius:50%;flex-shrink:0;"></div>
+      <span>Manhole Cover</span>
+    </div>
+    <div class="leg-row">
+      <div style="width:12px;height:10px;background:#0a1e30;border:1px solid #1c4060;border-radius:2px;flex-shrink:0;"></div>
+      <span>Manhole Shaft</span>
+    </div>
+    <div class="leg-row">
+      <div style="width:14px;height:8px;background:#4A90D9;border-radius:2px;flex-shrink:0;"></div>
+      <span>Stormwater Pipe</span>
+    </div>
+    <div class="leg-row">
+      <div style="width:14px;height:8px;background:#D4880F;border-radius:2px;flex-shrink:0;"></div>
+      <span>Sewer Pipe</span>
+    </div>
+  </div>
+
+  <!-- Navigation Section -->
+  <div class="cp-section">
+    <h4>Navigation</h4>
+    <div class="nav-row"><span class="nav-key">Drag</span><span class="nav-desc">Orbit</span></div>
+    <div class="nav-row"><span class="nav-key">Right-drag</span><span class="nav-desc">Pan</span></div>
+    <div class="nav-row"><span class="nav-key">Scroll</span><span class="nav-desc">Zoom</span></div>
+    <div class="nav-row"><span class="nav-key">Click</span><span class="nav-desc">Select</span></div>
+    <div class="nav-row"><span class="nav-key">1-6</span><span class="nav-desc">Views</span></div>
+    <div class="nav-row"><span class="nav-key">M</span><span class="nav-desc">Measure</span></div>
+    <div class="nav-row"><span class="nav-key">Esc</span><span class="nav-desc">Cancel</span></div>
+  </div>
+
+  <!-- Measure Tool -->
+  <div class="cp-section">
+    <button class="measure-btn" id="measure-btn">MEASURE DISTANCE</button>
+  </div>
+
+</div>
+
+<!-- Popup -->
+<div id="popup">
+  <div class="popup-card">
+    <div class="popup-header">
+      <span class="type-tag" id="popup-type">MANHOLE</span>
+      <button class="popup-close" id="popup-close">×</button>
+    </div>
+    <div class="popup-title" id="popup-title"></div>
+    <div class="popup-body"  id="popup-body"></div>
+  </div>
+</div>
+
+<!-- Elevation Profile Panel -->
+<div id="profile-panel">
+  <div class="profile-header">
+    <h3>⬡ Elevation Profile</h3>
+    <button class="profile-close" id="profile-close">×</button>
+  </div>
+  <div class="profile-canvas-wrap">
+    <canvas id="profile-canvas" width="300" height="180"></canvas>
+  </div>
+  <div class="profile-stats" id="profile-stats"></div>
+</div>
+
+<!-- Measure Result Panel -->
+<div id="measure-panel">
+  <h4>⬡ Measure Distance</h4>
+  <p style="font-size:11px;color:#888;margin-bottom:8px;">Click two points on the ground to measure</p>
+  <div class="measure-result" id="measure-result">—</div>
+  <button id="measure-close" style="margin-top:10px;width:100%;padding:6px;background:#1C3557;color:#fff;border:none;border-radius:4px;cursor:pointer;font-family:var(--mono);font-size:11px;">Close</button>
+</div>
+
+<script type="importmap">
+{
+  "imports": {
+    "three": "https://unpkg.com/three@0.160.0/build/three.module.js",
+    "three/addons/": "https://unpkg.com/three@0.160.0/examples/jsm/"
+  }
+}
+</script>
+
+<script type="module">
+import * as THREE from 'three';
+import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
+
+/* ================================================================
+   ENHANCED STORMWATER NETWORK VIEWER
+
+   NEW FEATURES:
+   1. SMOOTH ZOOM: Exponential damping + distance-aware zoom speed
+   2. IMAGE GALLERY: Up to 3 images per manhole, horizontal scroll
+   3. PIPE ELEVATION PROFILE: Canvas-drawn profile with grade calc
+   4. CONNECTED MANHOLE HIGHLIGHT: Both ends glow when pipe selected
+   ================================================================ */
+
+// ── DEMO DATA ───────────────────────────────────────────────────
+const NETWORK_ORIGINAL = {
+  manholes: [
+
+
+// Sewer Manholes, Inclusive of Inspection Eyes as Manholes
+    { id:"SE001", name:"SE001", type:"Sewer", x:-97271.62, y:2891518.13, cover_elev:1560.82, depth:0.33, diameter:1.0, images: ["images/SE001(1).jpg", "images/SE001(2).jpg"] },
+    { id:"SE002", name:"SE002", type:"Sewer", x:-97283.69, y:2891514.00, cover_elev:1560.51, depth:1.47, diameter:1.0, images: ["images/SE002(1).jpg", "images/SE002(2).jpg"] },
+    { id:"SE003", name:"SE003", type:"Sewer", x:-97287.06, y:2891514.13, cover_elev:1560.54, depth:0.33, diameter:1.0, images: ["images/SE003(1).jpg", "images/SE003(2).jpg"] },
+    { id:"SE004", name:"SE004", type:"Sewer", x:-97310.41, y:2891500.00, cover_elev:1559.85, depth:2.66, diameter:1.0, images: ["images/SE004(1).jpg", "images/SE004(2).jpg"] },
+    { id:"SE005", name:"SE005", type:"Sewer", x:-97393.60, y:2891504.31, cover_elev:1557.16, depth:2, diameter:1.0, images: ["images/SE005(1).jpg", "images/SE005(2).jpg"] },
+    { id:"SE006", name:"SE006", type:"Sewer", x:-97321.31, y:2891400.18, cover_elev:1555.63, depth:0.33, diameter:1.0, images: ["images/SE006(1).jpg", "images/SE006(2).jpg"] },
+    { id:"SE007", name:"SE007", type:"Sewer", x:-97410.12, y:2891391.18, cover_elev:1550.9, depth:1.9, diameter:1.0, images: ["images/SE007(1).jpg", "images/SE007(2).jpg"] },
+    { id:"SE008", name:"SE008", type:"Sewer", x:-97293.60, y:2891290.30, cover_elev:1552.22, depth:0.33, diameter:1.0, images: ["images/SE008(1).jpg", "images/SE008(2).jpg"] },
+    { id:"SE009", name:"SE009", type:"Sewer", x:-97322.41, y:2891307.80, cover_elev:1551.79, depth:0.33, diameter:1.0, images: ["images/SE009(1).jpg", "images/SE009(2).jpg"] },
+    { id:"SE010", name:"SE010", type:"Sewer", x:-97357.87, y:2891283.02, cover_elev:1549.82, depth:0.33, diameter:1.0, images: ["images/SE010(1).jpg", "images/SE010(2).jpg"] },
+    { id:"SE011", name:"SE011", type:"Sewer", x:-97364.90, y:2891301.70, cover_elev:1550.66, depth:0.33, diameter:1.0, images: ["images/SE011(1).jpg", "images/SE011(2).jpg"] },
+    { id:"SE012", name:"SE012", type:"Sewer", x:-97386.52, y:2891272.83, cover_elev:1548.75, depth:0.33, diameter:1.0, images: ["images/SE012(1).jpg", "images/SE012(2).jpg"] },
+    { id:"SE013", name:"SE013", type:"Sewer", x:-97422.25, y:2891302.74, cover_elev:1548.43, depth:0.33, diameter:1.0, images: ["images/SE013(1).jpg", "images/SE013(2).jpg"] },
+    { id:"SE014", name:"SE014", type:"Sewer", x:-97431.12, y:2891310.59, cover_elev:1548.24, depth:0.33, diameter:1.0, images: ["images/SE014(1).jpg", "images/SE014(2).jpg"] },
+    { id:"SE015", name:"SE015", type:"Sewer", x:-97434.70, y:2891314.99, cover_elev:1548.31, depth:0.33, diameter:1.0, images: ["images/SE015(1).jpg", "images/SE015(2).jpg"] },
+    { id:"SE017", name:"SE017", type:"Sewer", x:-97498.81, y:2891365.90, cover_elev:1549.45, depth:2.6, diameter:1.0, images: ["images/SE017(1).jpg", "images/SE017(2).jpg"] },
+    { id:"SE018", name:"SE018", type:"Sewer", x:-97533.10, y:2891625.42, cover_elev:1557.1, depth:1.2, diameter:1.0, images: ["images/SE018(1).jpg", "images/SE018(2).jpg"] },
+    { id:"SE019", name:"SE019", type:"Sewer", x:-97555.79, y:2891600.57, cover_elev:1557.18, depth:1.7, diameter:1.0, images: ["images/SE019(1).jpg", "images/SE019(2).jpg"] },
+    { id:"SE020", name:"SE020", type:"Sewer", x:-97547.88, y:2891587.94, cover_elev:1556.49, depth:1.55, diameter:1.0, images: ["images/SE020(1).jpg", "images/SE020(2).jpg"] },
+    { id:"SE021", name:"SE021", type:"Sewer", x:-97547.78, y:2891581.85, cover_elev:1556.45, depth:2.2, diameter:1.0, images: ["images/SE021(1).jpg", "images/SE021(2).jpg"] },
+    { id:"SE022", name:"SE022", type:"Sewer", x:-97544.35, y:2891541.34, cover_elev:1555.09, depth:1.7, diameter:1.0, images: ["images/SE022(1).jpg", "images/SE022(2).jpg"] },
+    { id:"SE023", name:"SE023", type:"Sewer", x:-97546.55, y:2891534.65, cover_elev:1555.01, depth:2.7, diameter:1.0, images: ["images/SE023(1).jpg", "images/SE023(2).jpg"] },
+    { id:"SE026", name:"SE026", type:"Sewer", x:-97557.92, y:2891537.91, cover_elev:1554.47, depth:2.5, diameter:1.0, images: ["images/SE026(1).jpg", "images/SE026(2).jpg"] },
+    { id:"SE027", name:"SE027", type:"Sewer", x:-97552.23, y:2891537.41, cover_elev:1554.76, depth:3, diameter:1.0, images: ["images/SE027(1).jpg", "images/SE027(2).jpg"] },
+    { id:"SE028", name:"SE028", type:"Sewer", x:-97548.68, y:2891529.04, cover_elev:1554.36, depth:2.58, diameter:1.0, images: ["images/SE028(1).jpg", "images/SE028(2).jpg"] },
+    { id:"SE029", name:"SE029", type:"Sewer", x:-97531.84, y:2891482.05, cover_elev:1551.94, depth:1.77, diameter:1.0, images: ["images/SE029(1).jpg", "images/SE029(2).jpg"] },
+    { id:"SE030", name:"SE030", type:"Sewer", x:-97517.39, y:2891498.37, cover_elev:1554.02, depth:0.33, diameter:1.0, images: ["images/SE030(1).jpg", "images/SE030(2).jpg"] },
+    { id:"SE031", name:"SE031", type:"Sewer", x:-97523.28, y:2891485.14, cover_elev:1553.59, depth:2.4, diameter:1.0, images: ["images/SE031(1).jpg", "images/SE031(2).jpg"] },
+    { id:"SE032", name:"SE032", type:"Sewer", x:-97528.72, y:2891474.02, cover_elev:1551.74, depth:1.56, diameter:1.0, images: ["images/SE032(1).jpg", "images/SE032(2).jpg"] },
+    { id:"SE033", name:"SE033", type:"Sewer", x:-97518.14, y:2891445.32, cover_elev:1550.82, depth:2.6, diameter:1.0, images: ["images/SE033(1).jpg", "images/SE033(2).jpg"] },
+    { id:"SE034", name:"SE034", type:"Sewer", x:-97554.28, y:2891508.97, cover_elev:1553.76, depth:1.6, diameter:1.0, images: ["images/SE034(1).jpg", "images/SE034(2).jpg"] },
+    { id:"SE035", name:"SE035", type:"Sewer", x:-97531.28, y:2891450.69, cover_elev:1551.56, depth:2.4, diameter:1.0, images: ["images/SE035(1).jpg", "images/SE035(2).jpg"] },
+    { id:"SE036", name:"SE036", type:"Sewer", x:-97766.59, y:2891684.83, cover_elev:1561.12, depth:1.7, diameter:1.0, images: ["images/SE036(1).jpg", "images/SE036(2).jpg"] },
+    { id:"SE037", name:"SE037", type:"Sewer", x:-97757.58, y:2891639.09, cover_elev:1559.36, depth:1.7, diameter:1.0, images: ["images/SE037(1).jpg", "images/SE037(2).jpg"] },
+    { id:"SE038", name:"SE038", type:"Sewer", x:-97722.16, y:2891633.28, cover_elev:1558.43, depth:1.9, diameter:1.0, images: ["images/SE038(1).jpg", "images/SE038(2).jpg"] },
+    { id:"SE039", name:"SE039", type:"Sewer", x:-97697.69, y:2891628.64, cover_elev:1557.49, depth:1.4, diameter:1.0, images: ["images/SE039(1).jpg", "images/SE039(2).jpg"] },
+    { id:"SE040", name:"SE040", type:"Sewer", x:-97618.68, y:2891613.47, cover_elev:1557.53, depth:0.33, diameter:1.0, images: ["images/SE040(1).jpg", "images/SE040(2).jpg"] },
+    { id:"SE041", name:"SE041", type:"Sewer", x:-97620.43, y:2891609.44, cover_elev:1557.3, depth:0.33, diameter:1.0, images: ["images/SE041(1).jpg", "images/SE041(2).jpg"] },
+    { id:"SE042", name:"SE042", type:"Sewer", x:-97566.85, y:2891772.05, cover_elev:1565.13, depth:0.33, diameter:1.0, images: ["images/SE042(1).jpg", "images/SE042(2).jpg"] },
+
+// Stormwater Manholes, Inclusive of Grid and Kerb Inlets as Manholes
+    { id:"SW001", name:"SW001", type:"Stormwater", x:-97161.60, y:2891484.88, cover_elev:1562.25, depth:1.4, diameter:1.0, images: ["images/SW001(1).jpg", "images/SW001(2).jpg"] },
+    { id:"SW002", name:"SW002", type:"Stormwater", x:-97169.09, y:2891473.45, cover_elev:1561.74, depth:1.5, diameter:1.0, images: ["images/SW002(1).jpg", "images/SW002(2).jpg"] },
+    { id:"SW003", name:"SW003", type:"Stormwater", x:-97178.92, y:2891457.75, cover_elev:1561.18, depth:1.4, diameter:1.0, images: ["images/SW003(1).jpg", "images/SW003(2).jpg"] },
+    { id:"SW004", name:"SW004", type:"Stormwater", x:-97188.74, y:2891442.00, cover_elev:1560.67, depth:1.4, diameter:1.0, images: ["images/SW004(1).jpg", "images/SW004(2).jpg"] },
+    { id:"SW005", name:"SW005", type:"Stormwater", x:-97231.92, y:2891513.10, cover_elev:1563.81, depth:2, diameter:1.0, images: ["images/SW005(1).jpg", "images/SW005(2).jpg"] },
+    { id:"SW006", name:"SW006", type:"Stormwater", x:-97267.88, y:2891530.98, cover_elev:1565.2, depth:0.6, diameter:1.0, images: ["images/SW006(1).jpg", "images/SW006(2).jpg"] },
+    { id:"SW007", name:"SW007", type:"Stormwater", x:-97270.14, y:2891537.66, cover_elev:1565.19, depth:1.6, diameter:1.0, images: ["images/SW007(1).jpg", "images/SW007(2).jpg"] },
+    { id:"SW008", name:"SW008", type:"Stormwater", x:-97273.08, y:2891548.72, cover_elev:1564.87, depth:0.9, diameter:1.0, images: ["images/SW008(1).jpg", "images/SW008(2).jpg"] },
+    { id:"SW009", name:"SW009", type:"Stormwater", x:-97268.88, y:2891576.60, cover_elev:1565.04, depth:1, diameter:1.0, images: ["images/SW009(1).jpg", "images/SW009(2).jpg"] },
+    { id:"SW010", name:"SW010", type:"Stormwater", x:-97267.53, y:2891546.24, cover_elev:1564.88, depth:0.5, diameter:1.0, images: ["images/SW010(1).jpg", "images/SW010(2).jpg"] },
+    { id:"SW011", name:"SW011", type:"Stormwater", x:-97259.51, y:2891542.26, cover_elev:1564.98, depth:0.5, diameter:1.0, images: ["images/SW011(1).jpg", "images/SW011(2).jpg"] },
+    { id:"SW012", name:"SW012", type:"Stormwater", x:-97227.80, y:2891414.14, cover_elev:1557.91, depth:1.4, diameter:1.0, images: ["images/SW012(1).jpg", "images/SW012(2).jpg"] },
+    { id:"SW013", name:"SW013", type:"Stormwater", x:-97242.10, y:2891399.54, cover_elev:1556.76, depth:1, diameter:1.0, images: ["images/SW013(1).jpg", "images/SW013(2).jpg"] },
+    { id:"SW014", name:"SW014", type:"Stormwater", x:-97260.46, y:2891380.36, cover_elev:1556.07, depth:1.6, diameter:1.0, images: ["images/SW014(1).jpg", "images/SW014(2).jpg"] },
+    { id:"SW015", name:"SW015", type:"Stormwater", x:-97273.65, y:2891375.55, cover_elev:1555.62, depth:1.5, diameter:1.0, images: ["images/SW015(1).jpg", "images/SW015(2).jpg"] },
+    { id:"SW016", name:"SW016", type:"Stormwater", x:-97291.04, y:2891370.32, cover_elev:1555.11, depth:1.58, diameter:1.0, images: ["images/SW016(1).jpg", "images/SW016(2).jpg"] },
+    { id:"SW017", name:"SW017", type:"Stormwater", x:-97308.46, y:2891364.41, cover_elev:1554.52, depth:1.6, diameter:1.0, images: ["images/SW017(1).jpg", "images/SW017(2).jpg"] },
+    { id:"SW018", name:"SW018", type:"Stormwater", x:-97325.66, y:2891358.76, cover_elev:1554.04, depth:1.7, diameter:1.0, images: ["images/SW018(1).jpg", "images/SW018(2).jpg"] },
+    { id:"SW019", name:"SW019", type:"Stormwater", x:-97349.56, y:2891350.86, cover_elev:1553.02, depth:1.45, diameter:1.0, images: ["images/SW019(1).jpg", "images/SW019(2).jpg"] },
+    { id:"SW020", name:"SW020", type:"Stormwater", x:-97384.25, y:2891360.34, cover_elev:1551.82, depth:1.56, diameter:1.0, images: ["images/SW020(1).jpg", "images/SW020(2).jpg"] },
+    { id:"SW021", name:"SW021", type:"Stormwater", x:-97393.88, y:2891370.61, cover_elev:1551.55, depth:1.62, diameter:1.0, images: ["images/SW021(1).jpg", "images/SW021(2).jpg"] },
+    { id:"SW022", name:"SW022", type:"Stormwater", x:-97406.30, y:2891384.20, cover_elev:1550.99, depth:1.73, diameter:1.0, images: ["images/SW022(1).jpg", "images/SW022(2).jpg"] },
+    { id:"SW023", name:"SW023", type:"Stormwater", x:-97454.03, y:2891332.00, cover_elev:1547.93, depth:1.1, diameter:1.0, images: ["images/SW023(1).jpg", "images/SW023(2).jpg"] },
+    { id:"SW024", name:"SW024", type:"Stormwater", x:-97450.05, y:2891328.53, cover_elev:1548.32, depth:0.4, diameter:1.0, images: ["images/SW024(1).jpg", "images/SW024(2).jpg"] },
+    { id:"SW025", name:"SW025", type:"Stormwater", x:-97451.87, y:2891326.65, cover_elev:1547.87, depth:0.6, diameter:1.0, images: ["images/SW025(1).jpg", "images/SW025(2).jpg"] },
+    { id:"SW026", name:"SW026", type:"Stormwater", x:-97430.30, y:2891310.27, cover_elev:1548.37, depth:0.33, diameter:1.0, images: ["images/SW026(1).jpg", "images/SW026(2).jpg"] },
+    { id:"SW027", name:"SW027", type:"Stormwater", x:-97437.38, y:2891303.44, cover_elev:1547.72, depth:0.65, diameter:1.0, images: ["images/SW027(1).jpg", "images/SW027(2).jpg"] },
+    { id:"SW028", name:"SW028", type:"Stormwater", x:-97410.52, y:2891292.40, cover_elev:1548.42, depth:0.4, diameter:1.0, images: ["images/SW028(1).jpg", "images/SW028(2).jpg"] },
+    { id:"SW029", name:"SW029", type:"Stormwater", x:-97422.44, y:2891279.76, cover_elev:1547.44, depth:0.55, diameter:1.0, images: ["images/SW029(1).jpg", "images/SW029(2).jpg"] },
+    { id:"SW030", name:"SW030", type:"Stormwater", x:-97333.23, y:2891292.22, cover_elev:1550.91, depth:1.3, diameter:1.0, images: ["images/SW030(1).jpg", "images/SW030(2).jpg"] },
+    { id:"SW031", name:"SW031", type:"Stormwater", x:-97385.38, y:2891274.11, cover_elev:1548.8699, depth:0.6, diameter:1.0, images: ["images/SW031(1).jpg", "images/SW031(2).jpg"] },
+    { id:"SW032", name:"SW032", type:"Stormwater", x:-97388.16, y:2891271.03, cover_elev:1548.72, depth:0.8, diameter:1.0, images: ["images/SW032(1).jpg", "images/SW032(2).jpg"] },
+    { id:"SW033", name:"SW033", type:"Stormwater", x:-97458.59, y:2891336.52, cover_elev:1548.21, depth:0.4, diameter:1.0, images: ["images/SW033(1).jpg", "images/SW033(2).jpg"] },
+    { id:"SW034", name:"SW034", type:"Stormwater", x:-97460.23, y:2891334.65, cover_elev:1548.32, depth:0.9, diameter:1.0, images: ["images/SW034(1).jpg", "images/SW034(2).jpg"] },
+    { id:"SW035", name:"SW035", type:"Stormwater", x:-97461.47, y:2891337.30, cover_elev:1548.14, depth:0.4, diameter:1.0, images: ["images/SW035(1).jpg", "images/SW035(2).jpg"] },
+    { id:"SW036", name:"SW036", type:"Stormwater", x:-97464.99, y:2891333.75, cover_elev:1547.52, depth:0.33, diameter:1.0, images: ["images/SW036(1).jpg", "images/SW036(2).jpg"] },
+    { id:"SW037", name:"SW037", type:"Stormwater", x:-97317.01, y:2891510.66, cover_elev:1560.39, depth:0.65, diameter:1.0, images: ["images/SW037(1).jpg", "images/SW037(2).jpg"] },
+    { id:"SW038", name:"SW038", type:"Stormwater", x:-97317.04, y:2891505.93, cover_elev:1560.03, depth:1.28, diameter:1.0, images: ["images/SW038(1).jpg", "images/SW038(2).jpg"] },
+    { id:"SW039", name:"SW039", type:"Stormwater", x:-97333.75, y:2891500.22, cover_elev:1560.22, depth:1.07, diameter:1.0, images: ["images/SW039(1).jpg", "images/SW039(2).jpg"] },
+    { id:"SW040", name:"SW040", type:"Stormwater", x:-97334.23, y:2891502.50, cover_elev:1560.55, depth:0.88, diameter:1.0, images: ["images/SW040(1).jpg", "images/SW040(2).jpg"] },
+    { id:"SW041", name:"SW041", type:"Stormwater", x:-97340.60, y:2891500.87, cover_elev:1560.27, depth:0.33, diameter:1.0, images: ["images/SW041(1).jpg", "images/SW041(2).jpg"] },
+    { id:"SW042", name:"SW042", type:"Stormwater", x:-97284.44, y:2891467.83, cover_elev:1558.75, depth:1.5, diameter:1.0, images: ["images/SW042(1).jpg", "images/SW042(2).jpg"] },
+    { id:"SW043", name:"SW043", type:"Stormwater", x:-97301.92, y:2891461.98, cover_elev:1558.22, depth:1.5, diameter:1.0, images: ["images/SW043(1).jpg", "images/SW043(2).jpg"] },
+    { id:"SW044", name:"SW044", type:"Stormwater", x:-97319.46, y:2891456.17, cover_elev:1557.64, depth:1.47, diameter:1.0, images: ["images/SW044(1).jpg", "images/SW044(2).jpg"] },
+    { id:"SW045", name:"SW045", type:"Stormwater", x:-97334.93, y:2891451.30, cover_elev:1557.12, depth:0.33, diameter:1.0, images: ["images/SW045(1).jpg", "images/SW045(2).jpg"] },
+    { id:"SW046", name:"SW046", type:"Stormwater", x:-97378.64, y:2891488.35, cover_elev:1556.85, depth:1.6, diameter:1.0, images: ["images/SW046(1).jpg", "images/SW046(2).jpg"] },
+    { id:"SW047", name:"SW047", type:"Stormwater", x:-97390.44, y:2891489.71, cover_elev:1556.48, depth:2.5, diameter:1.0, images: ["images/SW047(1).jpg", "images/SW047(2).jpg"] },
+    { id:"SW048", name:"SW048", type:"Stormwater", x:-97401.62, y:2891450.30, cover_elev:1553.84, depth:1.2, diameter:1.0, images: ["images/SW048(1).jpg", "images/SW048(2).jpg"] },
+    { id:"SW049", name:"SW049", type:"Stormwater", x:-97430.80, y:2891416.62, cover_elev:1551.69, depth:1.38, diameter:1.0, images: ["images/SW049(1).jpg", "images/SW049(2).jpg"] },
+    { id:"SW050", name:"SW050", type:"Stormwater", x:-97485.38, y:2891359.62, cover_elev:1548.97, depth:1.3, diameter:1.0, images: ["images/SW050(1).jpg", "images/SW050(2).jpg"] },
+    { id:"SW052", name:"SW052", type:"Stormwater", x:-97495.30, y:2891381.39, cover_elev:1549.98, depth:0.7, diameter:1.0, images: ["images/SW052(1).jpg", "images/SW052(2).jpg"] },
+    { id:"SW053", name:"SW053", type:"Stormwater", x:-97403.83, y:2891563.12, cover_elev:1559.44, depth:2.4, diameter:1.0, images: ["images/SW053(1).jpg", "images/SW053(2).jpg"] },
+    { id:"SW054", name:"SW054", type:"Stormwater", x:-97528.82, y:2891471.00, cover_elev:1551.63, depth:1.1, diameter:1.0, images: ["images/SW054(1).jpg", "images/SW054(2).jpg"] },
+    { id:"SW055", name:"SW055", type:"Stormwater", x:-97534.42, y:2891642.81, cover_elev:1557.34, depth:0.76, diameter:1.0, images: ["images/SW055(1).jpg", "images/SW055(2).jpg"] },
+    { id:"SW056", name:"SW056", type:"Stormwater", x:-97546.67, y:2891632.23, cover_elev:1557.17, depth:4, diameter:1.0, images: ["images/SW056(1).jpg", "images/SW056(2).jpg"] },
+    { id:"SW057", name:"SW057", type:"Stormwater", x:-97532.92, y:2891612.91, cover_elev:1557.16, depth:1.5, diameter:1.0, images: ["images/SW057(1).jpg", "images/SW057(2).jpg"] },
+    { id:"SW058", name:"SW058", type:"Stormwater", x:-97556.37, y:2891586.18, cover_elev:1556.88, depth:4.6, diameter:1.0, images: ["images/SW058(1).jpg", "images/SW058(2).jpg"] },
+    { id:"SW059", name:"SW059", type:"Stormwater", x:-97565.55, y:2891542.51, cover_elev:1552.39, depth:0.5, diameter:1.0, images: ["images/SW059(1).jpg", "images/SW059(2).jpg"] },
+    { id:"SW060", name:"SW060", type:"Stormwater", x:-97549.47, y:2891593.64, cover_elev:1556.59, depth:0.33, diameter:1.0, images: ["images/SW060(1).jpg", "images/SW060(2).jpg"] },
+    { id:"SW061", name:"SW061", type:"Stormwater", x:-97546.15, y:2891538.76, cover_elev:1555.17, depth:3.1, diameter:1.0, images: ["images/SW061(1).jpg", "images/SW061(2).jpg"] },
+    { id:"SW062", name:"SW062", type:"Stormwater", x:-97551.15, y:2891526.51, cover_elev:1553.68, depth:3.8, diameter:1.0, images: ["images/SW062(1).jpg", "images/SW062(2).jpg"] },
+    { id:"SW063", name:"SW063", type:"Stormwater", x:-97531.67, y:2891801.98, cover_elev:1564.5, depth:1.1, diameter:1.0, images: ["images/SW063(1).jpg", "images/SW063(2).jpg"] },
+    { id:"SW064", name:"SW064", type:"Stormwater", x:-97542.84, y:2891789.10, cover_elev:1564.21, depth:0.33, diameter:1.0, images: ["images/SW064(1).jpg", "images/SW064(2).jpg"] },
+    { id:"SW065", name:"SW065", type:"Stormwater", x:-97540.82, y:2891787.49, cover_elev:1563.15, depth:4.3, diameter:1.0, images: ["images/SW065(1).jpg", "images/SW065(2).jpg"] },
+    { id:"SW066", name:"SW066", type:"Stormwater", x:-97593.78, y:2891795.66, cover_elev:1564.38, depth:0.3, diameter:1.0, images: ["images/SW066(1).jpg", "images/SW066(2).jpg"] },
+    { id:"SW067", name:"SW067", type:"Stormwater", x:-97612.50, y:2891787.12, cover_elev:1564.59, depth:0.6, diameter:1.0, images: ["images/SW067(1).jpg", "images/SW067(2).jpg"] },
+    { id:"SW068", name:"SW068", type:"Stormwater", x:-97623.58, y:2891783.15, cover_elev:1564.56, depth:0.6, diameter:1.0, images: ["images/SW068(1).jpg", "images/SW068(2).jpg"] },
+    { id:"SW069", name:"SW069", type:"Stormwater", x:-97618.35, y:2891793.58, cover_elev:1564.23, depth:1.16, diameter:1.0, images: ["images/SW069(1).jpg", "images/SW069(2).jpg"] },
+    { id:"SW070", name:"SW070", type:"Stormwater", x:-97647.88, y:2891825.52, cover_elev:1564.72, depth:0.4, diameter:1.0, images: ["images/SW070(1).jpg", "images/SW070(2).jpg"] },
+    { id:"SW071", name:"SW071", type:"Stormwater", x:-97661.89, y:2891826.83, cover_elev:1564.93, depth:2.26, diameter:1.0, images: ["images/SW071(1).jpg", "images/SW071(2).jpg"] },
+    { id:"SW072", name:"SW072", type:"Stormwater", x:-97737.38, y:2891818.51, cover_elev:1565.8, depth:1.3, diameter:1.0, images: ["images/SW072(1).jpg", "images/SW072(2).jpg"] },
+    { id:"SW073", name:"SW073", type:"Stormwater", x:-97708.78, y:2891819.15, cover_elev:1565.38, depth:1.25, diameter:1.0, images: ["images/SW073(1).jpg", "images/SW073(2).jpg"] },
+    { id:"SW074", name:"SW074", type:"Stormwater", x:-97739.70, y:2891778.67, cover_elev:1564.78, depth:0.45, diameter:1.0, images: ["images/SW074(1).jpg", "images/SW074(2).jpg"] },
+    { id:"SW075", name:"SW075", type:"Stormwater", x:-97707.33, y:2891780.09, cover_elev:1564.42, depth:1.1, diameter:1.0, images: ["images/SW075(1).jpg", "images/SW075(2).jpg"] },
+    { id:"SW076", name:"SW076", type:"Stormwater", x:-97766.62, y:2891771.63, cover_elev:1565.03, depth:1.45, diameter:1.0, images: ["images/SW076(1).jpg", "images/SW076(2).jpg"] },
+    { id:"SW077", name:"SW077", type:"Stormwater", x:-97765.62, y:2891701.28, cover_elev:1561.86, depth:1, diameter:1.0, images: ["images/SW077(1).jpg", "images/SW077(2).jpg"] },
+    { id:"SW078", name:"SW078", type:"Stormwater", x:-97767.46, y:2891700.15, cover_elev:1561.72, depth:2, diameter:1.0, images: ["images/SW078(1).jpg", "images/SW078(2).jpg"] },
+    { id:"SW080", name:"SW080", type:"Stormwater", x:-97761.56, y:2891685.90, cover_elev:1560.95, depth:0.33, diameter:1.0, images: ["images/SW080(1).jpg", "images/SW080(2).jpg"] },
+    { id:"SW081", name:"SW081", type:"Stormwater", x:-97759.68, y:2891659.47, cover_elev:1559.94, depth:2.8, diameter:1.0, images: ["images/SW081(1).jpg", "images/SW081(2).jpg"] },
+    { id:"SW082", name:"SW082", type:"Stormwater", x:-97753.92, y:2891632.94, cover_elev:1559.14, depth:2.5, diameter:1.0, images: ["images/SW082(1).jpg", "images/SW082(2).jpg"] },
+    { id:"SW083", name:"SW083", type:"Stormwater", x:-97738.70, y:2891631.68, cover_elev:1558.67, depth:2.3, diameter:1.0, images: ["images/SW083(1).jpg", "images/SW083(2).jpg"] },
+    { id:"SW084", name:"SW084", type:"Stormwater", x:-97706.72, y:2891628.36, cover_elev:1558.04, depth:0.33, diameter:1.0, images: ["images/SW084(1).jpg", "images/SW084(2).jpg"] },
+    { id:"SW085", name:"SW085", type:"Stormwater", x:-97668.66, y:2891618.64, cover_elev:1557.16, depth:3.7, diameter:1.0, images: ["images/SW085(1).jpg", "images/SW085(2).jpg"] },
+    { id:"SW086", name:"SW086", type:"Stormwater", x:-97659.39, y:2891615.32, cover_elev:1557.13, depth:0.8, diameter:1.0, images: ["images/SW086(1).jpg", "images/SW086(2).jpg"] },
+    { id:"SW087", name:"SW087", type:"Stormwater", x:-97658.27, y:2891616.48, cover_elev:1557.11, depth:0.8, diameter:1.0, images: ["images/SW087(1).jpg", "images/SW087(2).jpg"] },
+],
+
+  pipes: [
+// Sewer Pipe Lines
+    {id:"P001",from_mh:"SE001",to_mh:"SE002",from_depth:1.78,to_depth:1.47,diameter_mm:110.0}, //#Pipe Kept Straight
+    {id:"P001",from_mh:"SE003",to_mh:"SE002",from_depth:0.43,to_depth:0.40,diameter_mm:110.0},
+    {id:"P001",from_mh:"SE002",to_mh:"SE004",from_depth:1.47,to_depth:2.50,diameter_mm:110.0},
+    {id:"P001",from_mh:"SE004",to_mh:"SE007",from_depth:2.66,to_depth:1.90,diameter_mm:110.0},
+    {id:"P001",from_mh:"SE006",to_mh:"SE007",from_depth:0.00,to_depth:1.40,diameter_mm:110.0}, //From Inspection Ground Level
+    
+    // Inspection Eye to Inspection Eye -  No Depth Could be Measured
+    {id:"P001",from_mh:"SE008",to_mh:"SE009",from_depth:0.00,to_depth:0.00,diameter_mm:110.0},
+    {id:"P001",from_mh:"SE009",to_mh:"SE010",from_depth:0.00,to_depth:0.00,diameter_mm:110.0},
+    {id:"P001",from_mh:"SE011",to_mh:"SE010",from_depth:0.00,to_depth:0.00,diameter_mm:110.0},
+    {id:"P001",from_mh:"SE010",to_mh:"SE012",from_depth:0.00,to_depth:0.00,diameter_mm:110.0},
+    {id:"P001",from_mh:"SE012",to_mh:"SE013",from_depth:0.00,to_depth:0.00,diameter_mm:110.0},
+    {id:"P001",from_mh:"SE013",to_mh:"SE014",from_depth:0.00,to_depth:0.00,diameter_mm:110.0},
+    {id:"P001",from_mh:"SE014",to_mh:"SE015",from_depth:0.00,to_depth:0.00,diameter_mm:110.0},
+    //End of Inspection Eyes
+
+    {id:"P001",from_mh:"SE019",to_mh:"SE020",from_depth:1.70,to_depth:1.55,diameter_mm:160.0},
+    {id:"P001",from_mh:"SE020",to_mh:"SE021",from_depth:1.55,to_depth:1.80,diameter_mm:160.0},
+    {id:"P001",from_mh:"SE021",to_mh:"SE022",from_depth:2.20,to_depth:1.70,diameter_mm:160.0},
+    {id:"P001",from_mh:"SE022",to_mh:"SE023",from_depth:1.70,to_depth:2.70,diameter_mm:160.0},
+    {id:"P001",from_mh:"SE026",to_mh:"SE027",from_depth:2.50,to_depth:3.00,diameter_mm:160.0},
+    {id:"P001",from_mh:"SE027",to_mh:"SE028",from_depth:3.00,to_depth:2.58,diameter_mm:160.0},
+    {id:"P001",from_mh:"SE023",to_mh:"SE028",from_depth:2.70,to_depth:2.58,diameter_mm:160.0},
+    {id:"P001",from_mh:"SE028",to_mh:"SE029",from_depth:2.58,to_depth:1.77,diameter_mm:160.0},
+    {id:"P001",from_mh:"SE029",to_mh:"SE032",from_depth:1.77,to_depth:1.56,diameter_mm:160.0},
+    {id:"P001",from_mh:"SE031",to_mh:"SE032",from_depth:2.40,to_depth:1.56,diameter_mm:160.0},
+    {id:"P001",from_mh:"SE032",to_mh:"SE033",from_depth:1.56,to_depth:2.60,diameter_mm:160.0},
+    {id:"P001",from_mh:"SE034",to_mh:"SE035",from_depth:1.60,to_depth:1.90,diameter_mm:300.0},
+
+    {id:"P001",from_mh:"SE036",to_mh:"SE037",from_depth:1.70,to_depth:1.70,diameter_mm:160.0},
+    {id:"P001",from_mh:"SE037",to_mh:"SE038",from_depth:1.70,to_depth:1.90,diameter_mm:160.0},
+    {id:"P001",from_mh:"SE038",to_mh:"SE039",from_depth:1.90,to_depth:1.40,diameter_mm:160.0},
+    {id:"P001",from_mh:"SE039",to_mh:"SE040",from_depth:1.40,to_depth:1.44,diameter_mm:160.0}, //#Pipe Kept Straight
+
+// Stormwater Pipe Lines
+    {id:"P001",from_mh:"SW001",to_mh:"SW002",from_depth:1.4,to_depth:1.5,diameter_mm:500.0},
+    {id:"P002",from_mh:"SW002",to_mh:"SW003",from_depth:1.5,to_depth:1.4,diameter_mm:500.0},
+    {id:"P003",from_mh:"SW003",to_mh:"SW004",from_depth:1.4,to_depth:1.4,diameter_mm:500.0},
+    {id:"P004",from_mh:"SW006",to_mh:"SW007",from_depth:0.8,to_depth:1.6,diameter_mm:500.0},
+    {id:"P005",from_mh:"SW008",to_mh:"SW007",from_depth:0.9,to_depth:1.6,diameter_mm:500.0},
+    {id:"P006",from_mh:"SW009",to_mh:"SW008",from_depth:1.0,to_depth:0.7,diameter_mm:500.0},
+    {id:"P007",from_mh:"SW010",to_mh:"SW008",from_depth:0.5,to_depth:0.7,diameter_mm:500.0},
+    {id:"P004",from_mh:"SW012",to_mh:"SW013",from_depth:1.4,to_depth:1.0,diameter_mm:500.0},
+    {id:"P005",from_mh:"SW013",to_mh:"SW014",from_depth:1.0,to_depth:1.6,diameter_mm:500.0},
+    {id:"P005",from_mh:"SW014",to_mh:"SW015",from_depth:1.6,to_depth:1.5,diameter_mm:600.0},
+    {id:"P005",from_mh:"SW015",to_mh:"SW016",from_depth:1.5,to_depth:1.58,diameter_mm:600.0},
+    {id:"P005",from_mh:"SW016",to_mh:"SW017",from_depth:1.58,to_depth:1.60,diameter_mm:600.0},
+    {id:"P005",from_mh:"SW017",to_mh:"SW018",from_depth:1.6,to_depth:1.7,diameter_mm:600.0},
+    {id:"P005",from_mh:"SW018",to_mh:"SW019",from_depth:1.7,to_depth:1.45,diameter_mm:600.0},
+    {id:"P005",from_mh:"SW019",to_mh:"SW020",from_depth:1.45,to_depth:1.56,diameter_mm:600.0},
+    {id:"P005",from_mh:"SW020",to_mh:"SW021",from_depth:1.56,to_depth:1.62,diameter_mm:600.0},
+    {id:"P005",from_mh:"SW021",to_mh:"SW022",from_depth:1.62,to_depth:1.73,diameter_mm:600.0},
+    {id:"P005",from_mh:"SW022",to_mh:"SW023",from_depth:1.73,to_depth:1.1,diameter_mm:600.0},
+    {id:"P005",from_mh:"SW024",to_mh:"SW025",from_depth:0.4,to_depth:0.60,diameter_mm:300.0},
+    {id:"P005",from_mh:"SW026",to_mh:"SW027",from_depth:0.65,to_depth:0.65,diameter_mm:300.0}, //invert made the same as mh is blocked
+    {id:"P005",from_mh:"SW028",to_mh:"SW029",from_depth:0.40,to_depth:0.55,diameter_mm:300.0},
+    {id:"P005",from_mh:"SW030",to_mh:"SW032",from_depth:1.30,to_depth:0.80,diameter_mm:500.0},
+    {id:"P005",from_mh:"SW033",to_mh:"SW034",from_depth:0.40,to_depth:0.90,diameter_mm:500.0},
+    {id:"P005",from_mh:"SW035",to_mh:"SW036",from_depth:0.40,to_depth:0.30,diameter_mm:500.0},
+
+    {id:"P005",from_mh:"SW037",to_mh:"SW038",from_depth:0.65,to_depth:0.60,diameter_mm:300.0},
+    {id:"P005",from_mh:"SW038",to_mh:"SW039",from_depth:1.28,to_depth:1.07,diameter_mm:400.0},
+    {id:"P005",from_mh:"SW040",to_mh:"SW039",from_depth:0.88,to_depth:0.67,diameter_mm:160.0},
+
+    {id:"P005",from_mh:"SW042",to_mh:"SW043",from_depth:1.50,to_depth:1.50,diameter_mm:550.0},
+    {id:"P005",from_mh:"SW043",to_mh:"SW044",from_depth:1.50,to_depth:1.47,diameter_mm:550.0},
+    {id:"P005",from_mh:"SW044",to_mh:"SW045",from_depth:1.47,to_depth:1.47,diameter_mm:550.0},
+    {id:"P005",from_mh:"SW045",to_mh:"SW046",from_depth:1.47,to_depth:1.60,diameter_mm:500.0},
+    {id:"P005",from_mh:"SW046",to_mh:"SW047",from_depth:1.60,to_depth:2.50,diameter_mm:500.0},
+    {id:"P005",from_mh:"SW047",to_mh:"SW048",from_depth:2.50,to_depth:1.20,diameter_mm:500.0},
+    {id:"P005",from_mh:"SW048",to_mh:"SW049",from_depth:1.20,to_depth:1.38,diameter_mm:500.0},
+    {id:"P005",from_mh:"SW049",to_mh:"SW050",from_depth:1.38,to_depth:1.30,diameter_mm:600.0},
+
+    {id:"P005",from_mh:"SW056",to_mh:"SW057",from_depth:4.00,to_depth:1.20,diameter_mm:400.0},
+    {id:"P005",from_mh:"SW057",to_mh:"SW058",from_depth:1.50,to_depth:4.60,diameter_mm:600.0},
+    {id:"P005",from_mh:"SW058",to_mh:"SW059",from_depth:4.60,to_depth:0.50,diameter_mm:600.0},
+    {id:"P005",from_mh:"SW060",to_mh:"SW061",from_depth:3.1,to_depth:3.1,diameter_mm:600.0},
+    {id:"P005",from_mh:"SW061",to_mh:"SW062",from_depth:3.1,to_depth:3.8,diameter_mm:600.0},
+
+    {id:"P005",from_mh:"SW063",to_mh:"SW065",from_depth:1.1,to_depth:0.90,diameter_mm:500.0},
+    {id:"P005",from_mh:"SW064",to_mh:"SW065",from_depth:1.0,to_depth:1.00,diameter_mm:500.0}, //invert made the same as mh is blocked
+
+    {id:"P005",from_mh:"SW072",to_mh:"SW073",from_depth:1.3,to_depth:1.25,diameter_mm:500.0},
+    {id:"P005",from_mh:"SW074",to_mh:"SW075",from_depth:0.45,to_depth:0.70,diameter_mm:400.0},
+
+    {id:"P005",from_mh:"SW077",to_mh:"SW078",from_depth:1.00,to_depth:1.10,diameter_mm:500.0},
+    {id:"P005",from_mh:"SW078",to_mh:"SW081",from_depth:2.00,to_depth:2.80,diameter_mm:400.0},
+    {id:"P005",from_mh:"SW081",to_mh:"SW082",from_depth:2.80,to_depth:2.50,diameter_mm:400.0},
+    {id:"P005",from_mh:"SW082",to_mh:"SW083",from_depth:2.50,to_depth:2.30,diameter_mm:400.0},
+    {id:"P005",from_mh:"SW083",to_mh:"SW084",from_depth:2.30,to_depth:2.30,diameter_mm:400.0}, //invert made the same as mh is blocked
+    {id:"P005",from_mh:"SW084",to_mh:"SW085",from_depth:3.70,to_depth:3.70,diameter_mm:400.0},
+    {id:"P005",from_mh:"SW085",to_mh:"SW087",from_depth:3.70,to_depth:3.70,diameter_mm:400.0}, //invert made the same as mh is blocked
+    {id:"P005",from_mh:"SW086",to_mh:"SW087",from_depth:0.80,to_depth:0.80,diameter_mm:400.0}, //invert made the same as mh is blocked
+]
+};
+
+
+
+const NETWORK = {
+  ...NETWORK_ORIGINAL,
+  manholes: NETWORK_ORIGINAL.manholes.map(mh => ({
+    ...mh,
+    x: mh.x,
+    y: mh.y
+  }))
+};
+
+
+// ── CONFIGURATION ──────────────────────────────────────────────
+const ROTATE_180 = true;
+
+const BASEMAP_BOUNDS = {
+  left:   -97791.3619289898,
+  right:  -97133.0284798979,
+  bottom: 2891253.7890256038,
+  top:    2891979.1426556809
+};
+
+const BASEMAP_ELEV = 1546.83;
+
+// ── LOADING UI ─────────────────────────────────────────────────
+const loadLabel = document.getElementById('load-label');
+const loadBar = document.getElementById('load-bar');
+const statsLabel = document.getElementById('stats-label');
+
+function setProgress(pct, msg) {
+  loadBar.style.width = pct + '%';
+  loadLabel.textContent = msg.toUpperCase();
+}
+function yieldFrame() {
+  return new Promise(resolve => requestAnimationFrame(resolve));
+}
+
+// ── COORDINATE SYSTEM ──────────────────────────────────────────
+const MH = {};
+NETWORK.manholes.forEach(m => { MH[m.id] = m; });
+
+const _xs = NETWORK.manholes.map(m => m.x);
+const _ys = NETWORK.manholes.map(m => m.y);
+const _cx = _xs.reduce((a, b) => a + b, 0) / _xs.length;
+const _cy = _ys.reduce((a, b) => a + b, 0) / _ys.length;
+const _allInverts = NETWORK.manholes.map(m => m.cover_elev - Math.max(m.depth, 0));
+const _minElev = Math.min(..._allInverts) - 2.0;
+
+const SCENE_ORIGIN = { x: _cx, y: _cy, elev: _minElev };
+const avgCoverElev = NETWORK.manholes.reduce((s, m) => s + m.cover_elev, 0) / NETWORK.manholes.length;
+const groundSceneY = avgCoverElev - SCENE_ORIGIN.elev;
+
+document.getElementById('crs-label').textContent = 'E ' + (-_cx).toFixed(0) + '  N ' + _cy.toFixed(0);
+statsLabel.textContent = `${NETWORK.manholes.length} MH · ${NETWORK.pipes.length} Pipes`;
+
+function w2s(wx, wy, wz) {
+  const dx = wx - SCENE_ORIGIN.x;
+  const dz = -(wy - SCENE_ORIGIN.y);
+  if (ROTATE_180) {
+    return new THREE.Vector3(-dx, wz - SCENE_ORIGIN.elev, -dz);
+  } else {
+    return new THREE.Vector3(dx, wz - SCENE_ORIGIN.elev, dz);
+  }
+}
+
+// ── THREE.JS SETUP ────────────────────────────────────────────
+const viewport = document.getElementById('viewport');
+const renderer = new THREE.WebGLRenderer({ antialias: true, powerPreference: 'high-performance', alpha: true });
+renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+renderer.setClearColor(0xffffff, 0);
+renderer.shadowMap.enabled = true;
+renderer.shadowMap.type = THREE.PCFSoftShadowMap;
+viewport.appendChild(renderer.domElement);
+
+const camera = new THREE.PerspectiveCamera(50, 1, 0.01, 5000);
+
+const controls = new OrbitControls(camera, renderer.domElement);
+controls.enableDamping = true;
+controls.dampingFactor = 0.08;
+controls.screenSpacePanning = true;
+controls.minDistance = 0.5;
+controls.maxDistance = 2000;
+controls.maxPolarAngle = Math.PI * 0.88;
+
+// ════════════════════════════════════════════════════════════════
+// SMOOTH ZOOM: distance-aware exponential damping
+// ════════════════════════════════════════════════════════════════
+controls.zoomSpeed = 0.8;                          // slower base zoom
+controls.enableZoom = true;
+
+// Custom zoom damping — reduce speed exponentially as we get closer
+const _origZoom = controls.zoomToCursor ? controls.zoomToCursor.bind(controls) : null;
+let lastZoomDist = Infinity;
+
+function applyZoomDamping() {
+  const dist = camera.position.distanceTo(controls.target);
+  // Exponential slowdown: at 2m distance, zoom is 4x slower than at 50m
+  const factor = Math.max(0.15, Math.min(1.0, dist / 30));
+  controls.zoomSpeed = 0.99 * factor;
+  lastZoomDist = dist;
+}
+
+// Hook into controls update
+const _origUpdate = controls.update.bind(controls);
+controls.update = function() {
+  applyZoomDamping();
+  return _origUpdate();
+};
+
+const scene = new THREE.Scene();
+scene.fog = new THREE.FogExp2(0xffffff, 0.0008);
+
+scene.add(new THREE.AmbientLight(0x3a2a1a, 3.0));
+const sun = new THREE.DirectionalLight(0xf5efe6, 2.5);
+sun.position.set(60, 150, 80);
+sun.castShadow = true;
+sun.shadow.mapSize.width = 1024;
+sun.shadow.mapSize.height = 1024;
+sun.shadow.camera.near = 0.5;
+sun.shadow.camera.far = 1000;
+sun.shadow.bias = -0.001;
+scene.add(sun);
+const fill = new THREE.DirectionalLight(0x1C3557, 0.8);
+fill.position.set(-50, 40, -40);
+scene.add(fill);
+const rim = new THREE.DirectionalLight(0xD4880F, 0.3);
+rim.position.set(0, 20, -80);
+scene.add(rim);
+
+// ── MATERIALS ────────────────────────────────────────────────────
+const matCover = new THREE.MeshStandardMaterial({
+  color: 0xD4880F, emissive: 0x1a0f00, roughness: 0.25, metalness: 0.85, envMapIntensity: 1.0
+});
+const matShaft = new THREE.MeshStandardMaterial({
+  color: 0x1C3557, roughness: 0.75, metalness: 0.15
+});
+const matPipeStorm = new THREE.MeshStandardMaterial({
+  color: 0x4A90D9, emissive: 0x0a1a30, roughness: 0.45, metalness: 0.35
+});
+const matPipeSewer = new THREE.MeshStandardMaterial({
+  color: 0xD4880F, emissive: 0x1a0f00, roughness: 0.45, metalness: 0.35
+});
+const matDrop = new THREE.LineBasicMaterial({
+  color: 0xD4B483, transparent: true, opacity: 0.25
+});
+
+// ── INSTANCED MESH: MANHOLES ──────────────────────────────────
+const N_MH = NETWORK.manholes.length;
+const GEO_COVER = new THREE.CylinderGeometry(0.5, 0.5, 0.10, 16);
+const GEO_SHAFT = new THREE.CylinderGeometry(0.5, 0.5, 1.00, 12);
+
+const iCovers = new THREE.InstancedMesh(GEO_COVER, matCover, N_MH);
+const iShafts = new THREE.InstancedMesh(GEO_SHAFT, matShaft, N_MH);
+iCovers.castShadow = true; iCovers.receiveShadow = true;
+iShafts.castShadow = true; iShafts.receiveShadow = true;
+iCovers.instanceColor = new THREE.InstancedBufferAttribute(new Float32Array(N_MH * 3).fill(1), 3);
+
+scene.add(iCovers, iShafts);
+
+const mhInstData = [];
+const dummy = new THREE.Object3D();
+const COL_DEFAULT = new THREE.Color(0xD4880F);
+const COL_HOVER = new THREE.Color(0xF5EFE6);
+const COL_PIPE_MH = new THREE.Color(0xD4B483);   // amber highlight for pipe-connected MH
+
+function buildManholes() {
+  NETWORK.manholes.forEach((mh, i) => {
+    const invert_elev = mh.cover_elev - Math.max(mh.depth, 0);
+    const r = (mh.diameter || 1.0) / 2;
+    const topS = w2s(mh.x, mh.y, mh.cover_elev);
+    const botS = w2s(mh.x, mh.y, invert_elev);
+    const h = Math.max(topS.y - botS.y, 0.05);
+
+    dummy.position.copy(topS);
+    dummy.rotation.set(0, 0, 0);
+    dummy.scale.set(r * 2, 1, r * 2);
+    dummy.updateMatrix();
+    iCovers.setMatrixAt(i, dummy.matrix);
+    iCovers.setColorAt(i, COL_DEFAULT);
+
+    dummy.position.set(topS.x, botS.y + h / 2, topS.z);
+    dummy.scale.set(r * 2, h, r * 2);
+    dummy.updateMatrix();
+    iShafts.setMatrixAt(i, dummy.matrix);
+
+    mhInstData[i] = { ...mh, invert_elev, topS: topS.clone(), botS: botS.clone(), r, h, index: i };
+  });
+
+  iCovers.instanceMatrix.needsUpdate = true;
+  iCovers.instanceColor.needsUpdate = true;
+  iShafts.instanceMatrix.needsUpdate = true;
+}
+
+// ── MERGED GEOMETRY: PIPES ─────────────────────────────────────
+const N_PIPES = NETWORK.pipes.length;
+const PIPE_SEGMENTS = 12;
+
+function buildPipes() {
+  const stormVerts = [], stormIndices = [];
+  const sewerVerts = [], sewerIndices = [];
+  const pipeData = [];
+  let stormVertOffset = 0, sewerVertOffset = 0;
+
+  NETWORK.pipes.forEach((pipe, i) => {
+    const fromMH = MH[pipe.from_mh];
+    const toMH = MH[pipe.to_mh];
+    if (!fromMH || !toMH) { pipeData.push(null); return; }
+
+    // Determine pipe type from connected manholes
+    const isStormwater = (fromMH.type === 'Stormwater' || toMH.type === 'Stormwater');
+    const verts = isStormwater ? stormVerts : sewerVerts;
+    const indices = isStormwater ? stormIndices : sewerIndices;
+    let vertOffset = isStormwater ? stormVertOffset : sewerVertOffset;
+
+    const from_invert = fromMH.cover_elev - pipe.from_depth;
+    const to_invert = toMH.cover_elev - pipe.to_depth;
+    const p1 = w2s(fromMH.x, fromMH.y, from_invert);
+    const p2 = w2s(toMH.x, toMH.y, to_invert);
+
+    const dir = new THREE.Vector3().subVectors(p2, p1);
+    const length = Math.max(dir.length(), 0.05);
+    const rp = (pipe.diameter_mm / 1000) / 2;
+    const norm = dir.clone().normalize();
+
+    const up = new THREE.Vector3(0, 1, 0);
+    let right, forward;
+    if (Math.abs(norm.dot(up)) > 0.999) {
+      right = new THREE.Vector3(1, 0, 0);
+      forward = new THREE.Vector3(0, 0, 1);
+    } else {
+      right = new THREE.Vector3().crossVectors(up, norm).normalize();
+      forward = new THREE.Vector3().crossVectors(norm, right).normalize();
+    }
+
+    const baseIdx = vertOffset;
+    for (let s = 0; s <= PIPE_SEGMENTS; s++) {
+      const angle = (s / PIPE_SEGMENTS) * Math.PI * 2;
+      const cos = Math.cos(angle), sin = Math.sin(angle);
+      const offset = new THREE.Vector3()
+        .addScaledVector(right, cos * rp)
+        .addScaledVector(forward, sin * rp);
+      verts.push(p1.x + offset.x, p1.y + offset.y, p1.z + offset.z);
+      verts.push(p2.x + offset.x, p2.y + offset.y, p2.z + offset.z);
+    }
+    for (let s = 0; s < PIPE_SEGMENTS; s++) {
+      const tl = baseIdx + s * 2;
+      const tr = baseIdx + (s + 1) * 2;
+      const bl = baseIdx + s * 2 + 1;
+      const br = baseIdx + (s + 1) * 2 + 1;
+      indices.push(tl, bl, tr);
+      indices.push(bl, br, tr);
+    }
+    verts.push(p1.x, p1.y, p1.z);
+    const startCenter = baseIdx + (PIPE_SEGMENTS + 1) * 2;
+    for (let s = 0; s < PIPE_SEGMENTS; s++) {
+      indices.push(startCenter, baseIdx + s * 2, baseIdx + (s + 1) * 2);
+    }
+    verts.push(p2.x, p2.y, p2.z);
+    const endCenter = startCenter + 1;
+    for (let s = 0; s < PIPE_SEGMENTS; s++) {
+      indices.push(endCenter, baseIdx + (s + 1) * 2 + 1, baseIdx + s * 2 + 1);
+    }
+    vertOffset += (PIPE_SEGMENTS + 1) * 2 + 2;
+
+    if (isStormwater) {
+      stormVertOffset = vertOffset;
+    } else {
+      sewerVertOffset = vertOffset;
+    }
+
+    const mid = new THREE.Vector3().addVectors(p1, p2).multiplyScalar(0.5);
+
+    // Calculate grade
+    const elevDiff = to_invert - from_invert;
+    const grade = (elevDiff / length) * 100; // percent
+
+    pipeData.push({
+      ...pipe, from_invert, to_invert,
+      p1: p1.clone(), p2: p2.clone(), fromMH, toMH,
+      rp, length, mid: mid.clone(), grade,
+      fromIdx: mhInstData.findIndex(m => m.id === fromMH.id),
+      toIdx: mhInstData.findIndex(m => m.id === toMH.id),
+      isStormwater
+    });
+  });
+
+  // Create stormwater pipe mesh
+  let stormMesh = null;
+  if (stormVerts.length > 0) {
+    const stormGeo = new THREE.BufferGeometry();
+    stormGeo.setAttribute('position', new THREE.Float32BufferAttribute(stormVerts, 3));
+    stormGeo.setIndex(stormIndices);
+    stormGeo.computeVertexNormals();
+    stormMesh = new THREE.Mesh(stormGeo, matPipeStorm);
+    stormMesh.castShadow = true;
+    stormMesh.receiveShadow = true;
+    stormMesh.name = 'pipes_storm';
+    scene.add(stormMesh);
+  }
+
+  // Create sewer pipe mesh
+  let sewerMesh = null;
+  if (sewerVerts.length > 0) {
+    const sewerGeo = new THREE.BufferGeometry();
+    sewerGeo.setAttribute('position', new THREE.Float32BufferAttribute(sewerVerts, 3));
+    sewerGeo.setIndex(sewerIndices);
+    sewerGeo.computeVertexNormals();
+    sewerMesh = new THREE.Mesh(sewerGeo, matPipeSewer);
+    sewerMesh.castShadow = true;
+    sewerMesh.receiveShadow = true;
+    sewerMesh.name = 'pipes_sewer';
+    scene.add(sewerMesh);
+  }
+
+  return { pipeData, pipeMesh: stormMesh || sewerMesh };
+}
+
+// ── DROP LINES ──────────────────────────────────────────────────
+function buildDropLines() {
+  const pts = [];
+  NETWORK.manholes.forEach(mh => {
+    const topS = w2s(mh.x, mh.y, mh.cover_elev);
+    pts.push(topS.x, groundSceneY, topS.z);
+    pts.push(topS.x, topS.y, topS.z);
+  });
+  const geo = new THREE.BufferGeometry();
+  geo.setAttribute('position', new THREE.Float32BufferAttribute(pts, 3));
+  const lines = new THREE.LineSegments(geo, matDrop);
+  lines.name = 'droplines';
+  scene.add(lines);
+}
+
+// ── GROUND PLANE ────────────────────────────────────────────────
+let groundPlaneMesh = null;
+let groundGridMesh = null;
+
+function buildGround() {
+  const boundsW = BASEMAP_BOUNDS.right - BASEMAP_BOUNDS.left;
+  const boundsH = BASEMAP_BOUNDS.top - BASEMAP_BOUNDS.bottom;
+  const size = Math.max(boundsW, boundsH) * 1.2 + 40;
+
+  const mat = new THREE.MeshStandardMaterial({
+    color: 0x1C3557, transparent: true, opacity: 0.30, roughness: 1, side: THREE.DoubleSide
+  });
+  const plane = new THREE.Mesh(new THREE.PlaneGeometry(size, size), mat);
+  plane.rotation.x = -Math.PI / 2;
+  plane.position.y = groundSceneY;
+  plane.receiveShadow = true;
+  plane.name = 'ground_plane';
+  scene.add(plane);
+  groundPlaneMesh = plane;
+
+  const divs = Math.min(Math.ceil(size / 15), 50);
+  const grid = new THREE.GridHelper(size, divs, 0xD4B483, 0xD4B483);
+  grid.material.transparent = true;
+  grid.material.opacity = 0.40;
+  grid.position.y = groundSceneY + 0.01;
+  grid.name = 'ground_grid';
+  scene.add(grid);
+  groundGridMesh = grid;
+}
+
+// ── BASEMAP PLANE ─────────────────────────────────────────────
+let basemapMesh = null;
+
+function buildBasemap() {
+  const textureLoader = new THREE.TextureLoader();
+  textureLoader.load('basemap.png', (texture) => {
+    texture.rotation = Math.PI;
+    texture.center.set(0.5, 0.5);
+    texture.wrapS = THREE.ClampToEdgeWrapping;
+    texture.wrapT = THREE.ClampToEdgeWrapping;
+    texture.minFilter = THREE.LinearMipmapLinearFilter;
+    texture.magFilter = THREE.LinearFilter;
+    texture.anisotropy = renderer.capabilities.getMaxAnisotropy();
+    texture.generateMipmaps = true;
+    texture.needsUpdate = true;
+
+    const boundsW = BASEMAP_BOUNDS.right - BASEMAP_BOUNDS.left;
+    const boundsH = BASEMAP_BOUNDS.top - BASEMAP_BOUNDS.bottom;
+    const boundsCx = (BASEMAP_BOUNDS.left + BASEMAP_BOUNDS.right) / 2;
+    const boundsCy = (BASEMAP_BOUNDS.bottom + BASEMAP_BOUNDS.top) / 2;
+
+    const centerS = w2s(boundsCx, boundsCy, SCENE_ORIGIN.elev);
+
+    const basemapGeo = new THREE.PlaneGeometry(boundsW, boundsH);
+    const basemapMat = new THREE.MeshStandardMaterial({
+      map: texture,
+      transparent: true,
+      opacity: 0.85,
+      roughness: 1.0,
+      metalness: 0.0,
+      side: THREE.DoubleSide,
+      depthWrite: false,
+      polygonOffset: true,
+      polygonOffsetFactor: -1,
+      polygonOffsetUnits: -1
+    });
+    const basemapPlane = new THREE.Mesh(basemapGeo, basemapMat);
+    basemapPlane.rotation.x = -Math.PI / 2;
+    basemapPlane.position.set(centerS.x, BASEMAP_ELEV - SCENE_ORIGIN.elev, centerS.z);
+    basemapPlane.name = 'basemap';
+    basemapPlane.receiveShadow = true;
+    scene.add(basemapPlane);
+    basemapMesh = basemapPlane;
+
+    if (groundGridMesh) groundGridMesh.visible = false;
+    if (groundPlaneMesh) {
+      groundPlaneMesh.material.opacity = 0.05;
+    }
+
+  }, undefined, (err) => {
+    console.warn('Basemap failed to load:', err);
+  });
+}
+
+// ── CAMERA FRAMING ──────────────────────────────────────────────
+function frameScene() {
+  const box = new THREE.Box3();
+  NETWORK.manholes.forEach(mh => {
+    box.expandByPoint(w2s(mh.x, mh.y, mh.cover_elev));
+    box.expandByPoint(w2s(mh.x, mh.y, mh.cover_elev - mh.depth));
+  });
+  const centre = new THREE.Vector3();
+  const size = new THREE.Vector3();
+  box.getCenter(centre);
+  box.getSize(size);
+  const span = Math.max(size.length(), 1);
+  camera.position.set(centre.x + span * 0.50, centre.y + span * 0.45, centre.z + span * 0.65);
+  controls.target.copy(centre);
+  controls.update();
+
+  // Zoom in 4× by moving camera closer to target
+  const dir = new THREE.Vector3().subVectors(camera.position, controls.target);
+  camera.position.copy(controls.target).add(dir.multiplyScalar(0.50));
+  controls.update();
+}
+
+// ── ASYNC BUILD ─────────────────────────────────────────────────
+let pipeResult;
+
+async function buildAll() {
+  setProgress(10, 'Computing coordinates…'); await yieldFrame();
+  setProgress(25, 'Building ground plane…'); await yieldFrame();
+  buildGround();
+  setProgress(40, `Instancing ${N_MH} manholes…`); await yieldFrame();
+  buildManholes();
+  setProgress(60, `Merging ${N_PIPES} pipes…`); await yieldFrame();
+  pipeResult = buildPipes();
+  setProgress(75, 'Loading basemap…'); await yieldFrame();
+  buildBasemap();
+  setProgress(85, 'Drawing detail lines…'); await yieldFrame();
+  buildDropLines();
+  setProgress(95, 'Framing scene…'); await yieldFrame();
+  frameScene();
+  setCameraView('top');
+  setProgress(100, 'Ready'); await yieldFrame(); await yieldFrame();
+  document.getElementById('loading').classList.add('hidden');
+}
+
+// ── RESIZE ──────────────────────────────────────────────────────
+function onResize() {
+  const w = viewport.clientWidth, h = viewport.clientHeight;
+  renderer.setSize(w, h);
+  camera.aspect = w / h;
+  camera.updateProjectionMatrix();
+}
+window.addEventListener('resize', onResize);
+onResize();
+
+// ── RAYCASTING ──────────────────────────────────────────────────
+const raycaster = new THREE.Raycaster();
+const mouse = new THREE.Vector2();
+
+let selType = null;
+let selIdx = null;
+let highlightMesh = null;
+let connectedHighlights = [];   // array of meshes for pipe-connected manholes
+
+function clearSelection() {
+  // Reset all cover colors to default
+  if (mhInstData.length > 0) {
+    for (let i = 0; i < N_MH; i++) {
+      iCovers.setColorAt(i, COL_DEFAULT);
+    }
+    iCovers.instanceColor.needsUpdate = true;
+  }
+
+  if (highlightMesh) {
+    scene.remove(highlightMesh);
+    highlightMesh.geometry.dispose();
+    highlightMesh = null;
+  }
+
+  // Remove connected manhole highlights
+  connectedHighlights.forEach(m => {
+    scene.remove(m);
+    m.geometry.dispose();
+  });
+  connectedHighlights = [];
+
+  selType = null; selIdx = null;
+  hideProfile();
+}
+
+function hidePopup() {
+  document.getElementById('popup').classList.remove('visible');
+  clearSelection();
+}
+
+document.getElementById('popup-close').addEventListener('click', hidePopup);
+
+function raycastManholes(ray) {
+  let bestDist = Infinity, bestIdx = -1;
+  const tempBox = new THREE.Box3();
+  for (let i = 0; i < mhInstData.length; i++) {
+    const mh = mhInstData[i];
+    const pad = mh.r * 1.2;
+    tempBox.min.set(mh.topS.x - pad, mh.botS.y - pad, mh.topS.z - pad);
+    tempBox.max.set(mh.topS.x + pad, mh.topS.y + pad, mh.topS.z + pad);
+    const hit = ray.intersectBox(tempBox, new THREE.Vector3());
+    if (hit) {
+      const dist = hit.distanceTo(ray.origin);
+      if (dist < bestDist) { bestDist = dist; bestIdx = i; }
+    }
+  }
+  return bestIdx >= 0 ? { type: 'manhole', idx: bestIdx, dist: bestDist } : null;
+}
+
+function raycastPipes(ray) {
+  let bestDist = Infinity, bestIdx = -1;
+  const tempBox = new THREE.Box3();
+  for (let i = 0; i < pipeResult.pipeData.length; i++) {
+    const pd = pipeResult.pipeData[i];
+    if (!pd) continue;
+    const pad = pd.rp * 2;
+    tempBox.min.set(Math.min(pd.p1.x, pd.p2.x) - pad, Math.min(pd.p1.y, pd.p2.y) - pad, Math.min(pd.p1.z, pd.p2.z) - pad);
+    tempBox.max.set(Math.max(pd.p1.x, pd.p2.x) + pad, Math.max(pd.p1.y, pd.p2.y) + pad, Math.max(pd.p1.z, pd.p2.z) + pad);
+    const hit = ray.intersectBox(tempBox, new THREE.Vector3());
+    if (hit) {
+      const dist = hit.distanceTo(ray.origin);
+      if (dist < bestDist) { bestDist = dist; bestIdx = i; }
+    }
+  }
+  return bestIdx >= 0 ? { type: 'pipe', idx: bestIdx, dist: bestDist } : null;
+}
+
+function castRay(e) {
+  const r = renderer.domElement.getBoundingClientRect();
+  mouse.x = ((e.clientX - r.left) / r.width) * 2 - 1;
+  mouse.y = -((e.clientY - r.top) / r.height) * 2 + 1;
+  raycaster.setFromCamera(mouse, camera);
+  const ray = raycaster.ray;
+
+  const mhHit = raycastManholes(ray);
+  const pipeHit = raycastPipes(ray);
+
+  if (mhHit && (!pipeHit || mhHit.dist < pipeHit.dist)) return mhHit;
+  if (pipeHit) return pipeHit;
+  return null;
+}
+
+// Highlight connected manholes for a pipe
+function highlightConnectedManholes(pd) {
+  // Reset all first
+  for (let i = 0; i < N_MH; i++) {
+    iCovers.setColorAt(i, COL_DEFAULT);
+  }
+
+  // Highlight upstream and downstream
+  if (pd.fromIdx >= 0) {
+    iCovers.setColorAt(pd.fromIdx, COL_PIPE_MH);
+    const mh = mhInstData[pd.fromIdx];
+    const glow = new THREE.Mesh(
+      new THREE.CylinderGeometry(mh.r * 1.15, mh.r * 1.15, 0.16, 20),
+      new THREE.MeshStandardMaterial({
+        color: 0xffdd55, emissive: 0x332200, roughness: 0.2, metalness: 0.9,
+        transparent: true, opacity: 0.6
+      })
+    );
+    glow.position.copy(mh.topS);
+    scene.add(glow);
+    connectedHighlights.push(glow);
+  }
+  if (pd.toIdx >= 0) {
+    iCovers.setColorAt(pd.toIdx, COL_PIPE_MH);
+    const mh = mhInstData[pd.toIdx];
+    const glow = new THREE.Mesh(
+      new THREE.CylinderGeometry(mh.r * 1.15, mh.r * 1.15, 0.16, 20),
+      new THREE.MeshStandardMaterial({
+        color: 0xffdd55, emissive: 0x332200, roughness: 0.2, metalness: 0.9,
+        transparent: true, opacity: 0.6
+      })
+    );
+    glow.position.copy(mh.topS);
+    scene.add(glow);
+    connectedHighlights.push(glow);
+  }
+
+  iCovers.instanceColor.needsUpdate = true;
+}
+
+function createHighlightManhole(mh) {
+  const geo = new THREE.CylinderGeometry(mh.r * 1.08, mh.r * 1.08, 0.14, 20);
+  const mat = new THREE.MeshStandardMaterial({
+    color: 0x44eeff, emissive: 0x0088aa, roughness: 0.2, metalness: 0.9,
+    transparent: true, opacity: 0.85
+  });
+  const mesh = new THREE.Mesh(geo, mat);
+  mesh.position.copy(mh.topS);
+  return mesh;
+}
+
+function createHighlightPipe(pd) {
+  const dir = new THREE.Vector3().subVectors(pd.p2, pd.p1);
+  const len = Math.max(dir.length(), 0.05);
+  const rp = pd.rp * 1.4;
+  const geo = new THREE.CylinderGeometry(rp, rp, len, 14);
+  const highlightColor = pd.isStormwater ? 0x66b3ff : 0xffdd55;
+  const emissiveColor = pd.isStormwater ? 0x002244 : 0x332200;
+  const mat = new THREE.MeshStandardMaterial({
+    color: highlightColor, emissive: emissiveColor, roughness: 0.35, metalness: 0.4,
+    transparent: true, opacity: 0.80
+  });
+  const mesh = new THREE.Mesh(geo, mat);
+  mesh.position.copy(pd.mid);
+  const up = new THREE.Vector3(0, 1, 0);
+  const norm = dir.clone().normalize();
+  if (Math.abs(norm.dot(up)) < 0.9999) {
+    mesh.quaternion.setFromUnitVectors(up, norm);
+  } else if (norm.y < 0) {
+    mesh.quaternion.setFromAxisAngle(new THREE.Vector3(1, 0, 0), Math.PI);
+  }
+  return mesh;
+}
+
+viewport.addEventListener('click', e => {
+  clearSelection();
+  const result = castRay(e);
+  if (!result) { hidePopup(); return; }
+
+  const { type, idx } = result;
+  if (type === 'manhole') {
+    iCovers.setColorAt(idx, COL_HOVER);
+    iCovers.instanceColor.needsUpdate = true;
+    selType = 'manhole'; selIdx = idx;
+    highlightMesh = createHighlightManhole(mhInstData[idx]);
+    scene.add(highlightMesh);
+    showManhole(mhInstData[idx], e.clientX, e.clientY);
+  } else {
+    const pd = pipeResult.pipeData[idx];
+    if (!pd) return;
+    selType = 'pipe'; selIdx = idx;
+    highlightMesh = createHighlightPipe(pd);
+    scene.add(highlightMesh);
+
+    // Highlight connected manholes
+    highlightConnectedManholes(pd);
+
+    showPipe(pd, e.clientX, e.clientY);
+  }
+});
+
+viewport.addEventListener('mousemove', e => {
+  const result = castRay(e);
+  viewport.style.cursor = result ? 'pointer' : 'default';
+});
+
+// ── POPUP ─────────────────────────────────────────────────────
+const popupEl = document.getElementById('popup');
+const popupType = document.getElementById('popup-type');
+const popupTitle = document.getElementById('popup-title');
+const popupBody = document.getElementById('popup-body');
+
+function row(label, val, cls) {
+  return `<div class="popup-row"><span class="popup-label">${label}</span><span class="popup-value${cls ? ' ' + cls : ''}">${val}</span></div>`;
+}
+
+function buildImageGallery(images, mhName) {
+  if (!images || images.length === 0) return '';
+
+  let dots = '';
+  for (let i = 0; i < images.length; i++) {
+    dots += `<div class="img-dot ${i === 0 ? 'active' : ''}" data-idx="${i}"></div>`;
+  }
+
+  let items = '';
+  images.forEach((img, i) => {
+    items += `
+      <div class="img-item">
+        <img src="${img}" alt="${mhName} photo ${i + 1}" onerror="this.style.display='none'; this.parentElement.innerHTML='<span style=\'color:#4a6278;font-size:11px;\'>Image not found</span>'">
+        <div class="img-label">${mhName}(${i + 1})</div>
+      </div>
+    `;
+  });
+
+  return `
+    <div class="img-gallery">
+      <div class="img-scroll" id="img-scroll">${items}</div>
+      <div class="img-dots">${dots}</div>
+    </div>
+  `;
+}
+
+// Wire up gallery scroll dots after popup is shown
+function attachGalleryListeners() {
+  const scroll = document.getElementById('img-scroll');
+  const dots = document.querySelectorAll('.img-dot');
+  if (!scroll || dots.length === 0) return;
+
+  dots.forEach(dot => {
+    dot.addEventListener('click', () => {
+      const idx = parseInt(dot.dataset.idx);
+      const itemWidth = scroll.clientWidth;
+      scroll.scrollTo({ left: idx * itemWidth, behavior: 'smooth' });
+      dots.forEach(d => d.classList.remove('active'));
+      dot.classList.add('active');
+    });
+  });
+
+  scroll.addEventListener('scroll', () => {
+    const itemWidth = scroll.clientWidth;
+    const idx = Math.round(scroll.scrollLeft / itemWidth);
+    dots.forEach(d => d.classList.remove('active'));
+    if (dots[idx]) dots[idx].classList.add('active');
+  });
+}
+
+function showManhole(mh, sx, sy) {
+  popupType.className = 'type-tag manhole';
+  popupType.textContent = mh.type.toUpperCase();
+  popupTitle.textContent = mh.name;
+
+  let html = '';
+  html += row('Cover Elev.', mh.cover_elev.toFixed(2) + ' m', 'accent');
+  html += row('Invert Elev.', mh.invert_elev.toFixed(2) + ' m');
+  html += row('Depth',mh.depth === 0.33? "Can't Measure": Math.max(mh.depth, 0).toFixed(2) + ' m','amber');
+  html += row('Y (m)', -mh.y.toFixed(2));
+  html += row('X (m)', mh.x.toFixed(2));
+
+  // Image gallery
+  if (mh.images && mh.images.length > 0) {
+    html += buildImageGallery(mh.images, mh.name);
+  }
+
+  popupBody.innerHTML = html;
+  placePopup(sx, sy);
+
+  // Attach scroll listeners after DOM insertion
+  requestAnimationFrame(() => attachGalleryListeners());
+}
+
+let currentPipeData = null;  // store for profile button
+
+function showPipe(pd, sx, sy) {
+  popupType.className = 'type-tag pipe';
+  popupType.textContent = 'PIPE';
+  popupTitle.textContent = pd.id;
+  currentPipeData = pd;
+
+  let html = '';
+  html += row('Diameter', pd.diameter_mm + ' mm', 'amber');
+  html += row('From', pd.fromMH.name, 'accent');
+  html += row('To', pd.toMH.name, 'accent');
+  html += row('Upstream Inv.', pd.from_invert.toFixed(3) + ' m', 'green');
+  html += row('Downstream Inv.', pd.to_invert.toFixed(3) + ' m', 'green');
+  html += row('Length', pd.length.toFixed(2) + ' m');
+  html += row('Grade', (pd.grade > 0 ? '+' : '') + pd.grade.toFixed(2) + ' %', pd.grade >= 0 ? 'green' : 'red');
+
+  // Elevation Profile button
+  html += `<button class="profile-btn" id="profile-btn">📊 &nbsp;ELEVATION PROFILE</button>`;
+
+  popupBody.innerHTML = html;
+  placePopup(sx, sy);
+
+  // Attach profile button listener
+  requestAnimationFrame(() => {
+    const btn = document.getElementById('profile-btn');
+    if (btn) btn.addEventListener('click', () => showProfile(pd));
+  });
+}
+
+function placePopup(sx, sy) {
+  popupEl.classList.add('visible');
+  // Fixed top-left position, matching elevation profile panel
+  popupEl.style.left = '20px';
+  popupEl.style.top = '60px';
+}
+
+// ── ELEVATION PROFILE PANEL ───────────────────────────────────
+const profilePanel = document.getElementById('profile-panel');
+const profileCanvas = document.getElementById('profile-canvas');
+const profileCtx = profileCanvas.getContext('2d');
+const profileStats = document.getElementById('profile-stats');
+
+document.getElementById('profile-close').addEventListener('click', hideProfile);
+
+function hideProfile() {
+  profilePanel.classList.remove('visible');
+}
+
+function showProfile(pd) {
+  hidePopup();  // close any open manhole/pipe popup
+  profilePanel.classList.add('visible');
+  drawProfile(pd);
+}
+
+function drawProfile(pd) {
+  const ctx = profileCtx;
+  const W = profileCanvas.width;
+  const H = profileCanvas.height;
+  const PAD = { top: 25, right: 15, bottom: 35, left: 50 };
+
+  ctx.clearRect(0, 0, W, H);
+
+  const chartW = W - PAD.left - PAD.right;
+  const chartH = H - PAD.top - PAD.bottom;
+
+  // Data
+  const fromElev = pd.from_invert;
+  const toElev = pd.to_invert;
+  const fromCover = pd.fromMH.cover_elev;
+  const toCover = pd.toMH.cover_elev;
+  const minElev = Math.min(fromElev, toElev, fromCover, toCover) - 0.5;
+  const maxElev = Math.max(fromElev, toElev, fromCover, toCover) + 0.5;
+  const elevRange = maxElev - minElev;
+
+  // Helper: world to chart coords
+  const toChartX = (dist) => PAD.left + (dist / pd.length) * chartW;
+  const toChartY = (elev) => PAD.top + chartH - ((elev - minElev) / elevRange) * chartH;
+
+  // Background grid
+  ctx.strokeStyle = 'rgba(212,180,131,0.4)';
+  ctx.lineWidth = 1;
+  ctx.setLineDash([3, 3]);
+
+  // Horizontal grid lines (elevation)
+  const step = elevRange > 5 ? 1 : 0.5;
+  for (let e = Math.ceil(minElev / step) * step; e <= maxElev; e += step) {
+    const y = toChartY(e);
+    ctx.beginPath();
+    ctx.moveTo(PAD.left, y);
+    ctx.lineTo(PAD.left + chartW, y);
+    ctx.stroke();
+
+    ctx.fillStyle = '#D4B483';
+    ctx.font = '9px "Share Tech Mono", monospace';
+    ctx.textAlign = 'right';
+    ctx.fillText(e.toFixed(1), PAD.left - 6, y + 3);
+  }
+  ctx.setLineDash([]);
+
+  // Ground / cover surface
+  ctx.fillStyle = 'rgba(212,136,15,0.08)';
+  ctx.strokeStyle = 'rgba(212,136,15,0.4)';
+  ctx.lineWidth = 1.5;
+  ctx.beginPath();
+  ctx.moveTo(toChartX(0), toChartY(fromCover));
+  ctx.lineTo(toChartX(pd.length), toChartY(toCover));
+  ctx.lineTo(toChartX(pd.length), toChartY(minElev));
+  ctx.lineTo(toChartX(0), toChartY(minElev));
+  ctx.closePath();
+  ctx.fill();
+  ctx.stroke();
+
+  // Pipe invert (main line)
+  ctx.strokeStyle = '#D4880F';
+  ctx.lineWidth = 3;
+  ctx.beginPath();
+  ctx.moveTo(toChartX(0), toChartY(fromElev));
+  ctx.lineTo(toChartX(pd.length), toChartY(toElev));
+  ctx.stroke();
+
+  // Pipe fill (between invert and cover)
+  ctx.fillStyle = 'rgba(212,136,15,0.15)';
+  ctx.beginPath();
+  ctx.moveTo(toChartX(0), toChartY(fromElev));
+  ctx.lineTo(toChartX(pd.length), toChartY(toElev));
+  ctx.lineTo(toChartX(pd.length), toChartY(toCover));
+  ctx.lineTo(toChartX(0), toChartY(fromCover));
+  ctx.closePath();
+  ctx.fill();
+
+  // Endpoints
+  const drawPoint = (x, y, color, label) => {
+    ctx.fillStyle = color;
+    ctx.beginPath();
+    ctx.arc(x, y, 4, 0, Math.PI * 2);
+    ctx.fill();
+    ctx.strokeStyle = '#fff';
+    ctx.lineWidth = 1.5;
+    ctx.stroke();
+
+    ctx.fillStyle = '#F5EFE6';
+    ctx.font = 'bold 10px "Barlow", sans-serif';
+    ctx.textAlign = 'center';
+    ctx.fillText(label, x, y - 10);
+  };
+
+  drawPoint(toChartX(0), toChartY(fromElev), '#f0a500', pd.fromMH.name);
+  drawPoint(toChartX(pd.length), toChartY(toElev), '#f0a500', pd.toMH.name);
+
+  // Cover points
+  ctx.fillStyle = 'rgba(0,200,255,0.5)';
+  ctx.beginPath();
+  ctx.arc(toChartX(0), toChartY(fromCover), 3, 0, Math.PI * 2);
+  ctx.fill();
+  ctx.beginPath();
+  ctx.arc(toChartX(pd.length), toChartY(toCover), 3, 0, Math.PI * 2);
+  ctx.fill();
+
+  // Axis labels
+  ctx.fillStyle = '#D4B483';
+  ctx.font = '9px "Share Tech Mono", monospace';
+  ctx.textAlign = 'center';
+  ctx.fillText('DISTANCE (m)', PAD.left + chartW / 2, H - 8);
+
+  ctx.save();
+  ctx.translate(12, PAD.top + chartH / 2);
+  ctx.rotate(-Math.PI / 2);
+  ctx.fillText('ELEVATION (m)', 0, 0);
+  ctx.restore();
+
+  // Distance ticks
+  ctx.strokeStyle = '#D4B483';
+  ctx.lineWidth = 1;
+  ctx.fillStyle = '#D4B483';
+  ctx.textAlign = 'center';
+  const distStep = pd.length > 50 ? 10 : (pd.length > 20 ? 5 : 1);
+  for (let d = 0; d <= pd.length; d += distStep) {
+    const x = toChartX(d);
+    ctx.beginPath();
+    ctx.moveTo(x, PAD.top + chartH);
+    ctx.lineTo(x, PAD.top + chartH + 4);
+    ctx.stroke();
+    ctx.fillText(d.toFixed(0), x, PAD.top + chartH + 16);
+  }
+
+  // Title
+  ctx.fillStyle = '#F5EFE6';
+  ctx.font = 'bold 11px "Barlow", sans-serif';
+  ctx.textAlign = 'left';
+  ctx.fillText(`Pipe ${pd.id} — ${pd.diameter_mm} mm`, PAD.left, 16);
+
+  // Grade arrow
+  const midX = toChartX(pd.length / 2);
+  const midY = toChartY((fromElev + toElev) / 2);
+  ctx.fillStyle = pd.grade >= 0 ? '#2E8B57' : '#C0392B';
+  ctx.font = 'bold 10px "Share Tech Mono", monospace';
+  ctx.textAlign = 'center';
+  const gradeText = (pd.grade > 0 ? '▲ ' : '▼ ') + Math.abs(pd.grade).toFixed(2) + '%';
+  ctx.fillText(gradeText, midX, midY - 8);
+
+  // Update stats panel
+  const gradeClass = pd.grade >= 0 ? 'up' : 'down';
+  const gradeArrow = pd.grade >= 0 ? '▲' : '▼';
+  profileStats.innerHTML = `
+    <div class="profile-stat">
+      <div class="profile-stat-label">Length</div>
+      <div class="profile-stat-value">${pd.length.toFixed(2)} m</div>
+    </div>
+    <div class="profile-stat">
+      <div class="profile-stat-label">Diameter</div>
+      <div class="profile-stat-value">${pd.diameter_mm} mm</div>
+    </div>
+    <div class="profile-stat">
+      <div class="profile-stat-label">Grade</div>
+      <div class="profile-stat-value ${gradeClass}">${gradeArrow} ${Math.abs(pd.grade).toFixed(2)}%</div>
+    </div>
+    <div class="profile-stat">
+      <div class="profile-stat-label">Fall / Rise</div>
+      <div class="profile-stat-value ${gradeClass}">${(pd.to_invert - pd.from_invert).toFixed(3)} m</div>
+    </div>
+    <div class="profile-stat">
+      <div class="profile-stat-label">Upstream</div>
+      <div class="profile-stat-value">${pd.fromMH.name}</div>
+    </div>
+    <div class="profile-stat">
+      <div class="profile-stat-label">Downstream</div>
+      <div class="profile-stat-value">${pd.toMH.name}</div>
+    </div>
+    <div class="profile-stat">
+      <div class="profile-stat-label">Up. Invert</div>
+      <div class="profile-stat-value">${pd.from_invert.toFixed(3)} m</div>
+    </div>
+    <div class="profile-stat">
+      <div class="profile-stat-label">Down. Invert</div>
+      <div class="profile-stat-value">${pd.to_invert.toFixed(3)} m</div>
+    </div>
+  `;
+}
+
+// ── RENDER LOOP ─────────────────────────────────────────────────
+let frameCount = 0, lastTime = performance.now();
+
+function animate() {
+  requestAnimationFrame(animate);
+  controls.update();
+
+  const droplines = scene.getObjectByName('droplines');
+  if (droplines) {
+    const dist = camera.position.distanceTo(controls.target);
+    droplines.visible = dist < 300;
+  }
+
+  renderer.render(scene, camera);
+
+  frameCount++;
+  const now = performance.now();
+  if (now - lastTime > 2000) {
+    const fps = Math.round(frameCount * 1000 / (now - lastTime));
+    statsLabel.textContent = `${NETWORK.manholes.length} MH · ${NETWORK.pipes.length} Pipes · ${fps} FPS`;
+    frameCount = 0;
+    lastTime = now;
+  }
+}
+
+// ── START ───────────────────────────────────────────────────────
+buildAll().then(() => { animate(); });
+
+
+// ════════════════════════════════════════════════════════════════
+// VIEW BUTTONS: ISO, Top, Front, Right, Left, Back
+// ════════════════════════════════════════════════════════════════
+const viewButtons = document.querySelectorAll('.view-btn');
+
+function setCameraView(viewName) {
+  const box = new THREE.Box3();
+  NETWORK.manholes.forEach(mh => {
+    box.expandByPoint(w2s(mh.x, mh.y, mh.cover_elev));
+    box.expandByPoint(w2s(mh.x, mh.y, mh.cover_elev - mh.depth));
+  });
+  const centre = new THREE.Vector3();
+  const size = new THREE.Vector3();
+  box.getCenter(centre);
+  box.getSize(size);
+  const span = Math.max(size.length(), 1);
+  const dist = span * 0.85;
+
+  let targetPos;
+  switch(viewName) {
+    case 'top':
+      targetPos = new THREE.Vector3(centre.x, centre.y + dist, centre.z);
+      break;
+    case 'front':
+      targetPos = new THREE.Vector3(centre.x, centre.y, centre.z + dist);
+      break;
+    case 'back':
+      targetPos = new THREE.Vector3(centre.x, centre.y, centre.z - dist);
+      break;
+    case 'right':
+      targetPos = new THREE.Vector3(centre.x + dist, centre.y, centre.z);
+      break;
+    case 'left':
+      targetPos = new THREE.Vector3(centre.x - dist, centre.y, centre.z);
+      break;
+    case 'iso':
+    default:
+      targetPos = new THREE.Vector3(centre.x + dist*0.6, centre.y + dist*0.55, centre.z + dist*0.6);
+      break;
+  }
+
+  const startPos = camera.position.clone();
+  const startTarget = controls.target.clone();
+  const endTarget = centre.clone();
+  const duration = 800;
+  const startTime = performance.now();
+
+  function animateCamera(now) {
+    const elapsed = now - startTime;
+    const t = Math.min(elapsed / duration, 1);
+    const ease = 1 - Math.pow(1 - t, 3);
+
+    camera.position.lerpVectors(startPos, targetPos, ease);
+    controls.target.lerpVectors(startTarget, endTarget, ease);
+    controls.update();
+
+    if (t < 1) {
+      requestAnimationFrame(animateCamera);
+    }
+  }
+  requestAnimationFrame(animateCamera);
+
+  viewButtons.forEach(btn => btn.classList.remove('active'));
+  document.querySelector(`[data-view="${viewName}"]`)?.classList.add('active');
+}
+
+viewButtons.forEach(btn => {
+  btn.addEventListener('click', () => setCameraView(btn.dataset.view));
+});
+
+// ════════════════════════════════════════════════════════════════
+// BASEMAP ELEVATION SLIDER (+/- 20m from BASEMAP_ELEV)
+// ════════════════════════════════════════════════════════════════
+const elevSlider = document.getElementById('elev-slider');
+const elevDisplay = document.getElementById('elev-display');
+const elevAbs = document.getElementById('elev-abs');
+
+if (elevSlider) {
+  elevSlider.addEventListener('input', (e) => {
+    const offset = parseFloat(e.target.value);
+    const newElev = BASEMAP_ELEV + offset;
+
+    if (elevDisplay) elevDisplay.textContent = (offset >= 0 ? '+' : '') + offset.toFixed(1) + 'm';
+    if (elevAbs) elevAbs.textContent = 'Abs: ' + newElev.toFixed(2) + 'm';
+
+    if (basemapMesh) {
+      basemapMesh.position.y = newElev - SCENE_ORIGIN.elev;
+    }
+  });
+}
+
+// ════════════════════════════════════════════════════════════════
+// BASEMAP TRANSPARENCY SLIDER
+// ════════════════════════════════════════════════════════════════
+const opacitySlider = document.getElementById('opacity-slider');
+const opacityDisplay = document.getElementById('opacity-display');
+
+if (opacitySlider) {
+  opacitySlider.addEventListener('input', (e) => {
+    const opacity = parseInt(e.target.value);
+    if (opacityDisplay) opacityDisplay.textContent = opacity + '%';
+    if (basemapMesh && basemapMesh.material) {
+      basemapMesh.material.opacity = opacity / 100;
+    }
+  });
+}
+
+// ════════════════════════════════════════════════════════════════
+// LAYER PANEL: Manholes, Pipes, Basemap, Ground, Grid, Droplines
+// ════════════════════════════════════════════════════════════════
+const layerMH = document.getElementById('layer-mh');
+const layerPipes = document.getElementById('layer-pipes');
+const layerBasemap = document.getElementById('layer-basemap');
+const layerGround = document.getElementById('layer-ground');
+if (layerMH) {
+  layerMH.addEventListener('change', (e) => {
+    iCovers.visible = e.target.checked;
+    iShafts.visible = e.target.checked;
+  });
+}
+
+if (layerPipes) {
+  layerPipes.addEventListener('change', (e) => {
+    const storm = scene.getObjectByName('pipes_storm');
+    const sewer = scene.getObjectByName('pipes_sewer');
+    if (storm) storm.visible = e.target.checked;
+    if (sewer) sewer.visible = e.target.checked;
+  });
+}
+
+if (layerBasemap) {
+  layerBasemap.addEventListener('change', (e) => {
+    if (basemapMesh) basemapMesh.visible = e.target.checked;
+  });
+}
+
+if (layerGround) {
+  layerGround.addEventListener('change', (e) => {
+    if (groundPlaneMesh) groundPlaneMesh.visible = e.target.checked;
+  });
+}
+
+
+
+// ════════════════════════════════════════════════════════════════
+// MEASURE TOOL: Click two points to measure distance
+// ════════════════════════════════════════════════════════════════
+let measureMode = false;
+let measurePoints = [];
+let measureMarkers = [];
+
+const measurePanel = document.getElementById('measure-panel');
+const measureResult = document.getElementById('measure-result');
+const measureClose = document.getElementById('measure-close');
+const measureBtn = document.getElementById('measure-btn');
+
+measureBtn.addEventListener('click', () => {
+  measureMode = !measureMode;
+  measureBtn.textContent = measureMode ? 'CANCEL' : 'MEASURE DISTANCE';
+  measureBtn.classList.toggle('active', measureMode);
+  if (measureMode) {
+    measurePoints = [];
+    measureMarkers.forEach(m => scene.remove(m));
+    measureMarkers = [];
+    measurePanel.classList.add('visible');
+    measureResult.textContent = 'Click first point...';
+  } else {
+    measurePanel.classList.remove('visible');
+    measureMarkers.forEach(m => scene.remove(m));
+    measureMarkers = [];
+  }
+});
+
+measureClose.addEventListener('click', () => {
+  measureMode = false;
+  measureBtn.textContent = 'MEASURE DISTANCE';
+  measureBtn.classList.remove('active');
+  measurePanel.classList.remove('visible');
+  measureMarkers.forEach(m => scene.remove(m));
+  measureMarkers = [];
+});
+
+// Hook into existing click handler for measure mode
+viewport.addEventListener('click', (e) => {
+  if (!measureMode) return;
+
+  const raycaster = new THREE.Raycaster();
+  const rect = renderer.domElement.getBoundingClientRect();
+  const mouse = new THREE.Vector2(
+    ((e.clientX - rect.left) / rect.width) * 2 - 1,
+    -((e.clientY - rect.top) / rect.height) * 2 + 1
+  );
+  raycaster.setFromCamera(mouse, camera);
+
+  const intersects = raycaster.intersectObjects([groundPlaneMesh, basemapMesh].filter(Boolean));
+  if (intersects.length > 0) {
+    const pt = intersects[0].point;
+
+    const marker = new THREE.Mesh(
+      new THREE.SphereGeometry(0.3, 12, 12),
+      new THREE.MeshStandardMaterial({ color: 0xD4880F, emissive: 0x332200 })
+    );
+    marker.position.copy(pt);
+    marker.position.y += 0.3;
+    scene.add(marker);
+    measureMarkers.push(marker);
+
+    measurePoints.push(pt);
+
+    if (measurePoints.length === 1) {
+      measureResult.textContent = 'Click second point...';
+    } else if (measurePoints.length === 2) {
+      const dist = measurePoints[0].distanceTo(measurePoints[1]);
+      measureResult.innerHTML = `Distance: <span style="font-size:18px;">${dist.toFixed(2)} m</span>`;
+      measurePoints = [];
+      setTimeout(() => {
+        measureMarkers.forEach(m => scene.remove(m));
+        measureMarkers = [];
+      }, 3000);
+    }
+  }
+});
+
+// ════════════════════════════════════════════════════════════════
+// KEYBOARD SHORTCUTS
+// ════════════════════════════════════════════════════════════════
+document.addEventListener('keydown', (e) => {
+  if (e.target.tagName === 'INPUT') return;
+
+  switch(e.key.toLowerCase()) {
+    case '1': setCameraView('iso'); break;
+    case '2': setCameraView('top'); break;
+    case '3': setCameraView('front'); break;
+    case '4': setCameraView('right'); break;
+    case '5': setCameraView('left'); break;
+    case '6': setCameraView('back'); break;
+    case 'm':
+      measureBtn.click();
+      break;
+    case 'escape':
+      if (measureMode) measureBtn.click();
+      hidePopup();
+      hideProfile();
+      break;
+  }
+});
+
+// ════════════════════════════════════════════════════════════════
+// RESET VIEW (double-click header logo)
+// ════════════════════════════════════════════════════════════════
+document.querySelector('.logo').addEventListener('dblclick', () => {
+  frameScene();
+  setCameraView('iso');
+});
+</script>
+</body>
+</html>
