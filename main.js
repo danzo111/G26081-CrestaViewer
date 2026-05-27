@@ -72,28 +72,28 @@ class NetworkViewerApp {
 
   async init() {
     try {
-      this.ui.setProgress(5, 'Please be patient. It\'s a big big map, so it could take a minute or two.');
+      this.ui.setProgress(5, 'Please be patient. It is a large map, so it could take a minute or two...');
       await this._yieldFrame();
 
       this.sceneManager = new SceneManager('viewport');
 
-      this.ui.setProgress(15, 'Please be patient. It\'s a big big map, so it could take a minute or two.');
+      this.ui.setProgress(15, 'Please be patient. It is a large map, so it could take a minute or two...');
       const networkData = await dataLoader.loadNetworkData('network.json');
 
-      this.ui.setProgress(30, 'Please be patient. It\'s a big big map, so it could take a minute or two.');
+      this.ui.setProgress(30, 'Please be patient. It is a large map, so it could take a minute or two...');
       await this._yieldFrame();
       this.coordSystem = new CoordinateSystem(networkData);
       this.ui.setCRSLabel(this.coordSystem.getCRSLabel());
 
-      this.ui.setProgress(32, 'Please be patient. It\'s a big big map, so it could take a minute or two.');
+      this.ui.setProgress(32, 'Please be patient. It is a large map, so it could take a minute or two...');
       await this._yieldFrame();
       this.searchIndex = new SearchIndex(networkData, this.coordSystem);
 
-      this.ui.setProgress(35, 'Please be patient. It\'s a big big map, so it could take a minute or two.');
+      this.ui.setProgress(35, 'Please be patient. It is a large map, so it could take a minute or two...');
       await this._yieldFrame();
       this._buildNetworkGraph(networkData);
 
-      this.ui.setProgress(40, 'Please be patient. It\'s a big big map, so it could take a minute or two.');
+      this.ui.setProgress(40, 'Please be patient. It is a large map, so it could take a minute or two...');
       await this._yieldFrame();
       this.geometryBuilder = new GeometryBuilder(this.sceneManager, this.coordSystem);
 
@@ -106,17 +106,17 @@ class NetworkViewerApp {
         this.coordSystem
       );
 
-      this.ui.setProgress(60, 'Please be patient. It\'s a big big map, so it could take a minute or two.');
+      this.ui.setProgress(60, 'Please be patient. It is a large map, so it could take a minute or two...');
       await this._yieldFrame();
       this.groundObjects = this.geometryBuilder.buildGround();
       this.geometryBuilder.buildDropLines(networkData.manholes);
       await this._loadBasemap();
 
-      this.ui.setProgress(70, 'Please be patient. It\'s a big big map, so it could take a minute or two.');
+      this.ui.setProgress(70, 'Please be patient. It is a large map, so it could take a minute or two...');
       await this._yieldFrame();
       this._buildMapView(networkData);
 
-      this.ui.setProgress(80, 'Please be patient. It\'s a big big map, so it could take a minute or two.');
+      this.ui.setProgress(80, 'Please be patient. It is a large map, so it could take a minute or two...');
       await this._yieldFrame();
       this.raycaster = new RaycasterManager(
         this.sceneManager.camera,
@@ -132,7 +132,7 @@ class NetworkViewerApp {
       this._setupViewToggle();
       this._setupHelpModal();
 
-      this.ui.setProgress(90, 'Please be patient. It\'s a big big map, so it could take a minute or two.');
+      this.ui.setProgress(90, 'Please be patient. It is a large map, so it could take a minute or two...');
       await this._yieldFrame();
       const box = this.coordSystem.computeBoundingBox(networkData.manholes);
       this.sceneManager.frameCamera(box, 0.5);
@@ -140,7 +140,7 @@ class NetworkViewerApp {
       // Set up map camera position
       this._setupMapCamera(box);
 
-      this.ui.setProgress(100, 'Please be patient. It\'s a big big map, so it could take a minute or two.');
+      this.ui.setProgress(100, 'Please be patient. It is a large map, so it could take a minute or two...');
       await this._yieldFrame();
       await this._yieldFrame();
       this.ui.hideLoading();
