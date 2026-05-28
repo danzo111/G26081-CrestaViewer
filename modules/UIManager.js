@@ -149,39 +149,12 @@ export class UIManager {
     this.elements.popup.classList.add('visible');
     this.elements.popup.style.pointerEvents = 'auto';
 
-    if (screenPos) {
-      // Position near the clicked manhole, keeping within viewport bounds
-      const popupW = 300;
-      const popupH = 400;
-      const margin = 16;
-      const vw = window.innerWidth;
-      const vh = window.innerHeight;
-
-      let left = screenPos.x + 20;
-      let top = screenPos.y - 40;
-
-      // Keep inside right edge
-      if (left + popupW > vw - margin) {
-        left = screenPos.x - popupW - 20;
-      }
-      // Keep inside bottom edge
-      if (top + popupH > vh - margin) {
-        top = vh - popupH - margin;
-      }
-      // Keep inside top edge
-      if (top < margin) top = margin;
-      // Keep inside left edge
-      if (left < margin) left = margin;
-
-      this.elements.popup.style.left = `${left}px`;
-      this.elements.popup.style.right = 'auto';
-      this.elements.popup.style.top = `${top}px`;
-    } else {
-      // Fallback: right side
-      this.elements.popup.style.left = 'auto';
-      this.elements.popup.style.right = '20px';
-      this.elements.popup.style.top = '60px';
-    }
+    // Always position on the right side for map view
+    this.elements.popup.style.left = 'auto';
+    this.elements.popup.style.right = '20px';
+    this.elements.popup.style.top = '60px';
+    this.elements.popup.style.maxHeight = 'calc(100vh - 80px)';
+    this.elements.popup.style.overflowY = 'auto';
   }
 
   hidePopup() {
@@ -198,7 +171,7 @@ export class UIManager {
     }
 
     this.elements.popupType.className = 'type-tag manhole';
-    this.elements.popupType.textContent = (mh.type || 'MANHOLE').toUpperCase();
+    this.elements.popupType.textContent = (mh.type ? mh.type.toUpperCase() + ' MANHOLE' : 'MANHOLE');
     this.elements.popupTitle.textContent = mh.name || 'Unknown';
 
     let html = '';
@@ -208,7 +181,7 @@ export class UIManager {
       mh.depth === 0.33 ? "Can't Measure" : `${Math.max(mh.depth || 0, 0).toFixed(2)} m`, 
       'amber'
     );
-    html += this._row('Y (m)', (-(mh.x || 0)).toFixed(2));
+    html += this._row('Y (m)', ((mh.x || 0)).toFixed(2));
     html += this._row('X (m)', ((mh.y || 0)).toFixed(2));
 
     if (mh.images && mh.images.length > 0) {
@@ -250,15 +223,15 @@ export class UIManager {
     }
 
     this.elements.popupType.className = 'type-tag pipe';
-    this.elements.popupType.textContent = 'PIPE';
+    this.elements.popupType.textContent = pd.isStormwater ? 'STORMWATER PIPE' : 'SEWER PIPE';
     this.elements.popupTitle.textContent = pd.id || 'Unknown';
 
     let html = '';
     html += this._row('Diameter', `${pd.diameter_mm || 0} mm`, 'amber');
     html += this._row('From', pd.fromMH?.name || 'Unknown', 'accent');
     html += this._row('To', pd.toMH?.name || 'Unknown', 'accent');
-    html += this._row('Upstream Inv.', `${(pd.fromInvert || 0).toFixed(3)} m`, 'green');
-    html += this._row('Downstream Inv.', `${(pd.toInvert || 0).toFixed(3)} m`, 'green');
+    html += this._row('Upstream Inv.', `${(pd.fromInvert || 0).toFixed(2)} m`, 'green');
+    html += this._row('Downstream Inv.', `${(pd.toInvert || 0).toFixed(2)} m`, 'green');
     html += this._row('Length', `${(pd.length || 0).toFixed(2)} m`);
     html += this._row('Grade', 
       `${(pd.grade > 0 ? '+' : '')}${(pd.grade || 0).toFixed(2)} %`,
@@ -275,6 +248,207 @@ export class UIManager {
     });
   }
 
+  /**
+   * Render pipe popup with embedded elevation profile for Map View.
+   * Draws the profile chart directly into the popup body instead of a separate panel.
+   */
+  renderPipePopupWithProfile(pd, screenPos = null) {
+    if (!this.elements.popupType || !this.elements.popupTitle || !this.elements.popupBody) {
+      console.error('renderPipePopupWithProfile: missing popup elements');
+      return;
+    }
+
+    this.elements.popupType.className = 'type-tag pipe';
+    this.elements.popupType.textContent = pd.isStormwater ? 'STORMWATER PIPE' : 'SEWER PIPE';
+    this.elements.popupTitle.textContent = pd.id || 'Unknown';
+
+    let html = '';
+    html += this._row('Diameter', `${pd.diameter_mm || 0} mm`, 'amber');
+    html += this._row('From', pd.fromMH?.name || 'Unknown', 'accent');
+    html += this._row('To', pd.toMH?.name || 'Unknown', 'accent');
+    html += this._row('Upstream Inv.', `${(pd.fromInvert || 0).toFixed(2)} m`, 'green');
+    html += this._row('Downstream Inv.', `${(pd.toInvert || 0).toFixed(2)} m`, 'green');
+    html += this._row('Length', `${(pd.length || 0).toFixed(2)} m`);
+    html += this._row('Grade', 
+      `${(pd.grade > 0 ? '+' : '')}${(pd.grade || 0).toFixed(2)} %`,
+      (pd.grade || 0) >= 0 ? 'green' : 'red'
+    );
+
+    // Add elevation profile section directly in popup
+    html += `<div style="margin: 12px 20px 8px; padding: 10px; background: var(--dark); border: 1px solid var(--border-mid); border-radius: var(--radius);">
+      <div style="font-family: var(--mono); font-size: 14px; letter-spacing: 1.5px; text-transform: uppercase; color: var(--accent); margin-bottom: 8px; font-weight: 700;">📊 Elevation Profile</div>
+      <canvas id="popup-profile-canvas" width="420" height="220" style="width: 100%; display: block; border-radius: var(--radius);"></canvas>
+      <div id="popup-profile-stats" style="display: grid; grid-template-columns: 1fr 1fr; gap: 1px; background: var(--border-faint); margin-top: 8px; border-top: 1px solid var(--border-faint);"></div>
+    </div>`;
+
+    this.elements.popupBody.innerHTML = html;
+    this.showPopup(screenPos);
+
+    // Draw the profile on the embedded canvas
+    requestAnimationFrame(() => {
+      this._drawProfileOnCanvas(pd, 'popup-profile-canvas', 'popup-profile-stats');
+    });
+  }
+
+  /**
+   * Draw elevation profile on a specified canvas element.
+   * @param {Object} pd - Pipe data
+   * @param {string} canvasId - Canvas element ID
+   * @param {string} statsId - Stats container ID (optional)
+   */
+  _drawProfileOnCanvas(pd, canvasId, statsId = null) {
+    const canvas = document.getElementById(canvasId);
+    if (!canvas) return;
+
+    const ctx = canvas.getContext('2d');
+    const W = canvas.width;
+    const H = canvas.height;
+    const PAD = { top: 25, right: 15, bottom: 35, left: 50 };
+
+    // Clear with dark background
+    ctx.fillStyle = '#162B47';
+    ctx.fillRect(0, 0, W, H);
+    ctx.clearRect(0, 0, W, H);
+
+    const chartW = W - PAD.left - PAD.right;
+    const chartH = H - PAD.top - PAD.bottom;
+
+    const fromElev = pd.fromInvert || 0;
+    const toElev = pd.toInvert || 0;
+    const fromCover = pd.fromMH?.cover_elev || 0;
+    const toCover = pd.toMH?.cover_elev || 0;
+    const minElev = Math.min(fromElev, toElev, fromCover, toCover) - 0.5;
+    const maxElev = Math.max(fromElev, toElev, fromCover, toCover) + 0.5;
+    const elevRange = maxElev - minElev || 1;
+
+    const toChartX = (dist) => PAD.left + (dist / (pd.length || 1)) * chartW;
+    const toChartY = (elev) => PAD.top + chartH - ((elev - minElev) / elevRange) * chartH;
+
+    // Grid
+    ctx.strokeStyle = 'rgba(212,180,131,0.4)';
+    ctx.lineWidth = 1;
+    ctx.setLineDash([3, 3]);
+
+    const step = elevRange > 5 ? 1 : 0.5;
+    for (let e = Math.ceil(minElev / step) * step; e <= maxElev; e += step) {
+      const y = toChartY(e);
+      ctx.beginPath();
+      ctx.moveTo(PAD.left, y);
+      ctx.lineTo(PAD.left + chartW, y);
+      ctx.stroke();
+
+      ctx.fillStyle = '#D4B483';
+      ctx.font = '11px monospace';
+      ctx.textAlign = 'right';
+      ctx.fillText(e.toFixed(1), PAD.left - 6, y + 3);
+    }
+    ctx.setLineDash([]);
+
+    // Ground surface
+    ctx.fillStyle = 'rgba(212,136,15,0.08)';
+    ctx.strokeStyle = 'rgba(212,136,15,0.4)';
+    ctx.lineWidth = 1.5;
+    ctx.beginPath();
+    ctx.moveTo(toChartX(0), toChartY(fromCover));
+    ctx.lineTo(toChartX(pd.length || 1), toChartY(toCover));
+    ctx.lineTo(toChartX(pd.length || 1), toChartY(minElev));
+    ctx.lineTo(toChartX(0), toChartY(minElev));
+    ctx.closePath();
+    ctx.fill();
+    ctx.stroke();
+
+    // Pipe invert
+    ctx.strokeStyle = '#D4880F';
+    ctx.lineWidth = 3;
+    ctx.beginPath();
+    ctx.moveTo(toChartX(0), toChartY(fromElev));
+    ctx.lineTo(toChartX(pd.length || 1), toChartY(toElev));
+    ctx.stroke();
+
+    // Pipe fill
+    ctx.fillStyle = 'rgba(212,136,15,0.15)';
+    ctx.beginPath();
+    ctx.moveTo(toChartX(0), toChartY(fromElev));
+    ctx.lineTo(toChartX(pd.length || 1), toChartY(toElev));
+    ctx.lineTo(toChartX(pd.length || 1), toChartY(toCover));
+    ctx.lineTo(toChartX(0), toChartY(fromCover));
+    ctx.closePath();
+    ctx.fill();
+
+    // Endpoints
+    this._drawPoint(ctx, toChartX(0), toChartY(fromElev), '#f0a500', pd.fromMH?.name || 'From', '#FFFFFF');
+    this._drawPoint(ctx, toChartX(pd.length || 1), toChartY(toElev), '#f0a500', pd.toMH?.name || 'To', '#FFFFFF');
+
+    // Cover points
+    ctx.fillStyle = 'rgba(0,200,255,0.5)';
+    ctx.beginPath();
+    ctx.arc(toChartX(0), toChartY(fromCover), 3, 0, Math.PI * 2);
+    ctx.fill();
+    ctx.beginPath();
+    ctx.arc(toChartX(pd.length || 1), toChartY(toCover), 3, 0, Math.PI * 2);
+    ctx.fill();
+
+    // Labels
+    ctx.fillStyle = '#D4B483';
+    ctx.font = '11px monospace';
+    ctx.textAlign = 'center';
+    ctx.fillText('DISTANCE (m)', PAD.left + chartW / 2, H - 8);
+
+    ctx.save();
+    ctx.translate(12, PAD.top + chartH / 2);
+    ctx.rotate(-Math.PI / 2);
+    ctx.fillText('ELEVATION (m)', 0, 0);
+    ctx.restore();
+
+    // Distance ticks
+    ctx.strokeStyle = '#D4B483';
+    ctx.fillStyle = '#D4B483';
+    const distStep = (pd.length || 1) > 50 ? 10 : ((pd.length || 1) > 20 ? 5 : 1);
+    for (let d = 0; d <= (pd.length || 1); d += distStep) {
+      const x = toChartX(d);
+      ctx.beginPath();
+      ctx.moveTo(x, PAD.top + chartH);
+      ctx.lineTo(x, PAD.top + chartH + 4);
+      ctx.stroke();
+      ctx.fillText(d.toFixed(0), x, PAD.top + chartH + 16);
+    }
+
+    // Title
+    ctx.fillStyle = '#1C3557';
+    ctx.font = 'bold 13px sans-serif';
+    ctx.textAlign = 'left';
+    ctx.fillText(`Pipe ${pd.id || '?'} — ${pd.diameter_mm || 0} mm`, PAD.left, 16);
+
+    // Grade arrow
+    const midX = toChartX((pd.length || 1) / 2);
+    const midY = toChartY((fromElev + toElev) / 2);
+    ctx.fillStyle = (pd.grade || 0) >= 0 ? '#2E8B57' : '#C0392B';
+    ctx.font = 'bold 12px monospace';
+    ctx.textAlign = 'center';
+    const gradeText = `${(pd.grade || 0) >= 0 ? '▲ ' : '▼ '}${Math.abs(pd.grade || 0).toFixed(2)}%`;
+    ctx.fillText(gradeText, midX, midY - 8);
+
+    // Stats
+    if (statsId) {
+      const statsEl = document.getElementById(statsId);
+      if (statsEl) {
+        const gradeClass = (pd.grade || 0) >= 0 ? 'up' : 'down';
+        const gradeArrow = (pd.grade || 0) >= 0 ? '▲' : '▼';
+        statsEl.innerHTML = `
+          <div class="profile-stat" style="padding: 7px 12px; background: var(--mid);"><div class="profile-stat-label" style="font-family: var(--mono); font-size: 10px; letter-spacing: 0.5px; color: var(--text-faint); text-transform: uppercase; margin-bottom: 2px;">Length</div><div class="profile-stat-value" style="font-family: var(--mono); font-size: 13px; color: var(--text);">${(pd.length || 0).toFixed(2)} m</div></div>
+          <div class="profile-stat" style="padding: 7px 12px; background: var(--mid);"><div class="profile-stat-label" style="font-family: var(--mono); font-size: 10px; letter-spacing: 0.5px; color: var(--text-faint); text-transform: uppercase; margin-bottom: 2px;">Diameter</div><div class="profile-stat-value" style="font-family: var(--mono); font-size: 13px; color: var(--text);">${pd.diameter_mm || 0} mm</div></div>
+          <div class="profile-stat" style="padding: 7px 12px; background: var(--mid);"><div class="profile-stat-label" style="font-family: var(--mono); font-size: 10px; letter-spacing: 0.5px; color: var(--text-faint); text-transform: uppercase; margin-bottom: 2px;">Grade</div><div class="profile-stat-value ${gradeClass}" style="font-family: var(--mono); font-size: 13px; color: var(--text);">${gradeArrow} ${Math.abs(pd.grade || 0).toFixed(2)}%</div></div>
+          <div class="profile-stat" style="padding: 7px 12px; background: var(--mid);"><div class="profile-stat-label" style="font-family: var(--mono); font-size: 10px; letter-spacing: 0.5px; color: var(--text-faint); text-transform: uppercase; margin-bottom: 2px;">Fall / Rise</div><div class="profile-stat-value ${gradeClass}" style="font-family: var(--mono); font-size: 13px; color: var(--text);">${((pd.toInvert || 0) - (pd.fromInvert || 0)).toFixed(3)} m</div></div>
+          <div class="profile-stat" style="padding: 7px 12px; background: var(--mid);"><div class="profile-stat-label" style="font-family: var(--mono); font-size: 10px; letter-spacing: 0.5px; color: var(--text-faint); text-transform: uppercase; margin-bottom: 2px;">Upstream</div><div class="profile-stat-value" style="font-family: var(--mono); font-size: 13px; color: var(--text);">${pd.fromMH?.name || '?'}</div></div>
+          <div class="profile-stat" style="padding: 7px 12px; background: var(--mid);"><div class="profile-stat-label" style="font-family: var(--mono); font-size: 10px; letter-spacing: 0.5px; color: var(--text-faint); text-transform: uppercase; margin-bottom: 2px;">Downstream</div><div class="profile-stat-value" style="font-family: var(--mono); font-size: 13px; color: var(--text);">${pd.toMH?.name || '?'}</div></div>
+          <div class="profile-stat" style="padding: 7px 12px; background: var(--mid);"><div class="profile-stat-label" style="font-family: var(--mono); font-size: 10px; letter-spacing: 0.5px; color: var(--text-faint); text-transform: uppercase; margin-bottom: 2px;">Up. Invert</div><div class="profile-stat-value" style="font-family: var(--mono); font-size: 13px; color: var(--text);">${(pd.fromInvert || 0).toFixed(3)} m</div></div>
+          <div class="profile-stat" style="padding: 7px 12px; background: var(--mid);"><div class="profile-stat-label" style="font-family: var(--mono); font-size: 10px; letter-spacing: 0.5px; color: var(--text-faint); text-transform: uppercase; margin-bottom: 2px;">Down. Invert</div><div class="profile-stat-value" style="font-family: var(--mono); font-size: 13px; color: var(--text);">${(pd.toInvert || 0).toFixed(3)} m</div></div>
+        `;
+      }
+    }
+  }
+
+
   _row(label, val, cls) {
     return `<div class="popup-row"><span class="popup-label">${label}</span><span class="popup-value${cls ? ' ' + cls : ''}">${val}</span></div>`;
   }
@@ -289,7 +463,7 @@ export class UIManager {
     const items = images.map((img, i) => `
       <div class="img-item">
         <img src="${img}" alt="${mhName} photo ${i + 1}" 
-          onerror="this.style.display='none'; this.parentElement.innerHTML='<span style=\'color:#4a6278;font-size:11px;\'>Image not found</span>'">
+          onerror="this.style.display='none'; this.parentElement.innerHTML='<span style=\'color:#4a6278;font-size:16px;\'>Image not found</span>'">
         <div class="img-label">${mhName}(${i + 1})</div>
       </div>
     `).join('');
@@ -412,8 +586,8 @@ export class UIManager {
     ctx.fill();
 
     // Endpoints
-    this._drawPoint(ctx, toChartX(0), toChartY(fromElev), '#f0a500', pd.fromMH?.name || 'From');
-    this._drawPoint(ctx, toChartX(pd.length || 1), toChartY(toElev), '#f0a500', pd.toMH?.name || 'To');
+    this._drawPoint(ctx, toChartX(0), toChartY(fromElev), '#f0a500', pd.fromMH?.name || 'From', '#FFFFFF');
+    this._drawPoint(ctx, toChartX(pd.length || 1), toChartY(toElev), '#f0a500', pd.toMH?.name || 'To', '#FFFFFF');
 
     // Cover points
     ctx.fillStyle = 'rgba(0,200,255,0.5)';
@@ -482,7 +656,7 @@ export class UIManager {
     }
   }
 
-  _drawPoint(ctx, x, y, color, label) {
+  _drawPoint(ctx, x, y, color, label, textColor = '#1C3557') {
     ctx.fillStyle = color;
     ctx.beginPath();
     ctx.arc(x, y, 4, 0, Math.PI * 2);
@@ -491,7 +665,7 @@ export class UIManager {
     ctx.lineWidth = 1.5;
     ctx.stroke();
 
-    ctx.fillStyle = '#1C3557';
+    ctx.fillStyle = textColor;
     ctx.font = 'bold 10px sans-serif';
     ctx.textAlign = 'center';
     ctx.fillText(label, x, y - 10);
