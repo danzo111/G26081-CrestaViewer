@@ -72,28 +72,28 @@ class NetworkViewerApp {
 
   async init() {
     try {
-      this.ui.setProgress(5, 'Initializing renderer...');
+      this.ui.setProgress(5, 'Please be patient. It is a large map, so it could take a minute or two...');
       await this._yieldFrame();
 
       this.sceneManager = new SceneManager('viewport');
 
-      this.ui.setProgress(15, 'Loading network data...');
+      this.ui.setProgress(15, 'Please be patient. It is a large map, so it could take a minute or two...');
       const networkData = await dataLoader.loadNetworkData('network.json');
 
-      this.ui.setProgress(30, 'Setting up coordinates...');
+      this.ui.setProgress(30, 'Please be patient. It is a large map, so it could take a minute or two...');
       await this._yieldFrame();
       this.coordSystem = new CoordinateSystem(networkData);
       this.ui.setCRSLabel(this.coordSystem.getCRSLabel());
 
-      this.ui.setProgress(32, 'Building search index...');
+      this.ui.setProgress(32, 'Please be patient. It is a large map, so it could take a minute or two...');
       await this._yieldFrame();
       this.searchIndex = new SearchIndex(networkData, this.coordSystem);
 
-      this.ui.setProgress(35, 'Building network graph...');
+      this.ui.setProgress(35, 'Please be patient. It is a large map, so it could take a minute or two...');
       await this._yieldFrame();
       this._buildNetworkGraph(networkData);
 
-      this.ui.setProgress(40, 'Building geometry...');
+      this.ui.setProgress(40, 'Please be patient. It is a large map, so it could take a minute or two...');
       await this._yieldFrame();
       this.geometryBuilder = new GeometryBuilder(this.sceneManager, this.coordSystem);
 
@@ -103,20 +103,21 @@ class NetworkViewerApp {
       this.flowArrows = new FlowArrows(
         this.sceneManager.scene,
         appState.pipeData,
-        this.coordSystem
+        this.coordSystem,
+        appState.mhLookup
       );
 
-      this.ui.setProgress(60, 'Building ground & basemap...');
+      this.ui.setProgress(60, 'Please be patient. It is a large map, so it could take a minute or two...');
       await this._yieldFrame();
       this.groundObjects = this.geometryBuilder.buildGround();
       this.geometryBuilder.buildDropLines(networkData.manholes);
       await this._loadBasemap();
 
-      this.ui.setProgress(70, 'Building Map View...');
+      this.ui.setProgress(70, 'Please be patient. It is a large map, so it could take a minute or two...');
       await this._yieldFrame();
       this._buildMapView(networkData);
 
-      this.ui.setProgress(80, 'Setting up interactions...');
+      this.ui.setProgress(80, 'Please be patient. It is a large map, so it could take a minute or two...');
       await this._yieldFrame();
       this.raycaster = new RaycasterManager(
         this.sceneManager.camera,
@@ -132,7 +133,7 @@ class NetworkViewerApp {
       this._setupViewToggle();
       this._setupHelpModal();
 
-      this.ui.setProgress(90, 'Framing scene...');
+      this.ui.setProgress(90, 'Please be patient. It is a large map, so it could take a minute or two...');
       await this._yieldFrame();
       const box = this.coordSystem.computeBoundingBox(networkData.manholes);
       this.sceneManager.frameCamera(box, 0.5);
@@ -140,13 +141,15 @@ class NetworkViewerApp {
       // Set up map camera position
       this._setupMapCamera(box);
 
-      this.ui.setProgress(100, 'Ready');
+      this.ui.setProgress(100, 'Please be patient. It is a large map, so it could take a minute or two...');
       await this._yieldFrame();
       await this._yieldFrame();
       this.ui.hideLoading();
 
-      // Start in Map View by default
-      this._toggleMapMode();
+      // Start in Map View by default (3D view disabled for client)
+      this.mapMode = true;
+      this._enterMapView();
+      document.getElementById('viewport')?.classList.add('map-mode');
 
       this._animate();
 
@@ -164,9 +167,19 @@ class NetworkViewerApp {
     const mhLookup = {};
     manholes.forEach(m => mhLookup[m.id] = m);
 
+    // Helper: resolve dummy manholes to their parent for elevation calculations.
+    const _getEffectiveMH = (mhId) => {
+      const mh = mhLookup[mhId];
+      if (!mh) return null;
+      if (mh.parent_mh && mhLookup[mh.parent_mh]) {
+        return { ...mh, cover_elev: mhLookup[mh.parent_mh].cover_elev };
+      }
+      return mh;
+    };
+
     pipes.forEach((p, i) => {
-      const fromMH = mhLookup[p.from_mh];
-      const toMH = mhLookup[p.to_mh];
+      const fromMH = _getEffectiveMH(p.from_mh);
+      const toMH = _getEffectiveMH(p.to_mh);
       if (!fromMH || !toMH) return;
 
       const fromInvert = fromMH.cover_elev - p.from_depth;
@@ -388,16 +401,41 @@ class NetworkViewerApp {
       tube.userData = { type: 'pipe', index: i };
       tube.renderOrder = 500;
       scene.add(tube);
-      this.mapPipeLines.push({ line: tube, index: i, p1, p2, isStormwater });
+
+      // Invisible hit target — much thicker for easy clicking when zoomed out
+      const hitGeo = new THREE.TubeGeometry(pipePath, 1, 2.5, 6, false);
+      const hitMat = new THREE.MeshBasicMaterial({
+        color: color,
+        transparent: true,
+        opacity: 0.0,        // Completely invisible
+        depthTest: false,
+        depthWrite: false
+      });
+      const hitMesh = new THREE.Mesh(hitGeo, hitMat);
+      hitMesh.visible = false;
+      hitMesh.name = `map_pipe_hit_${i}`;
+      hitMesh.userData = { type: 'pipe', index: i, isHitTarget: true };
+      hitMesh.renderOrder = 499;  // Just below the visible pipe
+      scene.add(hitMesh);
+
+      this.mapPipeLines.push({ line: tube, hitMesh, index: i, p1, p2, isStormwater });
 
       // Flow direction arrow (filled triangle mesh)
       const mid = new THREE.Vector3().addVectors(p1, p2).multiplyScalar(0.5);
       const dir = new THREE.Vector3().subVectors(p2, p1).normalize();
       const perp = new THREE.Vector3(-dir.z, 0, dir.x).normalize();
 
-      const fromInvert = fromMH.cover_elev - p.from_depth;
-      const toInvert = toMH.cover_elev - p.to_depth;
-      const flowDir = fromInvert >= toInvert ? dir : dir.clone().negate();
+      let flowDir;
+      const isDummyPipe = p.id && p.id.startsWith('DUMMY_PIPE');
+      if (isDummyPipe) {
+        // Dummy pipes: use JSON from_mh -> to_mh as flow direction
+        flowDir = dir;
+      } else {
+        // Regular pipes: compute from inverts
+        const fromInvert = fromMH.cover_elev - p.from_depth;
+        const toInvert = toMH.cover_elev - p.to_depth;
+        flowDir = fromInvert >= toInvert ? dir : dir.clone().negate();
+      }
 
       const arrowSize = 4.0;
       const tip   = mid.clone().add(flowDir.clone().multiplyScalar(arrowSize * 0.6));
@@ -503,21 +541,26 @@ class NetworkViewerApp {
   }
 
   _toggleMapMode() {
-    this.mapMode = !this.mapMode;
-    const viewport = document.getElementById('viewport');
-    const toggleBtn = document.getElementById('view-mode-toggle');
+    // DISABLED: 3D view is hidden from client - only Map View is available
+    // this.mapMode = !this.mapMode;
+    // const viewport = document.getElementById('viewport');
+    // const toggleBtn = document.getElementById('view-mode-toggle');
+    // 
+    // if (this.mapMode) {
+    //   this._enterMapView();
+    //   if (toggleBtn) toggleBtn.textContent = 'Switch to 3D View';
+    //   viewport.classList.add('map-mode');
+    // } else {
+    //   this._enter3DView();
+    //   if (toggleBtn) toggleBtn.textContent = 'Switch to Map View';
+    //   viewport.classList.remove('map-mode');
+    // }
 
-    if (this.mapMode) {
-      // Switch to Map View
-      this._enterMapView();
-      if (toggleBtn) toggleBtn.textContent = 'Switch to 3D View';
-      viewport.classList.add('map-mode');
-    } else {
-      // Switch to 3D View
-      this._enter3DView();
-      if (toggleBtn) toggleBtn.textContent = 'Switch to Map View';
-      viewport.classList.remove('map-mode');
-    }
+    // Always stay in map mode
+    this.mapMode = true;
+    const viewport = document.getElementById('viewport');
+    viewport.classList.add('map-mode');
+    this._enterMapView();
   }
 
   _enterMapView() {
@@ -538,7 +581,7 @@ class NetworkViewerApp {
 
     // Show map objects
     this.mapManholeSprites.forEach(s => s.visible = true);
-    this.mapPipeLines.forEach(p => p.line.visible = true);
+    this.mapPipeLines.forEach(p => { p.line.visible = true; if (p.hitMesh) p.hitMesh.visible = true; });
 
     const flowToggle = document.getElementById('flow-toggle');
     const showFlow = flowToggle?.classList.contains('active');
@@ -578,59 +621,11 @@ class NetworkViewerApp {
   }
 
   _enter3DView() {
-    // Show 3D objects
-    const layerMH = document.getElementById('layer-mh');
-    const layerPipes = document.getElementById('layer-pipes');
-
-    if (layerMH?.checked) {
-      if (this.geometryBuilder.iCoversSewer) this.geometryBuilder.iCoversSewer.visible = true;
-      if (this.geometryBuilder.iCoversStorm) this.geometryBuilder.iCoversStorm.visible = true;
-      if (this.geometryBuilder.iShafts) this.geometryBuilder.iShafts.visible = true;
-    }
-
-    if (layerPipes?.checked) {
-      const stormPipe = this.sceneManager.scene.getObjectByName('pipes_storm');
-      const sewerPipe = this.sceneManager.scene.getObjectByName('pipes_sewer');
-      if (stormPipe) stormPipe.visible = true;
-      if (sewerPipe) sewerPipe.visible = true;
-    }
-
-    // Hide map objects
-    this.mapManholeSprites.forEach(s => s.visible = false);
-    this.mapPipeLines.forEach(p => p.line.visible = false);
-    this.mapFlowArrows.forEach(a => a.visible = false);
-    this._clearMapHighlights();
-
-    // Switch camera back
-    this.sceneManager.camera = appState.camera;
-    this.sceneManager.controls.object = appState.camera;
-
-    // Restore 3D controls
-    this.sceneManager.controls.maxPolarAngle = Math.PI * 0.88;
-    this.sceneManager.controls.enableRotate = true;
-    this.sceneManager.controls.mouseButtons = {
-      LEFT: THREE.MOUSE.ROTATE,
-      MIDDLE: THREE.MOUSE.DOLLY,
-      RIGHT: THREE.MOUSE.PAN
-    };
-
-    // Show 3D UI
-    const controlPanel = document.getElementById('control-panel');
-    if (controlPanel) {
-      controlPanel.style.display = '';
-      controlPanel.classList.remove('hidden');
-    }
-    document.getElementById('view-buttons')?.classList.remove('hidden');
-    document.getElementById('data-toggle')?.classList.remove('hidden');
-
-    // Hide map UI
-    const mapControls = document.getElementById('map-controls');
-    if (mapControls) {
-      mapControls.style.display = 'none';
-      mapControls.classList.remove('visible');
-    }
-
-    this.sceneManager.controls.update();
+    // DISABLED: 3D view is not accessible to the client
+    // All 3D view functionality is preserved in code but hidden from UI
+    console.log('3D View is disabled - staying in Map View');
+    this.mapMode = true;
+    this._enterMapView();
   }
 
   _clearMapHighlights() {
@@ -860,7 +855,7 @@ class NetworkViewerApp {
     });
 
     document.getElementById('map-layer-pipes')?.addEventListener('change', (e) => {
-      this.mapPipeLines.forEach(p => p.line.visible = e.target.checked);
+      this.mapPipeLines.forEach(p => { p.line.visible = e.target.checked; if (p.hitMesh) p.hitMesh.visible = e.target.checked; });
     });
 
     document.getElementById('map-layer-flow')?.addEventListener('change', (e) => {
@@ -943,14 +938,28 @@ class NetworkViewerApp {
       mesh.renderOrder = 200;
       this.sceneManager.scene.add(mesh);
       this.mapUpstreamHighlights.push(mesh); // reuse array for selection highlight
+
+      // Also highlight the hit target so it remains clickable
+      if (pipeData.hitMesh) {
+        const hitGeo = new THREE.TubeGeometry(path, 1, 2.5, 8, false);
+        const hitMat = new THREE.MeshBasicMaterial({
+          color: pd.isStormwater ? 0x66b3ff : 0xffdd44,
+          transparent: true,
+          opacity: 0.0,
+          depthTest: false,
+          depthWrite: false
+        });
+        const hitHighlight = new THREE.Mesh(hitGeo, hitMat);
+        hitHighlight.renderOrder = 199;
+        hitHighlight.userData = { type: 'pipe', index: index, isHitTarget: true };
+        this.sceneManager.scene.add(hitHighlight);
+        this.mapUpstreamHighlights.push(hitHighlight);
+      }
     }
 
-    // Use same pipe popup as 3D view with static right-side positioning
+    // Map View: Show pipe popup with embedded elevation profile
     this._showMapPopup();
-    this.ui.renderPipePopup(pd, (pipeData) => {
-      this.ui.showProfile();
-      this.ui.drawProfile(pipeData);
-    });
+    this.ui.renderPipePopupWithProfile(pd);
   }
 
   /**
@@ -1026,13 +1035,17 @@ class NetworkViewerApp {
       return;
     }
 
-    // Check pipe lines
-    const pipeMeshes = this.mapPipeLines.filter(p => p.line.visible).map(p => p.line);
-    const pipeIntersects = raycaster.intersectObjects(pipeMeshes);
+    // Check pipe lines (including invisible hit targets for easier clicking)
+    const visiblePipes = this.mapPipeLines.filter(p => p.line.visible);
+    const pipeMeshes = visiblePipes.map(p => p.line);
+    const hitMeshes = visiblePipes.map(p => p.hitMesh).filter(Boolean);
+    const allPipeMeshes = [...pipeMeshes, ...hitMeshes];
+
+    const pipeIntersects = raycaster.intersectObjects(allPipeMeshes);
 
     if (pipeIntersects.length > 0) {
-      const pipeMesh = pipeIntersects[0].object;
-      const index = pipeMesh.userData.index;
+      const hitObj = pipeIntersects[0].object;
+      const index = hitObj.userData.index;
       this._selectMapPipe(index);
       return;
     }
@@ -1417,24 +1430,24 @@ class NetworkViewerApp {
     if (event.target.tagName === 'INPUT') return;
 
     switch (event.key.toLowerCase()) {
-      case '1': this._setCameraView('iso'); break;
-      case '2': this._setCameraView('top'); break;
-      case '3': this._setCameraView('front'); break;
-      case '4': this._setCameraView('right'); break;
-      case '5': this._setCameraView('left'); break;
-      case '6': this._setCameraView('back'); break;
-      case 'm':
-        if (!this.mapMode) this.ui.elements.measureBtn?.click();
-        break;
+      case '1': if (!this.mapMode) this._setCameraView('iso'); break;
+      case '2': if (!this.mapMode) this._setCameraView('top'); break;
+      case '3': if (!this.mapMode) this._setCameraView('front'); break;
+      case '4': if (!this.mapMode) this._setCameraView('right'); break;
+      case '5': if (!this.mapMode) this._setCameraView('left'); break;
+      case '6': if (!this.mapMode) this._setCameraView('back'); break;
+      // case 'm':
+      //   if (!this.mapMode) this.ui.elements.measureBtn?.click();
+      //   break;
       case 'f':
         document.getElementById('flow-toggle')?.click();
         break;
-      case 't':
-        if (!this.mapMode) this._toggleDataPanel();
-        break;
-      case 'v':
-        this._toggleMapMode();
-        break;
+      // case 't':
+      //   if (!this.mapMode) this._toggleDataPanel();
+      //   break;
+      // case 'v':
+      //   this._toggleMapMode();
+      //   break;
       case '?':
         this.helpModal?.toggle();
         break;
