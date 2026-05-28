@@ -167,31 +167,29 @@ class NetworkViewerApp {
     const mhLookup = {};
     manholes.forEach(m => mhLookup[m.id] = m);
 
-    // Helper: resolve dummy manholes to their parent for elevation calculations.
-    const _getEffectiveMH = (mhId) => {
-      const mh = mhLookup[mhId];
-      if (!mh) return null;
-      if (mh.parent_mh && mhLookup[mh.parent_mh]) {
-        return { ...mh, cover_elev: mhLookup[mh.parent_mh].cover_elev };
-      }
-      return mh;
-    };
-
     pipes.forEach((p, i) => {
-      const fromMH = _getEffectiveMH(p.from_mh);
-      const toMH = _getEffectiveMH(p.to_mh);
+      const fromMH = mhLookup[p.from_mh];
+      const toMH = mhLookup[p.to_mh];
       if (!fromMH || !toMH) return;
 
-      const fromInvert = fromMH.cover_elev - p.from_depth;
-      const toInvert = toMH.cover_elev - p.to_depth;
-
       let flowFrom, flowTo;
-      if (fromInvert >= toInvert) {
+      const isDummyPipe = p.id && p.id.startsWith('DUMMY_PIPE');
+
+      if (isDummyPipe) {
+        // Dummy pipes: ALWAYS use JSON from_mh -> to_mh as flow direction
         flowFrom = p.from_mh;
         flowTo = p.to_mh;
       } else {
-        flowFrom = p.to_mh;
-        flowTo = p.from_mh;
+        // Regular pipes: compute flow direction from invert elevations
+        const fromInvert = fromMH.cover_elev - p.from_depth;
+        const toInvert = toMH.cover_elev - p.to_depth;
+        if (fromInvert >= toInvert) {
+          flowFrom = p.from_mh;
+          flowTo = p.to_mh;
+        } else {
+          flowFrom = p.to_mh;
+          flowTo = p.from_mh;
+        }
       }
 
       if (!this.outgoingGraph.has(flowFrom)) this.outgoingGraph.set(flowFrom, []);
