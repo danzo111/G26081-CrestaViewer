@@ -1070,20 +1070,6 @@
       ]
     },
     {
-      "id": "SW037",
-      "name": "SW037",
-      "type": "Stormwater",
-      "x": -97317.01,
-      "y": 2891510.66,
-      "cover_elev": 1560.39,
-      "depth": 0.65,
-      "diameter": 1.0,
-      "images": [
-        "images/SW037(1).jpg",
-        "images/SW037(2).jpg"
-      ]
-    },
-    {
       "id": "SW038",
       "name": "SW038",
       "type": "Stormwater",
@@ -2930,18 +2916,6 @@
       "images": []
     },
     {
-      "id": "DUMMY_050",
-      "name": "DUMMY_050",
-      "type": "Stormwater",
-      "x": -97313.81,
-      "y": 2891511.27,
-      "cover_elev": 1560.39,
-      "depth": 0.65,
-      "diameter": 1.0,
-      "parent_mh": "SW037",
-      "images": []
-    },
-    {
       "id": "DUMMY_051",
       "name": "DUMMY_051",
       "type": "Sewer",
@@ -3457,16 +3431,8 @@
     },
     {
       "id": "P005",
-      "from_mh": "SW037",
+      "from_mh": "SW039",
       "to_mh": "SW038",
-      "from_depth": 0.65,
-      "to_depth": 0.6,
-      "diameter_mm": 300.0
-    },
-    {
-      "id": "P005",
-      "from_mh": "SW038",
-      "to_mh": "SW039",
       "from_depth": 1.28,
       "to_depth": 1.07,
       "diameter_mm": 400.0
@@ -3542,14 +3508,6 @@
       "from_depth": 1.38,
       "to_depth": 1.3,
       "diameter_mm": 600.0
-    },
-    {
-      "id": "P005",
-      "from_mh": "SW056",
-      "to_mh": "SW057",
-      "from_depth": 4.0,
-      "to_depth": 1.2,
-      "diameter_mm": 400.0
     },
     {
       "id": "P005",
@@ -3777,8 +3735,8 @@
     },
     {
       "id": "DUMMY_PIPE_016",
-      "from_mh": "SW068",
-      "to_mh": "DUMMY_016",
+      "from_mh": "DUMMY_016",
+      "to_mh": "SW068",
       "from_depth": 0.6,
       "to_depth": 0.6,
       "diameter_mm": 1000.0
@@ -3793,24 +3751,24 @@
     },
     {
       "id": "DUMMY_PIPE_018",
-      "from_mh": "DUMMY_018",
-      "to_mh": "SW088",
+      "from_mh": "SW088",
+      "to_mh": "DUMMY_018",
       "from_depth": 0.0,
       "to_depth": 0.0,
       "diameter_mm": 1000.0
     },
     {
       "id": "DUMMY_PIPE_020",
-      "from_mh": "SW074",
-      "to_mh": "DUMMY_020",
+      "from_mh": "DUMMY_020",
+      "to_mh": "SW074",
       "from_depth": 0.45,
       "to_depth": 0.45,
       "diameter_mm": 1000.0
     },
     {
       "id": "DUMMY_PIPE_021",
-      "from_mh": "DUMMY_021",
-      "to_mh": "SW076",
+      "from_mh": "SW076",
+      "to_mh": "DUMMY_021",
       "from_depth": 1.45,
       "to_depth": 1.45,
       "diameter_mm": 1000.0
@@ -3841,8 +3799,8 @@
     },
     {
       "id": "DUMMY_PIPE_026",
-      "from_mh": "SW053",
-      "to_mh": "DUMMY_026",
+      "from_mh": "DUMMY_026",
+      "to_mh": "SW053",
       "from_depth": 2.4,
       "to_depth": 2.4,
       "diameter_mm": 1000.0
@@ -3857,16 +3815,16 @@
     },
     {
       "id": "DUMMY_PIPE_028",
-      "from_mh": "SW053",
-      "to_mh": "DUMMY_028",
+      "from_mh": "DUMMY_028",
+      "to_mh": "SW053",
       "from_depth": 2.4,
       "to_depth": 2.4,
       "diameter_mm": 1000.0
     },
     {
       "id": "DUMMY_PIPE_029",
-      "from_mh": "DUMMY_029",
-      "to_mh": "SW053",
+      "from_mh": "SW053",
+      "to_mh": "DUMMY_029",
       "from_depth": 2.4,
       "to_depth": 2.4,
       "diameter_mm": 1000.0
@@ -3889,8 +3847,8 @@
     },
     {
       "id": "DUMMY_PIPE_032",
-      "from_mh": "DUMMY_032",
-      "to_mh": "SW055",
+      "from_mh": "SW055",
+      "to_mh": "DUMMY_032",
       "from_depth": 0.76,
       "to_depth": 0.76,
       "diameter_mm": 1000.0
@@ -3913,8 +3871,8 @@
     },
     {
       "id": "DUMMY_PIPE_036",
-      "from_mh": "SW057",
-      "to_mh": "DUMMY_036",
+      "from_mh": "DUMMY_036",
+      "to_mh": "SW057",
       "from_depth": 1.5,
       "to_depth": 1.5,
       "diameter_mm": 1000.0
@@ -3937,16 +3895,16 @@
     },
     {
       "id": "DUMMY_PIPE_041",
-      "from_mh": "DUMMY_041",
-      "to_mh": "SE033",
+      "from_mh": "SE033",
+      "to_mh": "DUMMY_041",
       "from_depth": 2.6,
       "to_depth": 2.6,
       "diameter_mm": 1000.0
     },
     {
       "id": "DUMMY_PIPE_042",
-      "from_mh": "DUMMY_042",
-      "to_mh": "SE035",
+      "from_mh": "SE035",
+      "to_mh": "DUMMY_042",
       "from_depth": 2.4,
       "to_depth": 2.4,
       "diameter_mm": 1000.0
@@ -3977,8 +3935,8 @@
     },
     {
       "id": "DUMMY_PIPE_046",
-      "from_mh": "DUMMY_046",
-      "to_mh": "SE005",
+      "from_mh": "SE005",
+      "to_mh": "DUMMY_046",
       "from_depth": 2,
       "to_depth": 2,
       "diameter_mm": 1000.0
@@ -4008,14 +3966,6 @@
       "diameter_mm": 1000.0
     },
     {
-      "id": "DUMMY_PIPE_050",
-      "from_mh": "SW037",
-      "to_mh": "DUMMY_050",
-      "from_depth": 0.65,
-      "to_depth": 0.65,
-      "diameter_mm": 1000.0
-    },
-    {
       "id": "DUMMY_PIPE_051",
       "from_mh": "DUMMY_051",
       "to_mh": "SE004",
@@ -4041,16 +3991,16 @@
     },
     {
       "id": "DUMMY_PIPE_056",
-      "from_mh": "DUMMY_056",
-      "to_mh": "SE017",
+      "from_mh": "SE017",
+      "to_mh": "DUMMY_056",
       "from_depth": 2.6,
       "to_depth": 2.6,
       "diameter_mm": 1000.0
     },
     {
       "id": "DUMMY_PIPE_057",
-      "from_mh": "SW005",
-      "to_mh": "DUMMY_057",
+      "from_mh": "DUMMY_057",
+      "to_mh": "SW005",
       "from_depth": 2,
       "to_depth": 2,
       "diameter_mm": 1000.0
