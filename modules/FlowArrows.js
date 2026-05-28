@@ -8,8 +8,8 @@
  *   fromInvert = fromMH.cover_elev - pipe.from_depth
  *   toInvert   = toMH.cover_elev   - pipe.to_depth
  * 
- * If fromInvert > toInvert: flow goes from from_mh → to_mh
- * If toInvert   > fromInvert: flow goes from to_mh   → from_mh
+ * Dummy manholes inherit their elevation from their parent manhole,
+ * so we resolve parent_mh when computing invert elevations.
  * 
  * The arrow mesh is placed at the pipe midpoint, pointing downstream.
  * Uses a single InstancedMesh for all arrows (1 draw call).
@@ -19,13 +19,30 @@
 import * as THREE from 'three';
 
 export class FlowArrows {
-  constructor(scene, pipeData, coordSystem) {
+  constructor(scene, pipeData, coordSystem, mhLookup = null) {
     this.scene = scene;
     this.pipeData = pipeData;
     this.coordSystem = coordSystem;
+    this.mhLookup = mhLookup;
     this.mesh = null;
     this.visible = false;
     this._buildMesh();
+  }
+
+  /**
+   * Resolve a manhole ID to its effective cover elevation.
+   * If the manhole is a dummy with a parent, use the parent's cover_elev.
+   */
+  _resolveCoverElev(mhId) {
+    if (!this.mhLookup) return null;
+    const mh = this.mhLookup[mhId];
+    if (!mh) return null;
+
+    // If dummy has a parent, use parent's cover_elev
+    if (mh.parent_mh && this.mhLookup[mh.parent_mh]) {
+      return this.mhLookup[mh.parent_mh].cover_elev;
+    }
+    return mh.cover_elev;
   }
 
   _buildMesh() {
@@ -50,9 +67,6 @@ export class FlowArrows {
       if (!p) continue;
       // Accept any pipe that has valid endpoint data
       if (!p.p1 || !p.p2) continue;
-      // fromInvert/toInvert might be 0 (valid) or undefined (invalid)
-      if (p.fromInvert === undefined || p.fromInvert === null) continue;
-      if (p.toInvert === undefined || p.toInvert === null) continue;
       validPipes.push(p);
     }
 
@@ -74,10 +88,43 @@ export class FlowArrows {
     for (let i = 0; i < validPipes.length; i++) {
       const pd = validPipes[i];
 
-      // Determine flow direction: from higher invert to lower invert
-      const flowsFromP1 = pd.fromInvert >= pd.toInvert;
-      const start = flowsFromP1 ? pd.p1 : pd.p2;
-      const end = flowsFromP1 ? pd.p2 : pd.p1;
+      let start, end;
+
+      // For dummy pipes, use the JSON from_mh/to_mh definition as flow direction
+      const isDummyPipe = pd.id && pd.id.startsWith('DUMMY_PIPE');
+
+      if (isDummyPipe) {
+        // Dummy pipes: flow follows the JSON from_mh -> to_mh definition
+        start = pd.p1;
+        end = pd.p2;
+      } else {
+        // Regular pipes: compute flow direction from invert elevations
+        // RESOLVE parent manholes for dummies to get correct elevations
+        const fromCover = this._resolveCoverElev(pd.fromMH?.id);
+        const toCover = this._resolveCoverElev(pd.toMH?.id);
+        
+        const fromDepth = pd.fromDepth ?? pd.from_depth ?? 0;
+        const toDepth = pd.toDepth ?? pd.to_depth ?? 0;
+        
+        const fromInvert = fromCover !== null ? fromCover - fromDepth : null;
+        const toInvert = toCover !== null ? toCover - toDepth : null;
+
+        if (fromInvert === null || toInvert === null) {
+          // Fallback to pre-computed values if resolution fails
+          start = pd.p1;
+          end = pd.p2;
+        } else if (fromInvert > toInvert) {
+          start = pd.p1;
+          end = pd.p2;
+        } else if (toInvert > fromInvert) {
+          start = pd.p2;
+          end = pd.p1;
+        } else {
+          // Equal inverts — fallback to JSON order
+          start = pd.p1;
+          end = pd.p2;
+        }
+      }
 
       const dir = new THREE.Vector3().subVectors(end, start).normalize();
       const mid = new THREE.Vector3().addVectors(start, end).multiplyScalar(0.5);
