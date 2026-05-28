@@ -9,7 +9,14 @@
       "right": -97133.0284798979,
       "bottom": 2891253.789025604,
       "top": 2891979.142655681
-    }
+    },
+    "dummy_pipes_added": 50,
+    "dummy_manholes_added": 50,
+    "additional_manholes_added": 62,
+    "total_manholes": 236,
+    "total_pipes": 130,
+    "generated": "2026-05-27",
+    "note": "Dummy points inherit depth, diameter, and type from connected manhole"
   },
   "manholes": [
     {
@@ -22,8 +29,8 @@
       "depth": 0.33,
       "diameter": 1.0,
       "images": [
-        "images/SE001(1).JPG",
-        "images/SE001(2).JPG"
+        "images/SE001(1).jpg",
+        "images/SE001(2).jpg"
       ]
     },
     {
@@ -36,8 +43,8 @@
       "depth": 1.47,
       "diameter": 1.0,
       "images": [
-        "images/SE002(1).JPG",
-        "images/SE002(2).JPG"
+        "images/SE002(1).jpg",
+        "images/SE002(2).jpg"
       ]
     },
     {
@@ -50,8 +57,8 @@
       "depth": 0.33,
       "diameter": 1.0,
       "images": [
-        "images/SE003(1).JPG",
-        "images/SE003(2).JPG"
+        "images/SE003(1).jpg",
+        "images/SE003(2).jpg"
       ]
     },
     {
@@ -64,8 +71,8 @@
       "depth": 2.66,
       "diameter": 1.0,
       "images": [
-        "images/SE004(1).JPG",
-        "images/SE004(2).JPG"
+        "images/SE004(1).jpg",
+        "images/SE004(2).jpg"
       ]
     },
     {
@@ -78,8 +85,8 @@
       "depth": 2,
       "diameter": 1.0,
       "images": [
-        "images/SE005(1).JPG",
-        "images/SE005(2).JPG"
+        "images/SE005(1).jpg",
+        "images/SE005(2).jpg"
       ]
     },
     {
@@ -92,8 +99,8 @@
       "depth": 0.33,
       "diameter": 1.0,
       "images": [
-        "images/SE006(1).JPG",
-        "images/SE006(2).JPG"
+        "images/SE006(1).jpg",
+        "images/SE006(2).jpg"
       ]
     },
     {
@@ -106,8 +113,8 @@
       "depth": 1.9,
       "diameter": 1.0,
       "images": [
-        "images/SE007(1).JPG",
-        "images/SE007(2).JPG"
+        "images/SE007(1).jpg",
+        "images/SE007(2).jpg"
       ]
     },
     {
@@ -120,8 +127,8 @@
       "depth": 0.33,
       "diameter": 1.0,
       "images": [
-        "images/SE008(1).JPG",
-        "images/SE008(2).JPG"
+        "images/SE008(1).jpg",
+        "images/SE008(2).jpg"
       ]
     },
     {
@@ -134,8 +141,8 @@
       "depth": 0.33,
       "diameter": 1.0,
       "images": [
-        "images/SE009(1).JPG",
-        "images/SE009(2).JPG"
+        "images/SE009(1).jpg",
+        "images/SE009(2).jpg"
       ]
     },
     {
@@ -148,8 +155,8 @@
       "depth": 0.33,
       "diameter": 1.0,
       "images": [
-        "images/SE010(1).JPG",
-        "images/SE010(2).JPG"
+        "images/SE010(1).jpg",
+        "images/SE010(2).jpg"
       ]
     },
     {
@@ -162,8 +169,8 @@
       "depth": 0.33,
       "diameter": 1.0,
       "images": [
-        "images/SE011(1).JPG",
-        "images/SE011(2).JPG"
+        "images/SE011(1).jpg",
+        "images/SE011(2).jpg"
       ]
     },
     {
@@ -176,8 +183,8 @@
       "depth": 0.33,
       "diameter": 1.0,
       "images": [
-        "images/SE012(1).JPG",
-        "images/SE012(2).JPG"
+        "images/SE012(1).jpg",
+        "images/SE012(2).jpg"
       ]
     },
     {
@@ -190,8 +197,8 @@
       "depth": 0.33,
       "diameter": 1.0,
       "images": [
-        "images/SE013(1).JPG",
-        "images/SE013(2).JPG"
+        "images/SE013(1).jpg",
+        "images/SE013(2).jpg"
       ]
     },
     {
@@ -204,8 +211,8 @@
       "depth": 0.33,
       "diameter": 1.0,
       "images": [
-        "images/SE014(1).JPG",
-        "images/SE014(2).JPG"
+        "images/SE014(1).jpg",
+        "images/SE014(2).jpg"
       ]
     },
     {
@@ -218,8 +225,8 @@
       "depth": 0.33,
       "diameter": 1.0,
       "images": [
-        "images/SE015(1).JPG",
-        "images/SE015(2).JPG"
+        "images/SE015(1).jpg",
+        "images/SE015(2).jpg"
       ]
     },
     {
@@ -232,8 +239,8 @@
       "depth": 2.6,
       "diameter": 1.0,
       "images": [
-        "images/SE017(1).JPG",
-        "images/SE017(2).JPG"
+        "images/SE017(1).jpg",
+        "images/SE017(2).jpg"
       ]
     },
     {
@@ -246,8 +253,8 @@
       "depth": 1.2,
       "diameter": 1.0,
       "images": [
-        "images/SE018(1).JPG",
-        "images/SE018(2).JPG"
+        "images/SE018(1).jpg",
+        "images/SE018(2).jpg"
       ]
     },
     {
@@ -260,8 +267,8 @@
       "depth": 1.7,
       "diameter": 1.0,
       "images": [
-        "images/SE019(1).JPG",
-        "images/SE019(2).JPG"
+        "images/SE019(1).jpg",
+        "images/SE019(2).jpg"
       ]
     },
     {
@@ -274,8 +281,8 @@
       "depth": 1.55,
       "diameter": 1.0,
       "images": [
-        "images/SE020(1).JPG",
-        "images/SE020(2).JPG"
+        "images/SE020(1).jpg",
+        "images/SE020(2).jpg"
       ]
     },
     {
@@ -288,8 +295,8 @@
       "depth": 2.2,
       "diameter": 1.0,
       "images": [
-        "images/SE021(1).JPG",
-        "images/SE021(2).JPG"
+        "images/SE021(1).jpg",
+        "images/SE021(2).jpg"
       ]
     },
     {
@@ -302,8 +309,8 @@
       "depth": 1.7,
       "diameter": 1.0,
       "images": [
-        "images/SE022(1).JPG",
-        "images/SE022(2).JPG"
+        "images/SE022(1).jpg",
+        "images/SE022(2).jpg"
       ]
     },
     {
@@ -316,8 +323,8 @@
       "depth": 2.7,
       "diameter": 1.0,
       "images": [
-        "images/SE023(1).JPG",
-        "images/SE023(2).JPG"
+        "images/SE023(1).jpg",
+        "images/SE023(2).jpg"
       ]
     },
     {
@@ -330,8 +337,8 @@
       "depth": 2.5,
       "diameter": 1.0,
       "images": [
-        "images/SE026(1).JPG",
-        "images/SE026(2).JPG"
+        "images/SE026(1).jpg",
+        "images/SE026(2).jpg"
       ]
     },
     {
@@ -344,8 +351,8 @@
       "depth": 3,
       "diameter": 1.0,
       "images": [
-        "images/SE027(1).JPG",
-        "images/SE027(2).JPG"
+        "images/SE027(1).jpg",
+        "images/SE027(2).jpg"
       ]
     },
     {
@@ -358,8 +365,8 @@
       "depth": 2.58,
       "diameter": 1.0,
       "images": [
-        "images/SE028(1).JPG",
-        "images/SE028(2).JPG"
+        "images/SE028(1).jpg",
+        "images/SE028(2).jpg"
       ]
     },
     {
@@ -372,8 +379,8 @@
       "depth": 1.77,
       "diameter": 1.0,
       "images": [
-        "images/SE029(1).JPG",
-        "images/SE029(2).JPG"
+        "images/SE029(1).jpg",
+        "images/SE029(2).jpg"
       ]
     },
     {
@@ -386,8 +393,8 @@
       "depth": 0.33,
       "diameter": 1.0,
       "images": [
-        "images/SE030(1).JPG",
-        "images/SE030(2).JPG"
+        "images/SE030(1).jpg",
+        "images/SE030(2).jpg"
       ]
     },
     {
@@ -400,8 +407,8 @@
       "depth": 2.4,
       "diameter": 1.0,
       "images": [
-        "images/SE031(1).JPG",
-        "images/SE031(2).JPG"
+        "images/SE031(1).jpg",
+        "images/SE031(2).jpg"
       ]
     },
     {
@@ -414,8 +421,8 @@
       "depth": 1.56,
       "diameter": 1.0,
       "images": [
-        "images/SE032(1).JPG",
-        "images/SE032(2).JPG"
+        "images/SE032(1).jpg",
+        "images/SE032(2).jpg"
       ]
     },
     {
@@ -428,8 +435,8 @@
       "depth": 2.6,
       "diameter": 1.0,
       "images": [
-        "images/SE033(1).JPG",
-        "images/SE033(2).JPG"
+        "images/SE033(1).jpg",
+        "images/SE033(2).jpg"
       ]
     },
     {
@@ -442,8 +449,8 @@
       "depth": 1.6,
       "diameter": 1.0,
       "images": [
-        "images/SE034(1).JPG",
-        "images/SE034(2).JPG"
+        "images/SE034(1).jpg",
+        "images/SE034(2).jpg"
       ]
     },
     {
@@ -456,8 +463,8 @@
       "depth": 2.4,
       "diameter": 1.0,
       "images": [
-        "images/SE035(1).JPG",
-        "images/SE035(2).JPG"
+        "images/SE035(1).jpg",
+        "images/SE035(2).jpg"
       ]
     },
     {
@@ -470,8 +477,8 @@
       "depth": 1.7,
       "diameter": 1.0,
       "images": [
-        "images/SE036(1).JPG",
-        "images/SE036(2).JPG"
+        "images/SE036(1).jpg",
+        "images/SE036(2).jpg"
       ]
     },
     {
@@ -484,8 +491,8 @@
       "depth": 1.7,
       "diameter": 1.0,
       "images": [
-        "images/SE037(1).JPG",
-        "images/SE037(2).JPG"
+        "images/SE037(1).jpg",
+        "images/SE037(2).jpg"
       ]
     },
     {
@@ -498,8 +505,8 @@
       "depth": 1.9,
       "diameter": 1.0,
       "images": [
-        "images/SE038(1).JPG",
-        "images/SE038(2).JPG"
+        "images/SE038(1).jpg",
+        "images/SE038(2).jpg"
       ]
     },
     {
@@ -512,8 +519,8 @@
       "depth": 1.4,
       "diameter": 1.0,
       "images": [
-        "images/SE039(1).JPG",
-        "images/SE039(2).JPG"
+        "images/SE039(1).jpg",
+        "images/SE039(2).jpg"
       ]
     },
     {
@@ -526,8 +533,8 @@
       "depth": 0.33,
       "diameter": 1.0,
       "images": [
-        "images/SE040(1).JPG",
-        "images/SE040(2).JPG"
+        "images/SE040(1).jpg",
+        "images/SE040(2).jpg"
       ]
     },
     {
@@ -540,8 +547,8 @@
       "depth": 0.33,
       "diameter": 1.0,
       "images": [
-        "images/SE041(1).JPG",
-        "images/SE041(2).JPG"
+        "images/SE041(1).jpg",
+        "images/SE041(2).jpg"
       ]
     },
     {
@@ -554,8 +561,8 @@
       "depth": 0.33,
       "diameter": 1.0,
       "images": [
-        "images/SE042(1).JPG",
-        "images/SE042(2).JPG"
+        "images/SE042(1).jpg",
+        "images/SE042(2).jpg"
       ]
     },
     {
@@ -568,8 +575,8 @@
       "depth": 1.4,
       "diameter": 1.0,
       "images": [
-        "images/SW001(1).JPG",
-        "images/SW001(2).JPG"
+        "images/SW001(1).jpg",
+        "images/SW001(2).jpg"
       ]
     },
     {
@@ -582,8 +589,8 @@
       "depth": 1.5,
       "diameter": 1.0,
       "images": [
-        "images/SW002(1).JPG",
-        "images/SW002(2).JPG"
+        "images/SW002(1).jpg",
+        "images/SW002(2).jpg"
       ]
     },
     {
@@ -596,8 +603,8 @@
       "depth": 1.4,
       "diameter": 1.0,
       "images": [
-        "images/SW003(1).JPG",
-        "images/SW003(2).JPG"
+        "images/SW003(1).jpg",
+        "images/SW003(2).jpg"
       ]
     },
     {
@@ -610,8 +617,8 @@
       "depth": 1.4,
       "diameter": 1.0,
       "images": [
-        "images/SW004(1).JPG",
-        "images/SW004(2).JPG"
+        "images/SW004(1).jpg",
+        "images/SW004(2).jpg"
       ]
     },
     {
@@ -624,8 +631,8 @@
       "depth": 2,
       "diameter": 1.0,
       "images": [
-        "images/SW005(1).JPG",
-        "images/SW005(2).JPG"
+        "images/SW005(1).jpg",
+        "images/SW005(2).jpg"
       ]
     },
     {
@@ -638,8 +645,8 @@
       "depth": 0.6,
       "diameter": 1.0,
       "images": [
-        "images/SW006(1).JPG",
-        "images/SW006(2).JPG"
+        "images/SW006(1).jpg",
+        "images/SW006(2).jpg"
       ]
     },
     {
@@ -652,8 +659,8 @@
       "depth": 1.6,
       "diameter": 1.0,
       "images": [
-        "images/SW007(1).JPG",
-        "images/SW007(2).JPG"
+        "images/SW007(1).jpg",
+        "images/SW007(2).jpg"
       ]
     },
     {
@@ -666,8 +673,8 @@
       "depth": 0.9,
       "diameter": 1.0,
       "images": [
-        "images/SW008(1).JPG",
-        "images/SW008(2).JPG"
+        "images/SW008(1).jpg",
+        "images/SW008(2).jpg"
       ]
     },
     {
@@ -680,8 +687,8 @@
       "depth": 1,
       "diameter": 1.0,
       "images": [
-        "images/SW009(1).JPG",
-        "images/SW009(2).JPG"
+        "images/SW009(1).jpg",
+        "images/SW009(2).jpg"
       ]
     },
     {
@@ -694,8 +701,8 @@
       "depth": 0.5,
       "diameter": 1.0,
       "images": [
-        "images/SW010(1).JPG",
-        "images/SW010(2).JPG"
+        "images/SW010(1).jpg",
+        "images/SW010(2).jpg"
       ]
     },
     {
@@ -708,8 +715,8 @@
       "depth": 0.5,
       "diameter": 1.0,
       "images": [
-        "images/SW011(1).JPG",
-        "images/SW011(2).JPG"
+        "images/SW011(1).jpg",
+        "images/SW011(2).jpg"
       ]
     },
     {
@@ -722,8 +729,8 @@
       "depth": 1.4,
       "diameter": 1.0,
       "images": [
-        "images/SW012(1).JPG",
-        "images/SW012(2).JPG"
+        "images/SW012(1).jpg",
+        "images/SW012(2).jpg"
       ]
     },
     {
@@ -736,8 +743,8 @@
       "depth": 1,
       "diameter": 1.0,
       "images": [
-        "images/SW013(1).JPG",
-        "images/SW013(2).JPG"
+        "images/SW013(1).jpg",
+        "images/SW013(2).jpg"
       ]
     },
     {
@@ -750,8 +757,8 @@
       "depth": 1.6,
       "diameter": 1.0,
       "images": [
-        "images/SW014(1).JPG",
-        "images/SW014(2).JPG"
+        "images/SW014(1).jpg",
+        "images/SW014(2).jpg"
       ]
     },
     {
@@ -764,8 +771,8 @@
       "depth": 1.5,
       "diameter": 1.0,
       "images": [
-        "images/SW015(1).JPG",
-        "images/SW015(2).JPG"
+        "images/SW015(1).jpg",
+        "images/SW015(2).jpg"
       ]
     },
     {
@@ -778,8 +785,8 @@
       "depth": 1.58,
       "diameter": 1.0,
       "images": [
-        "images/SW016(1).JPG",
-        "images/SW016(2).JPG"
+        "images/SW016(1).jpg",
+        "images/SW016(2).jpg"
       ]
     },
     {
@@ -792,8 +799,8 @@
       "depth": 1.6,
       "diameter": 1.0,
       "images": [
-        "images/SW017(1).JPG",
-        "images/SW017(2).JPG"
+        "images/SW017(1).jpg",
+        "images/SW017(2).jpg"
       ]
     },
     {
@@ -806,8 +813,8 @@
       "depth": 1.7,
       "diameter": 1.0,
       "images": [
-        "images/SW018(1).JPG",
-        "images/SW018(2).JPG"
+        "images/SW018(1).jpg",
+        "images/SW018(2).jpg"
       ]
     },
     {
@@ -820,8 +827,8 @@
       "depth": 1.45,
       "diameter": 1.0,
       "images": [
-        "images/SW019(1).JPG",
-        "images/SW019(2).JPG"
+        "images/SW019(1).jpg",
+        "images/SW019(2).jpg"
       ]
     },
     {
@@ -834,8 +841,8 @@
       "depth": 1.56,
       "diameter": 1.0,
       "images": [
-        "images/SW020(1).JPG",
-        "images/SW020(2).JPG"
+        "images/SW020(1).jpg",
+        "images/SW020(2).jpg"
       ]
     },
     {
@@ -848,8 +855,8 @@
       "depth": 1.62,
       "diameter": 1.0,
       "images": [
-        "images/SW021(1).JPG",
-        "images/SW021(2).JPG"
+        "images/SW021(1).jpg",
+        "images/SW021(2).jpg"
       ]
     },
     {
@@ -862,8 +869,8 @@
       "depth": 1.73,
       "diameter": 1.0,
       "images": [
-        "images/SW022(1).JPG",
-        "images/SW022(2).JPG"
+        "images/SW022(1).jpg",
+        "images/SW022(2).jpg"
       ]
     },
     {
@@ -876,8 +883,8 @@
       "depth": 1.1,
       "diameter": 1.0,
       "images": [
-        "images/SW023(1).JPG",
-        "images/SW023(2).JPG"
+        "images/SW023(1).jpg",
+        "images/SW023(2).jpg"
       ]
     },
     {
@@ -890,8 +897,8 @@
       "depth": 0.4,
       "diameter": 1.0,
       "images": [
-        "images/SW024(1).JPG",
-        "images/SW024(2).JPG"
+        "images/SW024(1).jpg",
+        "images/SW024(2).jpg"
       ]
     },
     {
@@ -904,8 +911,8 @@
       "depth": 0.6,
       "diameter": 1.0,
       "images": [
-        "images/SW025(1).JPG",
-        "images/SW025(2).JPG"
+        "images/SW025(1).jpg",
+        "images/SW025(2).jpg"
       ]
     },
     {
@@ -918,8 +925,8 @@
       "depth": 0.33,
       "diameter": 1.0,
       "images": [
-        "images/SW026(1).JPG",
-        "images/SW026(2).JPG"
+        "images/SW026(1).jpg",
+        "images/SW026(2).jpg"
       ]
     },
     {
@@ -932,8 +939,8 @@
       "depth": 0.65,
       "diameter": 1.0,
       "images": [
-        "images/SW027(1).JPG",
-        "images/SW027(2).JPG"
+        "images/SW027(1).jpg",
+        "images/SW027(2).jpg"
       ]
     },
     {
@@ -946,8 +953,8 @@
       "depth": 0.4,
       "diameter": 1.0,
       "images": [
-        "images/SW028(1).JPG",
-        "images/SW028(2).JPG"
+        "images/SW028(1).jpg",
+        "images/SW028(2).jpg"
       ]
     },
     {
@@ -960,8 +967,8 @@
       "depth": 0.55,
       "diameter": 1.0,
       "images": [
-        "images/SW029(1).JPG",
-        "images/SW029(2).JPG"
+        "images/SW029(1).jpg",
+        "images/SW029(2).jpg"
       ]
     },
     {
@@ -974,8 +981,8 @@
       "depth": 1.3,
       "diameter": 1.0,
       "images": [
-        "images/SW030(1).JPG",
-        "images/SW030(2).JPG"
+        "images/SW030(1).jpg",
+        "images/SW030(2).jpg"
       ]
     },
     {
@@ -988,8 +995,8 @@
       "depth": 0.6,
       "diameter": 1.0,
       "images": [
-        "images/SW031(1).JPG",
-        "images/SW031(2).JPG"
+        "images/SW031(1).jpg",
+        "images/SW031(2).jpg"
       ]
     },
     {
@@ -1002,8 +1009,8 @@
       "depth": 0.8,
       "diameter": 1.0,
       "images": [
-        "images/SW032(1).JPG",
-        "images/SW032(2).JPG"
+        "images/SW032(1).jpg",
+        "images/SW032(2).jpg"
       ]
     },
     {
@@ -1016,8 +1023,8 @@
       "depth": 0.4,
       "diameter": 1.0,
       "images": [
-        "images/SW033(1).JPG",
-        "images/SW033(2).JPG"
+        "images/SW033(1).jpg",
+        "images/SW033(2).jpg"
       ]
     },
     {
@@ -1030,8 +1037,8 @@
       "depth": 0.9,
       "diameter": 1.0,
       "images": [
-        "images/SW034(1).JPG",
-        "images/SW034(2).JPG"
+        "images/SW034(1).jpg",
+        "images/SW034(2).jpg"
       ]
     },
     {
@@ -1044,8 +1051,8 @@
       "depth": 0.4,
       "diameter": 1.0,
       "images": [
-        "images/SW035(1).JPG",
-        "images/SW035(2).JPG"
+        "images/SW035(1).jpg",
+        "images/SW035(2).jpg"
       ]
     },
     {
@@ -1058,8 +1065,8 @@
       "depth": 0.33,
       "diameter": 1.0,
       "images": [
-        "images/SW036(1).JPG",
-        "images/SW036(2).JPG"
+        "images/SW036(1).jpg",
+        "images/SW036(2).jpg"
       ]
     },
     {
@@ -1072,8 +1079,8 @@
       "depth": 0.65,
       "diameter": 1.0,
       "images": [
-        "images/SW037(1).JPG",
-        "images/SW037(2).JPG"
+        "images/SW037(1).jpg",
+        "images/SW037(2).jpg"
       ]
     },
     {
@@ -1086,8 +1093,8 @@
       "depth": 1.28,
       "diameter": 1.0,
       "images": [
-        "images/SW038(1).JPG",
-        "images/SW038(2).JPG"
+        "images/SW038(1).jpg",
+        "images/SW038(2).jpg"
       ]
     },
     {
@@ -1100,8 +1107,8 @@
       "depth": 1.07,
       "diameter": 1.0,
       "images": [
-        "images/SW039(1).JPG",
-        "images/SW039(2).JPG"
+        "images/SW039(1).jpg",
+        "images/SW039(2).jpg"
       ]
     },
     {
@@ -1114,8 +1121,8 @@
       "depth": 0.88,
       "diameter": 1.0,
       "images": [
-        "images/SW040(1).JPG",
-        "images/SW040(2).JPG"
+        "images/SW040(1).jpg",
+        "images/SW040(2).jpg"
       ]
     },
     {
@@ -1128,8 +1135,8 @@
       "depth": 0.33,
       "diameter": 1.0,
       "images": [
-        "images/SW041(1).JPG",
-        "images/SW041(2).JPG"
+        "images/SW041(1).jpg",
+        "images/SW041(2).jpg"
       ]
     },
     {
@@ -1142,8 +1149,8 @@
       "depth": 1.5,
       "diameter": 1.0,
       "images": [
-        "images/SW042(1).JPG",
-        "images/SW042(2).JPG"
+        "images/SW042(1).jpg",
+        "images/SW042(2).jpg"
       ]
     },
     {
@@ -1156,8 +1163,8 @@
       "depth": 1.5,
       "diameter": 1.0,
       "images": [
-        "images/SW043(1).JPG",
-        "images/SW043(2).JPG"
+        "images/SW043(1).jpg",
+        "images/SW043(2).jpg"
       ]
     },
     {
@@ -1170,8 +1177,8 @@
       "depth": 1.47,
       "diameter": 1.0,
       "images": [
-        "images/SW044(1).JPG",
-        "images/SW044(2).JPG"
+        "images/SW044(1).jpg",
+        "images/SW044(2).jpg"
       ]
     },
     {
@@ -1184,8 +1191,8 @@
       "depth": 0.33,
       "diameter": 1.0,
       "images": [
-        "images/SW045(1).JPG",
-        "images/SW045(2).JPG"
+        "images/SW045(1).jpg",
+        "images/SW045(2).jpg"
       ]
     },
     {
@@ -1198,8 +1205,8 @@
       "depth": 1.6,
       "diameter": 1.0,
       "images": [
-        "images/SW046(1).JPG",
-        "images/SW046(2).JPG"
+        "images/SW046(1).jpg",
+        "images/SW046(2).jpg"
       ]
     },
     {
@@ -1212,8 +1219,8 @@
       "depth": 2.5,
       "diameter": 1.0,
       "images": [
-        "images/SW047(1).JPG",
-        "images/SW047(2).JPG"
+        "images/SW047(1).jpg",
+        "images/SW047(2).jpg"
       ]
     },
     {
@@ -1226,8 +1233,8 @@
       "depth": 1.2,
       "diameter": 1.0,
       "images": [
-        "images/SW048(1).JPG",
-        "images/SW048(2).JPG"
+        "images/SW048(1).jpg",
+        "images/SW048(2).jpg"
       ]
     },
     {
@@ -1240,8 +1247,8 @@
       "depth": 1.38,
       "diameter": 1.0,
       "images": [
-        "images/SW049(1).JPG",
-        "images/SW049(2).JPG"
+        "images/SW049(1).jpg",
+        "images/SW049(2).jpg"
       ]
     },
     {
@@ -1254,8 +1261,8 @@
       "depth": 1.3,
       "diameter": 1.0,
       "images": [
-        "images/SW050(1).JPG",
-        "images/SW050(2).JPG"
+        "images/SW050(1).jpg",
+        "images/SW050(2).jpg"
       ]
     },
     {
@@ -1268,8 +1275,8 @@
       "depth": 0.7,
       "diameter": 1.0,
       "images": [
-        "images/SW052(1).JPG",
-        "images/SW052(2).JPG"
+        "images/SW052(1).jpg",
+        "images/SW052(2).jpg"
       ]
     },
     {
@@ -1282,8 +1289,8 @@
       "depth": 2.4,
       "diameter": 1.0,
       "images": [
-        "images/SW053(1).JPG",
-        "images/SW053(2).JPG"
+        "images/SW053(1).jpg",
+        "images/SW053(2).jpg"
       ]
     },
     {
@@ -1296,8 +1303,8 @@
       "depth": 1.1,
       "diameter": 1.0,
       "images": [
-        "images/SW054(1).JPG",
-        "images/SW054(2).JPG"
+        "images/SW054(1).jpg",
+        "images/SW054(2).jpg"
       ]
     },
     {
@@ -1310,8 +1317,8 @@
       "depth": 0.76,
       "diameter": 1.0,
       "images": [
-        "images/SW055(1).JPG",
-        "images/SW055(2).JPG"
+        "images/SW055(1).jpg",
+        "images/SW055(2).jpg"
       ]
     },
     {
@@ -1324,8 +1331,8 @@
       "depth": 4,
       "diameter": 1.0,
       "images": [
-        "images/SW056(1).JPG",
-        "images/SW056(2).JPG"
+        "images/SW056(1).jpg",
+        "images/SW056(2).jpg"
       ]
     },
     {
@@ -1338,8 +1345,8 @@
       "depth": 1.5,
       "diameter": 1.0,
       "images": [
-        "images/SW057(1).JPG",
-        "images/SW057(2).JPG"
+        "images/SW057(1).jpg",
+        "images/SW057(2).jpg"
       ]
     },
     {
@@ -1352,8 +1359,8 @@
       "depth": 4.6,
       "diameter": 1.0,
       "images": [
-        "images/SW058(1).JPG",
-        "images/SW058(2).JPG"
+        "images/SW058(1).jpg",
+        "images/SW058(2).jpg"
       ]
     },
     {
@@ -1366,8 +1373,8 @@
       "depth": 0.5,
       "diameter": 1.0,
       "images": [
-        "images/SW059(1).JPG",
-        "images/SW059(2).JPG"
+        "images/SW059(1).jpg",
+        "images/SW059(2).jpg"
       ]
     },
     {
@@ -1380,8 +1387,8 @@
       "depth": 0.33,
       "diameter": 1.0,
       "images": [
-        "images/SW060(1).JPG",
-        "images/SW060(2).JPG"
+        "images/SW060(1).jpg",
+        "images/SW060(2).jpg"
       ]
     },
     {
@@ -1394,8 +1401,8 @@
       "depth": 3.1,
       "diameter": 1.0,
       "images": [
-        "images/SW061(1).JPG",
-        "images/SW061(2).JPG"
+        "images/SW061(1).jpg",
+        "images/SW061(2).jpg"
       ]
     },
     {
@@ -1408,8 +1415,8 @@
       "depth": 3.8,
       "diameter": 1.0,
       "images": [
-        "images/SW062(1).JPG",
-        "images/SW062(2).JPG"
+        "images/SW062(1).jpg",
+        "images/SW062(2).jpg"
       ]
     },
     {
@@ -1422,8 +1429,8 @@
       "depth": 1.1,
       "diameter": 1.0,
       "images": [
-        "images/SW063(1).JPG",
-        "images/SW063(2).JPG"
+        "images/SW063(1).jpg",
+        "images/SW063(2).jpg"
       ]
     },
     {
@@ -1436,8 +1443,8 @@
       "depth": 0.33,
       "diameter": 1.0,
       "images": [
-        "images/SW064(1).JPG",
-        "images/SW064(2).JPG"
+        "images/SW064(1).jpg",
+        "images/SW064(2).jpg"
       ]
     },
     {
@@ -1450,8 +1457,8 @@
       "depth": 4.3,
       "diameter": 1.0,
       "images": [
-        "images/SW065(1).JPG",
-        "images/SW065(2).JPG"
+        "images/SW065(1).jpg",
+        "images/SW065(2).jpg"
       ]
     },
     {
@@ -1464,8 +1471,8 @@
       "depth": 0.3,
       "diameter": 1.0,
       "images": [
-        "images/SW066(1).JPG",
-        "images/SW066(2).JPG"
+        "images/SW066(1).jpg",
+        "images/SW066(2).jpg"
       ]
     },
     {
@@ -1478,8 +1485,8 @@
       "depth": 0.6,
       "diameter": 1.0,
       "images": [
-        "images/SW067(1).JPG",
-        "images/SW067(2).JPG"
+        "images/SW067(1).jpg",
+        "images/SW067(2).jpg"
       ]
     },
     {
@@ -1492,8 +1499,8 @@
       "depth": 0.6,
       "diameter": 1.0,
       "images": [
-        "images/SW068(1).JPG",
-        "images/SW068(2).JPG"
+        "images/SW068(1).jpg",
+        "images/SW068(2).jpg"
       ]
     },
     {
@@ -1506,8 +1513,8 @@
       "depth": 1.16,
       "diameter": 1.0,
       "images": [
-        "images/SW069(1).JPG",
-        "images/SW069(2).JPG"
+        "images/SW069(1).jpg",
+        "images/SW069(2).jpg"
       ]
     },
     {
@@ -1520,8 +1527,8 @@
       "depth": 0.4,
       "diameter": 1.0,
       "images": [
-        "images/SW070(1).JPG",
-        "images/SW070(2).JPG"
+        "images/SW070(1).jpg",
+        "images/SW070(2).jpg"
       ]
     },
     {
@@ -1534,8 +1541,8 @@
       "depth": 2.26,
       "diameter": 1.0,
       "images": [
-        "images/SW071(1).JPG",
-        "images/SW071(2).JPG"
+        "images/SW071(1).jpg",
+        "images/SW071(2).jpg"
       ]
     },
     {
@@ -1548,8 +1555,8 @@
       "depth": 1.3,
       "diameter": 1.0,
       "images": [
-        "images/SW072(1).JPG",
-        "images/SW072(2).JPG"
+        "images/SW072(1).jpg",
+        "images/SW072(2).jpg"
       ]
     },
     {
@@ -1562,8 +1569,8 @@
       "depth": 1.25,
       "diameter": 1.0,
       "images": [
-        "images/SW073(1).JPG",
-        "images/SW073(2).JPG"
+        "images/SW073(1).jpg",
+        "images/SW073(2).jpg"
       ]
     },
     {
@@ -1576,8 +1583,8 @@
       "depth": 0.45,
       "diameter": 1.0,
       "images": [
-        "images/SW074(1).JPG",
-        "images/SW074(2).JPG"
+        "images/SW074(1).jpg",
+        "images/SW074(2).jpg"
       ]
     },
     {
@@ -1590,8 +1597,8 @@
       "depth": 1.1,
       "diameter": 1.0,
       "images": [
-        "images/SW075(1).JPG",
-        "images/SW075(2).JPG"
+        "images/SW075(1).jpg",
+        "images/SW075(2).jpg"
       ]
     },
     {
@@ -1604,8 +1611,8 @@
       "depth": 1.45,
       "diameter": 1.0,
       "images": [
-        "images/SW076(1).JPG",
-        "images/SW076(2).JPG"
+        "images/SW076(1).jpg",
+        "images/SW076(2).jpg"
       ]
     },
     {
@@ -1618,8 +1625,8 @@
       "depth": 1,
       "diameter": 1.0,
       "images": [
-        "images/SW077(1).JPG",
-        "images/SW077(2).JPG"
+        "images/SW077(1).jpg",
+        "images/SW077(2).jpg"
       ]
     },
     {
@@ -1632,8 +1639,8 @@
       "depth": 2,
       "diameter": 1.0,
       "images": [
-        "images/SW078(1).JPG",
-        "images/SW078(2).JPG"
+        "images/SW078(1).jpg",
+        "images/SW078(2).jpg"
       ]
     },
     {
@@ -1646,8 +1653,8 @@
       "depth": 0.33,
       "diameter": 1.0,
       "images": [
-        "images/SW080(1).JPG",
-        "images/SW080(2).JPG"
+        "images/SW080(1).jpg",
+        "images/SW080(2).jpg"
       ]
     },
     {
@@ -1660,8 +1667,8 @@
       "depth": 2.8,
       "diameter": 1.0,
       "images": [
-        "images/SW081(1).JPG",
-        "images/SW081(2).JPG"
+        "images/SW081(1).jpg",
+        "images/SW081(2).jpg"
       ]
     },
     {
@@ -1674,8 +1681,8 @@
       "depth": 2.5,
       "diameter": 1.0,
       "images": [
-        "images/SW082(1).JPG",
-        "images/SW082(2).JPG"
+        "images/SW082(1).jpg",
+        "images/SW082(2).jpg"
       ]
     },
     {
@@ -1688,8 +1695,8 @@
       "depth": 2.3,
       "diameter": 1.0,
       "images": [
-        "images/SW083(1).JPG",
-        "images/SW083(2).JPG"
+        "images/SW083(1).jpg",
+        "images/SW083(2).jpg"
       ]
     },
     {
@@ -1702,8 +1709,8 @@
       "depth": 0.33,
       "diameter": 1.0,
       "images": [
-        "images/SW084(1).JPG",
-        "images/SW084(2).JPG"
+        "images/SW084(1).jpg",
+        "images/SW084(2).jpg"
       ]
     },
     {
@@ -1716,8 +1723,8 @@
       "depth": 3.7,
       "diameter": 1.0,
       "images": [
-        "images/SW085(1).JPG",
-        "images/SW085(2).JPG"
+        "images/SW085(1).jpg",
+        "images/SW085(2).jpg"
       ]
     },
     {
@@ -1730,8 +1737,8 @@
       "depth": 0.8,
       "diameter": 1.0,
       "images": [
-        "images/SW086(1).JPG",
-        "images/SW086(2).JPG"
+        "images/SW086(1).jpg",
+        "images/SW086(2).jpg"
       ]
     },
     {
@@ -1744,9 +1751,1291 @@
       "depth": 0.8,
       "diameter": 1.0,
       "images": [
-        "images/SW087(1).JPG",
-        "images/SW087(2).JPG"
+        "images/SW087(1).jpg",
+        "images/SW087(2).jpg"
       ]
+    },
+    {
+      "id": "BS013",
+      "name": "BS013",
+      "type": "Sewer",
+      "x": -97467.488,
+      "y": 2891328.402,
+      "cover_elev": 1549.152,
+      "depth": 0.0,
+      "diameter": 1.0,
+      "images": []
+    },
+    {
+      "id": "SE024",
+      "name": "SE024",
+      "type": "Sewer",
+      "x": -97575.05,
+      "y": 2891562.33,
+      "cover_elev": 1555.94,
+      "depth": 0.0,
+      "diameter": 1.0,
+      "images": []
+    },
+    {
+      "id": "SE025",
+      "name": "SE025",
+      "type": "Sewer",
+      "x": -97575.58,
+      "y": 2891555.28,
+      "cover_elev": 1555.89,
+      "depth": 0.0,
+      "diameter": 1.0,
+      "images": []
+    },
+    {
+      "id": "SE043",
+      "name": "SE043",
+      "type": "Sewer",
+      "x": -97585.424,
+      "y": 2891964.423,
+      "cover_elev": 1568.725,
+      "depth": 0.0,
+      "diameter": 1.0,
+      "images": []
+    },
+    {
+      "id": "SE044",
+      "name": "SE044",
+      "type": "Sewer",
+      "x": -97574.809,
+      "y": 2891953.059,
+      "cover_elev": 1568.289,
+      "depth": 0.0,
+      "diameter": 1.0,
+      "images": []
+    },
+    {
+      "id": "SE045",
+      "name": "SE045",
+      "type": "Sewer",
+      "x": -97571.579,
+      "y": 2891950.372,
+      "cover_elev": 1568.309,
+      "depth": 0.0,
+      "diameter": 1.0,
+      "images": []
+    },
+    {
+      "id": "SE047",
+      "name": "SE047",
+      "type": "Sewer",
+      "x": -97557.933,
+      "y": 2891510.429,
+      "cover_elev": 1553.93,
+      "depth": 0.0,
+      "diameter": 1.0,
+      "images": []
+    },
+    {
+      "id": "SE048",
+      "name": "SE048",
+      "type": "Sewer",
+      "x": -97618.71,
+      "y": 2891613.53,
+      "cover_elev": 1557.51,
+      "depth": 0.0,
+      "diameter": 1.0,
+      "images": []
+    },
+    {
+      "id": "SE049",
+      "name": "SE049",
+      "type": "Sewer",
+      "x": -97597.67,
+      "y": 2891609.52,
+      "cover_elev": 1557.94,
+      "depth": 0.0,
+      "diameter": 1.0,
+      "images": []
+    },
+    {
+      "id": "SE050",
+      "name": "SE050",
+      "type": "Sewer",
+      "x": -97467.48,
+      "y": 2891853.54,
+      "cover_elev": 1568.16,
+      "depth": 0.0,
+      "diameter": 1.0,
+      "images": []
+    },
+    {
+      "id": "SE052",
+      "name": "SE052",
+      "type": "Sewer",
+      "x": -97689.12,
+      "y": 2891746.3,
+      "cover_elev": 1560.69,
+      "depth": 0.0,
+      "diameter": 1.0,
+      "images": []
+    },
+    {
+      "id": "SE054",
+      "name": "SE054",
+      "type": "Sewer",
+      "x": -97723.17,
+      "y": 2891746.37,
+      "cover_elev": 1560.63,
+      "depth": 0.0,
+      "diameter": 1.0,
+      "images": []
+    },
+    {
+      "id": "SE055",
+      "name": "SE055",
+      "type": "Sewer",
+      "x": -97756.28,
+      "y": 2891746.18,
+      "cover_elev": 1560.67,
+      "depth": 0.0,
+      "diameter": 1.0,
+      "images": []
+    },
+    {
+      "id": "SE056",
+      "name": "SE056",
+      "type": "Sewer",
+      "x": -97722.71,
+      "y": 2891700.82,
+      "cover_elev": 1560.53,
+      "depth": 0.0,
+      "diameter": 1.0,
+      "images": []
+    },
+    {
+      "id": "SE057",
+      "name": "SE057",
+      "type": "Sewer",
+      "x": -97722.52,
+      "y": 2891665.33,
+      "cover_elev": 1560.37,
+      "depth": 0.0,
+      "diameter": 1.0,
+      "images": []
+    },
+    {
+      "id": "SE058",
+      "name": "SE058",
+      "type": "Sewer",
+      "x": -97753.14,
+      "y": 2891716.1,
+      "cover_elev": 1560.58,
+      "depth": 0.0,
+      "diameter": 1.0,
+      "images": []
+    },
+    {
+      "id": "SE059",
+      "name": "SE059",
+      "type": "Sewer",
+      "x": -97704.12,
+      "y": 2891754.65,
+      "cover_elev": 1560.69,
+      "depth": 0.0,
+      "diameter": 1.0,
+      "images": []
+    },
+    {
+      "id": "SE060",
+      "name": "SE060",
+      "type": "Sewer",
+      "x": -97760.61,
+      "y": 2891749.26,
+      "cover_elev": 1560.67,
+      "depth": 0.0,
+      "diameter": 1.0,
+      "images": []
+    },
+    {
+      "id": "SE061",
+      "name": "SE061",
+      "type": "Sewer",
+      "x": -97710.58,
+      "y": 2891676.2,
+      "cover_elev": 1560.39,
+      "depth": 0.0,
+      "diameter": 1.0,
+      "images": []
+    },
+    {
+      "id": "SE062",
+      "name": "SE062",
+      "type": "Sewer",
+      "x": -97722.273,
+      "y": 2891642.821,
+      "cover_elev": 1558.69,
+      "depth": 0.0,
+      "diameter": 1.0,
+      "images": []
+    },
+    {
+      "id": "SE063",
+      "name": "SE063",
+      "type": "Sewer",
+      "x": -97732.476,
+      "y": 2891654.485,
+      "cover_elev": 1558.912,
+      "depth": 0.0,
+      "diameter": 1.0,
+      "images": []
+    },
+    {
+      "id": "SW088",
+      "name": "SW088",
+      "type": "Stormwater",
+      "x": -97659.118,
+      "y": 2891821.023,
+      "cover_elev": 1564.737,
+      "depth": 0.0,
+      "diameter": 1.0,
+      "images": []
+    },
+    {
+      "id": "SW089",
+      "name": "SW089",
+      "type": "Stormwater",
+      "x": -97658.428,
+      "y": 2891803.329,
+      "cover_elev": 1564.266,
+      "depth": 0.0,
+      "diameter": 1.0,
+      "images": []
+    },
+    {
+      "id": "SW090",
+      "name": "SW090",
+      "type": "Stormwater",
+      "x": -97657.953,
+      "y": 2891785.917,
+      "cover_elev": 1563.869,
+      "depth": 0.0,
+      "diameter": 1.0,
+      "images": []
+    },
+    {
+      "id": "SW091",
+      "name": "SW091",
+      "type": "Stormwater",
+      "x": -97659.677,
+      "y": 2891773.186,
+      "cover_elev": 1563.488,
+      "depth": 0.0,
+      "diameter": 1.0,
+      "images": []
+    },
+    {
+      "id": "SW092",
+      "name": "SW092",
+      "type": "Stormwater",
+      "x": -97659.158,
+      "y": 2891770.635,
+      "cover_elev": 1563.358,
+      "depth": 0.0,
+      "diameter": 1.0,
+      "images": []
+    },
+    {
+      "id": "SW093",
+      "name": "SW093",
+      "type": "Stormwater",
+      "x": -97657.037,
+      "y": 2891768.489,
+      "cover_elev": 1563.4,
+      "depth": 0.0,
+      "diameter": 1.0,
+      "images": []
+    },
+    {
+      "id": "SW095",
+      "name": "SW095",
+      "type": "Stormwater",
+      "x": -97580.645,
+      "y": 2891938.825,
+      "cover_elev": 1567.821,
+      "depth": 0.0,
+      "diameter": 1.0,
+      "images": []
+    },
+    {
+      "id": "SW096",
+      "name": "SW096",
+      "type": "Stormwater",
+      "x": -97591.856,
+      "y": 2891920.648,
+      "cover_elev": 1567.507,
+      "depth": 0.0,
+      "diameter": 1.0,
+      "images": []
+    },
+    {
+      "id": "SW097",
+      "name": "SW097",
+      "type": "Stormwater",
+      "x": -97803.615,
+      "y": 2891630.698,
+      "cover_elev": 1559.53,
+      "depth": 0.0,
+      "diameter": 1.0,
+      "images": []
+    },
+    {
+      "id": "SW098",
+      "name": "SW098",
+      "type": "Stormwater",
+      "x": -97767.408,
+      "y": 2891631.267,
+      "cover_elev": 1560.03,
+      "depth": 0.0,
+      "diameter": 1.0,
+      "images": []
+    },
+    {
+      "id": "SW099",
+      "name": "SW099",
+      "type": "Stormwater",
+      "x": -97767.594,
+      "y": 2891623.227,
+      "cover_elev": 1559.641,
+      "depth": 0.0,
+      "diameter": 1.0,
+      "images": []
+    },
+    {
+      "id": "SW100",
+      "name": "SW100",
+      "type": "Stormwater",
+      "x": -97776.763,
+      "y": 2891644.724,
+      "cover_elev": 1560.907,
+      "depth": 0.0,
+      "diameter": 1.0,
+      "images": []
+    },
+    {
+      "id": "SW101",
+      "name": "SW101",
+      "type": "Stormwater",
+      "x": -97793.199,
+      "y": 2891681.277,
+      "cover_elev": 1560.81,
+      "depth": 0.0,
+      "diameter": 1.0,
+      "images": []
+    },
+    {
+      "id": "SW102",
+      "name": "SW102",
+      "type": "Stormwater",
+      "x": -97588.042,
+      "y": 2891583.633,
+      "cover_elev": 1555.73,
+      "depth": 0.0,
+      "diameter": 1.0,
+      "images": []
+    },
+    {
+      "id": "SW103",
+      "name": "SW103",
+      "type": "Stormwater",
+      "x": -97512.63,
+      "y": 2891791.59,
+      "cover_elev": 1561.8,
+      "depth": 0.0,
+      "diameter": 1.0,
+      "images": []
+    },
+    {
+      "id": "SW104",
+      "name": "SW104",
+      "type": "Stormwater",
+      "x": -97519.01,
+      "y": 2891784.88,
+      "cover_elev": 1561.04,
+      "depth": 0.0,
+      "diameter": 1.0,
+      "images": []
+    },
+    {
+      "id": "SW105",
+      "name": "SW105",
+      "type": "Stormwater",
+      "x": -97529.52,
+      "y": 2891767.86,
+      "cover_elev": 1559.25,
+      "depth": 0.0,
+      "diameter": 1.0,
+      "images": []
+    },
+    {
+      "id": "SW106",
+      "name": "SW106",
+      "type": "Stormwater",
+      "x": -97558.43,
+      "y": 2891600.87,
+      "cover_elev": 1555.6,
+      "depth": 0.0,
+      "diameter": 1.0,
+      "images": []
+    },
+    {
+      "id": "SW107",
+      "name": "SW107",
+      "type": "Stormwater",
+      "x": -97559.15,
+      "y": 2891606.84,
+      "cover_elev": 1555.11,
+      "depth": 0.0,
+      "diameter": 1.0,
+      "images": []
+    },
+    {
+      "id": "SW108",
+      "name": "SW108",
+      "type": "Stormwater",
+      "x": -97481.94,
+      "y": 2891832.03,
+      "cover_elev": 1566.37,
+      "depth": 0.0,
+      "diameter": 1.0,
+      "images": []
+    },
+    {
+      "id": "SW109",
+      "name": "SW109",
+      "type": "Stormwater",
+      "x": -97678.06,
+      "y": 2891821.29,
+      "cover_elev": 1564.41,
+      "depth": 0.0,
+      "diameter": 1.0,
+      "images": []
+    },
+    {
+      "id": "SW110",
+      "name": "SW110",
+      "type": "Stormwater",
+      "x": -97653.32,
+      "y": 2891768.51,
+      "cover_elev": 1563.42,
+      "depth": 0.0,
+      "diameter": 1.0,
+      "images": []
+    },
+    {
+      "id": "SW111",
+      "name": "SW111",
+      "type": "Stormwater",
+      "x": -97652.21,
+      "y": 2891761.46,
+      "cover_elev": 1563.3,
+      "depth": 0.0,
+      "diameter": 1.0,
+      "images": []
+    },
+    {
+      "id": "TM6021",
+      "name": "TM6021",
+      "type": "Sewer",
+      "x": -97678.69,
+      "y": 2891759.07,
+      "cover_elev": 1562.62,
+      "depth": 0.0,
+      "diameter": 1.0,
+      "images": []
+    },
+    {
+      "id": "SW112",
+      "name": "SW112",
+      "type": "Stormwater",
+      "x": -97678.68,
+      "y": 2891759.08,
+      "cover_elev": 1562.02,
+      "depth": 0.0,
+      "diameter": 1.0,
+      "images": []
+    },
+    {
+      "id": "SW113",
+      "name": "SW113",
+      "type": "Stormwater",
+      "x": -97699.22,
+      "y": 2891760.09,
+      "cover_elev": 1560.72,
+      "depth": 0.0,
+      "diameter": 1.0,
+      "images": []
+    },
+    {
+      "id": "SW114",
+      "name": "SW114",
+      "type": "Stormwater",
+      "x": -97700.09,
+      "y": 2891751.17,
+      "cover_elev": 1560.66,
+      "depth": 0.0,
+      "diameter": 1.0,
+      "images": []
+    },
+    {
+      "id": "SW115",
+      "name": "SW115",
+      "type": "Stormwater",
+      "x": -97663.0,
+      "y": 2891757.83,
+      "cover_elev": 1560.54,
+      "depth": 0.0,
+      "diameter": 1.0,
+      "images": []
+    },
+    {
+      "id": "SW116",
+      "name": "SW116",
+      "type": "Stormwater",
+      "x": -97757.81,
+      "y": 2891657.75,
+      "cover_elev": 1560.19,
+      "depth": 0.0,
+      "diameter": 1.0,
+      "images": []
+    },
+    {
+      "id": "SW117",
+      "name": "SW117",
+      "type": "Stormwater",
+      "x": -97540.293,
+      "y": 2891721.179,
+      "cover_elev": 1554.949,
+      "depth": 0.0,
+      "diameter": 1.0,
+      "images": []
+    },
+    {
+      "id": "SW118",
+      "name": "SW118",
+      "type": "Stormwater",
+      "x": -97540.973,
+      "y": 2891711.981,
+      "cover_elev": 1554.639,
+      "depth": 0.0,
+      "diameter": 1.0,
+      "images": []
+    },
+    {
+      "id": "SW119",
+      "name": "SW119",
+      "type": "Stormwater",
+      "x": -97551.696,
+      "y": 2891718.252,
+      "cover_elev": 1554.787,
+      "depth": 0.0,
+      "diameter": 1.0,
+      "images": []
+    },
+    {
+      "id": "SW120",
+      "name": "SW120",
+      "type": "Stormwater",
+      "x": -97561.757,
+      "y": 2891682.475,
+      "cover_elev": 1554.372,
+      "depth": 0.0,
+      "diameter": 1.0,
+      "images": []
+    },
+    {
+      "id": "SW121",
+      "name": "SW121",
+      "type": "Stormwater",
+      "x": -97553.01,
+      "y": 2891637.311,
+      "cover_elev": 1554.741,
+      "depth": 0.0,
+      "diameter": 1.0,
+      "images": []
+    },
+    {
+      "id": "SW122",
+      "name": "SW122",
+      "type": "Stormwater",
+      "x": -97563.273,
+      "y": 2891650.882,
+      "cover_elev": 1554.628,
+      "depth": 0.0,
+      "diameter": 1.0,
+      "images": []
+    },
+    {
+      "id": "SW123",
+      "name": "SW123",
+      "type": "Stormwater",
+      "x": -97558.687,
+      "y": 2891674.687,
+      "cover_elev": 1554.435,
+      "depth": 0.0,
+      "diameter": 1.0,
+      "images": []
+    },
+    {
+      "id": "SW124",
+      "name": "SW124",
+      "type": "Stormwater",
+      "x": -97549.342,
+      "y": 2891665.654,
+      "cover_elev": 1554.512,
+      "depth": 0.0,
+      "diameter": 1.0,
+      "images": []
+    },
+    {
+      "id": "SW125",
+      "name": "SW125",
+      "type": "Stormwater",
+      "x": -97547.134,
+      "y": 2891672.476,
+      "cover_elev": 1554.395,
+      "depth": 0.0,
+      "diameter": 1.0,
+      "images": []
+    },
+    {
+      "id": "SW126",
+      "name": "SW126",
+      "type": "Stormwater",
+      "x": -97546.094,
+      "y": 2891685.762,
+      "cover_elev": 1554.474,
+      "depth": 0.0,
+      "diameter": 1.0,
+      "images": []
+    },
+    {
+      "id": "SW127",
+      "name": "SW127",
+      "type": "Stormwater",
+      "x": -97737.866,
+      "y": 2891635.007,
+      "cover_elev": 1558.664,
+      "depth": 0.0,
+      "diameter": 1.0,
+      "images": []
+    },
+    {
+      "id": "DUMMY_MH",
+      "name": "DUMMY_MH",
+      "type": "Dummy",
+      "x": -97761.384,
+      "y": 2891698.376,
+      "cover_elev": 1560.91,
+      "depth": 0.0,
+      "diameter": 1.0,
+      "images": []
+    },
+    {
+      "id": "DUMMY_001",
+      "name": "DUMMY_001",
+      "type": "Sewer",
+      "x": -97771.117,
+      "y": 2891708.308,
+      "cover_elev": 1561.12,
+      "depth": 1.7,
+      "diameter": 1.0,
+      "parent_mh": "SE036",
+      "images": []
+    },
+    {
+      "id": "DUMMY_002",
+      "name": "DUMMY_002",
+      "type": "Stormwater",
+      "x": -97768.344409,
+      "y": 2891702.946644,
+      "cover_elev": 1561.72,
+      "depth": 2,
+      "diameter": 1.0,
+      "parent_mh": "SW078",
+      "images": []
+    },
+    {
+      "id": "DUMMY_003",
+      "name": "DUMMY_003",
+      "type": "Dummy",
+      "x": -97761.525,
+      "y": 2891690.47,
+      "cover_elev": 1560.91,
+      "depth": 0.0,
+      "diameter": 1.0,
+      "parent_mh": "DUMMY_MH",
+      "images": []
+    },
+    {
+      "id": "DUMMY_004",
+      "name": "DUMMY_004",
+      "type": "Stormwater",
+      "x": -97760.411882,
+      "y": 2891632.217648,
+      "cover_elev": 1559.14,
+      "depth": 2.5,
+      "diameter": 1.0,
+      "parent_mh": "SW082",
+      "images": []
+    },
+    {
+      "id": "DUMMY_007",
+      "name": "DUMMY_007",
+      "type": "Stormwater",
+      "x": -97734.88805,
+      "y": 2891636.265389,
+      "cover_elev": 1558.67,
+      "depth": 2.3,
+      "diameter": 1.0,
+      "parent_mh": "SW083",
+      "images": []
+    },
+    {
+      "id": "DUMMY_008",
+      "name": "DUMMY_008",
+      "type": "Sewer",
+      "x": -97722.667105,
+      "y": 2891636.956511,
+      "cover_elev": 1558.43,
+      "depth": 1.9,
+      "diameter": 1.0,
+      "parent_mh": "SE038",
+      "images": []
+    },
+    {
+      "id": "DUMMY_009",
+      "name": "DUMMY_009",
+      "type": "Sewer",
+      "x": -97697.622366,
+      "y": 2891634.997607,
+      "cover_elev": 1557.49,
+      "depth": 1.4,
+      "diameter": 1.0,
+      "parent_mh": "SE039",
+      "images": []
+    },
+    {
+      "id": "DUMMY_010",
+      "name": "DUMMY_010",
+      "type": "Stormwater",
+      "x": -97667.205518,
+      "y": 2891624.335224,
+      "cover_elev": 1557.16,
+      "depth": 3.7,
+      "diameter": 1.0,
+      "parent_mh": "SW085",
+      "images": []
+    },
+    {
+      "id": "DUMMY_011",
+      "name": "DUMMY_011",
+      "type": "Sewer",
+      "x": -97617.667631,
+      "y": 2891620.411959,
+      "cover_elev": 1557.53,
+      "depth": 0.33,
+      "diameter": 1.0,
+      "parent_mh": "SE040",
+      "images": []
+    },
+    {
+      "id": "DUMMY_012",
+      "name": "DUMMY_012",
+      "type": "Sewer",
+      "x": -97606.784925,
+      "y": 2891611.240026,
+      "cover_elev": 1557.53,
+      "depth": 0.33,
+      "diameter": 1.0,
+      "parent_mh": "SE040",
+      "images": []
+    },
+    {
+      "id": "DUMMY_014",
+      "name": "DUMMY_014",
+      "type": "Stormwater",
+      "x": -97528.689602,
+      "y": 2891764.699556,
+      "cover_elev": 1563.15,
+      "depth": 4.3,
+      "diameter": 1.0,
+      "parent_mh": "SW065",
+      "images": []
+    },
+    {
+      "id": "DUMMY_015",
+      "name": "DUMMY_015",
+      "type": "Stormwater",
+      "x": -97598.137185,
+      "y": 2891794.131163,
+      "cover_elev": 1564.38,
+      "depth": 0.3,
+      "diameter": 1.0,
+      "parent_mh": "SW066",
+      "images": []
+    },
+    {
+      "id": "DUMMY_016",
+      "name": "DUMMY_016",
+      "type": "Stormwater",
+      "x": -97620.667716,
+      "y": 2891780.771635,
+      "cover_elev": 1564.56,
+      "depth": 0.6,
+      "diameter": 1.0,
+      "parent_mh": "SW068",
+      "images": []
+    },
+    {
+      "id": "DUMMY_017",
+      "name": "DUMMY_017",
+      "type": "Stormwater",
+      "x": -97625.821246,
+      "y": 2891780.761787,
+      "cover_elev": 1564.56,
+      "depth": 0.6,
+      "diameter": 1.0,
+      "parent_mh": "SW068",
+      "images": []
+    },
+    {
+      "id": "DUMMY_018",
+      "name": "DUMMY_018",
+      "type": "Unknown",
+      "x": -97658.768912,
+      "y": 2891826.437949,
+      "cover_elev": 1564.737,
+      "depth": 0.0,
+      "diameter": 1.0,
+      "parent_mh": "SW088",
+      "images": []
+    },
+    {
+      "id": "DUMMY_020",
+      "name": "DUMMY_020",
+      "type": "Stormwater",
+      "x": -97737.37,
+      "y": 2891782.94,
+      "cover_elev": 1564.78,
+      "depth": 0.45,
+      "diameter": 1.0,
+      "parent_mh": "SW074",
+      "images": []
+    },
+    {
+      "id": "DUMMY_021",
+      "name": "DUMMY_021",
+      "type": "Stormwater",
+      "x": -97762.136351,
+      "y": 2891771.829273,
+      "cover_elev": 1565.03,
+      "depth": 1.45,
+      "diameter": 1.0,
+      "parent_mh": "SW076",
+      "images": []
+    },
+    {
+      "id": "DUMMY_023",
+      "name": "DUMMY_023",
+      "type": "Stormwater",
+      "x": -97704.325563,
+      "y": 2891818.978676,
+      "cover_elev": 1565.38,
+      "depth": 1.25,
+      "diameter": 1.0,
+      "parent_mh": "SW073",
+      "images": []
+    },
+    {
+      "id": "DUMMY_024",
+      "name": "DUMMY_024",
+      "type": "Stormwater",
+      "x": -97396.17984,
+      "y": 2891565.283639,
+      "cover_elev": 1559.44,
+      "depth": 2.4,
+      "diameter": 1.0,
+      "parent_mh": "SW053",
+      "images": []
+    },
+    {
+      "id": "DUMMY_025",
+      "name": "DUMMY_025",
+      "type": "Stormwater",
+      "x": -97396.20391,
+      "y": 2891565.080067,
+      "cover_elev": 1559.44,
+      "depth": 2.4,
+      "diameter": 1.0,
+      "parent_mh": "SW053",
+      "images": []
+    },
+    {
+      "id": "DUMMY_026",
+      "name": "DUMMY_026",
+      "type": "Stormwater",
+      "x": -97403.611065,
+      "y": 2891568.675436,
+      "cover_elev": 1559.44,
+      "depth": 2.4,
+      "diameter": 1.0,
+      "parent_mh": "SW053",
+      "images": []
+    },
+    {
+      "id": "DUMMY_027",
+      "name": "DUMMY_027",
+      "type": "Stormwater",
+      "x": -97403.479557,
+      "y": 2891568.77798,
+      "cover_elev": 1559.44,
+      "depth": 2.4,
+      "diameter": 1.0,
+      "parent_mh": "SW053",
+      "images": []
+    },
+    {
+      "id": "DUMMY_028",
+      "name": "DUMMY_028",
+      "type": "Stormwater",
+      "x": -97405.768726,
+      "y": 2891566.708593,
+      "cover_elev": 1559.44,
+      "depth": 2.4,
+      "diameter": 1.0,
+      "parent_mh": "SW053",
+      "images": []
+    },
+    {
+      "id": "DUMMY_029",
+      "name": "DUMMY_029",
+      "type": "Stormwater",
+      "x": -97411.253789,
+      "y": 2891561.182256,
+      "cover_elev": 1559.44,
+      "depth": 2.4,
+      "diameter": 1.0,
+      "parent_mh": "SW053",
+      "images": []
+    },
+    {
+      "id": "DUMMY_030",
+      "name": "DUMMY_030",
+      "type": "Sewer",
+      "x": -97531.956287,
+      "y": 2891633.643841,
+      "cover_elev": 1557.1,
+      "depth": 1.2,
+      "diameter": 1.0,
+      "parent_mh": "SE018",
+      "images": []
+    },
+    {
+      "id": "DUMMY_031",
+      "name": "DUMMY_031",
+      "type": "Sewer",
+      "x": -97529.810496,
+      "y": 2891616.458938,
+      "cover_elev": 1557.1,
+      "depth": 1.2,
+      "diameter": 1.0,
+      "parent_mh": "SE018",
+      "images": []
+    },
+    {
+      "id": "DUMMY_032",
+      "name": "DUMMY_032",
+      "type": "Stormwater",
+      "x": -97530.786387,
+      "y": 2891643.195256,
+      "cover_elev": 1557.34,
+      "depth": 0.76,
+      "diameter": 1.0,
+      "parent_mh": "SW055",
+      "images": []
+    },
+    {
+      "id": "DUMMY_033",
+      "name": "DUMMY_033",
+      "type": "Stormwater",
+      "x": -97534.615013,
+      "y": 2891646.294266,
+      "cover_elev": 1557.34,
+      "depth": 0.76,
+      "diameter": 1.0,
+      "parent_mh": "SW055",
+      "images": []
+    },
+    {
+      "id": "DUMMY_034",
+      "name": "DUMMY_034",
+      "type": "Stormwater",
+      "x": -97538.038652,
+      "y": 2891642.454804,
+      "cover_elev": 1557.34,
+      "depth": 0.76,
+      "diameter": 1.0,
+      "parent_mh": "SW055",
+      "images": []
+    },
+    {
+      "id": "DUMMY_036",
+      "name": "DUMMY_036",
+      "type": "Stormwater",
+      "x": -97530.315474,
+      "y": 2891612.285775,
+      "cover_elev": 1557.16,
+      "depth": 1.5,
+      "diameter": 1.0,
+      "parent_mh": "SW057",
+      "images": []
+    },
+    {
+      "id": "DUMMY_037",
+      "name": "DUMMY_037",
+      "type": "Sewer",
+      "x": -97553.173941,
+      "y": 2891608.492921,
+      "cover_elev": 1557.18,
+      "depth": 1.7,
+      "diameter": 1.0,
+      "parent_mh": "SE019",
+      "images": []
+    },
+    {
+      "id": "DUMMY_039",
+      "name": "DUMMY_039",
+      "type": "Sewer",
+      "x": -97549.373956,
+      "y": 2891540.339049,
+      "cover_elev": 1554.76,
+      "depth": 3,
+      "diameter": 1.0,
+      "parent_mh": "SE027",
+      "images": []
+    },
+    {
+      "id": "DUMMY_041",
+      "name": "DUMMY_041",
+      "type": "Sewer",
+      "x": -97516.066701,
+      "y": 2891441.173402,
+      "cover_elev": 1550.82,
+      "depth": 2.6,
+      "diameter": 1.0,
+      "parent_mh": "SE033",
+      "images": []
+    },
+    {
+      "id": "DUMMY_042",
+      "name": "DUMMY_042",
+      "type": "Sewer",
+      "x": -97530.058254,
+      "y": 2891446.501156,
+      "cover_elev": 1551.56,
+      "depth": 2.4,
+      "diameter": 1.0,
+      "parent_mh": "SE035",
+      "images": []
+    },
+    {
+      "id": "DUMMY_043",
+      "name": "DUMMY_043",
+      "type": "Sewer",
+      "x": -97397.677845,
+      "y": 2891506.14503,
+      "cover_elev": 1557.16,
+      "depth": 2,
+      "diameter": 1.0,
+      "parent_mh": "SE005",
+      "images": []
+    },
+    {
+      "id": "DUMMY_044",
+      "name": "DUMMY_044",
+      "type": "Sewer",
+      "x": -97392.713175,
+      "y": 2891508.300713,
+      "cover_elev": 1557.16,
+      "depth": 2,
+      "diameter": 1.0,
+      "parent_mh": "SE005",
+      "images": []
+    },
+    {
+      "id": "DUMMY_045",
+      "name": "DUMMY_045",
+      "type": "Sewer",
+      "x": -97392.642514,
+      "y": 2891508.258687,
+      "cover_elev": 1557.16,
+      "depth": 2,
+      "diameter": 1.0,
+      "parent_mh": "SE005",
+      "images": []
+    },
+    {
+      "id": "DUMMY_046",
+      "name": "DUMMY_046",
+      "type": "Sewer",
+      "x": -97391.018351,
+      "y": 2891494.628816,
+      "cover_elev": 1557.16,
+      "depth": 2,
+      "diameter": 1.0,
+      "parent_mh": "SE005",
+      "images": []
+    },
+    {
+      "id": "DUMMY_047",
+      "name": "DUMMY_047",
+      "type": "Stormwater",
+      "x": -97385.03,
+      "y": 2891499.49,
+      "cover_elev": 1556.48,
+      "depth": 2.5,
+      "diameter": 1.0,
+      "parent_mh": "SW047",
+      "images": []
+    },
+    {
+      "id": "DUMMY_048",
+      "name": "DUMMY_048",
+      "type": "Stormwater",
+      "x": -97337.703736,
+      "y": 2891498.873438,
+      "cover_elev": 1560.22,
+      "depth": 1.07,
+      "diameter": 1.0,
+      "parent_mh": "SW039",
+      "images": []
+    },
+    {
+      "id": "DUMMY_049",
+      "name": "DUMMY_049",
+      "type": "Sewer",
+      "x": -97314.914204,
+      "y": 2891514.820284,
+      "cover_elev": 1559.85,
+      "depth": 2.66,
+      "diameter": 1.0,
+      "parent_mh": "SE004",
+      "images": []
+    },
+    {
+      "id": "DUMMY_050",
+      "name": "DUMMY_050",
+      "type": "Stormwater",
+      "x": -97313.81,
+      "y": 2891511.27,
+      "cover_elev": 1560.39,
+      "depth": 0.65,
+      "diameter": 1.0,
+      "parent_mh": "SW037",
+      "images": []
+    },
+    {
+      "id": "DUMMY_051",
+      "name": "DUMMY_051",
+      "type": "Sewer",
+      "x": -97300.498493,
+      "y": 2891498.174196,
+      "cover_elev": 1559.85,
+      "depth": 2.66,
+      "diameter": 1.0,
+      "parent_mh": "SE004",
+      "images": []
+    },
+    {
+      "id": "DUMMY_054",
+      "name": "DUMMY_054",
+      "type": "Sewer",
+      "x": -97500.573114,
+      "y": 2891368.223356,
+      "cover_elev": 1549.45,
+      "depth": 2.6,
+      "diameter": 1.0,
+      "parent_mh": "SE017",
+      "images": []
+    },
+    {
+      "id": "DUMMY_055",
+      "name": "DUMMY_055",
+      "type": "Sewer",
+      "x": -97501.574051,
+      "y": 2891367.254568,
+      "cover_elev": 1549.45,
+      "depth": 2.6,
+      "diameter": 1.0,
+      "parent_mh": "SE017",
+      "images": []
+    },
+    {
+      "id": "DUMMY_056",
+      "name": "DUMMY_056",
+      "type": "Sewer",
+      "x": -97496.081303,
+      "y": 2891359.956076,
+      "cover_elev": 1549.45,
+      "depth": 2.6,
+      "diameter": 1.0,
+      "parent_mh": "SE017",
+      "images": []
+    },
+    {
+      "id": "DUMMY_057",
+      "name": "DUMMY_057",
+      "type": "Stormwater",
+      "x": -97237.259755,
+      "y": 2891520.840196,
+      "cover_elev": 1563.81,
+      "depth": 2,
+      "diameter": 1.0,
+      "parent_mh": "SW005",
+      "images": []
+    },
+    {
+      "id": "DUMMY_058",
+      "name": "DUMMY_058",
+      "type": "Stormwater",
+      "x": -97160.207291,
+      "y": 2891487.554885,
+      "cover_elev": 1562.25,
+      "depth": 1.4,
+      "diameter": 1.0,
+      "parent_mh": "SW001",
+      "images": []
+    },
+    {
+      "id": "DUMMY_059",
+      "name": "DUMMY_059",
+      "type": "Stormwater",
+      "x": -97274.754453,
+      "y": 2891372.388237,
+      "cover_elev": 1555.62,
+      "depth": 1.5,
+      "diameter": 1.0,
+      "parent_mh": "SW015",
+      "images": []
+    },
+    {
+      "id": "DUMMY_060",
+      "name": "DUMMY_060",
+      "type": "Stormwater",
+      "x": -97331.745322,
+      "y": 2891293.704678,
+      "cover_elev": 1550.91,
+      "depth": 1.3,
+      "diameter": 1.0,
+      "parent_mh": "SW030",
+      "images": []
     }
   ],
   "pipes": [
@@ -2389,6 +3678,406 @@
       "from_depth": 0.8,
       "to_depth": 0.8,
       "diameter_mm": 400.0
+    },
+    {
+      "id": "DUMMY_PIPE_001",
+      "from_mh": "DUMMY_001",
+      "to_mh": "SE036",
+      "from_depth": 1.7,
+      "to_depth": 1.7,
+      "diameter_mm": 1000.0
+    },
+    {
+      "id": "DUMMY_PIPE_002",
+      "from_mh": "DUMMY_002",
+      "to_mh": "SW078",
+      "from_depth": 2,
+      "to_depth": 2,
+      "diameter_mm": 1000.0
+    },
+    {
+      "id": "DUMMY_PIPE_003",
+      "from_mh": "DUMMY_003",
+      "to_mh": "DUMMY_MH",
+      "from_depth": 0.0,
+      "to_depth": 0.0,
+      "diameter_mm": 1000.0
+    },
+    {
+      "id": "DUMMY_PIPE_004",
+      "from_mh": "DUMMY_004",
+      "to_mh": "SW082",
+      "from_depth": 2.5,
+      "to_depth": 2.5,
+      "diameter_mm": 1000.0
+    },
+    {
+      "id": "DUMMY_PIPE_007",
+      "from_mh": "DUMMY_007",
+      "to_mh": "SW083",
+      "from_depth": 2.3,
+      "to_depth": 2.3,
+      "diameter_mm": 1000.0
+    },
+    {
+      "id": "DUMMY_PIPE_008",
+      "from_mh": "DUMMY_008",
+      "to_mh": "SE038",
+      "from_depth": 1.9,
+      "to_depth": 1.9,
+      "diameter_mm": 1000.0
+    },
+    {
+      "id": "DUMMY_PIPE_009",
+      "from_mh": "DUMMY_009",
+      "to_mh": "SE039",
+      "from_depth": 1.4,
+      "to_depth": 1.4,
+      "diameter_mm": 1000.0
+    },
+    {
+      "id": "DUMMY_PIPE_010",
+      "from_mh": "DUMMY_010",
+      "to_mh": "SW085",
+      "from_depth": 3.7,
+      "to_depth": 3.7,
+      "diameter_mm": 1000.0
+    },
+    {
+      "id": "DUMMY_PIPE_011",
+      "from_mh": "DUMMY_011",
+      "to_mh": "SE040",
+      "from_depth": 0.33,
+      "to_depth": 0.33,
+      "diameter_mm": 1000.0
+    },
+    {
+      "id": "DUMMY_PIPE_012",
+      "from_mh": "SE040",
+      "to_mh": "DUMMY_012",
+      "from_depth": 0.33,
+      "to_depth": 0.33,
+      "diameter_mm": 1000.0
+    },
+    {
+      "id": "DUMMY_PIPE_014",
+      "from_mh": "SW065",
+      "to_mh": "DUMMY_014",
+      "from_depth": 4.3,
+      "to_depth": 4.3,
+      "diameter_mm": 1000.0
+    },
+    {
+      "id": "DUMMY_PIPE_015",
+      "from_mh": "SW066",
+      "to_mh": "DUMMY_015",
+      "from_depth": 0.3,
+      "to_depth": 0.3,
+      "diameter_mm": 1000.0
+    },
+    {
+      "id": "DUMMY_PIPE_016",
+      "from_mh": "SW068",
+      "to_mh": "DUMMY_016",
+      "from_depth": 0.6,
+      "to_depth": 0.6,
+      "diameter_mm": 1000.0
+    },
+    {
+      "id": "DUMMY_PIPE_017",
+      "from_mh": "DUMMY_017",
+      "to_mh": "SW068",
+      "from_depth": 0.6,
+      "to_depth": 0.6,
+      "diameter_mm": 1000.0
+    },
+    {
+      "id": "DUMMY_PIPE_018",
+      "from_mh": "DUMMY_018",
+      "to_mh": "SW088",
+      "from_depth": 0.0,
+      "to_depth": 0.0,
+      "diameter_mm": 1000.0
+    },
+    {
+      "id": "DUMMY_PIPE_020",
+      "from_mh": "SW074",
+      "to_mh": "DUMMY_020",
+      "from_depth": 0.45,
+      "to_depth": 0.45,
+      "diameter_mm": 1000.0
+    },
+    {
+      "id": "DUMMY_PIPE_021",
+      "from_mh": "DUMMY_021",
+      "to_mh": "SW076",
+      "from_depth": 1.45,
+      "to_depth": 1.45,
+      "diameter_mm": 1000.0
+    },
+    {
+      "id": "DUMMY_PIPE_023",
+      "from_mh": "SW073",
+      "to_mh": "DUMMY_023",
+      "from_depth": 1.25,
+      "to_depth": 1.25,
+      "diameter_mm": 1000.0
+    },
+    {
+      "id": "DUMMY_PIPE_024",
+      "from_mh": "DUMMY_024",
+      "to_mh": "SW053",
+      "from_depth": 2.4,
+      "to_depth": 2.4,
+      "diameter_mm": 1000.0
+    },
+    {
+      "id": "DUMMY_PIPE_025",
+      "from_mh": "DUMMY_025",
+      "to_mh": "SW053",
+      "from_depth": 2.4,
+      "to_depth": 2.4,
+      "diameter_mm": 1000.0
+    },
+    {
+      "id": "DUMMY_PIPE_026",
+      "from_mh": "SW053",
+      "to_mh": "DUMMY_026",
+      "from_depth": 2.4,
+      "to_depth": 2.4,
+      "diameter_mm": 1000.0
+    },
+    {
+      "id": "DUMMY_PIPE_027",
+      "from_mh": "DUMMY_027",
+      "to_mh": "SW053",
+      "from_depth": 2.4,
+      "to_depth": 2.4,
+      "diameter_mm": 1000.0
+    },
+    {
+      "id": "DUMMY_PIPE_028",
+      "from_mh": "SW053",
+      "to_mh": "DUMMY_028",
+      "from_depth": 2.4,
+      "to_depth": 2.4,
+      "diameter_mm": 1000.0
+    },
+    {
+      "id": "DUMMY_PIPE_029",
+      "from_mh": "DUMMY_029",
+      "to_mh": "SW053",
+      "from_depth": 2.4,
+      "to_depth": 2.4,
+      "diameter_mm": 1000.0
+    },
+    {
+      "id": "DUMMY_PIPE_030",
+      "from_mh": "DUMMY_030",
+      "to_mh": "SE018",
+      "from_depth": 1.2,
+      "to_depth": 1.2,
+      "diameter_mm": 1000.0
+    },
+    {
+      "id": "DUMMY_PIPE_031",
+      "from_mh": "SE018",
+      "to_mh": "DUMMY_031",
+      "from_depth": 1.2,
+      "to_depth": 1.2,
+      "diameter_mm": 1000.0
+    },
+    {
+      "id": "DUMMY_PIPE_032",
+      "from_mh": "DUMMY_032",
+      "to_mh": "SW055",
+      "from_depth": 0.76,
+      "to_depth": 0.76,
+      "diameter_mm": 1000.0
+    },
+    {
+      "id": "DUMMY_PIPE_033",
+      "from_mh": "DUMMY_033",
+      "to_mh": "SW055",
+      "from_depth": 0.76,
+      "to_depth": 0.76,
+      "diameter_mm": 1000.0
+    },
+    {
+      "id": "DUMMY_PIPE_034",
+      "from_mh": "DUMMY_034",
+      "to_mh": "SW055",
+      "from_depth": 0.76,
+      "to_depth": 0.76,
+      "diameter_mm": 1000.0
+    },
+    {
+      "id": "DUMMY_PIPE_036",
+      "from_mh": "SW057",
+      "to_mh": "DUMMY_036",
+      "from_depth": 1.5,
+      "to_depth": 1.5,
+      "diameter_mm": 1000.0
+    },
+    {
+      "id": "DUMMY_PIPE_037",
+      "from_mh": "DUMMY_037",
+      "to_mh": "SE019",
+      "from_depth": 1.7,
+      "to_depth": 1.7,
+      "diameter_mm": 1000.0
+    },
+    {
+      "id": "DUMMY_PIPE_039",
+      "from_mh": "DUMMY_039",
+      "to_mh": "SE027",
+      "from_depth": 3,
+      "to_depth": 3,
+      "diameter_mm": 1000.0
+    },
+    {
+      "id": "DUMMY_PIPE_041",
+      "from_mh": "DUMMY_041",
+      "to_mh": "SE033",
+      "from_depth": 2.6,
+      "to_depth": 2.6,
+      "diameter_mm": 1000.0
+    },
+    {
+      "id": "DUMMY_PIPE_042",
+      "from_mh": "DUMMY_042",
+      "to_mh": "SE035",
+      "from_depth": 2.4,
+      "to_depth": 2.4,
+      "diameter_mm": 1000.0
+    },
+    {
+      "id": "DUMMY_PIPE_043",
+      "from_mh": "DUMMY_043",
+      "to_mh": "SE005",
+      "from_depth": 2,
+      "to_depth": 2,
+      "diameter_mm": 1000.0
+    },
+    {
+      "id": "DUMMY_PIPE_044",
+      "from_mh": "DUMMY_044",
+      "to_mh": "SE005",
+      "from_depth": 2,
+      "to_depth": 2,
+      "diameter_mm": 1000.0
+    },
+    {
+      "id": "DUMMY_PIPE_045",
+      "from_mh": "DUMMY_045",
+      "to_mh": "SE005",
+      "from_depth": 2,
+      "to_depth": 2,
+      "diameter_mm": 1000.0
+    },
+    {
+      "id": "DUMMY_PIPE_046",
+      "from_mh": "DUMMY_046",
+      "to_mh": "SE005",
+      "from_depth": 2,
+      "to_depth": 2,
+      "diameter_mm": 1000.0
+    },
+    {
+      "id": "DUMMY_PIPE_047",
+      "from_mh": "DUMMY_047",
+      "to_mh": "SW047",
+      "from_depth": 2.5,
+      "to_depth": 2.5,
+      "diameter_mm": 1000.0
+    },
+    {
+      "id": "DUMMY_PIPE_048",
+      "from_mh": "SW039",
+      "to_mh": "DUMMY_048",
+      "from_depth": 1.07,
+      "to_depth": 1.07,
+      "diameter_mm": 1000.0
+    },
+    {
+      "id": "DUMMY_PIPE_049",
+      "from_mh": "DUMMY_049",
+      "to_mh": "SE004",
+      "from_depth": 2.66,
+      "to_depth": 2.66,
+      "diameter_mm": 1000.0
+    },
+    {
+      "id": "DUMMY_PIPE_050",
+      "from_mh": "SW037",
+      "to_mh": "DUMMY_050",
+      "from_depth": 0.65,
+      "to_depth": 0.65,
+      "diameter_mm": 1000.0
+    },
+    {
+      "id": "DUMMY_PIPE_051",
+      "from_mh": "DUMMY_051",
+      "to_mh": "SE004",
+      "from_depth": 2.66,
+      "to_depth": 2.66,
+      "diameter_mm": 1000.0
+    },
+    {
+      "id": "DUMMY_PIPE_054",
+      "from_mh": "DUMMY_054",
+      "to_mh": "SE017",
+      "from_depth": 2.6,
+      "to_depth": 2.6,
+      "diameter_mm": 1000.0
+    },
+    {
+      "id": "DUMMY_PIPE_055",
+      "from_mh": "DUMMY_055",
+      "to_mh": "SE017",
+      "from_depth": 2.6,
+      "to_depth": 2.6,
+      "diameter_mm": 1000.0
+    },
+    {
+      "id": "DUMMY_PIPE_056",
+      "from_mh": "DUMMY_056",
+      "to_mh": "SE017",
+      "from_depth": 2.6,
+      "to_depth": 2.6,
+      "diameter_mm": 1000.0
+    },
+    {
+      "id": "DUMMY_PIPE_057",
+      "from_mh": "SW005",
+      "to_mh": "DUMMY_057",
+      "from_depth": 2,
+      "to_depth": 2,
+      "diameter_mm": 1000.0
+    },
+    {
+      "id": "DUMMY_PIPE_058",
+      "from_mh": "DUMMY_058",
+      "to_mh": "SW001",
+      "from_depth": 1.4,
+      "to_depth": 1.4,
+      "diameter_mm": 1000.0
+    },
+    {
+      "id": "DUMMY_PIPE_059",
+      "from_mh": "DUMMY_059",
+      "to_mh": "SW015",
+      "from_depth": 1.5,
+      "to_depth": 1.5,
+      "diameter_mm": 1000.0
+    },
+    {
+      "id": "DUMMY_PIPE_060",
+      "from_mh": "DUMMY_060",
+      "to_mh": "SW030",
+      "from_depth": 1.3,
+      "to_depth": 1.3,
+      "diameter_mm": 1000.0
     }
   ]
 }
