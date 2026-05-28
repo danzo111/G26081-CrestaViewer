@@ -267,6 +267,10 @@ class NetworkViewerApp {
     canvas.height = 128;
 
     manholes.forEach((mh, i) => {
+      // Skip dummy manholes — no symbols or labels on map
+      const isDummy = mh.type === 'Dummy' || (mh.id && mh.id.startsWith('DUMMY'));
+      if (isDummy) return;
+
       const pos = this.coordSystem.w2s(mh.x, mh.y, mh.cover_elev);
 
       // Create sprite for manhole dot
@@ -828,14 +832,23 @@ class NetworkViewerApp {
 
       const result = this.searchIndex.findById(query);
       if (result) {
-        this._flyToManholeMap(result.index);
-        this._selectMapManhole(result.index);
+        const mh = appState.mhInstData[result.index];
+        const isDummy = mh && (mh.type === 'Dummy' || (mh.id && mh.id.startsWith('DUMMY')));
+        if (!isDummy) {
+          this._flyToManholeMap(result.index);
+          this._selectMapManhole(result.index);
+        }
       } else {
-        // Try partial match
+        // Try partial match — skip dummy manholes
         const matches = this.searchIndex.search(query);
-        if (matches.length > 0) {
-          this._flyToManholeMap(matches[0].index);
-          this._selectMapManhole(matches[0].index);
+        for (const match of matches) {
+          const mh = appState.mhInstData[match.index];
+          const isDummy = mh && (mh.type === 'Dummy' || (mh.id && mh.id.startsWith('DUMMY')));
+          if (!isDummy) {
+            this._flyToManholeMap(match.index);
+            this._selectMapManhole(match.index);
+            break;
+          }
         }
       }
     };
@@ -869,6 +882,10 @@ class NetworkViewerApp {
     const mh = appState.mhInstData[index];
     if (!mh || !this.mapCamera) return;
 
+    // Skip dummy manholes
+    const isDummy = mh.type === 'Dummy' || (mh.id && mh.id.startsWith('DUMMY'));
+    if (isDummy) return;
+
     const target = mh.topS.clone();
     const currentPos = this.mapCamera.position.clone();
     const startTarget = this.sceneManager.controls.target.clone();
@@ -895,6 +912,10 @@ class NetworkViewerApp {
   _selectMapManhole(index) {
     const mh = appState.mhInstData[index];
     if (!mh) return;
+
+    // Skip dummy manholes — they have no symbols and should not be selectable
+    const isDummy = mh.type === 'Dummy' || (mh.id && mh.id.startsWith('DUMMY'));
+    if (isDummy) return;
 
     this.mapSelectedManhole = mh.id;
     this._highlightMapNetwork(mh.id);
@@ -1020,9 +1041,15 @@ class NetworkViewerApp {
     raycaster.setFromCamera(mouse, this.mapCamera);
 
     // Check manhole sprites first (higher priority)
-    const manholeSprites = this.mapManholeSprites.filter(s => 
-      s.name?.startsWith('map_mh_') && s.visible
-    );
+    // Filter out dummy manholes — they have no symbols on the map
+    const manholeSprites = this.mapManholeSprites.filter(s => {
+      if (!s.name?.startsWith('map_mh_') || !s.visible) return false;
+      const mhIdx = s.userData.index;
+      const mh = appState.mhInstData[mhIdx];
+      if (!mh) return false;
+      const isDummy = mh.type === 'Dummy' || (mh.id && mh.id.startsWith('DUMMY'));
+      return !isDummy;
+    });
 
     const mhIntersects = raycaster.intersectObjects(manholeSprites);
 
