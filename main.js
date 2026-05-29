@@ -174,9 +174,10 @@ class NetworkViewerApp {
 
       let flowFrom, flowTo;
       const isDummyPipe = p.id && p.id.startsWith('DUMMY_PIPE');
+      const hasFlowOverride = p.flow_override === true;
 
-      if (isDummyPipe) {
-        // Dummy pipes: ALWAYS use JSON from_mh -> to_mh as flow direction
+      if (isDummyPipe || hasFlowOverride) {
+        // Use JSON from_mh -> to_mh as the authoritative flow direction
         flowFrom = p.from_mh;
         flowTo = p.to_mh;
       } else {
@@ -429,8 +430,9 @@ class NetworkViewerApp {
 
       let flowDir;
       const isDummyPipe = p.id && p.id.startsWith('DUMMY_PIPE');
-      if (isDummyPipe) {
-        // Dummy pipes: use JSON from_mh -> to_mh as flow direction
+      const hasFlowOverride = p.flow_override === true;
+      if (isDummyPipe || hasFlowOverride) {
+        // Use JSON from_mh -> to_mh as flow direction
         flowDir = dir;
       } else {
         // Regular pipes: compute from inverts
@@ -763,7 +765,7 @@ class NetworkViewerApp {
     mapControls.id = 'map-controls';
     mapControls.innerHTML = `
       <div class="map-search">
-        <input type="text" id="map-search-input" placeholder="Search manhole ID..." autocomplete="off">
+        <input type="text" id="map-search-input" placeholder="Search manhole or pipe ID..." autocomplete="off">
         <button id="map-search-btn">🔍</button>
       </div>
       <div class="map-legend">
@@ -830,6 +832,7 @@ class NetworkViewerApp {
       const query = searchInput.value.trim().toUpperCase();
       if (!query) return;
 
+      // First try manhole search
       const result = this.searchIndex.findById(query);
       if (result) {
         const mh = appState.mhInstData[result.index];
@@ -837,19 +840,28 @@ class NetworkViewerApp {
         if (!isDummy) {
           this._flyToManholeMap(result.index);
           this._selectMapManhole(result.index);
+          return;
         }
-      } else {
-        // Try partial match — skip dummy manholes
-        const matches = this.searchIndex.search(query);
-        for (const match of matches) {
-          const mh = appState.mhInstData[match.index];
-          const isDummy = mh && (mh.type === 'Dummy' || (mh.id && mh.id.startsWith('DUMMY')));
-          if (!isDummy) {
-            this._flyToManholeMap(match.index);
-            this._selectMapManhole(match.index);
-            break;
-          }
+      }
+
+      // Try partial match for manholes — skip dummy manholes
+      const matches = this.searchIndex.search(query);
+      for (const match of matches) {
+        const mh = appState.mhInstData[match.index];
+        const isDummy = mh && (mh.type === 'Dummy' || (mh.id && mh.id.startsWith('DUMMY')));
+        if (!isDummy) {
+          this._flyToManholeMap(match.index);
+          this._selectMapManhole(match.index);
+          return;
         }
+      }
+
+      // If no manhole found, try pipe search
+      const pipeResult = this._searchPipeById(query);
+      if (pipeResult !== null) {
+        this._flyToPipeMap(pipeResult);
+        this._selectMapPipe(pipeResult);
+        return;
       }
     };
 
@@ -908,6 +920,63 @@ class NetworkViewerApp {
 
     requestAnimationFrame(animate);
   }
+  /**
+   * Search for a pipe by ID (exact or partial match).
+   * Returns the pipeData index or null if not found.
+   */
+  _searchPipeById(query) {
+    if (!query || !appState.pipeData) return null;
+    const q = query.toUpperCase();
+
+    // Exact match first
+    for (let i = 0; i < appState.pipeData.length; i++) {
+      const pd = appState.pipeData[i];
+      if (pd && pd.id && pd.id.toUpperCase() === q) {
+        return i;
+      }
+    }
+
+    // Partial match
+    for (let i = 0; i < appState.pipeData.length; i++) {
+      const pd = appState.pipeData[i];
+      if (pd && pd.id && pd.id.toUpperCase().includes(q)) {
+        return i;
+      }
+    }
+
+    return null;
+  }
+
+  /**
+   * Fly camera to a pipe's midpoint in map view.
+   */
+  _flyToPipeMap(index) {
+    const pd = appState.pipeData[index];
+    if (!pd || !this.mapCamera) return;
+
+    const mid = new THREE.Vector3().addVectors(pd.p1, pd.p2).multiplyScalar(0.5);
+    const currentPos = this.mapCamera.position.clone();
+    const startTarget = this.sceneManager.controls.target.clone();
+
+    // Animate camera
+    const startTime = performance.now();
+    const duration = 600;
+
+    const animate = (now) => {
+      const elapsed = now - startTime;
+      const t = Math.min(elapsed / duration, 1);
+      const ease = 1 - Math.pow(1 - t, 3);
+
+      this.mapCamera.position.lerpVectors(currentPos, new THREE.Vector3(mid.x, currentPos.y, mid.z), ease);
+      this.sceneManager.controls.target.lerpVectors(startTarget, mid, ease);
+      this.sceneManager.controls.update();
+
+      if (t < 1) requestAnimationFrame(animate);
+    };
+
+    requestAnimationFrame(animate);
+  }
+
 
   _selectMapManhole(index) {
     const mh = appState.mhInstData[index];
