@@ -90,11 +90,13 @@ export class FlowArrows {
 
       let start, end;
 
-      // For dummy pipes, use the JSON from_mh/to_mh definition as flow direction
+      // For dummy pipes OR pipes flagged with flow_override, use the JSON
+      // from_mh/to_mh definition as flow direction (skip invert calculation)
       const isDummyPipe = pd.id && pd.id.startsWith('DUMMY_PIPE');
+      const hasFlowOverride = pd.flow_override === true;
 
-      if (isDummyPipe) {
-        // Dummy pipes: flow follows the JSON from_mh -> to_mh definition
+      if (isDummyPipe || hasFlowOverride) {
+        // Flow follows the JSON from_mh -> to_mh definition
         start = pd.p1;
         end = pd.p2;
       } else {
