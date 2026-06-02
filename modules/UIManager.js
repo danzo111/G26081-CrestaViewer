@@ -124,8 +124,12 @@ export class UIManager {
     const now = performance.now();
     if (now - this.lastTime > 2000) {
       const fps = Math.round(this.frameCount * 1000 / (now - this.lastTime));
+      const allManholes = appState.networkData?.manholes || [];
+      const realMhCount = allManholes.filter(
+        mh => mh.type !== 'Dummy' && !(mh.id && mh.id.startsWith('DUMMY'))
+      ).length;
       this.updateStats(
-        appState.networkData?.manholes?.length || 0,
+        realMhCount,
         appState.networkData?.pipes?.length || 0,
         fps
       );
