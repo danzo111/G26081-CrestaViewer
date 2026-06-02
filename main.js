@@ -175,8 +175,12 @@ class NetworkViewerApp {
       let flowFrom, flowTo;
       const isDummyPipe = p.id && p.id.startsWith('DUMMY_PIPE');
       const hasFlowOverride = p.flow_override === true;
+      // A dummy node's invert is inherited/arbitrary, so a gradient comparison
+      // against it is meaningless — follow the authored from_mh -> to_mh instead.
+      const touchesDummy = (p.from_mh && p.from_mh.startsWith('DUMMY')) ||
+                           (p.to_mh && p.to_mh.startsWith('DUMMY'));
 
-      if (isDummyPipe || hasFlowOverride) {
+      if (isDummyPipe || hasFlowOverride || touchesDummy) {
         // Use JSON from_mh -> to_mh as the authoritative flow direction
         flowFrom = p.from_mh;
         flowTo = p.to_mh;
@@ -385,7 +389,9 @@ class NetworkViewerApp {
       const p1 = this.coordSystem.w2s(fromMH.x, fromMH.y, fromMH.cover_elev - p.from_depth);
       const p2 = this.coordSystem.w2s(toMH.x, toMH.y, toMH.cover_elev - p.to_depth);
 
-      const isStormwater = (fromMH.type === 'Stormwater' || toMH.type === 'Stormwater');
+      const isStormwater = p.type
+        ? p.type !== 'Sewer'
+        : (fromMH.type === 'Stormwater' || toMH.type === 'Stormwater');
       const color = isStormwater ? 0x4A90D9 : 0xD4880F;
 
       // Main pipe line — use TubeGeometry for visible thickness in 2D
@@ -431,7 +437,9 @@ class NetworkViewerApp {
       let flowDir;
       const isDummyPipe = p.id && p.id.startsWith('DUMMY_PIPE');
       const hasFlowOverride = p.flow_override === true;
-      if (isDummyPipe || hasFlowOverride) {
+      const touchesDummy = (p.from_mh && p.from_mh.startsWith('DUMMY')) ||
+                           (p.to_mh && p.to_mh.startsWith('DUMMY'));
+      if (isDummyPipe || hasFlowOverride || touchesDummy) {
         // Use JSON from_mh -> to_mh as flow direction
         flowDir = dir;
       } else {
