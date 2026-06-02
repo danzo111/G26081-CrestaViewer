@@ -169,7 +169,10 @@ export class GeometryBuilder {
         return;
       }
 
-      const isStormwater = (fromMH.type === 'Stormwater' || toMH.type === 'Stormwater');
+      // A pipe-level "type" field overrides the endpoint-inferred classification
+      const isStormwater = pipe.type
+        ? pipe.type !== 'Sewer'
+        : (fromMH.type === 'Stormwater' || toMH.type === 'Stormwater');
       const verts = isStormwater ? stormVerts : sewerVerts;
       const indices = isStormwater ? stormIndices : sewerIndices;
       let offset = isStormwater ? stormOffset : sewerOffset;
