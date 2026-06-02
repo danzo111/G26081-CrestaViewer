@@ -20,7 +20,9 @@
       "top": 2891979.142655681
     },
     "dummy_pipes_added": 50,
-    "additional_manholes_added": 62
+    "additional_manholes_added": 62,
+    "invert_source": "Depths reconciled to master schedule \"G26081 Manhole (For Daniel Only)\" sheet 20260525 (clean Depth column + Flow Direction); 6 MH not in master (SE016,SE046,SW075,SW094,SW100,SW105) retain PDF-table values. Master Invert-Level column ignored (corrupt).",
+    "invert_reconciled": "2026-06-02"
   },
   "manholes": [
     {
@@ -33,8 +35,8 @@
       "depth": 0.0,
       "diameter": 1.0,
       "images": [
-        "images/SE001(1).JPG",
-        "images/SE001(2).JPG"
+        "images/SE001(1).jpg",
+        "images/SE001(2).jpg"
       ]
     },
     {
@@ -47,8 +49,8 @@
       "depth": 1.47,
       "diameter": 1.0,
       "images": [
-        "images/SE002(1).JPG",
-        "images/SE002(2).JPG"
+        "images/SE002(1).jpg",
+        "images/SE002(2).jpg"
       ]
     },
     {
@@ -61,8 +63,8 @@
       "depth": 0.0,
       "diameter": 1.0,
       "images": [
-        "images/SE003(1).JPG",
-        "images/SE003(2).JPG"
+        "images/SE003(1).jpg",
+        "images/SE003(2).jpg"
       ]
     },
     {
@@ -75,8 +77,8 @@
       "depth": 2.66,
       "diameter": 1.0,
       "images": [
-        "images/SE004(1).JPG",
-        "images/SE004(2).JPG"
+        "images/SE004(1).jpg",
+        "images/SE004(2).jpg"
       ]
     },
     {
@@ -89,8 +91,8 @@
       "depth": 2.0,
       "diameter": 1.0,
       "images": [
-        "images/SE005(1).JPG",
-        "images/SE005(2).JPG"
+        "images/SE005(1).jpg",
+        "images/SE005(2).jpg"
       ]
     },
     {
@@ -103,8 +105,8 @@
       "depth": 0.0,
       "diameter": 1.0,
       "images": [
-        "images/SE006(1).JPG",
-        "images/SE006(2).JPG"
+        "images/SE006(1).jpg",
+        "images/SE006(2).jpg"
       ]
     },
     {
@@ -117,8 +119,8 @@
       "depth": 1.9,
       "diameter": 1.0,
       "images": [
-        "images/SE007(1).JPG",
-        "images/SE007(2).JPG"
+        "images/SE007(1).jpg",
+        "images/SE007(2).jpg"
       ]
     },
     {
@@ -131,8 +133,8 @@
       "depth": 0.0,
       "diameter": 1.0,
       "images": [
-        "images/SE008(1).JPG",
-        "images/SE008(2).JPG"
+        "images/SE008(1).jpg",
+        "images/SE008(2).jpg"
       ]
     },
     {
@@ -145,8 +147,8 @@
       "depth": 0.0,
       "diameter": 1.0,
       "images": [
-        "images/SE009(1).JPG",
-        "images/SE009(2).JPG"
+        "images/SE009(1).jpg",
+        "images/SE009(2).jpg"
       ]
     },
     {
@@ -159,8 +161,8 @@
       "depth": 0.0,
       "diameter": 1.0,
       "images": [
-        "images/SE010(1).JPG",
-        "images/SE010(2).JPG"
+        "images/SE010(1).jpg",
+        "images/SE010(2).jpg"
       ]
     },
     {
@@ -173,8 +175,8 @@
       "depth": 0.0,
       "diameter": 1.0,
       "images": [
-        "images/SE011(1).JPG",
-        "images/SE011(2).JPG"
+        "images/SE011(1).jpg",
+        "images/SE011(2).jpg"
       ]
     },
     {
@@ -187,8 +189,8 @@
       "depth": 0.0,
       "diameter": 1.0,
       "images": [
-        "images/SE012(1).JPG",
-        "images/SE012(2).JPG"
+        "images/SE012(1).jpg",
+        "images/SE012(2).jpg"
       ]
     },
     {
@@ -201,8 +203,8 @@
       "depth": 0.0,
       "diameter": 1.0,
       "images": [
-        "images/SE013(1).JPG",
-        "images/SE013(2).JPG"
+        "images/SE013(1).jpg",
+        "images/SE013(2).jpg"
       ]
     },
     {
@@ -215,8 +217,8 @@
       "depth": 0.0,
       "diameter": 1.0,
       "images": [
-        "images/SE014(1).JPG",
-        "images/SE014(2).JPG"
+        "images/SE014(1).jpg",
+        "images/SE014(2).jpg"
       ]
     },
     {
@@ -226,11 +228,11 @@
       "x": -97434.7,
       "y": 2891314.99,
       "cover_elev": 1548.31,
-      "depth": 0.0,
+      "depth": 3.28,
       "diameter": 1.0,
       "images": [
-        "images/SE015(1).JPG",
-        "images/SE015(2).JPG"
+        "images/SE015(1).jpg",
+        "images/SE015(2).jpg"
       ]
     },
     {
@@ -243,8 +245,8 @@
       "depth": 2.6,
       "diameter": 1.0,
       "images": [
-        "images/SE017(1).JPG",
-        "images/SE017(2).JPG"
+        "images/SE017(1).jpg",
+        "images/SE017(2).jpg"
       ]
     },
     {
@@ -257,8 +259,8 @@
       "depth": 1.2,
       "diameter": 1.0,
       "images": [
-        "images/SE018(1).JPG",
-        "images/SE018(2).JPG"
+        "images/SE018(1).jpg",
+        "images/SE018(2).jpg"
       ]
     },
     {
@@ -271,8 +273,8 @@
       "depth": 1.7,
       "diameter": 1.0,
       "images": [
-        "images/SE019(1).JPG",
-        "images/SE019(2).JPG"
+        "images/SE019(1).jpg",
+        "images/SE019(2).jpg"
       ]
     },
     {
@@ -285,8 +287,8 @@
       "depth": 1.55,
       "diameter": 1.0,
       "images": [
-        "images/SE020(1).JPG",
-        "images/SE020(2).JPG"
+        "images/SE020(1).jpg",
+        "images/SE020(2).jpg"
       ]
     },
     {
@@ -299,8 +301,8 @@
       "depth": 2.2,
       "diameter": 1.0,
       "images": [
-        "images/SE021(1).JPG",
-        "images/SE021(2).JPG"
+        "images/SE021(1).jpg",
+        "images/SE021(2).jpg"
       ]
     },
     {
@@ -313,8 +315,8 @@
       "depth": 1.7,
       "diameter": 1.0,
       "images": [
-        "images/SE022(1).JPG",
-        "images/SE022(2).JPG"
+        "images/SE022(1).jpg",
+        "images/SE022(2).jpg"
       ]
     },
     {
@@ -327,8 +329,8 @@
       "depth": 2.7,
       "diameter": 1.0,
       "images": [
-        "images/SE023(1).JPG",
-        "images/SE023(2).JPG"
+        "images/SE023(1).jpg",
+        "images/SE023(2).jpg"
       ]
     },
     {
@@ -363,8 +365,8 @@
       "depth": 2.5,
       "diameter": 1.0,
       "images": [
-        "images/SE026(1).JPG",
-        "images/SE026(2).JPG"
+        "images/SE026(1).jpg",
+        "images/SE026(2).jpg"
       ]
     },
     {
@@ -377,8 +379,8 @@
       "depth": 3.0,
       "diameter": 1.0,
       "images": [
-        "images/SE027(1).JPG",
-        "images/SE027(2).JPG"
+        "images/SE027(1).jpg",
+        "images/SE027(2).jpg"
       ]
     },
     {
@@ -391,8 +393,8 @@
       "depth": 2.58,
       "diameter": 1.0,
       "images": [
-        "images/SE028(1).JPG",
-        "images/SE028(2).JPG"
+        "images/SE028(1).jpg",
+        "images/SE028(2).jpg"
       ]
     },
     {
@@ -405,8 +407,8 @@
       "depth": 1.77,
       "diameter": 1.0,
       "images": [
-        "images/SE029(1).JPG",
-        "images/SE029(2).JPG"
+        "images/SE029(1).jpg",
+        "images/SE029(2).jpg"
       ]
     },
     {
@@ -419,8 +421,8 @@
       "depth": 0.0,
       "diameter": 1.0,
       "images": [
-        "images/SE030(1).JPG",
-        "images/SE030(2).JPG"
+        "images/SE030(1).jpg",
+        "images/SE030(2).jpg"
       ]
     },
     {
@@ -433,8 +435,8 @@
       "depth": 2.4,
       "diameter": 1.0,
       "images": [
-        "images/SE031(1).JPG",
-        "images/SE031(2).JPG"
+        "images/SE031(1).jpg",
+        "images/SE031(2).jpg"
       ]
     },
     {
@@ -447,8 +449,8 @@
       "depth": 1.56,
       "diameter": 1.0,
       "images": [
-        "images/SE032(1).JPG",
-        "images/SE032(2).JPG"
+        "images/SE032(1).jpg",
+        "images/SE032(2).jpg"
       ]
     },
     {
@@ -461,8 +463,8 @@
       "depth": 2.6,
       "diameter": 1.0,
       "images": [
-        "images/SE033(1).JPG",
-        "images/SE033(2).JPG"
+        "images/SE033(1).jpg",
+        "images/SE033(2).jpg"
       ]
     },
     {
@@ -475,8 +477,8 @@
       "depth": 1.6,
       "diameter": 1.0,
       "images": [
-        "images/SE034(1).JPG",
-        "images/SE034(2).JPG"
+        "images/SE034(1).jpg",
+        "images/SE034(2).jpg"
       ]
     },
     {
@@ -489,8 +491,8 @@
       "depth": 2.4,
       "diameter": 1.0,
       "images": [
-        "images/SE035(1).JPG",
-        "images/SE035(2).JPG"
+        "images/SE035(1).jpg",
+        "images/SE035(2).jpg"
       ]
     },
     {
@@ -503,8 +505,8 @@
       "depth": 1.7,
       "diameter": 1.0,
       "images": [
-        "images/SE036(1).JPG",
-        "images/SE036(2).JPG"
+        "images/SE036(1).jpg",
+        "images/SE036(2).jpg"
       ]
     },
     {
@@ -517,8 +519,8 @@
       "depth": 1.7,
       "diameter": 1.0,
       "images": [
-        "images/SE037(1).JPG",
-        "images/SE037(2).JPG"
+        "images/SE037(1).jpg",
+        "images/SE037(2).jpg"
       ]
     },
     {
@@ -531,8 +533,8 @@
       "depth": 1.9,
       "diameter": 1.0,
       "images": [
-        "images/SE038(1).JPG",
-        "images/SE038(2).JPG"
+        "images/SE038(1).jpg",
+        "images/SE038(2).jpg"
       ]
     },
     {
@@ -545,22 +547,8 @@
       "depth": 1.4,
       "diameter": 1.0,
       "images": [
-        "images/SE039(1).JPG",
-        "images/SE039(2).JPG"
-      ]
-    },
-    {
-      "id": "SE040",
-      "name": "SE040",
-      "type": "Sewer",
-      "x": -97618.68,
-      "y": 2891613.47,
-      "cover_elev": 1557.53,
-      "depth": 0.0,
-      "diameter": 1.0,
-      "images": [
-        "images/SE040(1).JPG",
-        "images/SE040(2).JPG"
+        "images/SE039(1).jpg",
+        "images/SE039(2).jpg"
       ]
     },
     {
@@ -573,8 +561,8 @@
       "depth": 0.0,
       "diameter": 1.0,
       "images": [
-        "images/SE041(1).JPG",
-        "images/SE041(2).JPG"
+        "images/SE041(1).jpg",
+        "images/SE041(2).jpg"
       ]
     },
     {
@@ -587,8 +575,8 @@
       "depth": 0.0,
       "diameter": 1.0,
       "images": [
-        "images/SE042(1).JPG",
-        "images/SE042(2).JPG"
+        "images/SE042(1).jpg",
+        "images/SE042(2).jpg"
       ]
     },
     {
@@ -799,8 +787,8 @@
       "depth": 1.4,
       "diameter": 1.0,
       "images": [
-        "images/SW001(1).JPG",
-        "images/SW001(2).JPG"
+        "images/SW001(1).jpg",
+        "images/SW001(2).jpg"
       ]
     },
     {
@@ -813,8 +801,8 @@
       "depth": 1.5,
       "diameter": 1.0,
       "images": [
-        "images/SW002(1).JPG",
-        "images/SW002(2).JPG"
+        "images/SW002(1).jpg",
+        "images/SW002(2).jpg"
       ]
     },
     {
@@ -827,8 +815,8 @@
       "depth": 1.4,
       "diameter": 1.0,
       "images": [
-        "images/SW003(1).JPG",
-        "images/SW003(2).JPG"
+        "images/SW003(1).jpg",
+        "images/SW003(2).jpg"
       ]
     },
     {
@@ -841,8 +829,8 @@
       "depth": 1.4,
       "diameter": 1.0,
       "images": [
-        "images/SW004(1).JPG",
-        "images/SW004(2).JPG"
+        "images/SW004(1).jpg",
+        "images/SW004(2).jpg"
       ]
     },
     {
@@ -855,8 +843,8 @@
       "depth": 2.0,
       "diameter": 1.0,
       "images": [
-        "images/SW005(1).JPG",
-        "images/SW005(2).JPG"
+        "images/SW005(1).jpg",
+        "images/SW005(2).jpg"
       ]
     },
     {
@@ -869,8 +857,8 @@
       "depth": 0.6,
       "diameter": 1.0,
       "images": [
-        "images/SW006(1).JPG",
-        "images/SW006(2).JPG"
+        "images/SW006(1).jpg",
+        "images/SW006(2).jpg"
       ]
     },
     {
@@ -883,8 +871,8 @@
       "depth": 1.6,
       "diameter": 1.0,
       "images": [
-        "images/SW007(1).JPG",
-        "images/SW007(2).JPG"
+        "images/SW007(1).jpg",
+        "images/SW007(2).jpg"
       ]
     },
     {
@@ -897,8 +885,8 @@
       "depth": 0.9,
       "diameter": 1.0,
       "images": [
-        "images/SW008(1).JPG",
-        "images/SW008(2).JPG"
+        "images/SW008(1).jpg",
+        "images/SW008(2).jpg"
       ]
     },
     {
@@ -911,8 +899,8 @@
       "depth": 1.0,
       "diameter": 1.0,
       "images": [
-        "images/SW009(1).JPG",
-        "images/SW009(2).JPG"
+        "images/SW009(1).jpg",
+        "images/SW009(2).jpg"
       ]
     },
     {
@@ -925,8 +913,8 @@
       "depth": 0.5,
       "diameter": 1.0,
       "images": [
-        "images/SW010(1).JPG",
-        "images/SW010(2).JPG"
+        "images/SW010(1).jpg",
+        "images/SW010(2).jpg"
       ]
     },
     {
@@ -939,8 +927,8 @@
       "depth": 0.5,
       "diameter": 1.0,
       "images": [
-        "images/SW011(1).JPG",
-        "images/SW011(2).JPG"
+        "images/SW011(1).jpg",
+        "images/SW011(2).jpg"
       ]
     },
     {
@@ -953,8 +941,8 @@
       "depth": 1.4,
       "diameter": 1.0,
       "images": [
-        "images/SW012(1).JPG",
-        "images/SW012(2).JPG"
+        "images/SW012(1).jpg",
+        "images/SW012(2).jpg"
       ]
     },
     {
@@ -967,8 +955,8 @@
       "depth": 1.0,
       "diameter": 1.0,
       "images": [
-        "images/SW013(1).JPG",
-        "images/SW013(2).JPG"
+        "images/SW013(1).jpg",
+        "images/SW013(2).jpg"
       ]
     },
     {
@@ -981,8 +969,8 @@
       "depth": 1.6,
       "diameter": 1.0,
       "images": [
-        "images/SW014(1).JPG",
-        "images/SW014(2).JPG"
+        "images/SW014(1).jpg",
+        "images/SW014(2).jpg"
       ]
     },
     {
@@ -995,8 +983,8 @@
       "depth": 1.5,
       "diameter": 1.0,
       "images": [
-        "images/SW015(1).JPG",
-        "images/SW015(2).JPG"
+        "images/SW015(1).jpg",
+        "images/SW015(2).jpg"
       ]
     },
     {
@@ -1009,8 +997,8 @@
       "depth": 1.58,
       "diameter": 1.0,
       "images": [
-        "images/SW016(1).JPG",
-        "images/SW016(2).JPG"
+        "images/SW016(1).jpg",
+        "images/SW016(2).jpg"
       ]
     },
     {
@@ -1023,8 +1011,8 @@
       "depth": 1.6,
       "diameter": 1.0,
       "images": [
-        "images/SW017(1).JPG",
-        "images/SW017(2).JPG"
+        "images/SW017(1).jpg",
+        "images/SW017(2).jpg"
       ]
     },
     {
@@ -1037,8 +1025,8 @@
       "depth": 1.7,
       "diameter": 1.0,
       "images": [
-        "images/SW018(1).JPG",
-        "images/SW018(2).JPG"
+        "images/SW018(1).jpg",
+        "images/SW018(2).jpg"
       ]
     },
     {
@@ -1051,8 +1039,8 @@
       "depth": 1.45,
       "diameter": 1.0,
       "images": [
-        "images/SW019(1).JPG",
-        "images/SW019(2).JPG"
+        "images/SW019(1).jpg",
+        "images/SW019(2).jpg"
       ]
     },
     {
@@ -1065,8 +1053,8 @@
       "depth": 1.56,
       "diameter": 1.0,
       "images": [
-        "images/SW020(1).JPG",
-        "images/SW020(2).JPG"
+        "images/SW020(1).jpg",
+        "images/SW020(2).jpg"
       ]
     },
     {
@@ -1079,8 +1067,8 @@
       "depth": 1.62,
       "diameter": 1.0,
       "images": [
-        "images/SW021(1).JPG",
-        "images/SW021(2).JPG"
+        "images/SW021(1).jpg",
+        "images/SW021(2).jpg"
       ]
     },
     {
@@ -1093,8 +1081,8 @@
       "depth": 1.73,
       "diameter": 1.0,
       "images": [
-        "images/SW022(1).JPG",
-        "images/SW022(2).JPG"
+        "images/SW022(1).jpg",
+        "images/SW022(2).jpg"
       ]
     },
     {
@@ -1107,8 +1095,8 @@
       "depth": 1.1,
       "diameter": 1.0,
       "images": [
-        "images/SW023(1).JPG",
-        "images/SW023(2).JPG"
+        "images/SW023(1).jpg",
+        "images/SW023(2).jpg"
       ]
     },
     {
@@ -1121,8 +1109,8 @@
       "depth": 0.4,
       "diameter": 1.0,
       "images": [
-        "images/SW024(1).JPG",
-        "images/SW024(2).JPG"
+        "images/SW024(1).jpg",
+        "images/SW024(2).jpg"
       ]
     },
     {
@@ -1135,8 +1123,8 @@
       "depth": 0.6,
       "diameter": 1.0,
       "images": [
-        "images/SW025(1).JPG",
-        "images/SW025(2).JPG"
+        "images/SW025(1).jpg",
+        "images/SW025(2).jpg"
       ]
     },
     {
@@ -1149,8 +1137,8 @@
       "depth": 0.0,
       "diameter": 1.0,
       "images": [
-        "images/SW026(1).JPG",
-        "images/SW026(2).JPG"
+        "images/SW026(1).jpg",
+        "images/SW026(2).jpg"
       ]
     },
     {
@@ -1163,8 +1151,8 @@
       "depth": 0.65,
       "diameter": 1.0,
       "images": [
-        "images/SW027(1).JPG",
-        "images/SW027(2).JPG"
+        "images/SW027(1).jpg",
+        "images/SW027(2).jpg"
       ]
     },
     {
@@ -1177,8 +1165,8 @@
       "depth": 0.4,
       "diameter": 1.0,
       "images": [
-        "images/SW028(1).JPG",
-        "images/SW028(2).JPG"
+        "images/SW028(1).jpg",
+        "images/SW028(2).jpg"
       ]
     },
     {
@@ -1191,8 +1179,8 @@
       "depth": 0.55,
       "diameter": 1.0,
       "images": [
-        "images/SW029(1).JPG",
-        "images/SW029(2).JPG"
+        "images/SW029(1).jpg",
+        "images/SW029(2).jpg"
       ]
     },
     {
@@ -1205,8 +1193,8 @@
       "depth": 1.3,
       "diameter": 1.0,
       "images": [
-        "images/SW030(1).JPG",
-        "images/SW030(2).JPG"
+        "images/SW030(1).jpg",
+        "images/SW030(2).jpg"
       ]
     },
     {
@@ -1219,8 +1207,8 @@
       "depth": 0.6,
       "diameter": 1.0,
       "images": [
-        "images/SW031(1).JPG",
-        "images/SW031(2).JPG"
+        "images/SW031(1).jpg",
+        "images/SW031(2).jpg"
       ]
     },
     {
@@ -1233,8 +1221,8 @@
       "depth": 0.8,
       "diameter": 1.0,
       "images": [
-        "images/SW032(1).JPG",
-        "images/SW032(2).JPG"
+        "images/SW032(1).jpg",
+        "images/SW032(2).jpg"
       ]
     },
     {
@@ -1247,8 +1235,8 @@
       "depth": 0.4,
       "diameter": 1.0,
       "images": [
-        "images/SW033(1).JPG",
-        "images/SW033(2).JPG"
+        "images/SW033(1).jpg",
+        "images/SW033(2).jpg"
       ]
     },
     {
@@ -1261,8 +1249,8 @@
       "depth": 0.9,
       "diameter": 1.0,
       "images": [
-        "images/SW034(1).JPG",
-        "images/SW034(2).JPG"
+        "images/SW034(1).jpg",
+        "images/SW034(2).jpg"
       ]
     },
     {
@@ -1275,8 +1263,8 @@
       "depth": 0.4,
       "diameter": 1.0,
       "images": [
-        "images/SW035(1).JPG",
-        "images/SW035(2).JPG"
+        "images/SW035(1).jpg",
+        "images/SW035(2).jpg"
       ]
     },
     {
@@ -1286,11 +1274,11 @@
       "x": -97464.99,
       "y": 2891333.75,
       "cover_elev": 1547.52,
-      "depth": 0.0,
+      "depth": 0.3,
       "diameter": 1.0,
       "images": [
-        "images/SW036(1).JPG",
-        "images/SW036(2).JPG"
+        "images/SW036(1).jpg",
+        "images/SW036(2).jpg"
       ]
     },
     {
@@ -1314,8 +1302,8 @@
       "depth": 1.28,
       "diameter": 1.0,
       "images": [
-        "images/SW038(1).JPG",
-        "images/SW038(2).JPG"
+        "images/SW038(1).jpg",
+        "images/SW038(2).jpg"
       ]
     },
     {
@@ -1328,8 +1316,8 @@
       "depth": 1.07,
       "diameter": 1.0,
       "images": [
-        "images/SW039(1).JPG",
-        "images/SW039(2).JPG"
+        "images/SW039(1).jpg",
+        "images/SW039(2).jpg"
       ]
     },
     {
@@ -1342,8 +1330,8 @@
       "depth": 0.88,
       "diameter": 1.0,
       "images": [
-        "images/SW040(1).JPG",
-        "images/SW040(2).JPG"
+        "images/SW040(1).jpg",
+        "images/SW040(2).jpg"
       ]
     },
     {
@@ -1356,8 +1344,8 @@
       "depth": 0.0,
       "diameter": 1.0,
       "images": [
-        "images/SW041(1).JPG",
-        "images/SW041(2).JPG"
+        "images/SW041(1).jpg",
+        "images/SW041(2).jpg"
       ]
     },
     {
@@ -1370,8 +1358,8 @@
       "depth": 1.5,
       "diameter": 1.0,
       "images": [
-        "images/SW042(1).JPG",
-        "images/SW042(2).JPG"
+        "images/SW042(1).jpg",
+        "images/SW042(2).jpg"
       ]
     },
     {
@@ -1384,8 +1372,8 @@
       "depth": 1.5,
       "diameter": 1.0,
       "images": [
-        "images/SW043(1).JPG",
-        "images/SW043(2).JPG"
+        "images/SW043(1).jpg",
+        "images/SW043(2).jpg"
       ]
     },
     {
@@ -1398,8 +1386,8 @@
       "depth": 1.47,
       "diameter": 1.0,
       "images": [
-        "images/SW044(1).JPG",
-        "images/SW044(2).JPG"
+        "images/SW044(1).jpg",
+        "images/SW044(2).jpg"
       ]
     },
     {
@@ -1412,8 +1400,8 @@
       "depth": 0.0,
       "diameter": 1.0,
       "images": [
-        "images/SW045(1).JPG",
-        "images/SW045(2).JPG"
+        "images/SW045(1).jpg",
+        "images/SW045(2).jpg"
       ]
     },
     {
@@ -1426,8 +1414,8 @@
       "depth": 1.6,
       "diameter": 1.0,
       "images": [
-        "images/SW046(1).JPG",
-        "images/SW046(2).JPG"
+        "images/SW046(1).jpg",
+        "images/SW046(2).jpg"
       ]
     },
     {
@@ -1440,8 +1428,8 @@
       "depth": 2.5,
       "diameter": 1.0,
       "images": [
-        "images/SW047(1).JPG",
-        "images/SW047(2).JPG"
+        "images/SW047(1).jpg",
+        "images/SW047(2).jpg"
       ]
     },
     {
@@ -1454,8 +1442,8 @@
       "depth": 1.2,
       "diameter": 1.0,
       "images": [
-        "images/SW048(1).JPG",
-        "images/SW048(2).JPG"
+        "images/SW048(1).jpg",
+        "images/SW048(2).jpg"
       ]
     },
     {
@@ -1468,8 +1456,8 @@
       "depth": 1.38,
       "diameter": 1.0,
       "images": [
-        "images/SW049(1).JPG",
-        "images/SW049(2).JPG"
+        "images/SW049(1).jpg",
+        "images/SW049(2).jpg"
       ]
     },
     {
@@ -1482,8 +1470,8 @@
       "depth": 1.3,
       "diameter": 1.0,
       "images": [
-        "images/SW050(1).JPG",
-        "images/SW050(2).JPG"
+        "images/SW050(1).jpg",
+        "images/SW050(2).jpg"
       ]
     },
     {
@@ -1496,8 +1484,8 @@
       "depth": 0.7,
       "diameter": 1.0,
       "images": [
-        "images/SW052(1).JPG",
-        "images/SW052(2).JPG"
+        "images/SW052(1).jpg",
+        "images/SW052(2).jpg"
       ]
     },
     {
@@ -1510,8 +1498,8 @@
       "depth": 2.4,
       "diameter": 1.0,
       "images": [
-        "images/SW053(1).JPG",
-        "images/SW053(2).JPG"
+        "images/SW053(1).jpg",
+        "images/SW053(2).jpg"
       ]
     },
     {
@@ -1524,8 +1512,8 @@
       "depth": 1.1,
       "diameter": 1.0,
       "images": [
-        "images/SW054(1).JPG",
-        "images/SW054(2).JPG"
+        "images/SW054(1).jpg",
+        "images/SW054(2).jpg"
       ]
     },
     {
@@ -1538,8 +1526,8 @@
       "depth": 0.76,
       "diameter": 1.0,
       "images": [
-        "images/SW055(1).JPG",
-        "images/SW055(2).JPG"
+        "images/SW055(1).jpg",
+        "images/SW055(2).jpg"
       ]
     },
     {
@@ -1552,8 +1540,8 @@
       "depth": 4.0,
       "diameter": 1.0,
       "images": [
-        "images/SW056(1).JPG",
-        "images/SW056(2).JPG"
+        "images/SW056(1).jpg",
+        "images/SW056(2).jpg"
       ]
     },
     {
@@ -1566,8 +1554,8 @@
       "depth": 1.5,
       "diameter": 1.0,
       "images": [
-        "images/SW057(1).JPG",
-        "images/SW057(2).JPG"
+        "images/SW057(1).jpg",
+        "images/SW057(2).jpg"
       ]
     },
     {
@@ -1580,8 +1568,8 @@
       "depth": 4.6,
       "diameter": 1.0,
       "images": [
-        "images/SW058(1).JPG",
-        "images/SW058(2).JPG"
+        "images/SW058(1).jpg",
+        "images/SW058(2).jpg"
       ]
     },
     {
@@ -1594,8 +1582,8 @@
       "depth": 0.5,
       "diameter": 1.0,
       "images": [
-        "images/SW059(1).JPG",
-        "images/SW059(2).JPG"
+        "images/SW059(1).jpg",
+        "images/SW059(2).jpg"
       ]
     },
     {
@@ -1608,8 +1596,8 @@
       "depth": 7.8,
       "diameter": 1.0,
       "images": [
-        "images/SW060(1).JPG",
-        "images/SW060(2).JPG"
+        "images/SW060(1).jpg",
+        "images/SW060(2).jpg"
       ]
     },
     {
@@ -1622,8 +1610,8 @@
       "depth": 3.1,
       "diameter": 1.0,
       "images": [
-        "images/SW061(1).JPG",
-        "images/SW061(2).JPG"
+        "images/SW061(1).jpg",
+        "images/SW061(2).jpg"
       ]
     },
     {
@@ -1636,8 +1624,8 @@
       "depth": 3.8,
       "diameter": 1.0,
       "images": [
-        "images/SW062(1).JPG",
-        "images/SW062(2).JPG"
+        "images/SW062(1).jpg",
+        "images/SW062(2).jpg"
       ]
     },
     {
@@ -1650,8 +1638,8 @@
       "depth": 1.1,
       "diameter": 1.0,
       "images": [
-        "images/SW063(1).JPG",
-        "images/SW063(2).JPG"
+        "images/SW063(1).jpg",
+        "images/SW063(2).jpg"
       ]
     },
     {
@@ -1664,8 +1652,8 @@
       "depth": 0.0,
       "diameter": 1.0,
       "images": [
-        "images/SW064(1).JPG",
-        "images/SW064(2).JPG"
+        "images/SW064(1).jpg",
+        "images/SW064(2).jpg"
       ]
     },
     {
@@ -1678,8 +1666,8 @@
       "depth": 4.3,
       "diameter": 1.0,
       "images": [
-        "images/SW065(1).JPG",
-        "images/SW065(2).JPG"
+        "images/SW065(1).jpg",
+        "images/SW065(2).jpg"
       ]
     },
     {
@@ -1692,8 +1680,8 @@
       "depth": 0.3,
       "diameter": 1.0,
       "images": [
-        "images/SW066(1).JPG",
-        "images/SW066(2).JPG"
+        "images/SW066(1).jpg",
+        "images/SW066(2).jpg"
       ]
     },
     {
@@ -1706,8 +1694,8 @@
       "depth": 0.6,
       "diameter": 1.0,
       "images": [
-        "images/SW067(1).JPG",
-        "images/SW067(2).JPG"
+        "images/SW067(1).jpg",
+        "images/SW067(2).jpg"
       ]
     },
     {
@@ -1716,12 +1704,12 @@
       "type": "Stormwater",
       "x": -97623.58,
       "y": 2891783.15,
-      "cover_elev": 1564.41,
+      "cover_elev": 1564.56,
       "depth": 0.6,
       "diameter": 1.0,
       "images": [
-        "images/SW068(1).JPG",
-        "images/SW068(2).JPG"
+        "images/SW068(1).jpg",
+        "images/SW068(2).jpg"
       ]
     },
     {
@@ -1734,8 +1722,8 @@
       "depth": 1.16,
       "diameter": 1.0,
       "images": [
-        "images/SW069(1).JPG",
-        "images/SW069(2).JPG"
+        "images/SW069(1).jpg",
+        "images/SW069(2).jpg"
       ]
     },
     {
@@ -1748,8 +1736,8 @@
       "depth": 0.4,
       "diameter": 1.0,
       "images": [
-        "images/SW070(1).JPG",
-        "images/SW070(2).JPG"
+        "images/SW070(1).jpg",
+        "images/SW070(2).jpg"
       ]
     },
     {
@@ -1762,8 +1750,8 @@
       "depth": 2.26,
       "diameter": 1.0,
       "images": [
-        "images/SW071(1).JPG",
-        "images/SW071(2).JPG"
+        "images/SW071(1).jpg",
+        "images/SW071(2).jpg"
       ]
     },
     {
@@ -1776,8 +1764,8 @@
       "depth": 1.3,
       "diameter": 1.0,
       "images": [
-        "images/SW072(1).JPG",
-        "images/SW072(2).JPG"
+        "images/SW072(1).jpg",
+        "images/SW072(2).jpg"
       ]
     },
     {
@@ -1790,8 +1778,8 @@
       "depth": 1.25,
       "diameter": 1.0,
       "images": [
-        "images/SW073(1).JPG",
-        "images/SW073(2).JPG"
+        "images/SW073(1).jpg",
+        "images/SW073(2).jpg"
       ]
     },
     {
@@ -1804,8 +1792,8 @@
       "depth": 0.45,
       "diameter": 1.0,
       "images": [
-        "images/SW074(1).JPG",
-        "images/SW074(2).JPG"
+        "images/SW074(1).jpg",
+        "images/SW074(2).jpg"
       ]
     },
     {
@@ -1818,8 +1806,8 @@
       "depth": 1.45,
       "diameter": 1.0,
       "images": [
-        "images/SW076(1).JPG",
-        "images/SW076(2).JPG"
+        "images/SW076(1).jpg",
+        "images/SW076(2).jpg"
       ]
     },
     {
@@ -1832,8 +1820,8 @@
       "depth": 1.0,
       "diameter": 1.0,
       "images": [
-        "images/SW077(1).JPG",
-        "images/SW077(2).JPG"
+        "images/SW077(1).jpg",
+        "images/SW077(2).jpg"
       ]
     },
     {
@@ -1846,8 +1834,8 @@
       "depth": 2.0,
       "diameter": 1.0,
       "images": [
-        "images/SW078(1).JPG",
-        "images/SW078(2).JPG"
+        "images/SW078(1).jpg",
+        "images/SW078(2).jpg"
       ]
     },
     {
@@ -1860,8 +1848,8 @@
       "depth": 0.0,
       "diameter": 1.0,
       "images": [
-        "images/SW080(1).JPG",
-        "images/SW080(2).JPG"
+        "images/SW080(1).jpg",
+        "images/SW080(2).jpg"
       ]
     },
     {
@@ -1874,8 +1862,8 @@
       "depth": 2.8,
       "diameter": 1.0,
       "images": [
-        "images/SW081(1).JPG",
-        "images/SW081(2).JPG"
+        "images/SW081(1).jpg",
+        "images/SW081(2).jpg"
       ]
     },
     {
@@ -1888,8 +1876,8 @@
       "depth": 2.5,
       "diameter": 1.0,
       "images": [
-        "images/SW082(1).JPG",
-        "images/SW082(2).JPG"
+        "images/SW082(1).jpg",
+        "images/SW082(2).jpg"
       ]
     },
     {
@@ -1902,8 +1890,8 @@
       "depth": 2.3,
       "diameter": 1.0,
       "images": [
-        "images/SW083(1).JPG",
-        "images/SW083(2).JPG"
+        "images/SW083(1).jpg",
+        "images/SW083(2).jpg"
       ]
     },
     {
@@ -1916,8 +1904,8 @@
       "depth": 0.0,
       "diameter": 1.0,
       "images": [
-        "images/SW084(1).JPG",
-        "images/SW084(2).JPG"
+        "images/SW084(1).jpg",
+        "images/SW084(2).jpg"
       ]
     },
     {
@@ -1930,8 +1918,8 @@
       "depth": 3.7,
       "diameter": 1.0,
       "images": [
-        "images/SW085(1).JPG",
-        "images/SW085(2).JPG"
+        "images/SW085(1).jpg",
+        "images/SW085(2).jpg"
       ]
     },
     {
@@ -1944,8 +1932,8 @@
       "depth": 0.8,
       "diameter": 1.0,
       "images": [
-        "images/SW086(1).JPG",
-        "images/SW086(2).JPG"
+        "images/SW086(1).jpg",
+        "images/SW086(2).jpg"
       ]
     },
     {
@@ -1958,8 +1946,8 @@
       "depth": 3.6,
       "diameter": 1.0,
       "images": [
-        "images/SW087(1).JPG",
-        "images/SW087(2).JPG"
+        "images/SW087(1).jpg",
+        "images/SW087(2).jpg"
       ]
     },
     {
@@ -2090,7 +2078,7 @@
       "x": -97776.763,
       "y": 2891644.724,
       "cover_elev": 1560.907,
-      "depth": 0.0,
+      "depth": 2.128,
       "diameter": 1.0,
       "images": []
     },
@@ -2144,7 +2132,7 @@
       "type": "Stormwater",
       "x": -97529.52,
       "y": 2891767.86,
-      "cover_elev": 1559.25,
+      "cover_elev": 1559.44,
       "depth": 1.6,
       "diameter": 1.0,
       "images": []
@@ -2401,13 +2389,13 @@
       "depth": 1.1,
       "diameter": 1.0,
       "images": [
-        "images/SW075(1).JPG",
-        "images/SW075(2).JPG"
+        "images/SW075(1).jpg",
+        "images/SW075(2).jpg"
       ]
     },
     {
-      "id": "BS013",
-      "name": "BS013",
+      "id": "SE016",
+      "name": "SE016",
       "type": "Sewer",
       "x": -97467.488,
       "y": 2891328.402,
@@ -2417,13 +2405,13 @@
       "images": []
     },
     {
-      "id": "DUMMY_MH",
-      "name": "DUMMY_MH",
+      "id": "SW094",
+      "name": "SW094",
       "type": "Stormwater",
       "x": -97761.384,
       "y": 2891698.376,
       "cover_elev": 1560.91,
-      "depth": 0.0,
+      "depth": 0.65,
       "diameter": 1.0,
       "images": []
     },
@@ -3585,8 +3573,8 @@
       "type": "Sewer",
       "x": -97584.2658,
       "y": 2891588.2655,
-      "cover_elev": 1554.85,
-      "depth": 0.0,
+      "cover_elev": 1556.85,
+      "depth": 3.1,
       "diameter": 1.0,
       "images": []
     },
@@ -3697,18 +3685,6 @@
       "diameter": 1.0,
       "images": [],
       "parent_mh": "SE063"
-    },
-    {
-      "id": "DUMMY_118",
-      "name": "DUMMY_118",
-      "type": "Stormwater",
-      "x": -97658.555,
-      "y": 2891778.28,
-      "cover_elev": 1560.06,
-      "depth": 0.0,
-      "diameter": 1.0,
-      "images": [],
-      "parent_mh": "SW091"
     },
     {
       "id": "DUMMY_119",
@@ -4827,18 +4803,6 @@
       "parent_mh": "SW116"
     },
     {
-      "id": "DUMMY_219",
-      "name": "DUMMY_219",
-      "type": "Stormwater",
-      "x": -97738.574539,
-      "y": 2891632.371511,
-      "cover_elev": 1557.87,
-      "depth": 0.0,
-      "diameter": 1.0,
-      "images": [],
-      "parent_mh": "SW083"
-    },
-    {
       "id": "DUMMY_220",
       "name": "DUMMY_220",
       "type": "Stormwater",
@@ -4875,8 +4839,8 @@
       "parent_mh": "SE030"
     },
     {
-      "id": "DUMMY_224",
-      "name": "DUMMY_224",
+      "id": "SW051",
+      "name": "SW051",
       "type": "Stormwater",
       "x": -97495.157142,
       "y": 2891385.390029,
@@ -4981,6 +4945,42 @@
       "diameter": 1.0,
       "images": [],
       "parent_mh": "SW006"
+    },
+    {
+      "id": "DUMMY_233",
+      "name": "DUMMY_233",
+      "type": "Stormwater",
+      "x": -97787.72033333333,
+      "y": 2891669.0926666665,
+      "cover_elev": 1560.4423333333334,
+      "depth": 0.0,
+      "diameter": 1.0,
+      "images": [],
+      "parent_mh": "SW101"
+    },
+    {
+      "id": "DUMMY_234",
+      "name": "DUMMY_234",
+      "type": "Stormwater",
+      "x": -97782.24166666667,
+      "y": 2891656.908333333,
+      "cover_elev": 1560.6746666666666,
+      "depth": 0.0,
+      "diameter": 1.0,
+      "images": [],
+      "parent_mh": "SW100"
+    },
+    {
+      "id": "DUMMY_235",
+      "name": "DUMMY_235",
+      "type": "Stormwater",
+      "x": -97699.6304,
+      "y": 2891760.8782,
+      "cover_elev": 1559.9035,
+      "depth": 0.0,
+      "diameter": 1.0,
+      "images": [],
+      "parent_mh": "SW113"
     }
   ],
   "pipes": [
@@ -5043,7 +5043,7 @@
       "id": "P047",
       "from_mh": "SE063",
       "to_mh": "SE062",
-      "from_depth": 0.75,
+      "from_depth": 0.7,
       "to_depth": 1.6,
       "diameter_mm": 110.0,
       "diameter_source": "survey_match_high"
@@ -5071,7 +5071,7 @@
       "from_mh": "SE061",
       "to_mh": "SE057",
       "from_depth": 0.0,
-      "to_depth": 2.0,
+      "to_depth": 0.7,
       "diameter_mm": 110.0,
       "diameter_source": "survey_match_medium"
     },
@@ -5080,7 +5080,7 @@
       "from_mh": "SE056",
       "to_mh": "SE057",
       "from_depth": 1.7,
-      "to_depth": 2.0,
+      "to_depth": 0.7,
       "diameter_mm": 160.0,
       "diameter_source": "survey_match_good"
     },
@@ -5116,7 +5116,7 @@
       "from_mh": "SW113",
       "to_mh": "SW112",
       "from_depth": 1.0,
-      "to_depth": 1.0,
+      "to_depth": 3.0,
       "diameter_mm": 500.0,
       "flow_override": true,
       "diameter_source": "survey_match_good"
@@ -5135,7 +5135,7 @@
       "from_mh": "SW092",
       "to_mh": "SW112",
       "from_depth": 3.8,
-      "to_depth": 1.0,
+      "to_depth": 3.0,
       "diameter_mm": 500.0,
       "flow_override": true,
       "diameter_source": "survey_match_good"
@@ -5145,7 +5145,7 @@
       "from_mh": "SW112",
       "to_mh": "SW112",
       "from_depth": 4.2,
-      "to_depth": 1.0,
+      "to_depth": 3.0,
       "diameter_mm": 500.0,
       "diameter_source": "survey_match_good"
     },
@@ -5154,7 +5154,7 @@
       "from_mh": "SW112",
       "to_mh": "SW112",
       "from_depth": 4.2,
-      "to_depth": 1.0,
+      "to_depth": 3.0,
       "diameter_mm": 500.0,
       "diameter_source": "survey_match_good"
     },
@@ -5217,8 +5217,8 @@
       "from_mh": "SW098",
       "to_mh": "SW100",
       "from_depth": 2.3,
-      "to_depth": 0.0,
-      "diameter_mm": 200.0,
+      "to_depth": 2.128,
+      "diameter_mm": 500.0,
       "diameter_source": "survey_match_review"
     },
     {
@@ -5240,21 +5240,11 @@
       "diameter_source": "survey_match_high"
     },
     {
-      "id": "P095",
-      "from_mh": "SW101",
-      "to_mh": "SW100",
-      "from_depth": 0.6,
-      "to_depth": 0.0,
-      "diameter_mm": 600.0,
-      "flow_override": true,
-      "diameter_source": "survey_match_review"
-    },
-    {
       "id": "P099",
       "from_mh": "SW089",
       "to_mh": "SW090",
       "from_depth": 0.0,
-      "to_depth": 3.3,
+      "to_depth": 2.5,
       "diameter_mm": 500.0,
       "diameter_source": "survey_match_medium"
     },
@@ -5273,7 +5263,7 @@
       "from_mh": "SW111",
       "to_mh": "SW110",
       "from_depth": 1.0,
-      "to_depth": 2.2,
+      "to_depth": 1.5,
       "diameter_mm": 400.0,
       "diameter_source": "survey_match_good"
     },
@@ -5282,7 +5272,7 @@
       "from_mh": "SW093",
       "to_mh": "SW110",
       "from_depth": 2.5,
-      "to_depth": 2.2,
+      "to_depth": 1.2,
       "diameter_mm": 500.0,
       "upstreamNode": "SW093",
       "downstreamNode": "SW110",
@@ -5303,7 +5293,7 @@
       "id": "P107",
       "from_mh": "SW112",
       "to_mh": "SW085",
-      "from_depth": 1.0,
+      "from_depth": 4.2,
       "to_depth": 3.7,
       "diameter_mm": 400.0,
       "diameter_source": "survey_match_review"
@@ -5329,9 +5319,9 @@
     {
       "id": "P113",
       "from_mh": "DUMMY_003",
-      "to_mh": "DUMMY_MH",
+      "to_mh": "SW094",
       "from_depth": 0.0,
-      "to_depth": 0.0,
+      "to_depth": 0.65,
       "diameter_mm": 300.0,
       "diameter_source": "survey_match_medium"
     },
@@ -5349,8 +5339,8 @@
       "from_mh": "DUMMY_047",
       "to_mh": "SW047",
       "from_depth": 2.5,
-      "to_depth": 2.5,
-      "diameter_mm": 500.0,
+      "to_depth": 1.3,
+      "diameter_mm": 350.0,
       "diameter_source": "survey_match_low"
     },
     {
@@ -5377,7 +5367,7 @@
       "from_mh": "SW058",
       "to_mh": "SW059",
       "from_depth": 4.6,
-      "to_depth": 0.5,
+      "to_depth": 2.5,
       "diameter_mm": 500.0,
       "diameter_source": "survey_match_medium"
     },
@@ -5395,7 +5385,7 @@
       "from_mh": "SE017",
       "to_mh": "SE035",
       "from_depth": 2.6,
-      "to_depth": 2.4,
+      "to_depth": 1.9,
       "diameter_mm": 300.0,
       "diameter_source": "survey_match_good"
     },
@@ -5403,8 +5393,9 @@
       "id": "P127",
       "from_mh": "DUMMY_028",
       "to_mh": "SW053",
+      "type": "Sewer",
       "from_depth": 2.4,
-      "to_depth": 2.4,
+      "to_depth": 1.3,
       "diameter_mm": 160.0,
       "flow_override": true,
       "diameter_source": "survey_match_medium"
@@ -5414,7 +5405,7 @@
       "from_mh": "DUMMY_026",
       "to_mh": "SW053",
       "from_depth": 2.4,
-      "to_depth": 2.4,
+      "to_depth": 1.3,
       "diameter_mm": 160.0,
       "flow_override": true,
       "diameter_source": "survey_match_medium"
@@ -5434,8 +5425,8 @@
       "from_mh": "DUMMY_027",
       "to_mh": "SW053",
       "from_depth": 2.4,
-      "to_depth": 2.4,
-      "diameter_mm": 160.0,
+      "to_depth": 0.6,
+      "diameter_mm": 300.0,
       "diameter_source": "survey_match_medium"
     },
     {
@@ -5443,8 +5434,8 @@
       "from_mh": "DUMMY_025",
       "to_mh": "SW053",
       "from_depth": 2.4,
-      "to_depth": 2.4,
-      "diameter_mm": 160.0,
+      "to_depth": 2.3,
+      "diameter_mm": 600.0,
       "diameter_source": "survey_match_medium"
     },
     {
@@ -5452,8 +5443,8 @@
       "from_mh": "DUMMY_024",
       "to_mh": "SW053",
       "from_depth": 2.4,
-      "to_depth": 2.4,
-      "diameter_mm": 160.0,
+      "to_depth": 2.3,
+      "diameter_mm": 600.0,
       "diameter_source": "survey_match_medium"
     },
     {
@@ -5508,7 +5499,7 @@
       "to_mh": "DUMMY_031",
       "from_depth": 1.2,
       "to_depth": 1.2,
-      "diameter_mm": 110.0,
+      "diameter_mm": 160.0,
       "diameter_source": "survey_match_good"
     },
     {
@@ -5578,7 +5569,7 @@
       "from_mh": "DUMMY_039",
       "to_mh": "SE027",
       "from_depth": 3.0,
-      "to_depth": 3.0,
+      "to_depth": 1.7,
       "diameter_mm": 160.0,
       "diameter_source": "survey_match_medium"
     },
@@ -5605,7 +5596,7 @@
       "from_mh": "SE028",
       "to_mh": "SE023",
       "from_depth": 2.58,
-      "to_depth": 2.7,
+      "to_depth": 1.6,
       "diameter_mm": 160.0,
       "diameter_source": "survey_match_high"
     },
@@ -5614,7 +5605,7 @@
       "from_mh": "SE020",
       "to_mh": "SE021",
       "from_depth": 1.55,
-      "to_depth": 2.2,
+      "to_depth": 1.8,
       "diameter_mm": 160.0,
       "diameter_source": "survey_match_good"
     },
@@ -5697,7 +5688,7 @@
       "from_mh": "SW077",
       "to_mh": "SW078",
       "from_depth": 1.0,
-      "to_depth": 2.0,
+      "to_depth": 1.1,
       "diameter_mm": 500.0,
       "diameter_source": "survey_match_good"
     },
@@ -5706,7 +5697,7 @@
       "from_mh": "DUMMY_002",
       "to_mh": "SW078",
       "from_depth": 2.0,
-      "to_depth": 2.0,
+      "to_depth": 1.1,
       "diameter_mm": 500.0,
       "diameter_source": "survey_match_medium"
     },
@@ -5768,18 +5759,18 @@
     {
       "id": "P197",
       "from_mh": "SE039",
-      "to_mh": "SE040",
+      "to_mh": "SE048",
       "from_depth": 1.4,
-      "to_depth": 0.0,
+      "to_depth": 2.4,
       "diameter_mm": 160.0,
       "flow_override": true,
       "diameter_source": "survey_match_good"
     },
     {
       "id": "P198",
-      "from_mh": "SE040",
+      "from_mh": "SE048",
       "to_mh": "SE049",
-      "from_depth": 0.0,
+      "from_depth": 2.4,
       "to_depth": 2.9,
       "diameter_mm": 110.0,
       "diameter_source": "survey_match_good"
@@ -5787,9 +5778,9 @@
     {
       "id": "P199",
       "from_mh": "DUMMY_011",
-      "to_mh": "SE040",
+      "to_mh": "SE048",
       "from_depth": 0.33,
-      "to_depth": 0.0,
+      "to_depth": 2.4,
       "diameter_mm": 110.0,
       "flow_override": true,
       "diameter_source": "survey_match_medium"
@@ -5832,17 +5823,17 @@
     },
     {
       "id": "P205",
-      "from_mh": "SE032",
-      "to_mh": "SE029",
-      "from_depth": 1.56,
-      "to_depth": 1.77,
+      "from_mh": "SE029",
+      "to_mh": "SE032",
+      "from_depth": 1.77,
+      "to_depth": 1.56,
       "diameter_mm": 160.0,
       "flow_override": true,
       "diameter_source": "survey_match_high"
     },
     {
       "id": "P206",
-      "from_mh": "BS013",
+      "from_mh": "SE016",
       "to_mh": "SE033",
       "from_depth": 3.28,
       "to_depth": 2.6,
@@ -5872,7 +5863,7 @@
       "from_mh": "SW045",
       "to_mh": "SW018",
       "from_depth": 0.0,
-      "to_depth": 1.7,
+      "to_depth": 1.4,
       "diameter_mm": 500.0,
       "diameter_source": "survey_match_medium"
     },
@@ -5880,7 +5871,7 @@
       "id": "P213",
       "from_mh": "SW036",
       "to_mh": "SW035",
-      "from_depth": 0.0,
+      "from_depth": 0.3,
       "to_depth": 0.4,
       "diameter_mm": 300.0,
       "diameter_source": "survey_match_medium"
@@ -5943,7 +5934,7 @@
       "from_mh": "SE014",
       "to_mh": "SE015",
       "from_depth": 0.0,
-      "to_depth": 0.0,
+      "to_depth": 3.28,
       "diameter_mm": 110.0,
       "flow_override": true
     },
@@ -6119,7 +6110,7 @@
       "from_mh": "DUMMY_059",
       "to_mh": "SW015",
       "from_depth": 1.5,
-      "to_depth": 1.5,
+      "to_depth": 0.4,
       "diameter_mm": 110.0,
       "diameter_source": "survey_match_medium"
     },
@@ -6174,7 +6165,7 @@
       "from_mh": "SW040",
       "to_mh": "SW039",
       "from_depth": 0.88,
-      "to_depth": 1.07,
+      "to_depth": 0.67,
       "diameter_mm": 160.0,
       "diameter_source": "survey_match_good"
     },
@@ -6193,8 +6184,8 @@
       "from_mh": "DUMMY_051",
       "to_mh": "SE004",
       "from_depth": 2.66,
-      "to_depth": 2.66,
-      "diameter_mm": 200.0,
+      "to_depth": 2.5,
+      "diameter_mm": 300.0,
       "diameter_source": "survey_match_medium"
     },
     {
@@ -6202,7 +6193,7 @@
       "from_mh": "DUMMY_049",
       "to_mh": "SE004",
       "from_depth": 2.66,
-      "to_depth": 2.66,
+      "to_depth": 2.4,
       "diameter_mm": 200.0,
       "diameter_source": "survey_match_medium"
     },
@@ -6247,7 +6238,7 @@
       "from_mh": "SW007",
       "to_mh": "SW008",
       "from_depth": 1.6,
-      "to_depth": 0.9,
+      "to_depth": 0.7,
       "diameter_mm": 500.0,
       "diameter_source": "survey_match_good"
     },
@@ -6255,7 +6246,7 @@
       "id": "P264",
       "from_mh": "SW006",
       "to_mh": "SW007",
-      "from_depth": 0.6,
+      "from_depth": 0.8,
       "to_depth": 1.6,
       "diameter_mm": 500.0,
       "diameter_source": "survey_match_good"
@@ -7203,7 +7194,7 @@
       "from_mh": "DUMMY_109",
       "to_mh": "SE046",
       "from_depth": 0.0,
-      "to_depth": 0.0,
+      "to_depth": 2.0,
       "diameter_mm": 160.0,
       "startInvert": 1554.85,
       "endInvert": 1554.85,
@@ -7231,7 +7222,7 @@
       "from_mh": "DUMMY_110",
       "to_mh": "SE046",
       "from_depth": 0.0,
-      "to_depth": 0.0,
+      "to_depth": 2.0,
       "diameter_mm": 160.0,
       "startInvert": 1554.85,
       "endInvert": 1554.85,
@@ -7260,7 +7251,7 @@
       "to_mh": "SE049",
       "from_depth": 0.0,
       "to_depth": 0.7,
-      "diameter_mm": 260.0,
+      "diameter_mm": 110.0,
       "startInvert": 1557.24,
       "endInvert": 1557.24,
       "upstreamNode": null,
@@ -7288,7 +7279,7 @@
       "to_mh": "SE049",
       "from_depth": 0.0,
       "to_depth": 0.6,
-      "diameter_mm": 260.0,
+      "diameter_mm": 110.0,
       "startInvert": 1557.34,
       "endInvert": 1557.34,
       "upstreamNode": null,
@@ -7314,7 +7305,7 @@
       "id": "P313",
       "from_mh": "SW056",
       "to_mh": "DUMMY_113",
-      "from_depth": 0.64,
+      "from_depth": 4.0,
       "to_depth": 0.0,
       "diameter_mm": 3000.0,
       "startInvert": 1556.53,
@@ -7343,7 +7334,7 @@
       "to_mh": "DUMMY_115",
       "from_depth": 0.0,
       "to_depth": 0.0,
-      "diameter_mm": null,
+      "diameter_mm": 110.0,
       "startInvert": 1560.39,
       "endInvert": 1560.37,
       "upstreamNode": "DUMMY_114",
@@ -7369,7 +7360,7 @@
       "to_mh": "DUMMY_116",
       "from_depth": 0.0,
       "to_depth": 0.0,
-      "diameter_mm": null,
+      "diameter_mm": 110.0,
       "startInvert": 1560.37,
       "endInvert": 1560.38,
       "upstreamNode": "DUMMY_116",
@@ -7419,61 +7410,8 @@
       "diameter_source": "survey_match_low"
     },
     {
-      "id": "P317",
-      "from_mh": "DUMMY_118",
-      "to_mh": "SW092",
-      "from_depth": 0.0,
-      "to_depth": 3.298,
-      "diameter_mm": null,
-      "startInvert": 1560.06,
-      "endInvert": 1560.06,
-      "upstreamNode": null,
-      "downstreamNode": null,
-      "layer": "SU_SERV_STORMWATER MANHOLE",
-      "source_pipe_id": "P0058",
-      "geometry": [
-        [
-          -97658.555,
-          2891778.28,
-          1560.06
-        ],
-        [
-          -97659.16,
-          2891770.64,
-          1560.06
-        ]
-      ]
-    },
-    {
-      "id": "P318",
-      "from_mh": "SW090",
-      "to_mh": "DUMMY_118",
-      "from_depth": 3.299,
-      "to_depth": 0.0,
-      "diameter_mm": 500.0,
-      "startInvert": 1560.57,
-      "endInvert": 1560.57,
-      "upstreamNode": null,
-      "downstreamNode": null,
-      "layer": "SU_SERV_STORMWATER MANHOLE",
-      "source_pipe_id": "P0059",
-      "geometry": [
-        [
-          -97657.95,
-          2891785.92,
-          1560.57
-        ],
-        [
-          -97658.555,
-          2891778.28,
-          1560.57
-        ]
-      ],
-      "diameter_source": "survey_match_good"
-    },
-    {
       "id": "P319",
-      "from_mh": "BS013",
+      "from_mh": "SE016",
       "to_mh": "DUMMY_119",
       "from_depth": 3.282,
       "to_depth": 0.0,
@@ -7500,14 +7438,14 @@
     {
       "id": "P320",
       "from_mh": "DUMMY_120",
-      "to_mh": "BS013",
+      "to_mh": "SE016",
       "from_depth": 0.0,
       "to_depth": 3.282,
       "diameter_mm": null,
       "startInvert": 1549.0,
       "endInvert": 1545.87,
       "upstreamNode": "DUMMY_120",
-      "downstreamNode": "BS013",
+      "downstreamNode": "SE016",
       "layer": "SU_SERV_SEWER PIPE",
       "source_pipe_id": "P0061",
       "geometry": [
@@ -7527,7 +7465,7 @@
       "id": "P321",
       "from_mh": "SE046",
       "to_mh": "DUMMY_121",
-      "from_depth": 1.1,
+      "from_depth": 3.1,
       "to_depth": 0.0,
       "diameter_mm": 160.0,
       "startInvert": 1553.75,
@@ -7873,38 +7811,11 @@
       "diameter_source": "survey_match_good"
     },
     {
-      "id": "P338",
-      "from_mh": "DUMMY_144",
-      "to_mh": "DUMMY_145",
-      "from_depth": 0.0,
-      "to_depth": 0.0,
-      "diameter_mm": 400.0,
-      "startInvert": 1563.4372,
-      "endInvert": 1563.309,
-      "upstreamNode": "DUMMY_144",
-      "downstreamNode": "DUMMY_145",
-      "layer": "SU_SERV_STORMWATER MANHOLE",
-      "source_pipe_id": "P0083",
-      "geometry": [
-        [
-          -97651.8036,
-          2891759.0115,
-          1563.4372
-        ],
-        [
-          -97651.7395,
-          2891762.7304,
-          1563.309
-        ]
-      ],
-      "diameter_source": "survey_match_medium"
-    },
-    {
       "id": "P339",
       "from_mh": "SE049",
       "to_mh": "SE046",
-      "from_depth": 0.0,
-      "to_depth": 1.1,
+      "from_depth": 2.9,
+      "to_depth": 2.1,
       "diameter_mm": 260.0,
       "startInvert": 1557.94,
       "endInvert": 1553.75,
@@ -8140,7 +8051,8 @@
           1557.09
         ]
       ],
-      "diameter_source": "survey_match_good"
+      "diameter_source": "survey_match_good",
+      "flow_override": true
     },
     {
       "id": "P348",
@@ -8167,7 +8079,8 @@
           1557.09
         ]
       ],
-      "diameter_source": "survey_match_good"
+      "diameter_source": "survey_match_good",
+      "flow_override": true
     },
     {
       "id": "P349",
@@ -8175,7 +8088,7 @@
       "to_mh": "SE055",
       "from_depth": 1.39,
       "to_depth": 1.2,
-      "diameter_mm": 160.0,
+      "diameter_mm": 110.0,
       "startInvert": 1559.47,
       "endInvert": 1559.47,
       "upstreamNode": null,
@@ -8283,8 +8196,8 @@
       "from_mh": "DUMMY_158",
       "to_mh": "SE052",
       "from_depth": 0.0,
-      "to_depth": 1.2,
-      "diameter_mm": 110.0,
+      "to_depth": 1.0,
+      "diameter_mm": 160.0,
       "startInvert": 1559.49,
       "endInvert": 1559.49,
       "upstreamNode": null,
@@ -8310,7 +8223,7 @@
       "from_mh": "DUMMY_159",
       "to_mh": "SE052",
       "from_depth": 0.0,
-      "to_depth": 1.0,
+      "to_depth": 1.2,
       "diameter_mm": 110.0,
       "startInvert": 1559.69,
       "endInvert": 1559.69,
@@ -8364,7 +8277,7 @@
       "id": "P360",
       "from_mh": "SW112",
       "to_mh": "DUMMY_165",
-      "from_depth": 0.0,
+      "from_depth": 4.2,
       "to_depth": 0.0,
       "diameter_mm": 500.0,
       "startInvert": 1561.98,
@@ -8473,8 +8386,8 @@
       "from_mh": "DUMMY_173",
       "to_mh": "SW104",
       "from_depth": 0.0,
-      "to_depth": 0.0,
-      "diameter_mm": 600.0,
+      "to_depth": 1.2,
+      "diameter_mm": 400.0,
       "startInvert": 1562.1,
       "endInvert": 1561.04,
       "upstreamNode": "DUMMY_173",
@@ -8500,7 +8413,7 @@
       "from_mh": "DUMMY_174",
       "to_mh": "SE046",
       "from_depth": 0.0,
-      "to_depth": 0.1,
+      "to_depth": 2.0,
       "diameter_mm": 160.0,
       "startInvert": 1554.75,
       "endInvert": 1554.75,
@@ -8527,7 +8440,7 @@
       "from_mh": "DUMMY_175",
       "to_mh": "SE046",
       "from_depth": 0.0,
-      "to_depth": 0.0,
+      "to_depth": 2.0,
       "diameter_mm": 160.0,
       "startInvert": 1554.85,
       "endInvert": 1554.85,
@@ -8555,7 +8468,7 @@
       "from_mh": "DUMMY_176",
       "to_mh": "SE046",
       "from_depth": 0.0,
-      "to_depth": 1.1,
+      "to_depth": 2.0,
       "diameter_mm": 160.0,
       "startInvert": 1553.75,
       "endInvert": 1553.75,
@@ -8665,7 +8578,7 @@
       "to_mh": "SW109",
       "from_depth": 0.0,
       "to_depth": 0.8,
-      "diameter_mm": 500.0,
+      "diameter_mm": 160.0,
       "startInvert": 1563.61,
       "endInvert": 1563.61,
       "upstreamNode": null,
@@ -8693,7 +8606,7 @@
       "to_mh": "SW110",
       "from_depth": 0.0,
       "to_depth": 0.5,
-      "diameter_mm": 400.0,
+      "diameter_mm": 160.0,
       "startInvert": 1562.92,
       "endInvert": 1562.92,
       "upstreamNode": null,
@@ -8746,7 +8659,7 @@
       "id": "P381",
       "from_mh": "SE015",
       "to_mh": "DUMMY_120",
-      "from_depth": 0.0,
+      "from_depth": 3.28,
       "to_depth": 0.69,
       "diameter_mm": 300.0,
       "startInvert": 1548.31,
@@ -8826,7 +8739,7 @@
       "id": "P384",
       "from_mh": "SE004",
       "to_mh": "DUMMY_191",
-      "from_depth": 1.45,
+      "from_depth": 2.66,
       "to_depth": 0.0,
       "diameter_mm": 300.0,
       "startInvert": 1558.4,
@@ -8851,14 +8764,14 @@
     },
     {
       "id": "P385",
-      "from_mh": "DUMMY_MH",
+      "from_mh": "SW094",
       "to_mh": "SW078",
       "from_depth": 0.65,
       "to_depth": 1.7,
-      "diameter_mm": 300.0,
+      "diameter_mm": 500.0,
       "startInvert": 1560.26,
       "endInvert": 1560.02,
-      "upstreamNode": "DUMMY_MH",
+      "upstreamNode": "SW094",
       "downstreamNode": "SW078",
       "layer": "SU_SERV_STORMWATER MANHOLE",
       "source_pipe_id": "P0177",
@@ -8908,7 +8821,7 @@
       "from_mh": "DUMMY_193",
       "to_mh": "SE023",
       "from_depth": 0.0,
-      "to_depth": 1.6,
+      "to_depth": 2.7,
       "diameter_mm": 160.0,
       "startInvert": 1553.41,
       "endInvert": 1553.41,
@@ -8962,7 +8875,7 @@
       "from_mh": "DUMMY_195",
       "to_mh": "SW057",
       "from_depth": 1.5,
-      "to_depth": 0.0,
+      "to_depth": 1.5,
       "diameter_mm": 600.0,
       "startInvert": 1555.0369,
       "endInvert": 1555.66,
@@ -9125,8 +9038,8 @@
       "id": "P395",
       "from_mh": "SW074",
       "to_mh": "SW074",
-      "from_depth": 0.45,
-      "to_depth": 0.0,
+      "from_depth": 1.1,
+      "to_depth": 0.7,
       "diameter_mm": 500.0,
       "startInvert": 1563.72,
       "endInvert": 1564.33,
@@ -9179,7 +9092,7 @@
       "id": "P398",
       "from_mh": "SW073",
       "to_mh": "SW109",
-      "from_depth": 0.0,
+      "from_depth": 1.25,
       "to_depth": 2.0,
       "diameter_mm": 500.0,
       "startInvert": 1564.13,
@@ -9372,7 +9285,7 @@
       "id": "P405",
       "from_mh": "SW068",
       "to_mh": "DUMMY_212",
-      "from_depth": 0.45,
+      "from_depth": 0.6,
       "to_depth": 0.0,
       "diameter_mm": 110.0,
       "startInvert": 1563.63,
@@ -9426,7 +9339,7 @@
       "id": "P407",
       "from_mh": "SW063",
       "to_mh": "SW065",
-      "from_depth": 0.0,
+      "from_depth": 1.1,
       "to_depth": 0.9,
       "diameter_mm": 500.0,
       "startInvert": 1562.25,
@@ -9506,11 +9419,11 @@
     },
     {
       "id": "P411",
-      "from_mh": "DUMMY_219",
-      "to_mh": "DUMMY_220",
+      "from_mh": "DUMMY_220",
+      "to_mh": "SW083",
       "from_depth": 0.0,
-      "to_depth": 0.0,
-      "diameter_mm": 600.0,
+      "to_depth": 0.8,
+      "diameter_mm": 400.0,
       "startInvert": 1557.87,
       "endInvert": 1557.87,
       "upstreamNode": null,
@@ -9519,24 +9432,25 @@
       "source_pipe_id": "P0235",
       "geometry": [
         [
-          -97738.5745,
-          2891632.3715,
-          1557.87
-        ],
-        [
           -97738.6637,
           2891636.9186,
           1557.87
+        ],
+        [
+          -97738.5745,
+          2891632.3715,
+          1557.87
         ]
       ],
-      "diameter_source": "survey_match_medium"
+      "diameter_source": "survey_match_medium",
+      "flow_override": true
     },
     {
       "id": "P412",
       "from_mh": "DUMMY_007",
-      "to_mh": "DUMMY_219",
+      "to_mh": "SW083",
       "from_depth": 1.6,
-      "to_depth": 0.8,
+      "to_depth": 1.6,
       "diameter_mm": 300.0,
       "startInvert": 1557.07,
       "endInvert": 1557.07,
@@ -9556,13 +9470,14 @@
           1557.07
         ]
       ],
-      "diameter_source": "survey_match_good"
+      "diameter_source": "survey_match_good",
+      "flow_override": true
     },
     {
       "id": "P413",
       "from_mh": "SW086",
       "to_mh": "SW087",
-      "from_depth": 0.0,
+      "from_depth": 0.8,
       "to_depth": 0.8,
       "diameter_mm": 400.0,
       "startInvert": 1556.33,
@@ -9670,10 +9585,10 @@
     },
     {
       "id": "P417",
-      "from_mh": "SW052",
-      "to_mh": "DUMMY_224",
+      "from_mh": "SW051",
+      "to_mh": "SW052",
       "from_depth": 0.7,
-      "to_depth": 0.0,
+      "to_depth": 0.7,
       "diameter_mm": 500.0,
       "startInvert": 1549.28,
       "endInvert": 1549.28,
@@ -9683,17 +9598,18 @@
       "source_pipe_id": "P0266",
       "geometry": [
         [
-          -97495.3,
-          2891381.39,
-          1549.28
-        ],
-        [
           -97495.1571,
           2891385.39,
           1549.28
+        ],
+        [
+          -97495.3,
+          2891381.39,
+          1549.28
         ]
       ],
-      "diameter_source": "survey_match_low"
+      "diameter_source": "survey_match_low",
+      "flow_override": true
     },
     {
       "id": "P418",
@@ -9861,7 +9777,7 @@
       "id": "P424",
       "from_mh": "SW008",
       "to_mh": "DUMMY_230",
-      "from_depth": 0.4,
+      "from_depth": 0.9,
       "to_depth": 0.0,
       "diameter_mm": 110.0,
       "startInvert": 1564.47,
@@ -9890,7 +9806,7 @@
       "to_mh": "SW037",
       "from_depth": 0.0,
       "to_depth": 0.38,
-      "diameter_mm": 300.0,
+      "diameter_mm": 250.0,
       "startInvert": 1560.01,
       "endInvert": 1560.01,
       "upstreamNode": null,
@@ -10005,14 +9921,14 @@
     {
       "id": "P428",
       "from_mh": "SW075",
-      "to_mh": "SW113",
+      "to_mh": "DUMMY_235",
       "from_depth": 1.1,
       "to_depth": 1.0,
       "diameter_mm": 400.0,
       "startInvert": 1563.32,
-      "endInvert": 1559.72,
+      "endInvert": 1559.9035,
       "upstreamNode": "SW075",
-      "downstreamNode": "SW113",
+      "downstreamNode": "DUMMY_235",
       "geometry": [
         [
           -97707.33,
@@ -10020,13 +9936,101 @@
           1563.32
         ],
         [
-          -97699.22,
-          2891760.09,
-          1559.72
+          -97699.6304,
+          2891760.8782,
+          1559.9035
         ]
       ],
       "flow_override": false,
       "diameter_source": "survey_match_good"
+    },
+    {
+      "id": "P317",
+      "from_mh": "SW090",
+      "to_mh": "SW091",
+      "from_depth": 3.3,
+      "to_depth": 0.0,
+      "diameter_mm": 500.0,
+      "flow_override": true,
+      "diameter_source": "survey_match_good",
+      "geometry": [
+        [
+          -97657.953,
+          2891785.917,
+          1560.569
+        ],
+        [
+          -97659.677,
+          2891773.186,
+          1563.488
+        ]
+      ]
+    },
+    {
+      "id": "P318",
+      "from_mh": "SW091",
+      "to_mh": "SW092",
+      "from_depth": 0.0,
+      "to_depth": 3.3,
+      "diameter_mm": 500.0,
+      "flow_override": true,
+      "diameter_source": "survey_match_good",
+      "geometry": [
+        [
+          -97659.677,
+          2891773.186,
+          1563.488
+        ],
+        [
+          -97659.158,
+          2891770.635,
+          1559.558
+        ]
+      ]
+    },
+    {
+      "id": "P095A",
+      "from_mh": "SW101",
+      "to_mh": "DUMMY_233",
+      "from_depth": 0.6,
+      "to_depth": 0.0,
+      "diameter_mm": 600.0,
+      "flow_override": true,
+      "diameter_source": "survey_match_review",
+      "geometry": [
+        [
+          -97793.199,
+          2891681.277,
+          1560.21
+        ],
+        [
+          -97787.72033333333,
+          2891669.0926666665,
+          1560.4423333333334
+        ]
+      ]
+    },
+    {
+      "id": "P095B",
+      "from_mh": "DUMMY_234",
+      "to_mh": "SW100",
+      "from_depth": 0.0,
+      "to_depth": 2.128,
+      "diameter_mm": 200.0,
+      "flow_override": true,
+      "diameter_source": "survey_match_review",
+      "geometry": [
+        [
+          -97782.24166666667,
+          2891656.908333333,
+          1560.6746666666666
+        ],
+        [
+          -97776.763,
+          2891644.724,
+          1560.907
+        ]
+      ]
     }
   ]
 }
