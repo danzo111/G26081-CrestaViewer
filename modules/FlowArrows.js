@@ -94,8 +94,12 @@ export class FlowArrows {
       // from_mh/to_mh definition as flow direction (skip invert calculation)
       const isDummyPipe = pd.id && pd.id.startsWith('DUMMY_PIPE');
       const hasFlowOverride = pd.flow_override === true;
+      // Dummy nodes have inherited/arbitrary inverts, so a gradient comparison
+      // against them is unreliable — follow the authored from_mh -> to_mh order.
+      const touchesDummy = (pd.from_mh && pd.from_mh.startsWith('DUMMY')) ||
+                           (pd.to_mh && pd.to_mh.startsWith('DUMMY'));
 
-      if (isDummyPipe || hasFlowOverride) {
+      if (isDummyPipe || hasFlowOverride || touchesDummy) {
         // Flow follows the JSON from_mh -> to_mh definition
         start = pd.p1;
         end = pd.p2;
