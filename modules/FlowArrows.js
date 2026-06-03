@@ -26,6 +26,8 @@ export class FlowArrows {
     this.mhLookup = mhLookup;
     this.mesh = null;
     this.visible = false;
+    this.baseScales = [];    // Store per-arrow base scale (from pipe diameter)
+    this.currentZoomScale = 1.0;
     this._buildMesh();
   }
 
@@ -142,9 +144,10 @@ export class FlowArrows {
       const up = new THREE.Vector3(0, 1, 0);
       dummy.quaternion.setFromUnitVectors(up, dir);
 
-      // Scale based on pipe size
-      const scale = Math.min(2.0, Math.max(0.8, pd.rp * 10));
-      dummy.scale.setScalar(scale);
+      // Scale based on pipe size (base scale for this arrow)
+      const baseScale = Math.min(2.0, Math.max(0.8, pd.rp * 10));
+      this.baseScales.push(baseScale);
+      dummy.scale.setScalar(baseScale);
       dummy.updateMatrix();
       this.mesh.setMatrixAt(i, dummy.matrix);
     }
@@ -163,6 +166,33 @@ export class FlowArrows {
   toggle() {
     this.setVisible(!this.visible);
     return this.visible;
+  }
+
+  /**
+   * Apply zoom-based scaling to all arrows while preserving pipe-diameter-based scales.
+   * Rebuilds each instance's matrix with: finalScale = baseScale * zoomFactor
+   * This ensures small-diameter arrows stay proportionally small when zoomed in.
+   */
+  setZoomScale(zoomFactor) {
+    if (!this.mesh || this.baseScales.length === 0) return;
+    this.currentZoomScale = zoomFactor;
+
+    const dummy = new THREE.Object3D();
+    const validPipes = this.pipeData.filter(p => p && p.p1 && p.p2);
+
+    for (let i = 0; i < validPipes.length && i < this.baseScales.length; i++) {
+      this.mesh.getMatrixAt(i, dummy.matrix);
+
+      // Extract position and rotation, apply new scale (base × zoom)
+      dummy.position.setFromMatrixPosition(dummy.matrix);
+      dummy.quaternion.setFromRotationMatrix(dummy.matrix);
+      const finalScale = this.baseScales[i] * zoomFactor;
+      dummy.scale.setScalar(finalScale);
+
+      dummy.updateMatrix();
+      this.mesh.setMatrixAt(i, dummy.matrix);
+    }
+    this.mesh.instanceMatrix.needsUpdate = true;
   }
 
   update(camera) {
