@@ -4214,18 +4214,7 @@
       "images": [],
       "parent_mh": "SW093"
     },
-    {
-      "id": "DUMMY_165",
-      "name": "DUMMY_165",
-      "type": "Stormwater",
-      "x": -97679.41,
-      "y": 2891759.11,
-      "cover_elev": 1561.98,
-      "depth": 0.0,
-      "diameter": 1.0,
-      "images": [],
-      "parent_mh": "TM6021"
-    },
+    
     {
       "id": "DUMMY_166",
       "name": "DUMMY_166",
@@ -5043,7 +5032,7 @@
       "id": "P047",
       "from_mh": "SE063",
       "to_mh": "SE062",
-      "from_depth": 0.7,
+      "from_depth": 0.75,
       "to_depth": 1.6,
       "diameter_mm": 110.0,
       "diameter_source": "survey_match_high"
@@ -5080,7 +5069,7 @@
       "from_mh": "SE056",
       "to_mh": "SE057",
       "from_depth": 1.7,
-      "to_depth": 0.7,
+      "to_depth": 2.0,
       "diameter_mm": 160.0,
       "diameter_source": "survey_match_good"
     },
@@ -5269,14 +5258,13 @@
     },
     {
       "id": "P105",
-      "from_mh": "SW093",
-      "to_mh": "SW110",
-      "from_depth": 2.5,
-      "to_depth": 1.2,
+      "from_mh": "SW110",
+      "to_mh": "SW093",
+      "from_depth": 2.2,
+      "to_depth": 2.5,
       "diameter_mm": 500.0,
       "upstreamNode": "SW093",
       "downstreamNode": "SW110",
-      "flow_override": true,
       "diameter_source": "survey_match_good"
     },
     {
@@ -5358,7 +5346,7 @@
       "to_mh": "SW061",
       "from_depth": 7.8,
       "to_depth": 3.1,
-      "diameter_mm": 0.0,
+      "diameter_mm": 600.0,
       "flow_override": true,
       "diameter_source": "survey_match_review"
     },
@@ -5385,7 +5373,7 @@
       "from_mh": "SE017",
       "to_mh": "SE035",
       "from_depth": 2.6,
-      "to_depth": 1.9,
+      "to_depth": 2.4,
       "diameter_mm": 300.0,
       "diameter_source": "survey_match_good"
     },
@@ -5596,7 +5584,7 @@
       "from_mh": "SE028",
       "to_mh": "SE023",
       "from_depth": 2.58,
-      "to_depth": 1.6,
+      "to_depth": 2.7,
       "diameter_mm": 160.0,
       "diameter_source": "survey_match_high"
     },
@@ -6238,7 +6226,7 @@
       "from_mh": "SW007",
       "to_mh": "SW008",
       "from_depth": 1.6,
-      "to_depth": 0.7,
+      "to_depth": 0.9,
       "diameter_mm": 500.0,
       "diameter_source": "survey_match_good"
     },
@@ -6246,7 +6234,7 @@
       "id": "P264",
       "from_mh": "SW006",
       "to_mh": "SW007",
-      "from_depth": 0.8,
+      "from_depth": 0.6,
       "to_depth": 1.6,
       "diameter_mm": 500.0,
       "diameter_source": "survey_match_good"
@@ -7415,7 +7403,7 @@
       "to_mh": "DUMMY_119",
       "from_depth": 3.282,
       "to_depth": 0.0,
-      "diameter_mm": null,
+      "diameter_mm": 200.0,
       "startInvert": 1545.87,
       "endInvert": 1545.87,
       "upstreamNode": null,
@@ -7441,7 +7429,7 @@
       "to_mh": "SE016",
       "from_depth": 0.0,
       "to_depth": 3.282,
-      "diameter_mm": null,
+      "diameter_mm": 200.0,
       "startInvert": 1549.0,
       "endInvert": 1545.87,
       "upstreamNode": "DUMMY_120",
@@ -7655,7 +7643,7 @@
       "to_mh": "DUMMY_133",
       "from_depth": 0.0,
       "to_depth": 0.0,
-      "diameter_mm": null,
+      "diameter_mm": 160.0,
       "startInvert": 1560.62,
       "endInvert": 1560.62,
       "upstreamNode": null,
@@ -8273,33 +8261,7 @@
       "flow_override": true,
       "diameter_source": "survey_match_good"
     },
-    {
-      "id": "P360",
-      "from_mh": "SW112",
-      "to_mh": "DUMMY_165",
-      "from_depth": 4.2,
-      "to_depth": 0.0,
-      "diameter_mm": 500.0,
-      "startInvert": 1561.98,
-      "endInvert": 1562.62,
-      "upstreamNode": "TM6021",
-      "downstreamNode": "DUMMY_165",
-      "layer": "SU_SERV_STORMWATER MANHOLE",
-      "source_pipe_id": "P0118",
-      "geometry": [
-        [
-          -97679.41,
-          2891759.11,
-          1561.98
-        ],
-        [
-          -97678.69,
-          2891759.07,
-          1562.62
-        ]
-      ],
-      "diameter_source": "survey_match_good"
-    },
+   
     {
       "id": "P361",
       "from_mh": "DUMMY_166",
@@ -9013,7 +8975,7 @@
       "to_mh": "DUMMY_200",
       "from_depth": 1.45,
       "to_depth": 0.0,
-      "diameter_mm": null,
+      "diameter_mm": 500.0,
       "startInvert": 1563.58,
       "endInvert": 1563.58,
       "upstreamNode": null,
@@ -9038,7 +9000,7 @@
       "id": "P395",
       "from_mh": "SW074",
       "to_mh": "SW074",
-      "from_depth": 1.1,
+      "from_depth": 0.45,
       "to_depth": 0.7,
       "diameter_mm": 500.0,
       "startInvert": 1563.72,
