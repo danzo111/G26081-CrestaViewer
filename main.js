@@ -335,7 +335,8 @@ class NetworkViewerApp {
         type: 'manhole',
         index: i,
         manholeId: mh.id,
-        baseScale: new THREE.Vector3(30, 30, 1)
+        isSewer,
+        baseScale: new THREE.Vector3(21, 21, 1)   // 30 × 0.7 = 21
       };
       dotSprite.scale.copy(dotSprite.userData.baseScale);
       dotSprite.name = `map_mh_${i}`;
@@ -377,7 +378,8 @@ class NetworkViewerApp {
       const labelSprite = new THREE.Sprite(labelMaterial);
       labelSprite.position.set(pos.x, pos.y + 2.0, pos.z);
       labelSprite.userData = {
-        baseScale: new THREE.Vector3(48, 15, 1)
+        isSewer,
+        baseScale: new THREE.Vector3(34, 11, 1)   // 48×15 × 0.7
       };
       labelSprite.scale.copy(labelSprite.userData.baseScale);
       labelSprite.visible = false;
@@ -864,8 +866,12 @@ class NetworkViewerApp {
       <div class="map-layers">
         <div class="map-legend-title">Layers</div>
         <label class="map-layer-item">
-          <input type="checkbox" id="map-layer-mh" checked>
-          <span>Manholes</span>
+          <input type="checkbox" id="map-layer-mh-sewer" checked>
+          <span style="color:#E87722;">● Sewer Manholes</span>
+        </label>
+        <label class="map-layer-item">
+          <input type="checkbox" id="map-layer-mh-storm" checked>
+          <span style="color:#00D4FF;">● Stormwater Manholes</span>
         </label>
         <label class="map-layer-item">
           <input type="checkbox" id="map-layer-sewer" checked data-toggle="pipes" data-type="sewer">
@@ -874,10 +880,6 @@ class NetworkViewerApp {
         <label class="map-layer-item">
           <input type="checkbox" id="map-layer-storm" checked data-toggle="pipes" data-type="storm">
           <span style="color:#4A90D9;">● Stormwater Pipes</span>
-        </label>
-        <label class="map-layer-item">
-          <input type="checkbox" id="map-layer-flow" checked>
-          <span>Flow Arrows</span>
         </label>
         <label class="map-layer-item">
           <input type="checkbox" id="map-layer-basemap" checked>
@@ -936,12 +938,17 @@ class NetworkViewerApp {
       if (e.key === 'Enter') doSearch();
     });
 
-    // Map layer toggles
-    document.getElementById('map-layer-mh')?.addEventListener('change', (e) => {
+    // Separate manhole layer toggles — sewer and stormwater
+    const updateManholeVisibility = () => {
+      const sewerOn = document.getElementById('map-layer-mh-sewer')?.checked ?? true;
+      const stormOn = document.getElementById('map-layer-mh-storm')?.checked ?? true;
       this.mapManholeSprites.forEach(s => {
-        if (s.name?.startsWith('map_mh_')) s.visible = e.target.checked;
+        const on = s.userData.isSewer ? sewerOn : stormOn;
+        s.visible = on;
       });
-    });
+    };
+    document.getElementById('map-layer-mh-sewer')?.addEventListener('change', updateManholeVisibility);
+    document.getElementById('map-layer-mh-storm')?.addEventListener('change', updateManholeVisibility);
 
     // Separate toggles for sewer and stormwater pipes (also gate their flow viz)
     const updatePipeVisibility = () => {
@@ -956,11 +963,6 @@ class NetworkViewerApp {
     };
     document.getElementById('map-layer-sewer')?.addEventListener('change', updatePipeVisibility);
     document.getElementById('map-layer-storm')?.addEventListener('change', updatePipeVisibility);
-
-    document.getElementById('map-layer-flow')?.addEventListener('change', (e) => {
-      this._flowOn = e.target.checked;
-      this._applyFlowVisibility();
-    });
 
     document.getElementById('map-layer-basemap')?.addEventListener('change', (e) => {
       if (this.basemapMesh) this.basemapMesh.visible = e.target.checked;
