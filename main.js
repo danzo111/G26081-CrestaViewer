@@ -78,28 +78,28 @@ class NetworkViewerApp {
 
   async init() {
     try {
-      this.ui.setProgress(5, 'Please be patient. It is a large map, so it could take a minute or two...');
+      this.ui.setProgress(5, 'Starting up...');
       await this._yieldFrame();
 
       this.sceneManager = new SceneManager('viewport');
 
-      this.ui.setProgress(15, 'Please be patient. It is a large map, so it could take a minute or two...');
+      this.ui.setProgress(15, 'Loading network data...');
       const networkData = await dataLoader.loadNetworkData('network.json');
 
-      this.ui.setProgress(30, 'Please be patient. It is a large map, so it could take a minute or two...');
+      this.ui.setProgress(30, `Found ${networkData.manholes.length} manholes and ${networkData.pipes.length} pipes...`);
       await this._yieldFrame();
       this.coordSystem = new CoordinateSystem(networkData);
       this.ui.setCRSLabel(this.coordSystem.getCRSLabel());
 
-      this.ui.setProgress(32, 'Please be patient. It is a large map, so it could take a minute or two...');
+      this.ui.setProgress(32, 'Indexing manholes for search...');
       await this._yieldFrame();
       this.searchIndex = new SearchIndex(networkData, this.coordSystem);
 
-      this.ui.setProgress(35, 'Please be patient. It is a large map, so it could take a minute or two...');
+      this.ui.setProgress(35, 'Mapping water-flow connections...');
       await this._yieldFrame();
       this._buildNetworkGraph(networkData);
 
-      this.ui.setProgress(40, 'Please be patient. It is a large map, so it could take a minute or two...');
+      this.ui.setProgress(40, 'Building manholes & pipes...');
       await this._yieldFrame();
       this.geometryBuilder = new GeometryBuilder(this.sceneManager, this.coordSystem);
 
@@ -113,17 +113,17 @@ class NetworkViewerApp {
         appState.mhLookup
       );
 
-      this.ui.setProgress(60, 'Please be patient. It is a large map, so it could take a minute or two...');
+      this.ui.setProgress(60, 'Loading aerial basemap...');
       await this._yieldFrame();
       this.groundObjects = this.geometryBuilder.buildGround();
       this.geometryBuilder.buildDropLines(networkData.manholes);
       await this._loadBasemap();
 
-      this.ui.setProgress(70, 'Please be patient. It is a large map, so it could take a minute or two...');
+      this.ui.setProgress(70, 'Preparing the map view...');
       await this._yieldFrame();
       this._buildMapView(networkData);
 
-      this.ui.setProgress(80, 'Please be patient. It is a large map, so it could take a minute or two...');
+      this.ui.setProgress(80, 'Enabling clicks & search...');
       await this._yieldFrame();
       this.raycaster = new RaycasterManager(
         this.sceneManager.camera,
@@ -139,7 +139,7 @@ class NetworkViewerApp {
       this._setupViewToggle();
       this._setupHelpModal();
 
-      this.ui.setProgress(90, 'Please be patient. It is a large map, so it could take a minute or two...');
+      this.ui.setProgress(90, 'Framing the site...');
       await this._yieldFrame();
       const box = this.coordSystem.computeBoundingBox(networkData.manholes);
       this.sceneManager.frameCamera(box, 0.5);
@@ -147,7 +147,7 @@ class NetworkViewerApp {
       // Set up map camera position
       this._setupMapCamera(box);
 
-      this.ui.setProgress(100, 'Please be patient. It is a large map, so it could take a minute or two...');
+      this.ui.setProgress(100, 'Ready!');
       await this._yieldFrame();
       await this._yieldFrame();
       this.ui.hideLoading();
@@ -1254,21 +1254,29 @@ class NetworkViewerApp {
   // ── Rest of existing methods (preserved) ──
 
   async _loadBasemap() {
-    try {
-      const textureLoader = new THREE.TextureLoader();
-      const texture = await new Promise((resolve, reject) => {
-        textureLoader.load(
-          'basemap.png',
-          (tex) => resolve(tex),
-          undefined,
-          (err) => reject(new Error(`Basemap load failed: ${err.message}`))
-        );
-      });
-      this.basemapMesh = this.geometryBuilder.buildBasemap(texture);
-    } catch (error) {
-      appState.addError(error.message, 'Basemap');
-      console.warn('Basemap not loaded — continuing without it');
+    // Prefer the optimised JPEG (~3 MB, ≤4096px); fall back to the original PNG.
+    const sources = ['basemap.jpg', 'basemap.png'];
+    const textureLoader = new THREE.TextureLoader();
+
+    for (const src of sources) {
+      try {
+        const texture = await new Promise((resolve, reject) => {
+          textureLoader.load(
+            src,
+            (tex) => resolve(tex),
+            undefined,
+            () => reject(new Error(`Basemap load failed: ${src}`))
+          );
+        });
+        this.basemapMesh = this.geometryBuilder.buildBasemap(texture);
+        return;
+      } catch (error) {
+        // Try the next source before giving up.
+      }
     }
+
+    appState.addError('Basemap not loaded — continuing without it', 'Basemap');
+    console.warn('Basemap not loaded — continuing without it');
   }
 
   _yieldFrame() {
