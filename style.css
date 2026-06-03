@@ -1646,8 +1646,6 @@ body.measure-active #viewport { cursor: crosshair; }
   display: none;
   flex-direction: column;
   gap: 14px;
-  max-height: calc(100vh - 80px);
-  overflow-y: auto;
 }
 #map-controls.visible {
   display: flex;
