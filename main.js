@@ -52,6 +52,12 @@ class NetworkViewerApp {
     this.mapUpstreamHighlights = [];
     this.mapDownstreamHighlights = [];
     this.mapSelectedManhole = null;
+    this.mapFlowRibbons = [];        // animated marching-chevron flow overlays
+    this._chevronCanvas = null;      // shared chevron canvas (one CanvasTexture per pipe)
+    this._flowOn = false;            // flow visualization on/off
+    this._sewerOn = true;            // pipe-type visibility (for flow gating)
+    this._stormOn = true;
+    this._flowLastT = 0;             // for frame-rate-independent animation
 
     // Network graph for tracing
     this.outgoingGraph = new Map();
@@ -449,7 +455,11 @@ class NetworkViewerApp {
         flowDir = fromInvert >= toInvert ? dir : dir.clone().negate();
       }
 
-      const arrowSize = 4.0;
+      // Size the arrow to sit WITHIN the pipe band (pipe tube radius is 0.6, so
+      // full width 1.2 m). Half-width = 0.35*size must stay < 0.6 → size ≤ ~1.4.
+      // Because both arrow and pipe are world-space, this keeps the arrow inside
+      // the pipe at every zoom level instead of ballooning when zoomed in.
+      const arrowSize = 1.4;
       const tip   = mid.clone().add(flowDir.clone().multiplyScalar(arrowSize * 0.6));
       const left  = mid.clone().add(perp.clone().multiplyScalar(arrowSize * 0.35)).sub(flowDir.clone().multiplyScalar(arrowSize * 0.4));
       const right = mid.clone().sub(perp.clone().multiplyScalar(arrowSize * 0.35)).sub(flowDir.clone().multiplyScalar(arrowSize * 0.4));
@@ -476,8 +486,49 @@ class NetworkViewerApp {
       arrowMesh.visible = false;
       arrowMesh.name = `map_flow_${i}`;
       arrowMesh.renderOrder = 600;
+      arrowMesh.userData = { isStormwater };
       scene.add(arrowMesh);
       this.mapFlowArrows.push(arrowMesh);
+
+      // ── Animated flow ribbon: marching chevrons along the pipe, pointing
+      //    downstream. Sits within the pipe band and reads clearly in dense areas. ──
+      const goesP1toP2 = flowDir.dot(dir) >= 0;
+      const uPt = goesP1toP2 ? p1 : p2;   // upstream
+      const dPt = goesP1toP2 ? p2 : p1;   // downstream
+      const ribLen = uPt.distanceTo(dPt);
+      if (ribLen > 0.05) {
+        const halfW = 0.45;               // within pipe (tube radius 0.6)
+        const fd = new THREE.Vector3().subVectors(dPt, uPt).normalize();
+        const pp = new THREE.Vector3(-fd.z, 0, fd.x).normalize();
+        const yL = 0.5;                   // slight lift; depthTest off keeps it on top
+        const a = new THREE.Vector3(uPt.x + pp.x * halfW, uPt.y + yL, uPt.z + pp.z * halfW);
+        const b = new THREE.Vector3(uPt.x - pp.x * halfW, uPt.y + yL, uPt.z - pp.z * halfW);
+        const c = new THREE.Vector3(dPt.x - pp.x * halfW, dPt.y + yL, dPt.z - pp.z * halfW);
+        const e = new THREE.Vector3(dPt.x + pp.x * halfW, dPt.y + yL, dPt.z + pp.z * halfW);
+        const repeatX = Math.max(1, Math.round(ribLen / 4));  // one chevron ≈ every 4 m
+        const ribGeo = new THREE.BufferGeometry();
+        ribGeo.setAttribute('position', new THREE.Float32BufferAttribute([
+          a.x, a.y, a.z, b.x, b.y, b.z, c.x, c.y, c.z, e.x, e.y, e.z
+        ], 3));
+        ribGeo.setAttribute('uv', new THREE.Float32BufferAttribute([0, 1, 0, 0, 1, 0, 1, 1], 2));
+        ribGeo.setIndex([0, 1, 2, 0, 2, 3]);
+        if (!this._chevronCanvas) this._chevronCanvas = this._makeChevronCanvas();
+        const tex = new THREE.CanvasTexture(this._chevronCanvas);
+        tex.wrapS = THREE.RepeatWrapping;
+        tex.wrapT = THREE.ClampToEdgeWrapping;
+        tex.minFilter = THREE.LinearFilter;
+        tex.magFilter = THREE.LinearFilter;
+        tex.repeat.set(repeatX, 1);
+        const ribMat = new THREE.MeshBasicMaterial({
+          map: tex, transparent: true, depthTest: false, depthWrite: false, side: THREE.DoubleSide
+        });
+        const ribMesh = new THREE.Mesh(ribGeo, ribMat);
+        ribMesh.name = `map_flowribbon_${i}`;
+        ribMesh.renderOrder = 650;
+        ribMesh.visible = false;
+        scene.add(ribMesh);
+        this.mapFlowRibbons.push({ mesh: ribMesh, tex, isStormwater });
+      }
     });
 
     // ── Highlight meshes (upstream/downstream) ──
@@ -597,7 +648,10 @@ class NetworkViewerApp {
 
     const flowToggle = document.getElementById('flow-toggle');
     const showFlow = flowToggle?.classList.contains('active');
-    this.mapFlowArrows.forEach(a => a.visible = showFlow);
+    this._flowOn = !!showFlow;
+    this._sewerOn = document.getElementById('map-layer-sewer')?.checked ?? true;
+    this._stormOn = document.getElementById('map-layer-storm')?.checked ?? true;
+    this._applyFlowVisibility();
 
     // Switch camera
     this.sceneManager.camera = this.mapCamera;
@@ -814,8 +868,12 @@ class NetworkViewerApp {
           <span>Manholes</span>
         </label>
         <label class="map-layer-item">
-          <input type="checkbox" id="map-layer-pipes" checked>
-          <span>Pipes</span>
+          <input type="checkbox" id="map-layer-sewer" checked data-toggle="pipes" data-type="sewer">
+          <span style="color:#D4880F;">● Sewer Pipes</span>
+        </label>
+        <label class="map-layer-item">
+          <input type="checkbox" id="map-layer-storm" checked data-toggle="pipes" data-type="storm">
+          <span style="color:#4A90D9;">● Stormwater Pipes</span>
         </label>
         <label class="map-layer-item">
           <input type="checkbox" id="map-layer-flow" checked>
@@ -885,12 +943,23 @@ class NetworkViewerApp {
       });
     });
 
-    document.getElementById('map-layer-pipes')?.addEventListener('change', (e) => {
-      this.mapPipeLines.forEach(p => { p.line.visible = e.target.checked; if (p.hitMesh) p.hitMesh.visible = e.target.checked; });
-    });
+    // Separate toggles for sewer and stormwater pipes (also gate their flow viz)
+    const updatePipeVisibility = () => {
+      this._sewerOn = document.getElementById('map-layer-sewer')?.checked ?? true;
+      this._stormOn = document.getElementById('map-layer-storm')?.checked ?? true;
+      this.mapPipeLines.forEach(p => {
+        const isVisible = p.isStormwater ? this._stormOn : this._sewerOn;
+        p.line.visible = isVisible;
+        if (p.hitMesh) p.hitMesh.visible = isVisible;
+      });
+      this._applyFlowVisibility();   // keep arrows/ribbons in sync with pipe types
+    };
+    document.getElementById('map-layer-sewer')?.addEventListener('change', updatePipeVisibility);
+    document.getElementById('map-layer-storm')?.addEventListener('change', updatePipeVisibility);
 
     document.getElementById('map-layer-flow')?.addEventListener('change', (e) => {
-      this.mapFlowArrows.forEach(a => a.visible = e.target.checked);
+      this._flowOn = e.target.checked;
+      this._applyFlowVisibility();
     });
 
     document.getElementById('map-layer-basemap')?.addEventListener('change', (e) => {
@@ -1424,15 +1493,16 @@ class NetworkViewerApp {
 
       newBtn.addEventListener('click', () => {
         const on = this.flowArrows?.toggle();
-        // Also toggle map flow arrows
-        this.mapFlowArrows.forEach(a => a.visible = on);
+        this._flowOn = !!on;
+        this._applyFlowVisibility();   // arrows + animated ribbons
         newBtn.textContent = on ? 'Hide Flow Direction' : 'Toggle Flow Direction';
         newBtn.classList.toggle('active', on);
       });
     } else {
       btn.addEventListener('click', () => {
         const on = this.flowArrows?.toggle();
-        this.mapFlowArrows.forEach(a => a.visible = on);
+        this._flowOn = !!on;
+        this._applyFlowVisibility();
         btn.textContent = on ? 'Hide Flow Direction' : 'Toggle Flow Direction';
         btn.classList.toggle('active', on);
       });
@@ -1586,6 +1656,7 @@ class NetworkViewerApp {
 
     if (!this.mapMode) {
       this.flowArrows?.update(this.sceneManager.camera);
+      this._updateZoomScaling();  // Dynamic scaling for arrows and symbols
 
       const droplines = this.sceneManager.scene.getObjectByName('droplines');
       if (droplines) {
@@ -1593,12 +1664,45 @@ class NetworkViewerApp {
         droplines.visible = dist < 300;
       }
     } else {
-      // Scale map sprites inversely with orthographic zoom so they don't overlap when zoomed in
+      // Scale map sprites for constant screen size + declutter labels
       this._updateMapSpriteZoom();
+      // March the animated flow chevrons along each pipe
+      this._animateFlowRibbons();
     }
 
     this.sceneManager.render();
     this.ui.updateFPS();
+  }
+
+  /**
+   * Dynamic scaling for 3D view: as camera zooms in (gets closer), arrows and
+   * symbols get smaller (but never vanishingly small) so they don't overlap and
+   * block detail. As you zoom out, they get larger for visibility.
+   *
+   * Scaling formula: base scale × (1 / sqrt(cameraDistance))
+   * This gives a gentle non-linear scaling: at 100m scale=1.0, at 10m scale≈0.3
+   */
+  _updateZoomScaling() {
+    if (!this.sceneManager || !this.sceneManager.camera) return;
+
+    const camera = this.sceneManager.camera;
+    const target = this.sceneManager.controls?.target || new THREE.Vector3(0, 0, 0);
+    const dist = camera.position.distanceTo(target);
+
+    // Scale factor based on distance: gets smaller as you zoom in (smaller dist = smaller scale)
+    // Using sqrt for gentler scaling; clamp to 0.2–1.5 range to avoid extremes
+    const scaleFactor = Math.max(0.2, Math.min(1.5, Math.sqrt(dist / 100)));
+
+    // Scale flow arrows via dedicated method (handles InstancedMesh properly)
+    this.flowArrows?.setZoomScale(scaleFactor);
+
+    // Scale manhole symbols (the cylinder-covers in 3D)
+    if (this.sceneManager.geometryBuilder?.iCoversSewer) {
+      this.sceneManager.geometryBuilder.iCoversSewer.scale.setScalar(scaleFactor);
+    }
+    if (this.sceneManager.geometryBuilder?.iCoversStorm) {
+      this.sceneManager.geometryBuilder.iCoversStorm.scale.setScalar(scaleFactor);
+    }
   }
 
   /**
@@ -1619,6 +1723,56 @@ class NetworkViewerApp {
       const base = sprite.userData.baseScale;
       sprite.scale.set(base.x * scaleFactor, base.y * scaleFactor, base.z);
     }
+  }
+
+  /**
+   * Build a 64×64 chevron canvas (">" pointing toward +U). A fresh CanvasTexture
+   * is created per pipe from this shared canvas, then repeated/scrolled to animate.
+   */
+  _makeChevronCanvas() {
+    const cv = document.createElement('canvas');
+    cv.width = 64; cv.height = 64;
+    const ctx = cv.getContext('2d');
+    ctx.clearRect(0, 0, 64, 64);
+    ctx.lineCap = 'round';
+    ctx.lineJoin = 'round';
+    const chevron = (color, lw) => {
+      ctx.strokeStyle = color;
+      ctx.lineWidth = lw;
+      ctx.beginPath();
+      ctx.moveTo(22, 14);
+      ctx.lineTo(46, 32);
+      ctx.lineTo(22, 50);
+      ctx.stroke();
+    };
+    chevron('rgba(13,30,53,0.95)', 17);    // dark halo for contrast on any pipe
+    chevron('rgba(255,255,255,0.98)', 9);  // bright white core
+    return cv;
+  }
+
+  /** Scroll each visible flow ribbon's texture so the chevrons march downstream. */
+  _animateFlowRibbons() {
+    if (!this.mapFlowRibbons.length) return;
+    const now = performance.now();
+    const dt = this._flowLastT ? Math.min((now - this._flowLastT) / 1000, 0.1) : 0;
+    this._flowLastT = now;
+    const speed = 0.45;   // texture tiles per second (≈ 0.45 × 4 m ≈ 1.8 m/s)
+    for (const r of this.mapFlowRibbons) {
+      if (!r.mesh.visible) continue;
+      r.tex.offset.x = (r.tex.offset.x - speed * dt) % 1;
+    }
+  }
+
+  /** Apply flow visibility: a flow arrow/ribbon shows only if flow is on AND its
+   *  pipe type is currently visible. Single source of truth for both. */
+  _applyFlowVisibility() {
+    const typeOn = (storm) => (storm ? this._stormOn : this._sewerOn);
+    this.mapFlowArrows.forEach(a => {
+      a.visible = this._flowOn && typeOn(a.userData?.isStormwater);
+    });
+    this.mapFlowRibbons.forEach(r => {
+      r.mesh.visible = this._flowOn && typeOn(r.isStormwater);
+    });
   }
 
   _handleFatalError(error) {
