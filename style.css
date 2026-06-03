@@ -1920,3 +1920,161 @@ body.measure-active #viewport { cursor: crosshair; }
   max-height: calc(100vh - 80px);
   overflow-y: auto;
 }
+
+/* ═══════════════════════════════════════════════════════════════════
+   MAP VIEW — Mall-Manager Friendly Restyle
+   Scoped to Map View only (#popup.map-mode + #map-controls) so the
+   3D engineer view keeps its technical monospace look untouched.
+   Goal: visually appealing · easy to use · easy to understand.
+   Same data — friendlier typography, spacing, hierarchy & tap targets.
+   ═══════════════════════════════════════════════════════════════════ */
+
+/* ── Popup card: softer, more inviting ────────────────────────────── */
+#popup.map-mode .popup-card {
+  border-radius: 16px;
+  box-shadow: 0 14px 44px rgba(0, 0, 0, 0.5);
+}
+
+/* ── Header & title: clean sans, friendly pill tag ────────────────── */
+#popup.map-mode .popup-header {
+  padding: 16px 22px 12px;
+}
+#popup.map-mode .type-tag {
+  font-family: var(--sans);
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.8px;
+  padding: 6px 14px;
+  border-radius: 999px;          /* rounded pill — approachable */
+}
+#popup.map-mode .popup-title {
+  font-family: var(--sans);      /* clean & modern, not a serif headline */
+  font-size: 26px;
+  font-weight: 700;
+  letter-spacing: 0;
+  padding: 14px 22px 14px;
+}
+
+/* ── Data rows: readable sans, natural-case labels, more air ──────── */
+#popup.map-mode .popup-row {
+  padding: 14px 22px;
+  align-items: center;
+}
+#popup.map-mode .popup-label {
+  font-family: var(--sans);
+  font-size: 14px;
+  font-weight: 400;
+  letter-spacing: 0;
+  text-transform: none;          /* "Cover Elev." not "COVER ELEV." */
+  color: var(--text-dim);
+}
+#popup.map-mode .popup-value {
+  font-family: var(--sans);
+  font-size: 18px;
+  font-weight: 600;
+  letter-spacing: 0;
+}
+
+/* ── Photo gallery: rounder, friendlier captions ──────────────────── */
+#popup.map-mode .img-item img {
+  border-radius: 12px;
+}
+#popup.map-mode .img-label {
+  font-family: var(--sans);
+  font-size: 13px;
+}
+
+/* ── Network trace: the "where does the water go?" story, front & centre */
+#popup.map-mode .trace-legend {
+  background: linear-gradient(180deg, rgba(46, 204, 113, 0.06), rgba(231, 76, 60, 0.06));
+  border-radius: 14px;
+  padding: 18px 20px;
+}
+#popup.map-mode .trace-legend-title {
+  font-family: var(--sans);
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 0.8px;
+  margin-bottom: 14px;
+}
+#popup.map-mode .trace-legend-row {
+  font-family: var(--sans);
+  font-size: 15px;
+  gap: 12px;
+}
+#popup.map-mode .trace-dot {
+  width: 16px;
+  height: 16px;
+  box-shadow: 0 0 0 4px rgba(255, 255, 255, 0.06);
+}
+#popup.map-mode .trace-count {
+  font-family: var(--sans);
+  font-size: 13px;
+  font-weight: 600;
+}
+#popup.map-mode .trace-legend-note {
+  font-family: var(--sans);
+  font-size: 13px;
+  font-style: normal;            /* italic reads as fine-print; keep it plain */
+}
+
+/* ── Buttons inside popup (e.g. pipe elevation profile) ───────────── */
+#popup.map-mode .profile-btn {
+  font-family: var(--sans);
+  font-size: 14px;
+  font-weight: 600;
+  letter-spacing: 0.3px;
+  text-transform: none;
+  border-radius: 10px;
+  padding: 12px 16px;
+}
+
+/* ── Controls panel: softer card, more breathing room ─────────────── */
+#map-controls {
+  border-radius: 16px;
+  padding: 18px;
+  box-shadow: 0 14px 44px rgba(0, 0, 0, 0.45);
+}
+
+/* Search: friendly rounded field, bigger tap target */
+#map-controls .map-search input {
+  font-family: var(--sans);
+  font-size: 15px;
+  padding: 11px 14px;
+  border-radius: 10px;
+}
+#map-controls .map-search button {
+  border-radius: 10px;
+  padding: 0 14px;
+  font-size: 16px;
+}
+
+/* Legend & layers: friendly sans, roomier, finger-friendly checkboxes */
+#map-controls .map-legend-title {
+  font-family: var(--sans);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 1.2px;
+}
+#map-controls .map-legend-item,
+#map-controls .map-layer-item {
+  font-family: var(--sans);
+  font-size: 14px;
+  margin-bottom: 11px;
+}
+#map-controls .map-layer-item {
+  padding: 3px 0;                /* taller hit area for touch */
+}
+#map-controls .map-layer-item input[type="checkbox"] {
+  width: 18px;
+  height: 18px;
+}
+
+/* Hint: friendly callout */
+#map-controls .map-hint {
+  font-family: var(--sans);
+  font-size: 13px;
+  line-height: 1.6;
+  border-radius: 10px;
+  padding: 13px 15px;
+}
