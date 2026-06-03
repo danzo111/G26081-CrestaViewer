@@ -26,7 +26,7 @@ import { UIManager } from './modules/UIManager.js';
 import { SearchIndex } from './modules/SearchIndex.js';
 import { FlowArrows } from './modules/FlowArrows.js';
 import { DataTable } from './modules/DataTable.js';
-import { HelpModal } from './modules/HelpModal.js';
+import { Walkthrough } from './modules/Walkthrough.js';
 
 class NetworkViewerApp {
   constructor() {
@@ -1518,8 +1518,9 @@ class NetworkViewerApp {
   }
 
   _setupHelpModal() {
-    this.helpModal = new HelpModal();
-    setTimeout(() => this.helpModal.maybeAutoShow(), 1200);
+    // Optional guided walkthrough (welcome card + spotlight tour).
+    this.helpModal = new Walkthrough();
+    setTimeout(() => this.helpModal.maybeAutoShowWelcome(), 700);
   }
 
   _flyToManhole(index) {
