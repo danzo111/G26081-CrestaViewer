@@ -5645,16 +5645,6 @@
       "diameter": 1.0
     },
     {
-      "id": "DUMMY_238",
-      "name": "DUMMY_238",
-      "type": "Stormwater",
-      "x": -97251.013,
-      "y": 2891649.527,
-      "cover_elev": 1564.34,
-      "depth": 0.0,
-      "diameter": 1.0
-    },
-    {
       "id": "DUMMY_239",
       "name": "DUMMY_239",
       "type": "Stormwater",
@@ -5715,16 +5705,6 @@
       "diameter": 1.0
     },
     {
-      "id": "DUMMY_245",
-      "name": "DUMMY_245",
-      "type": "Stormwater",
-      "x": -97300.649,
-      "y": 2891650.156,
-      "cover_elev": 1565.48,
-      "depth": 0.0,
-      "diameter": 1.0
-    },
-    {
       "id": "DUMMY_246",
       "name": "DUMMY_246",
       "type": "Stormwater",
@@ -5761,16 +5741,6 @@
       "x": -97312.408,
       "y": 2891734.267,
       "cover_elev": 1565.432,
-      "depth": 0.0,
-      "diameter": 1.0
-    },
-    {
-      "id": "DUMMY_250",
-      "name": "DUMMY_250",
-      "type": "Stormwater",
-      "x": -97320.036,
-      "y": 2891738.341,
-      "cover_elev": 1565.351,
       "depth": 0.0,
       "diameter": 1.0
     },
@@ -5845,36 +5815,6 @@
       "diameter": 1.0
     },
     {
-      "id": "DUMMY_258",
-      "name": "DUMMY_258",
-      "type": "Stormwater",
-      "x": -97371.15,
-      "y": 2891856.87,
-      "cover_elev": 1566.78,
-      "depth": 0.0,
-      "diameter": 1.0
-    },
-    {
-      "id": "DUMMY_259",
-      "name": "DUMMY_259",
-      "type": "Stormwater",
-      "x": -97370.55,
-      "y": 2891857.28,
-      "cover_elev": 1566.78,
-      "depth": 0.0,
-      "diameter": 1.0
-    },
-    {
-      "id": "DUMMY_260",
-      "name": "DUMMY_260",
-      "type": "Stormwater",
-      "x": -97372.128,
-      "y": 2891843.896,
-      "cover_elev": 1565.03,
-      "depth": 0.0,
-      "diameter": 1.0
-    },
-    {
       "id": "DUMMY_261",
       "name": "DUMMY_261",
       "type": "Stormwater",
@@ -5901,16 +5841,6 @@
       "x": -97396.215,
       "y": 2891825.411,
       "cover_elev": 1566.32,
-      "depth": 0.0,
-      "diameter": 1.0
-    },
-    {
-      "id": "DUMMY_264",
-      "name": "DUMMY_264",
-      "type": "Sewer",
-      "x": -97406.973,
-      "y": 2891569.073,
-      "cover_elev": 1559.44,
       "depth": 0.0,
       "diameter": 1.0
     },
@@ -6011,16 +5941,6 @@
       "x": -97491.272,
       "y": 2891587.263,
       "cover_elev": 1554.409,
-      "depth": 0.0,
-      "diameter": 1.0
-    },
-    {
-      "id": "DUMMY_275",
-      "name": "DUMMY_275",
-      "type": "Sewer",
-      "x": -97473.653,
-      "y": 2891627.766,
-      "cover_elev": 1554.354,
       "depth": 0.0,
       "diameter": 1.0
     },
@@ -6195,16 +6115,6 @@
       "diameter": 1.0
     },
     {
-      "id": "DUMMY_293",
-      "name": "DUMMY_293",
-      "type": "Stormwater",
-      "x": -97522.167,
-      "y": 2891765.354,
-      "cover_elev": 1561.847,
-      "depth": 0.0,
-      "diameter": 1.0
-    },
-    {
       "id": "DUMMY_294",
       "name": "DUMMY_294",
       "type": "Stormwater",
@@ -6291,16 +6201,6 @@
       "x": -97507.863,
       "y": 2891654.102,
       "cover_elev": 1558.754,
-      "depth": 0.0,
-      "diameter": 1.0
-    },
-    {
-      "id": "DUMMY_303",
-      "name": "DUMMY_303",
-      "type": "Stormwater",
-      "x": -97512.34,
-      "y": 2891770.41,
-      "cover_elev": 1563.78,
       "depth": 0.0,
       "diameter": 1.0
     },
@@ -6405,16 +6305,6 @@
       "diameter": 1.0
     },
     {
-      "id": "DUMMY_314",
-      "name": "DUMMY_314",
-      "type": "Sewer",
-      "x": -97520.649,
-      "y": 2891491.05,
-      "cover_elev": 1551.19,
-      "depth": 0.0,
-      "diameter": 1.0
-    },
-    {
       "id": "DUMMY_315",
       "name": "DUMMY_315",
       "type": "Stormwater",
@@ -6465,52 +6355,12 @@
       "diameter": 1.0
     },
     {
-      "id": "DUMMY_320",
-      "name": "DUMMY_320",
-      "type": "Stormwater",
-      "x": -97529.903,
-      "y": 2891612.187,
-      "cover_elev": 1555.66,
-      "depth": 0.0,
-      "diameter": 1.0
-    },
-    {
       "id": "DUMMY_321",
       "name": "DUMMY_321",
       "type": "Stormwater",
       "x": -97533.332,
       "y": 2891647.706,
       "cover_elev": 1557.646,
-      "depth": 0.0,
-      "diameter": 1.0
-    },
-    {
-      "id": "DUMMY_322",
-      "name": "DUMMY_322",
-      "type": "Stormwater",
-      "x": -97529.871,
-      "y": 2891612.855,
-      "cover_elev": 1557.234,
-      "depth": 0.0,
-      "diameter": 1.0
-    },
-    {
-      "id": "DUMMY_323",
-      "name": "DUMMY_323",
-      "type": "Stormwater",
-      "x": -97536.773,
-      "y": 2891715.524,
-      "cover_elev": 1554.25,
-      "depth": 0.0,
-      "diameter": 1.0
-    },
-    {
-      "id": "DUMMY_324",
-      "name": "DUMMY_324",
-      "type": "Stormwater",
-      "x": -97545.581,
-      "y": 2891722.853,
-      "cover_elev": 1553.95,
       "depth": 0.0,
       "diameter": 1.0
     },
@@ -6551,16 +6401,6 @@
       "x": -97542.972,
       "y": 2891582.984,
       "cover_elev": 1556.67,
-      "depth": 0.0,
-      "diameter": 1.0
-    },
-    {
-      "id": "DUMMY_329",
-      "name": "DUMMY_329",
-      "type": "Sewer",
-      "x": -97550.036,
-      "y": 2891532.237,
-      "cover_elev": 1551.772,
       "depth": 0.0,
       "diameter": 1.0
     },
@@ -6785,32 +6625,12 @@
       "diameter": 1.0
     },
     {
-      "id": "DUMMY_352",
-      "name": "DUMMY_352",
-      "type": "Sewer",
-      "x": -97582.359,
-      "y": 2891590.728,
-      "cover_elev": 1552.73,
-      "depth": 0.0,
-      "diameter": 1.0
-    },
-    {
       "id": "DUMMY_353",
       "name": "DUMMY_353",
       "type": "Sewer",
       "x": -97595.447,
       "y": 2891594.874,
       "cover_elev": 1553.93,
-      "depth": 0.0,
-      "diameter": 1.0
-    },
-    {
-      "id": "DUMMY_354",
-      "name": "DUMMY_354",
-      "type": "Stormwater",
-      "x": -97591.005,
-      "y": 2891591.289,
-      "cover_elev": 1555.13,
       "depth": 0.0,
       "diameter": 1.0
     },
@@ -12174,16 +11994,6 @@
       "type": "Sewer"
     },
     {
-      "id": "P440",
-      "from_mh": "SW138",
-      "to_mh": "SW300",
-      "from_depth": 0.93,
-      "to_depth": 1.6,
-      "diameter_mm": 500.0,
-      "diameter_source": "sheet_both",
-      "type": "Stormwater"
-    },
-    {
       "id": "P441",
       "from_mh": "SW302",
       "to_mh": "SW303",
@@ -12354,16 +12164,6 @@
       "type": "Stormwater"
     },
     {
-      "id": "P458",
-      "from_mh": "SW319",
-      "to_mh": "SW320",
-      "from_depth": 4.15,
-      "to_depth": 3.61,
-      "diameter_mm": 800.0,
-      "diameter_source": "sheet_both",
-      "type": "Stormwater"
-    },
-    {
       "id": "P459",
       "from_mh": "SW318",
       "to_mh": "SW319",
@@ -12430,16 +12230,6 @@
       "from_depth": 0.86,
       "to_depth": 4.1,
       "diameter_mm": 300.0,
-      "diameter_source": "sheet_from_out",
-      "type": "Stormwater"
-    },
-    {
-      "id": "P466",
-      "from_mh": "SW136",
-      "to_mh": "SW105",
-      "from_depth": 4.1,
-      "to_depth": 1.6,
-      "diameter_mm": 500.0,
       "diameter_source": "sheet_from_out",
       "type": "Stormwater"
     },
@@ -12614,16 +12404,6 @@
       "type": "Stormwater"
     },
     {
-      "id": "P484",
-      "from_mh": "DUMMY_238",
-      "to_mh": "W002",
-      "from_depth": 0.0,
-      "to_depth": 1.4,
-      "diameter_mm": null,
-      "diameter_source": "dgn_unsized",
-      "type": "Stormwater"
-    },
-    {
       "id": "P485",
       "from_mh": "DUMMY_239",
       "to_mh": "W002",
@@ -12674,16 +12454,6 @@
       "type": "Sewer"
     },
     {
-      "id": "P490",
-      "from_mh": "DUMMY_239",
-      "to_mh": "DUMMY_245",
-      "from_depth": 0.0,
-      "to_depth": 0.0,
-      "diameter_mm": null,
-      "diameter_source": "dgn_unsized",
-      "type": "Stormwater"
-    },
-    {
       "id": "P491",
       "from_mh": "DUMMY_246",
       "to_mh": "DUMMY_239",
@@ -12694,26 +12464,6 @@
       "type": "Stormwater"
     },
     {
-      "id": "P492",
-      "from_mh": "SE004",
-      "to_mh": "DUMMY_247",
-      "from_depth": 2.66,
-      "to_depth": 0.0,
-      "diameter_mm": 200.0,
-      "diameter_source": "sheet_from_out",
-      "type": "Sewer"
-    },
-    {
-      "id": "P493",
-      "from_mh": "DUMMY_247",
-      "to_mh": "SE007",
-      "from_depth": 0.0,
-      "to_depth": 1.9,
-      "diameter_mm": 300.0,
-      "diameter_source": "sheet_to_ambig",
-      "type": "Sewer"
-    },
-    {
       "id": "P494",
       "from_mh": "DUMMY_247",
       "to_mh": "DUMMY_248",
@@ -12722,16 +12472,6 @@
       "diameter_mm": null,
       "diameter_source": "dgn_unsized",
       "type": "Sewer"
-    },
-    {
-      "id": "P495",
-      "from_mh": "DUMMY_249",
-      "to_mh": "DUMMY_250",
-      "from_depth": 0.0,
-      "to_depth": 0.0,
-      "diameter_mm": null,
-      "diameter_source": "dgn_unsized",
-      "type": "Stormwater"
     },
     {
       "id": "P496",
@@ -12794,36 +12534,6 @@
       "type": "Stormwater"
     },
     {
-      "id": "P502",
-      "from_mh": "DUMMY_258",
-      "to_mh": "SW142",
-      "from_depth": 0.0,
-      "to_depth": 1.75,
-      "diameter_mm": 110.0,
-      "diameter_source": "sheet_to_in",
-      "type": "Stormwater"
-    },
-    {
-      "id": "P503",
-      "from_mh": "DUMMY_259",
-      "to_mh": "SW142",
-      "from_depth": 0.0,
-      "to_depth": 1.75,
-      "diameter_mm": 110.0,
-      "diameter_source": "sheet_to_in",
-      "type": "Stormwater"
-    },
-    {
-      "id": "P504",
-      "from_mh": "SW142",
-      "to_mh": "DUMMY_260",
-      "from_depth": 1.75,
-      "to_depth": 0.0,
-      "diameter_mm": 500.0,
-      "diameter_source": "sheet_from_out",
-      "type": "Stormwater"
-    },
-    {
       "id": "P505",
       "from_mh": "DUMMY_261",
       "to_mh": "SW153",
@@ -12851,16 +12561,6 @@
       "to_depth": 1.7,
       "diameter_mm": 160.0,
       "diameter_source": "sheet_to_ambig",
-      "type": "Sewer"
-    },
-    {
-      "id": "P508",
-      "from_mh": "DUMMY_264",
-      "to_mh": "SW053",
-      "from_depth": 0.0,
-      "to_depth": 2.4,
-      "diameter_mm": null,
-      "diameter_source": "dgn_unsized",
       "type": "Sewer"
     },
     {
@@ -12957,16 +12657,6 @@
       "id": "P518",
       "from_mh": "DUMMY_272",
       "to_mh": "DUMMY_274",
-      "from_depth": 0.0,
-      "to_depth": 0.0,
-      "diameter_mm": null,
-      "diameter_source": "dgn_unsized",
-      "type": "Sewer"
-    },
-    {
-      "id": "P519",
-      "from_mh": "DUMMY_272",
-      "to_mh": "DUMMY_275",
       "from_depth": 0.0,
       "to_depth": 0.0,
       "diameter_mm": null,
@@ -13164,16 +12854,6 @@
       "type": "Sewer"
     },
     {
-      "id": "P539",
-      "from_mh": "DUMMY_293",
-      "to_mh": "SW136",
-      "from_depth": 0.0,
-      "to_depth": 4.1,
-      "diameter_mm": 700.0,
-      "diameter_source": "sheet_to_ambig",
-      "type": "Stormwater"
-    },
-    {
       "id": "P540",
       "from_mh": "DUMMY_294",
       "to_mh": "DUMMY_295",
@@ -13252,16 +12932,6 @@
       "diameter_mm": 110.0,
       "diameter_source": "sheet_to_in",
       "type": "Sewer"
-    },
-    {
-      "id": "P548",
-      "from_mh": "DUMMY_303",
-      "to_mh": "SW132",
-      "from_depth": 0.0,
-      "to_depth": 0.86,
-      "diameter_mm": null,
-      "diameter_source": "dgn_unsized",
-      "type": "Stormwater"
     },
     {
       "id": "P549",
@@ -13344,31 +13014,11 @@
       "type": "Stormwater"
     },
     {
-      "id": "P557",
-      "from_mh": "DUMMY_314",
-      "to_mh": "SE031",
-      "from_depth": 0.0,
-      "to_depth": 2.4,
-      "diameter_mm": null,
-      "diameter_source": "dgn_unsized",
-      "type": "Sewer"
-    },
-    {
       "id": "P558",
       "from_mh": "DUMMY_315",
       "to_mh": "DUMMY_307",
       "from_depth": 0.0,
       "to_depth": 0.0,
-      "diameter_mm": null,
-      "diameter_source": "dgn_unsized",
-      "type": "Stormwater"
-    },
-    {
-      "id": "P559",
-      "from_mh": "DUMMY_315",
-      "to_mh": "SW055",
-      "from_depth": 0.0,
-      "to_depth": 0.76,
       "diameter_mm": null,
       "diameter_source": "dgn_unsized",
       "type": "Stormwater"
@@ -13414,26 +13064,6 @@
       "type": "Sewer"
     },
     {
-      "id": "P564",
-      "from_mh": "SE018",
-      "to_mh": "DUMMY_319",
-      "from_depth": 1.2,
-      "to_depth": 0.0,
-      "diameter_mm": 110.0,
-      "diameter_source": "sheet_from_out",
-      "type": "Sewer"
-    },
-    {
-      "id": "P565",
-      "from_mh": "SW057",
-      "to_mh": "DUMMY_320",
-      "from_depth": 1.5,
-      "to_depth": 0.0,
-      "diameter_mm": null,
-      "diameter_source": "dgn_unsized",
-      "type": "Stormwater"
-    },
-    {
       "id": "P566",
       "from_mh": "DUMMY_321",
       "to_mh": "SW055",
@@ -13441,36 +13071,6 @@
       "to_depth": 0.76,
       "diameter_mm": null,
       "diameter_source": "dgn_unsized",
-      "type": "Stormwater"
-    },
-    {
-      "id": "P567",
-      "from_mh": "DUMMY_322",
-      "to_mh": "SW057",
-      "from_depth": 0.0,
-      "to_depth": 1.5,
-      "diameter_mm": null,
-      "diameter_source": "dgn_unsized",
-      "type": "Stormwater"
-    },
-    {
-      "id": "P568",
-      "from_mh": "DUMMY_323",
-      "to_mh": "SW117",
-      "from_depth": 0.0,
-      "to_depth": 1.0,
-      "diameter_mm": 300.0,
-      "diameter_source": "sheet_to_in",
-      "type": "Stormwater"
-    },
-    {
-      "id": "P569",
-      "from_mh": "DUMMY_324",
-      "to_mh": "SW117",
-      "from_depth": 0.0,
-      "to_depth": 1.0,
-      "diameter_mm": 300.0,
-      "diameter_source": "sheet_to_in",
       "type": "Stormwater"
     },
     {
@@ -13512,16 +13112,6 @@
       "diameter_mm": null,
       "diameter_source": "dgn_unsized",
       "type": "Stormwater"
-    },
-    {
-      "id": "P574",
-      "from_mh": "SE028",
-      "to_mh": "DUMMY_329",
-      "from_depth": 2.58,
-      "to_depth": 0.0,
-      "diameter_mm": null,
-      "diameter_source": "dgn_unsized",
-      "type": "Sewer"
     },
     {
       "id": "P575",
@@ -13674,16 +13264,6 @@
       "type": "Sewer"
     },
     {
-      "id": "P590",
-      "from_mh": "DUMMY_350",
-      "to_mh": "SW095",
-      "from_depth": 0.0,
-      "to_depth": 0.66,
-      "diameter_mm": null,
-      "diameter_source": "dgn_unsized",
-      "type": "Stormwater"
-    },
-    {
       "id": "P591",
       "from_mh": "DUMMY_350",
       "to_mh": "DUMMY_351",
@@ -13694,26 +13274,6 @@
       "type": "Stormwater"
     },
     {
-      "id": "P592",
-      "from_mh": "DUMMY_350",
-      "to_mh": "SW096",
-      "from_depth": 0.0,
-      "to_depth": 0.0,
-      "diameter_mm": null,
-      "diameter_source": "dgn_unsized",
-      "type": "Stormwater"
-    },
-    {
-      "id": "P593",
-      "from_mh": "SE046",
-      "to_mh": "DUMMY_352",
-      "from_depth": 3.1,
-      "to_depth": 0.0,
-      "diameter_mm": 600.0,
-      "diameter_source": "sheet_from_ambig",
-      "type": "Sewer"
-    },
-    {
       "id": "P594",
       "from_mh": "DUMMY_353",
       "to_mh": "SE046",
@@ -13722,16 +13282,6 @@
       "diameter_mm": 600.0,
       "diameter_source": "sheet_to_ambig",
       "type": "Sewer"
-    },
-    {
-      "id": "P595",
-      "from_mh": "SW102",
-      "to_mh": "DUMMY_354",
-      "from_depth": 0.6,
-      "to_depth": 0.0,
-      "diameter_mm": null,
-      "diameter_source": "dgn_unsized",
-      "type": "Stormwater"
     },
     {
       "id": "P596",

@@ -397,10 +397,13 @@ class NetworkViewerApp {
       const p1 = this.coordSystem.w2s(fromMH.x, fromMH.y, fromMH.cover_elev - p.from_depth);
       const p2 = this.coordSystem.w2s(toMH.x, toMH.y, toMH.cover_elev - p.to_depth);
 
-      const isStormwater = p.type
-        ? p.type !== 'Sewer'
-        : (fromMH.type === 'Stormwater' || toMH.type === 'Stormwater');
-      const color = isStormwater ? 0x4A90D9 : 0xD4880F;
+      const isWater = p.type === 'Water';
+      const isStormwater = isWater
+        ? true
+        : (p.type
+            ? p.type !== 'Sewer'
+            : (fromMH.type === 'Stormwater' || toMH.type === 'Stormwater'));
+      const color = isWater ? 0x0A3D91 : (isStormwater ? 0x4A90D9 : 0xD4880F);
 
       // Main pipe line — use TubeGeometry for visible thickness in 2D
       const pipePath = new THREE.LineCurve3(p1, p2);
@@ -849,6 +852,10 @@ class NetworkViewerApp {
         <div class="map-legend-item">
           <span class="map-line storm"></span>
           <span>Stormwater Pipe</span>
+        </div>
+        <div class="map-legend-item">
+          <span class="map-line" style="background:#0A3D91;"></span>
+          <span>Water Pipe</span>
         </div>
         <div class="map-legend-item">
           <span class="map-arrow"></span>
