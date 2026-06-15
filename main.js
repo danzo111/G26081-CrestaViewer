@@ -320,11 +320,13 @@ class NetworkViewerApp {
       dotCtx.lineWidth = 5;
       dotCtx.stroke();
 
-      // Inner highlight
-      dotCtx.beginPath();
-      dotCtx.arc(64, 64, 20, 0, Math.PI * 2);
-      dotCtx.fillStyle = 'rgba(255,255,255,0.2)';
-      dotCtx.fill();
+      // Inner highlight — skip for Water so WMH reads as solid dark navy like the water pipes
+      if (mh.type !== 'Water') {
+        dotCtx.beginPath();
+        dotCtx.arc(64, 64, 20, 0, Math.PI * 2);
+        dotCtx.fillStyle = 'rgba(255,255,255,0.2)';
+        dotCtx.fill();
+      }
 
       const dotTexture = new THREE.CanvasTexture(dotCanvas);
       const dotMaterial = new THREE.SpriteMaterial({ 
