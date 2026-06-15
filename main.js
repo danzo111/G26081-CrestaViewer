@@ -291,18 +291,22 @@ class NetworkViewerApp {
       dotCanvas.height = 128;
 
       const isSewer = mh.type === 'Sewer';
-      const color = isSewer ? '#E87722' : '#00D4FF';
+      let color, glowA, glowB;
+      if (isSewer) { color='#E87722'; glowA='rgba(232,119,34,0.25)'; glowB='rgba(232,119,34,0.4)'; }
+      else if (mh.type === 'Water') { color='#0A3D91'; glowA='rgba(10,61,145,0.30)'; glowB='rgba(10,61,145,0.45)'; }   // WMH/Water = dark blue
+      else if (mh.type === 'Unknown') { color='#FFFFFF'; glowA='rgba(255,255,255,0.30)'; glowB='rgba(255,255,255,0.5)'; }  // UK = white
+      else { color='#00D4FF'; glowA='rgba(0,212,255,0.25)'; glowB='rgba(0,212,255,0.4)'; }
 
       // Outer glow
       dotCtx.beginPath();
       dotCtx.arc(64, 64, 44, 0, Math.PI * 2);
-      dotCtx.fillStyle = isSewer ? 'rgba(232,119,34,0.25)' : 'rgba(0,212,255,0.25)';
+      dotCtx.fillStyle = glowA;
       dotCtx.fill();
 
       // Middle glow
       dotCtx.beginPath();
       dotCtx.arc(64, 64, 36, 0, Math.PI * 2);
-      dotCtx.fillStyle = isSewer ? 'rgba(232,119,34,0.4)' : 'rgba(0,212,255,0.4)';
+      dotCtx.fillStyle = glowB;
       dotCtx.fill();
 
       // Main circle
@@ -311,15 +315,15 @@ class NetworkViewerApp {
       dotCtx.fillStyle = color;
       dotCtx.fill();
 
-      // White border
-      dotCtx.strokeStyle = '#ffffff';
+      // border — dark for white (Unknown) manholes so they stay visible
+      dotCtx.strokeStyle = (mh.type === 'Unknown') ? '#2A3A4A' : '#ffffff';
       dotCtx.lineWidth = 5;
       dotCtx.stroke();
 
       // Inner highlight
       dotCtx.beginPath();
       dotCtx.arc(64, 64, 20, 0, Math.PI * 2);
-      dotCtx.fillStyle = isSewer ? 'rgba(255,255,255,0.25)' : 'rgba(255,255,255,0.2)';
+      dotCtx.fillStyle = 'rgba(255,255,255,0.2)';
       dotCtx.fill();
 
       const dotTexture = new THREE.CanvasTexture(dotCanvas);
@@ -844,6 +848,14 @@ class NetworkViewerApp {
         <div class="map-legend-item">
           <span class="map-dot storm"></span>
           <span>Stormwater Manhole</span>
+        </div>
+        <div class="map-legend-item">
+          <span class="map-dot" style="background:#0A3D91;"></span>
+          <span>Water Manhole</span>
+        </div>
+        <div class="map-legend-item">
+          <span class="map-dot" style="background:#fff;border:1px solid #2A3A4A;"></span>
+          <span>Unknown Manhole</span>
         </div>
         <div class="map-legend-item">
           <span class="map-line sewer"></span>
