@@ -8289,13 +8289,12 @@
     {
       "id": "P215",
       "from_mh": "SE075A",
-      "to_mh": "SE085",
+      "to_mh": "SE082",
       "from_depth": 0.0,
-      "to_depth": 2.1,
+      "to_depth": 3.0,
       "diameter_mm": 160.0,
       "diameter_source": "deliverable_table",
-      "type": "Sewer",
-      "flow_override": true
+      "type": "Sewer"
     },
     {
       "id": "P216",
