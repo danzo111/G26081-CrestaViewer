@@ -432,6 +432,59 @@ export class GeometryBuilder {
     return basemapPlane;
   }
 
+  /**
+   * Build the DXF reference overlay — exact CAD linework drawn as crisp
+   * colour-coded line segments. Stored as one THREE.LineSegments per
+   * discipline inside a group named 'dxf_overlay'. Hidden by default;
+   * toggled from the map-view controls.
+   * @param {Object} overlayData - { groups: { Sewer:[[x1,y1,x2,y2],...], ... } }
+   * @returns {THREE.Group}
+   */
+  buildDxfOverlay(overlayData) {
+    const colors = {
+      Sewer: 0xE87722,
+      Stormwater: 0x00D4FF,
+      Water: 0x0A3D91,
+      Unknown: 0xFFFFFF
+    };
+    const group = new THREE.Group();
+    group.name = 'dxf_overlay';
+    // sit just above the basemap so it reads as a reference under the network
+    const elev = this.coordSystem.basemapElev + 3.0;
+    const groups = overlayData.groups || {};
+
+    for (const disc of Object.keys(groups)) {
+      const segs = groups[disc];
+      if (!segs || !segs.length) continue;
+      const positions = new Float32Array(segs.length * 6);
+      let i = 0;
+      for (const s of segs) {
+        const a = this.coordSystem.w2s(s[0], s[1], elev);
+        const b = this.coordSystem.w2s(s[2], s[3], elev);
+        positions[i++] = a.x; positions[i++] = a.y; positions[i++] = a.z;
+        positions[i++] = b.x; positions[i++] = b.y; positions[i++] = b.z;
+      }
+      const geo = new THREE.BufferGeometry();
+      geo.setAttribute('position', new THREE.BufferAttribute(positions, 3));
+      const mat = new THREE.LineBasicMaterial({
+        color: colors[disc] ?? 0xffffff,
+        transparent: true,
+        opacity: 0.95,
+        depthTest: false,
+        depthWrite: false
+      });
+      const lines = new THREE.LineSegments(geo, mat);
+      lines.name = 'dxf_overlay_' + disc;
+      lines.renderOrder = -50; // above basemap (-100), below network (0)
+      group.add(lines);
+    }
+
+    group.visible = false; // off by default; toggled in the map view
+    this.scene.add(group);
+    this.dxfOverlay = group;
+    return group;
+  }
+
   createManholeHighlight(mh) {
     const geo = new THREE.CylinderGeometry(mh.r * 1.08, mh.r * 1.08, 0.14, 20);
     const mesh = new THREE.Mesh(geo, this.materials.highlight);

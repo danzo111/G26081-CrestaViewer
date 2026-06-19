@@ -119,6 +119,16 @@ class NetworkViewerApp {
       this.geometryBuilder.buildDropLines(networkData.manholes);
       await this._loadBasemap();
 
+      // DXF reference overlay — exact CAD linework, toggled from map controls
+      try {
+        const ovResp = await fetch('./data/dxf_overlay.json', { cache: 'no-cache' });
+        if (ovResp.ok) {
+          this.dxfOverlay = this.geometryBuilder.buildDxfOverlay(await ovResp.json());
+        }
+      } catch (e) {
+        console.warn('DXF overlay unavailable:', e);
+      }
+
       this.ui.setProgress(70, 'Preparing the map view...');
       await this._yieldFrame();
       this._buildMapView(networkData);
@@ -906,6 +916,10 @@ class NetworkViewerApp {
           <input type="checkbox" id="map-layer-basemap" checked>
           <span>Basemap</span>
         </label>
+        <label class="map-layer-item">
+          <input type="checkbox" id="map-layer-dxf">
+          <span>DXF Overlay (exact CAD)</span>
+        </label>
       </div>
       <div class="map-hint">
         <strong>Click a manhole</strong> to see details and trace upstream/downstream network.
@@ -987,6 +1001,10 @@ class NetworkViewerApp {
 
     document.getElementById('map-layer-basemap')?.addEventListener('change', (e) => {
       if (this.basemapMesh) this.basemapMesh.visible = e.target.checked;
+    });
+
+    document.getElementById('map-layer-dxf')?.addEventListener('change', (e) => {
+      if (this.dxfOverlay) this.dxfOverlay.visible = e.target.checked;
     });
   }
 
