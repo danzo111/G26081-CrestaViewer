@@ -277,6 +277,34 @@ class NetworkViewerApp {
     return { manholeIds, pipeIndices };
   }
 
+  /**
+   * Scene-space centreline points for a pipe. Follows the real DXF polyline
+   * (pipe.path, in network coords, from_mh -> to_mh) when present; otherwise a
+   * straight [p1, p2]. Intermediate elevations are interpolated between ends.
+   */
+  _pipeScenePoints(p, fromMH, toMH, p1, p2) {
+    if (!p.path || p.path.length < 2) return [p1, p2];
+    const eFrom = fromMH.cover_elev - p.from_depth;
+    const eTo = toMH.cover_elev - p.to_depth;
+    const n = p.path.length;
+    const pts = p.path.map((xy, idx) => {
+      const t = idx / (n - 1);
+      return this.coordSystem.w2s(xy[0], xy[1], eFrom + (eTo - eFrom) * t);
+    });
+    pts[0] = p1; pts[n - 1] = p2;   // snap ends exactly to the manholes
+    return pts;
+  }
+
+  /** Build a centreline curve from a stored mapPipeLines entry (bent if it has a path). */
+  _pipeDataCurve(pd) {
+    return (pd.pts && pd.pts.length > 2)
+      ? new THREE.CatmullRomCurve3(pd.pts, false, 'centripetal')
+      : new THREE.LineCurve3(pd.p1, pd.p2);
+  }
+  _pipeDataSeg(pd) {
+    return (pd.pts && pd.pts.length > 2) ? Math.max((pd.pts.length - 1) * 8, 8) : 1;
+  }
+
   _buildMapView(networkData) {
     const scene = this.sceneManager.scene;
     const { manholes, pipes } = networkData;
@@ -421,9 +449,14 @@ class NetworkViewerApp {
             : (fromMH.type === 'Stormwater' || toMH.type === 'Stormwater'));
       const color = isWater ? 0x0A3D91 : (isStormwater ? 0x4A90D9 : 0xD4880F);
 
-      // Main pipe line — use TubeGeometry for visible thickness in 2D
-      const pipePath = new THREE.LineCurve3(p1, p2);
-      const tubeGeo = new THREE.TubeGeometry(pipePath, 1, 0.6, 6, false);
+      // Main pipe centreline — follow the real DXF path if present, else straight
+      const pipePts = this._pipeScenePoints(p, fromMH, toMH, p1, p2);
+      const bent = pipePts.length > 2;
+      const pipeCurve = bent
+        ? new THREE.CatmullRomCurve3(pipePts, false, 'centripetal')
+        : new THREE.LineCurve3(p1, p2);
+      const tubSeg = bent ? Math.max((pipePts.length - 1) * 8, 8) : 1;
+      const tubeGeo = new THREE.TubeGeometry(pipeCurve, tubSeg, 0.6, 6, false);
       const tubeMat = new THREE.MeshBasicMaterial({
         color: color,
         transparent: true,
@@ -439,7 +472,7 @@ class NetworkViewerApp {
       scene.add(tube);
 
       // Invisible hit target — much thicker for easy clicking when zoomed out
-      const hitGeo = new THREE.TubeGeometry(pipePath, 1, 2.5, 6, false);
+      const hitGeo = new THREE.TubeGeometry(pipeCurve, tubSeg, 2.5, 6, false);
       const hitMat = new THREE.MeshBasicMaterial({
         color: color,
         transparent: true,
@@ -454,11 +487,11 @@ class NetworkViewerApp {
       hitMesh.renderOrder = 499;  // Just below the visible pipe
       scene.add(hitMesh);
 
-      this.mapPipeLines.push({ line: tube, hitMesh, index: i, p1, p2, isStormwater });
+      this.mapPipeLines.push({ line: tube, hitMesh, index: i, p1, p2, pts: pipePts, isStormwater });
 
       // Flow direction arrow (filled triangle mesh)
-      const mid = new THREE.Vector3().addVectors(p1, p2).multiplyScalar(0.5);
-      const dir = new THREE.Vector3().subVectors(p2, p1).normalize();
+      const mid = pipeCurve.getPoint(0.5);
+      const dir = pipeCurve.getTangent(0.5).normalize();
       const perp = new THREE.Vector3(-dir.z, 0, dir.x).normalize();
 
       let flowDir;
@@ -514,32 +547,40 @@ class NetworkViewerApp {
       // ── Animated flow ribbon: marching chevrons along the pipe, pointing
       //    downstream. Sits within the pipe band and reads clearly in dense areas. ──
       const goesP1toP2 = flowDir.dot(dir) >= 0;
-      const uPt = goesP1toP2 ? p1 : p2;   // upstream
-      const dPt = goesP1toP2 ? p2 : p1;   // downstream
-      const ribLen = uPt.distanceTo(dPt);
-      if (ribLen > 0.05) {
-        const halfW = 0.45;               // within pipe (tube radius 0.6)
-        const fd = new THREE.Vector3().subVectors(dPt, uPt).normalize();
-        const pp = new THREE.Vector3(-fd.z, 0, fd.x).normalize();
-        const yL = 0.5;                   // slight lift; depthTest off keeps it on top
-        const a = new THREE.Vector3(uPt.x + pp.x * halfW, uPt.y + yL, uPt.z + pp.z * halfW);
-        const b = new THREE.Vector3(uPt.x - pp.x * halfW, uPt.y + yL, uPt.z - pp.z * halfW);
-        const c = new THREE.Vector3(dPt.x - pp.x * halfW, dPt.y + yL, dPt.z - pp.z * halfW);
-        const e = new THREE.Vector3(dPt.x + pp.x * halfW, dPt.y + yL, dPt.z + pp.z * halfW);
-        const repeatX = Math.max(1, Math.round(ribLen / 4));  // one chevron ≈ every 4 m
+      // Ribbon follows the full pipe centreline (downstream order); chevrons march
+      // along the real route, around bends. U accumulates by distance (≈1 per 4 m).
+      const flowPts = goesP1toP2 ? pipePts : pipePts.slice().reverse();
+      let ribTotal = 0;
+      for (let k = 1; k < flowPts.length; k++) ribTotal += flowPts[k].distanceTo(flowPts[k - 1]);
+      if (ribTotal > 0.05) {
+        const halfW = 0.45, yL = 0.5;     // within pipe (tube radius 0.6); slight lift
+        const pos = [], uvA = [], ind = [];
+        let acc = 0;
+        for (let k = 0; k < flowPts.length; k++) {
+          const d = new THREE.Vector3();
+          if (k < flowPts.length - 1) d.subVectors(flowPts[k + 1], flowPts[k]);
+          else d.subVectors(flowPts[k], flowPts[k - 1]);
+          d.y = 0; d.normalize();
+          const pp = new THREE.Vector3(-d.z, 0, d.x).normalize();
+          if (k > 0) acc += flowPts[k].distanceTo(flowPts[k - 1]);
+          const u = acc / 4;
+          const L = flowPts[k];
+          pos.push(L.x + pp.x * halfW, L.y + yL, L.z + pp.z * halfW);
+          pos.push(L.x - pp.x * halfW, L.y + yL, L.z - pp.z * halfW);
+          uvA.push(u, 1, u, 0);
+          if (k > 0) { const b0 = (k - 1) * 2, c0 = k * 2; ind.push(b0, b0 + 1, c0 + 1, b0, c0 + 1, c0); }
+        }
         const ribGeo = new THREE.BufferGeometry();
-        ribGeo.setAttribute('position', new THREE.Float32BufferAttribute([
-          a.x, a.y, a.z, b.x, b.y, b.z, c.x, c.y, c.z, e.x, e.y, e.z
-        ], 3));
-        ribGeo.setAttribute('uv', new THREE.Float32BufferAttribute([0, 1, 0, 0, 1, 0, 1, 1], 2));
-        ribGeo.setIndex([0, 1, 2, 0, 2, 3]);
+        ribGeo.setAttribute('position', new THREE.Float32BufferAttribute(pos, 3));
+        ribGeo.setAttribute('uv', new THREE.Float32BufferAttribute(uvA, 2));
+        ribGeo.setIndex(ind);
         if (!this._chevronCanvas) this._chevronCanvas = this._makeChevronCanvas();
         const tex = new THREE.CanvasTexture(this._chevronCanvas);
         tex.wrapS = THREE.RepeatWrapping;
         tex.wrapT = THREE.ClampToEdgeWrapping;
         tex.minFilter = THREE.LinearFilter;
         tex.magFilter = THREE.LinearFilter;
-        tex.repeat.set(repeatX, 1);
+        tex.repeat.set(1, 1);
         const ribMat = new THREE.MeshBasicMaterial({
           map: tex, transparent: true, depthTest: false, depthWrite: false, side: THREE.DoubleSide
         });
@@ -744,8 +785,8 @@ class NetworkViewerApp {
     upstream.pipeIndices.forEach(idx => {
       const pipeData = this.mapPipeLines.find(p => p.index === idx);
       if (pipeData) {
-        const path = new THREE.LineCurve3(pipeData.p1, pipeData.p2);
-        const geo = new THREE.TubeGeometry(path, 1, 1.2, 8, false);
+        const path = this._pipeDataCurve(pipeData);
+        const geo = new THREE.TubeGeometry(path, this._pipeDataSeg(pipeData), 1.2, 8, false);
         const mat = this.upstreamMat.clone();
         const mesh = new THREE.Mesh(geo, mat);
         mesh.renderOrder = 200;
@@ -775,8 +816,8 @@ class NetworkViewerApp {
     downstream.pipeIndices.forEach(idx => {
       const pipeData = this.mapPipeLines.find(p => p.index === idx);
       if (pipeData) {
-        const path = new THREE.LineCurve3(pipeData.p1, pipeData.p2);
-        const geo = new THREE.TubeGeometry(path, 1, 1.2, 8, false);
+        const path = this._pipeDataCurve(pipeData);
+        const geo = new THREE.TubeGeometry(path, this._pipeDataSeg(pipeData), 1.2, 8, false);
         const mat = this.downstreamMat.clone();
         const mesh = new THREE.Mesh(geo, mat);
         mesh.renderOrder = 200;
@@ -1131,8 +1172,8 @@ class NetworkViewerApp {
     // Highlight the pipe in map view
     const pipeData = this.mapPipeLines.find(p => p.index === index);
     if (pipeData) {
-      const path = new THREE.LineCurve3(pipeData.p1, pipeData.p2);
-      const geo = new THREE.TubeGeometry(path, 1, 1.5, 8, false);
+      const path = this._pipeDataCurve(pipeData);
+      const geo = new THREE.TubeGeometry(path, this._pipeDataSeg(pipeData), 1.5, 8, false);
       const mat = new THREE.MeshBasicMaterial({
         color: pd.isStormwater ? 0x66b3ff : 0xffdd44,
         transparent: true,
