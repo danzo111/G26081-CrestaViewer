@@ -450,7 +450,12 @@ class NetworkViewerApp {
       const color = isWater ? 0x0A3D91 : (isStormwater ? 0x4A90D9 : 0xD4880F);
 
       // Main pipe centreline — follow the real DXF path if present, else straight
-      const pipePts = this._pipeScenePoints(p, fromMH, toMH, p1, p2);
+      let pipePts = this._pipeScenePoints(p, fromMH, toMH, p1, p2);
+      // Drop consecutive (near-)coincident vertices. Many DXF paths duplicate
+      // their final point, which hooks the smoothed tube and collapses the flow
+      // ribbon's cross-section, making the chevrons render off the pipe.
+      pipePts = pipePts.filter((pt, idx) => idx === 0 || pt.distanceTo(pipePts[idx - 1]) > 0.05);
+      if (pipePts.length < 2) pipePts = [p1, p2];
       const bent = pipePts.length > 2;
       const pipeCurve = bent
         ? new THREE.CatmullRomCurve3(pipePts, false, 'centripetal')
@@ -549,7 +554,11 @@ class NetworkViewerApp {
       const goesP1toP2 = flowDir.dot(dir) >= 0;
       // Ribbon follows the full pipe centreline (downstream order); chevrons march
       // along the real route, around bends. U accumulates by distance (≈1 per 4 m).
-      const flowPts = goesP1toP2 ? pipePts : pipePts.slice().reverse();
+      // Sample the SAME curve the tube uses so the chevrons sit exactly on the
+      // pipe at bends (raw path points cut corners the smoothed tube rounds).
+      const ribSamples = bent ? Math.max((pipePts.length - 1) * 8, 8) : 1;
+      const curvePts = pipeCurve.getPoints(ribSamples);
+      const flowPts = goesP1toP2 ? curvePts : curvePts.slice().reverse();
       let ribTotal = 0;
       for (let k = 1; k < flowPts.length; k++) ribTotal += flowPts[k].distanceTo(flowPts[k - 1]);
       if (ribTotal > 0.05) {
