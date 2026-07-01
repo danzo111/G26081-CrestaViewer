@@ -23,8 +23,8 @@
       "depth": 1.4,
       "diameter": 1.0,
       "images": [
-        "images/SW001(1).JPG",
-        "images/SW001(2).JPG"
+        "images/SW001.JPG",
+        "images/SW001 (2).JPG"
       ]
     },
     {
@@ -37,8 +37,8 @@
       "depth": 1.5,
       "diameter": 1.0,
       "images": [
-        "images/SW002(1).JPG",
-        "images/SW002(2).JPG"
+        "images/SW002.JPG",
+        "images/SW002 (2).JPG"
       ]
     },
     {
@@ -51,8 +51,8 @@
       "depth": 1.4,
       "diameter": 1.0,
       "images": [
-        "images/SW003(1).JPG",
-        "images/SW003(2).JPG"
+        "images/SW003.JPG",
+        "images/SW003 (2).JPG"
       ]
     },
     {
@@ -64,7 +64,10 @@
       "cover_elev": 1560.67,
       "depth": 1.4,
       "diameter": 1.0,
-      "images": []
+      "images": [
+        "images/SW004.JPG",
+        "images/SW004 (2).JPG"
+      ]
     },
     {
       "id": "SW004A",
@@ -87,7 +90,7 @@
       "depth": 2.0,
       "diameter": 1.0,
       "images": [
-        "images/SW005(1).JPG"
+        "images/SW005.JPG"
       ]
     },
     {
@@ -100,8 +103,7 @@
       "depth": 0.8,
       "diameter": 1.0,
       "images": [
-        "images/SW006(1).JPG",
-        "images/SW006(2).JPG"
+        "images/SW006.JPG"
       ]
     },
     {
@@ -114,8 +116,9 @@
       "depth": 1.6,
       "diameter": 1.0,
       "images": [
-        "images/SW007(1).JPG",
-        "images/SW007(2).JPG"
+        "images/SW007.JPG",
+        "images/SW007 (2).JPG",
+        "images/sw007 (3).JPG"
       ]
     },
     {
@@ -128,9 +131,8 @@
       "depth": 0.9,
       "diameter": 1.0,
       "images": [
-        "images/SW008(1).JPG",
-        "images/SW008(2).JPG",
-        "images/SW008(3).JPG"
+        "images/SW008.JPG",
+        "images/SW008 (2).JPG"
       ]
     },
     {
@@ -142,7 +144,10 @@
       "cover_elev": 1565.04,
       "depth": 1.0,
       "diameter": 1.0,
-      "images": []
+      "images": [
+        "images/SW009.JPG",
+        "images/SW009 (2).JPG"
+      ]
     },
     {
       "id": "SW010",
@@ -154,8 +159,8 @@
       "depth": 0.5,
       "diameter": 1.0,
       "images": [
-        "images/SW010(1).JPG",
-        "images/SW010(2).JPG"
+        "images/SW010.JPG",
+        "images/SW010 (2).JPG"
       ]
     },
     {
@@ -168,8 +173,8 @@
       "depth": 0.5,
       "diameter": 1.0,
       "images": [
-        "images/SW011(1).JPG",
-        "images/SW011(2).JPG"
+        "images/SW011.JPG",
+        "images/SW011 (2).JPG"
       ]
     },
     {
@@ -182,8 +187,8 @@
       "depth": 1.4,
       "diameter": 1.0,
       "images": [
-        "images/SW012(1).JPG",
-        "images/SW012(2).JPG"
+        "images/SW012.JPG",
+        "images/SW012 (2).JPG"
       ]
     },
     {
@@ -196,8 +201,8 @@
       "depth": 1.0,
       "diameter": 1.0,
       "images": [
-        "images/SW013(1).JPG",
-        "images/SW013(2).JPG"
+        "images/SW013.JPG",
+        "images/SW013 (2).JPG"
       ]
     },
     {
@@ -210,8 +215,8 @@
       "depth": 1.6,
       "diameter": 1.0,
       "images": [
-        "images/SW014(1).JPG",
-        "images/SW014(2).JPG"
+        "images/SW014.JPG",
+        "images/SW014 (2).JPG"
       ]
     },
     {
@@ -224,8 +229,8 @@
       "depth": 1.5,
       "diameter": 1.0,
       "images": [
-        "images/SW015(1).JPG",
-        "images/SW015(2).JPG"
+        "images/SW015.JPG",
+        "images/SW015 (2).JPG"
       ]
     },
     {
@@ -238,8 +243,8 @@
       "depth": 1.58,
       "diameter": 1.0,
       "images": [
-        "images/SW016(1).JPG",
-        "images/SW016(2).JPG"
+        "images/SW016.JPG",
+        "images/SW016 (2).JPG"
       ]
     },
     {
@@ -252,8 +257,8 @@
       "depth": 1.6,
       "diameter": 1.0,
       "images": [
-        "images/SW017(1).JPG",
-        "images/SW017(2).JPG"
+        "images/SW017.JPG",
+        "images/SW017 (2).JPG"
       ]
     },
     {
@@ -266,8 +271,8 @@
       "depth": 1.7,
       "diameter": 1.0,
       "images": [
-        "images/SW018(1).JPG",
-        "images/SW018(2).JPG"
+        "images/SW018.JPG",
+        "images/SW018 (2).JPG"
       ]
     },
     {
@@ -280,8 +285,8 @@
       "depth": 1.45,
       "diameter": 1.0,
       "images": [
-        "images/SW019(1).JPG",
-        "images/SW019(2).JPG"
+        "images/SW019.JPG",
+        "images/SW019 (2).JPG"
       ]
     },
     {
@@ -294,8 +299,9 @@
       "depth": 1.56,
       "diameter": 1.0,
       "images": [
-        "images/SW020(1).JPG",
-        "images/SW020(2).JPG"
+        "images/SW020.JPG",
+        "images/SW020 (2).JPG",
+        "images/SW020 (3).JPG"
       ]
     },
     {
@@ -308,8 +314,8 @@
       "depth": 1.62,
       "diameter": 1.0,
       "images": [
-        "images/SW021(1).JPG",
-        "images/SW021(2).JPG"
+        "images/SW021.JPG",
+        "images/SW021 (2).JPG"
       ]
     },
     {
@@ -322,8 +328,8 @@
       "depth": 1.73,
       "diameter": 1.0,
       "images": [
-        "images/SW022(1).JPG",
-        "images/SW022(2).JPG"
+        "images/SW022.JPG",
+        "images/SW022 (2).JPG"
       ]
     },
     {
@@ -361,8 +367,8 @@
       "depth": 0.6,
       "diameter": 1.0,
       "images": [
-        "images/SW025(1).JPG",
-        "images/SW025(2).JPG"
+        "images/SW025.JPG",
+        "images/SW025 (2).JPG"
       ]
     },
     {
@@ -375,8 +381,9 @@
       "depth": 0.0,
       "diameter": 1.0,
       "images": [
-        "images/SW026(1).JPG",
-        "images/SW026(2).JPG"
+        "images/SW026.JPG",
+        "images/SW026 (2).JPG",
+        "images/SW026 (3).JPG"
       ]
     },
     {
@@ -389,10 +396,8 @@
       "depth": 0.65,
       "diameter": 1.0,
       "images": [
-        "images/SW027(1).JPG",
-        "images/SW027(2).JPG",
-        "images/SW027(3).JPG",
-        "images/SW027(4).JPG"
+        "images/SW027.JPG",
+        "images/SW027 (2).JPG"
       ]
     },
     {
@@ -405,8 +410,8 @@
       "depth": 0.4,
       "diameter": 1.0,
       "images": [
-        "images/SW028(1).JPG",
-        "images/SW028(2).JPG"
+        "images/SW028.JPG",
+        "images/SW028 (2).JPG"
       ]
     },
     {
@@ -418,7 +423,10 @@
       "cover_elev": 1547.44,
       "depth": 0.55,
       "diameter": 1.0,
-      "images": []
+      "images": [
+        "images/SW029.JPG",
+        "images/SW029 (2).JPG"
+      ]
     },
     {
       "id": "SW030",
@@ -430,8 +438,8 @@
       "depth": 1.3,
       "diameter": 1.0,
       "images": [
-        "images/SW030(1).JPG",
-        "images/SW030(2).JPG"
+        "images/SW030.JPG",
+        "images/SW030 (2).JPG"
       ]
     },
     {
@@ -444,8 +452,8 @@
       "depth": 0.6,
       "diameter": 1.0,
       "images": [
-        "images/SW031(1).JPG",
-        "images/SW031(2).JPG"
+        "images/SW031.JPG",
+        "images/SW031 (2).JPG"
       ]
     },
     {
@@ -458,8 +466,8 @@
       "depth": 0.8,
       "diameter": 1.0,
       "images": [
-        "images/SW032(1).JPG",
-        "images/SW032(2).JPG"
+        "images/SW032.JPG",
+        "images/SW032 (2).JPG"
       ]
     },
     {
@@ -471,7 +479,10 @@
       "cover_elev": 1548.21,
       "depth": 0.4,
       "diameter": 1.0,
-      "images": []
+      "images": [
+        "images/SW033 (1).JPG",
+        "images/SW033 (2).JPG"
+      ]
     },
     {
       "id": "SW034",
@@ -483,8 +494,8 @@
       "depth": 0.9,
       "diameter": 1.0,
       "images": [
-        "images/SW034(1).JPG",
-        "images/SW034(2).JPG"
+        "images/SW034 (1).JPG",
+        "images/SW034 (2).JPG"
       ]
     },
     {
@@ -497,8 +508,10 @@
       "depth": 0.4,
       "diameter": 1.0,
       "images": [
-        "images/SW035(1).JPG",
-        "images/SW035(2).JPG"
+        "images/sw035.JPG",
+        "images/SW035 (1).JPG",
+        "images/SW035 (2).JPG",
+        "images/sw035 (3).JPG"
       ]
     },
     {
@@ -511,10 +524,8 @@
       "depth": 0.0,
       "diameter": 1.0,
       "images": [
-        "images/SW036(1).JPG",
-        "images/SW036(2).JPG",
-        "images/SW036(3).JPG",
-        "images/SW036(4).JPG"
+        "images/SW036 (1).JPG",
+        "images/SW036 (2).JPG"
       ]
     },
     {
@@ -526,7 +537,10 @@
       "cover_elev": 1560.39,
       "depth": 0.65,
       "diameter": 1.0,
-      "images": []
+      "images": [
+        "images/SW037 (1).JPG",
+        "images/SW037 (2).JPG"
+      ]
     },
     {
       "id": "SW038",
@@ -537,7 +551,10 @@
       "cover_elev": 1560.03,
       "depth": 1.28,
       "diameter": 1.0,
-      "images": []
+      "images": [
+        "images/SW038 (1).JPG",
+        "images/SW038 (2).JPG"
+      ]
     },
     {
       "id": "SW039",
@@ -548,7 +565,10 @@
       "cover_elev": 1558.92,
       "depth": 1.07,
       "diameter": 1.0,
-      "images": []
+      "images": [
+        "images/SW039 (1).JPG",
+        "images/SW039 (2).JPG"
+      ]
     },
     {
       "id": "SW040",
@@ -559,7 +579,10 @@
       "cover_elev": 1560.55,
       "depth": 0.88,
       "diameter": 1.0,
-      "images": []
+      "images": [
+        "images/SW040 (1).JPG",
+        "images/SW040 (2).JPG"
+      ]
     },
     {
       "id": "SW041",
@@ -570,7 +593,10 @@
       "cover_elev": 1560.5,
       "depth": 0.0,
       "diameter": 1.0,
-      "images": []
+      "images": [
+        "images/SW041 (1).JPG",
+        "images/SW041 (2).JPG"
+      ]
     },
     {
       "id": "SW042",
@@ -581,7 +607,10 @@
       "cover_elev": 1558.75,
       "depth": 1.5,
       "diameter": 1.0,
-      "images": []
+      "images": [
+        "images/SW042 (1).JPG",
+        "images/SW042 (2).JPG"
+      ]
     },
     {
       "id": "SW043",
@@ -592,7 +621,10 @@
       "cover_elev": 1558.22,
       "depth": 1.5,
       "diameter": 1.0,
-      "images": []
+      "images": [
+        "images/SW043 (1).JPG",
+        "images/SW043 (2).JPG"
+      ]
     },
     {
       "id": "SW044",
@@ -603,7 +635,9 @@
       "cover_elev": 1557.64,
       "depth": 1.47,
       "diameter": 1.0,
-      "images": []
+      "images": [
+        "images/SW044.JPG"
+      ]
     },
     {
       "id": "SW045",
@@ -614,7 +648,12 @@
       "cover_elev": 1557.12,
       "depth": 0.0,
       "diameter": 1.0,
-      "images": []
+      "images": [
+        "images/SW045 (1).JPG",
+        "images/SW045 (2).JPG",
+        "images/SW045 (3).JPG",
+        "images/SW045 (4).JPG"
+      ]
     },
     {
       "id": "SW046",
@@ -636,7 +675,12 @@
       "cover_elev": 1556.48,
       "depth": 2.5,
       "diameter": 1.0,
-      "images": []
+      "images": [
+        "images/sw047.jpg",
+        "images/SW047 (1).JPG",
+        "images/SW047 (2).JPG",
+        "images/sw047 (3).jpg"
+      ]
     },
     {
       "id": "SW047A",
@@ -658,7 +702,12 @@
       "cover_elev": 1553.84,
       "depth": 1.2,
       "diameter": 1.0,
-      "images": []
+      "images": [
+        "images/sw048.jpg",
+        "images/SW048 (1).JPG",
+        "images/SW048 (2).JPG",
+        "images/sw048 (3).jpg"
+      ]
     },
     {
       "id": "SW049",
@@ -669,7 +718,14 @@
       "cover_elev": 1551.69,
       "depth": 1.38,
       "diameter": 1.0,
-      "images": []
+      "images": [
+        "images/sw049.jpg",
+        "images/SW049 (1).JPG",
+        "images/SW049 (2).JPG",
+        "images/sw049 (3).jpg",
+        "images/sw049 (4).JPG",
+        "images/sw049 (5).JPG"
+      ]
     },
     {
       "id": "SW050",
@@ -680,7 +736,12 @@
       "cover_elev": 1548.97,
       "depth": 1.3,
       "diameter": 1.0,
-      "images": []
+      "images": [
+        "images/sw050.JPG",
+        "images/sw050 (2).JPG",
+        "images/sw050 (3).JPG",
+        "images/sw050 (4).JPG"
+      ]
     },
     {
       "id": "SW051",
@@ -691,7 +752,10 @@
       "cover_elev": 1550.28,
       "depth": 0.0,
       "diameter": 1.0,
-      "images": []
+      "images": [
+        "images/sw051.JPG",
+        "images/sw051 (2).JPG"
+      ]
     },
     {
       "id": "SW052",
@@ -702,7 +766,10 @@
       "cover_elev": 1549.98,
       "depth": 0.7,
       "diameter": 1.0,
-      "images": []
+      "images": [
+        "images/sw052.JPG",
+        "images/sw052 (2).JPG"
+      ]
     },
     {
       "id": "SW053",
@@ -713,7 +780,10 @@
       "cover_elev": 1560.36,
       "depth": 0.91,
       "diameter": 1.0,
-      "images": []
+      "images": [
+        "images/sw053.JPG",
+        "images/sw053 (2).JPG"
+      ]
     },
     {
       "id": "SW054",
@@ -724,7 +794,10 @@
       "cover_elev": 1560.42,
       "depth": 0.58,
       "diameter": 1.0,
-      "images": []
+      "images": [
+        "images/sw054.JPG",
+        "images/sw054 (2).JPG"
+      ]
     },
     {
       "id": "SW055",
@@ -735,7 +808,10 @@
       "cover_elev": 1559.86,
       "depth": 1.6,
       "diameter": 1.0,
-      "images": []
+      "images": [
+        "images/sw055.JPG",
+        "images/sw055 (2).JPG"
+      ]
     },
     {
       "id": "SW056",
@@ -757,7 +833,10 @@
       "cover_elev": 1559.44,
       "depth": 2.4,
       "diameter": 1.0,
-      "images": []
+      "images": [
+        "images/sw057.JPG",
+        "images/sw057 (2).JPG"
+      ]
     },
     {
       "id": "SW058",
@@ -768,7 +847,10 @@
       "cover_elev": 1559.69,
       "depth": 1.07,
       "diameter": 1.0,
-      "images": []
+      "images": [
+        "images/sw058.JPG",
+        "images/sw058 (2).JPG"
+      ]
     },
     {
       "id": "SW059",
@@ -779,7 +861,10 @@
       "cover_elev": 1558.99,
       "depth": 2.33,
       "diameter": 1.0,
-      "images": []
+      "images": [
+        "images/sw059.JPG",
+        "images/sw059 (2).JPG"
+      ]
     },
     {
       "id": "SW060",
@@ -790,7 +875,9 @@
       "cover_elev": 1558.14,
       "depth": 1.84,
       "diameter": 1.0,
-      "images": []
+      "images": [
+        "images/sw060.JPG"
+      ]
     },
     {
       "id": "SW061",
@@ -801,7 +888,9 @@
       "cover_elev": 1558.12,
       "depth": 0.0,
       "diameter": 1.0,
-      "images": []
+      "images": [
+        "images/sw061.JPG"
+      ]
     },
     {
       "id": "SW062",
@@ -812,7 +901,11 @@
       "cover_elev": 1558.42,
       "depth": 2.14,
       "diameter": 1.0,
-      "images": []
+      "images": [
+        "images/sw062.JPG",
+        "images/sw062 (2).JPG",
+        "images/sw062 (3).JPG"
+      ]
     },
     {
       "id": "SW063",
@@ -823,7 +916,11 @@
       "cover_elev": 1556.57,
       "depth": 1.44,
       "diameter": 1.0,
-      "images": []
+      "images": [
+        "images/sw063.JPG",
+        "images/sw063 (2).JPG",
+        "images/sw063 (3).JPG"
+      ]
     },
     {
       "id": "SW064",
@@ -834,7 +931,10 @@
       "cover_elev": 1556.59,
       "depth": 1.58,
       "diameter": 1.0,
-      "images": []
+      "images": [
+        "images/sw064.JPG",
+        "images/sw064 (2).JPG"
+      ]
     },
     {
       "id": "SW065",
@@ -856,7 +956,11 @@
       "cover_elev": 1556.59,
       "depth": 1.73,
       "diameter": 1.0,
-      "images": []
+      "images": [
+        "images/sw066.JPG",
+        "images/sw066 (2).JPG",
+        "images/sw066 (3).JPG"
+      ]
     },
     {
       "id": "SW067",
@@ -867,7 +971,10 @@
       "cover_elev": 1556.54,
       "depth": 1.88,
       "diameter": 1.0,
-      "images": []
+      "images": [
+        "images/sw067.JPG",
+        "images/sw067 (2).JPG"
+      ]
     },
     {
       "id": "SW068",
@@ -878,7 +985,10 @@
       "cover_elev": 1556.51,
       "depth": 1.96,
       "diameter": 1.0,
-      "images": []
+      "images": [
+        "images/sw068.JPG",
+        "images/sw068 (2).JPG"
+      ]
     },
     {
       "id": "SW069",
@@ -889,7 +999,10 @@
       "cover_elev": 1556.51,
       "depth": 2.26,
       "diameter": 1.0,
-      "images": []
+      "images": [
+        "images/sw069.JPG",
+        "images/sw069 (2).JPG"
+      ]
     },
     {
       "id": "SW070",
@@ -900,7 +1013,10 @@
       "cover_elev": 1556.52,
       "depth": 2.58,
       "diameter": 1.0,
-      "images": []
+      "images": [
+        "images/sw070.JPG",
+        "images/sw070 (2).JPG"
+      ]
     },
     {
       "id": "SW071",
@@ -911,7 +1027,9 @@
       "cover_elev": 1556.51,
       "depth": 2.9,
       "diameter": 1.0,
-      "images": []
+      "images": [
+        "images/sw071.JPG"
+      ]
     },
     {
       "id": "SW072",
@@ -922,7 +1040,10 @@
       "cover_elev": 1556.54,
       "depth": 1.8,
       "diameter": 1.0,
-      "images": []
+      "images": [
+        "images/sw072.JPG",
+        "images/sw072 (2).JPG"
+      ]
     },
     {
       "id": "SW073",
@@ -933,7 +1054,10 @@
       "cover_elev": 1556.56,
       "depth": 2.07,
       "diameter": 1.0,
-      "images": []
+      "images": [
+        "images/sw073.JPG",
+        "images/sw073 (2).JPG"
+      ]
     },
     {
       "id": "SW074",
@@ -944,7 +1068,9 @@
       "cover_elev": 1556.53,
       "depth": 2.17,
       "diameter": 1.0,
-      "images": []
+      "images": [
+        "images/sw074.JPG"
+      ]
     },
     {
       "id": "SW075",
@@ -955,7 +1081,10 @@
       "cover_elev": 1556.3,
       "depth": 4.15,
       "diameter": 1.0,
-      "images": []
+      "images": [
+        "images/sw075.JPG",
+        "images/sw075 (2).JPG"
+      ]
     },
     {
       "id": "SW076",
@@ -966,7 +1095,10 @@
       "cover_elev": 1555.65,
       "depth": 3.61,
       "diameter": 1.0,
-      "images": []
+      "images": [
+        "images/sw076.JPG",
+        "images/sw076 (2).JPG"
+      ]
     },
     {
       "id": "SW077",
@@ -977,7 +1109,10 @@
       "cover_elev": 1555.47,
       "depth": 3.66,
       "diameter": 1.0,
-      "images": []
+      "images": [
+        "images/sw077.JPG",
+        "images/sw077 (2).JPG"
+      ]
     },
     {
       "id": "SW078",
@@ -988,7 +1123,10 @@
       "cover_elev": 1555.26,
       "depth": 0.12,
       "diameter": 1.0,
-      "images": []
+      "images": [
+        "images/sw078.JPG",
+        "images/sw078 (2).JPG"
+      ]
     },
     {
       "id": "SW079",
@@ -999,7 +1137,10 @@
       "cover_elev": 1551.63,
       "depth": 1.1,
       "diameter": 1.0,
-      "images": []
+      "images": [
+        "images/sw079.JPG",
+        "images/sw079 (2).JPG"
+      ]
     },
     {
       "id": "SW080",
@@ -1010,7 +1151,10 @@
       "cover_elev": 1554.02,
       "depth": 0.75,
       "diameter": 1.0,
-      "images": []
+      "images": [
+        "images/sw080.JPG",
+        "images/sw080 (2).JPG"
+      ]
     },
     {
       "id": "SW081",
@@ -1021,7 +1165,10 @@
       "cover_elev": 1553.59,
       "depth": 1.41,
       "diameter": 1.0,
-      "images": []
+      "images": [
+        "images/sw081.JPG",
+        "images/sw081 (2).JPG"
+      ]
     },
     {
       "id": "SW082",
@@ -1032,7 +1179,10 @@
       "cover_elev": 1568.37,
       "depth": 0.0,
       "diameter": 1.0,
-      "images": []
+      "images": [
+        "images/sw082.JPG",
+        "images/sw082 (2).JPG"
+      ]
     },
     {
       "id": "SW083",
@@ -1043,7 +1193,9 @@
       "cover_elev": 1568.27,
       "depth": 0.9,
       "diameter": 1.0,
-      "images": []
+      "images": [
+        "images/sw083.JPG"
+      ]
     },
     {
       "id": "SW084",
@@ -1208,7 +1360,9 @@
       "cover_elev": 1563.15,
       "depth": 4.3,
       "diameter": 1.0,
-      "images": []
+      "images": [
+        "images/sw098.jpg"
+      ]
     },
     {
       "id": "SW099",
@@ -1219,7 +1373,9 @@
       "cover_elev": 1559.44,
       "depth": 1.6,
       "diameter": 1.0,
-      "images": []
+      "images": [
+        "images/sw099.jpg"
+      ]
     },
     {
       "id": "SW100",
@@ -1230,7 +1386,10 @@
       "cover_elev": 1560.17,
       "depth": 0.53,
       "diameter": 1.0,
-      "images": []
+      "images": [
+        "images/sw100.jpg",
+        "images/sw100 (2).jpg"
+      ]
     },
     {
       "id": "SW101",
@@ -1241,7 +1400,11 @@
       "cover_elev": 1554.95,
       "depth": 1.0,
       "diameter": 1.0,
-      "images": []
+      "images": [
+        "images/sw101.jpg",
+        "images/sw101 (2).jpg",
+        "images/sw101 (3).jpg"
+      ]
     },
     {
       "id": "SW102",
@@ -1252,7 +1415,10 @@
       "cover_elev": 1554.79,
       "depth": 0.6,
       "diameter": 1.0,
-      "images": []
+      "images": [
+        "images/sw102.jpg",
+        "images/sw102 (2).jpg"
+      ]
     },
     {
       "id": "SW103",
@@ -1263,7 +1429,10 @@
       "cover_elev": 1554.64,
       "depth": 0.6,
       "diameter": 1.0,
-      "images": []
+      "images": [
+        "images/sw103.jpg",
+        "images/sw103 (2).jpg"
+      ]
     },
     {
       "id": "SW104",
@@ -1274,7 +1443,10 @@
       "cover_elev": 1554.47,
       "depth": 0.9,
       "diameter": 1.0,
-      "images": []
+      "images": [
+        "images/sw104.jpg",
+        "images/sw104 (2).jpg"
+      ]
     },
     {
       "id": "SW105",
@@ -1285,7 +1457,9 @@
       "cover_elev": 1554.4,
       "depth": 0.5,
       "diameter": 1.0,
-      "images": []
+      "images": [
+        "images/sw105.jpg"
+      ]
     },
     {
       "id": "SW106",
@@ -1296,7 +1470,10 @@
       "cover_elev": 1558.6,
       "depth": 0.6,
       "diameter": 1.0,
-      "images": []
+      "images": [
+        "images/sw106.jpg",
+        "images/sw106 (2).jpg"
+      ]
     },
     {
       "id": "SW107",
@@ -1307,7 +1484,10 @@
       "cover_elev": 1558.59,
       "depth": 0.6,
       "diameter": 1.0,
-      "images": []
+      "images": [
+        "images/sw107.jpg",
+        "images/sw107 (2).jpg"
+      ]
     },
     {
       "id": "SW108",
@@ -1318,7 +1498,10 @@
       "cover_elev": 1558.32,
       "depth": 0.5,
       "diameter": 1.0,
-      "images": []
+      "images": [
+        "images/sw108.jpg",
+        "images/sw108 (2).jpg"
+      ]
     },
     {
       "id": "SW109",
@@ -1329,7 +1512,11 @@
       "cover_elev": 1558.13,
       "depth": 0.4,
       "diameter": 1.0,
-      "images": []
+      "images": [
+        "images/sw109.jpg",
+        "images/sw109 (2).jpg",
+        "images/sw109 (3).jpg"
+      ]
     },
     {
       "id": "SW110",
@@ -1340,7 +1527,10 @@
       "cover_elev": 1559.16,
       "depth": 1.0,
       "diameter": 1.0,
-      "images": []
+      "images": [
+        "images/sw110.jpg",
+        "images/sw110 (2).jpg"
+      ]
     },
     {
       "id": "SW111",
@@ -1351,7 +1541,10 @@
       "cover_elev": 1558.74,
       "depth": 0.7,
       "diameter": 1.0,
-      "images": []
+      "images": [
+        "images/sw111.jpg",
+        "images/sw111 (2).jpg"
+      ]
     },
     {
       "id": "SW112",
@@ -1362,7 +1555,10 @@
       "cover_elev": 1557.68,
       "depth": 0.4,
       "diameter": 1.0,
-      "images": []
+      "images": [
+        "images/sw112.jpg",
+        "images/sw112 (2).jpg"
+      ]
     },
     {
       "id": "SW113",
@@ -1373,7 +1569,10 @@
       "cover_elev": 1557.73,
       "depth": 0.4,
       "diameter": 1.0,
-      "images": []
+      "images": [
+        "images/sw113.jpg",
+        "images/sw113 (2).jpg"
+      ]
     },
     {
       "id": "SW114",
@@ -1384,7 +1583,10 @@
       "cover_elev": 1557.97,
       "depth": 0.9,
       "diameter": 1.0,
-      "images": []
+      "images": [
+        "images/sw114.jpg",
+        "images/sw114 (2).jpg"
+      ]
     },
     {
       "id": "SW115",
@@ -1395,7 +1597,11 @@
       "cover_elev": 1557.78,
       "depth": 2.2,
       "diameter": 1.0,
-      "images": []
+      "images": [
+        "images/sw115.jpg",
+        "images/sw115 (2).jpg",
+        "images/sw115 (3).jpg"
+      ]
     },
     {
       "id": "SW116",
@@ -1406,7 +1612,10 @@
       "cover_elev": 1554.37,
       "depth": 0.0,
       "diameter": 1.0,
-      "images": []
+      "images": [
+        "images/sw116.jpg",
+        "images/sw116 (2).jpg"
+      ]
     },
     {
       "id": "SW117",
@@ -1417,7 +1626,10 @@
       "cover_elev": 1554.44,
       "depth": 0.0,
       "diameter": 1.0,
-      "images": []
+      "images": [
+        "images/sw117.jpg",
+        "images/sw117 (2).jpg"
+      ]
     },
     {
       "id": "SW118",
@@ -1428,7 +1640,10 @@
       "cover_elev": 1554.51,
       "depth": 1.1,
       "diameter": 1.0,
-      "images": []
+      "images": [
+        "images/sw118.jpg",
+        "images/sw118 (2).jpg"
+      ]
     },
     {
       "id": "SW119",
@@ -1439,7 +1654,10 @@
       "cover_elev": 1554.63,
       "depth": 1.0,
       "diameter": 1.0,
-      "images": []
+      "images": [
+        "images/sw119.jpg",
+        "images/sw119 (2).jpg"
+      ]
     },
     {
       "id": "SW120",
@@ -1450,7 +1668,10 @@
       "cover_elev": 1554.74,
       "depth": 1.5,
       "diameter": 1.0,
-      "images": []
+      "images": [
+        "images/sw120.jpg",
+        "images/sw120 (2).jpg"
+      ]
     },
     {
       "id": "SW121",
@@ -1461,7 +1682,10 @@
       "cover_elev": 1555.11,
       "depth": 2.6,
       "diameter": 1.0,
-      "images": []
+      "images": [
+        "images/sw121.jpg",
+        "images/sw121 (2).jpg"
+      ]
     },
     {
       "id": "SW122",
@@ -1472,7 +1696,10 @@
       "cover_elev": 1555.6,
       "depth": 1.4,
       "diameter": 1.0,
-      "images": []
+      "images": [
+        "images/sw122.jpg",
+        "images/sw122 (2).jpg"
+      ]
     },
     {
       "id": "SW122A",
@@ -1495,7 +1722,10 @@
       "cover_elev": 1565.8,
       "depth": 1.3,
       "diameter": 1.0,
-      "images": []
+      "images": [
+        "images/sw123.jpg",
+        "images/sw123 (2).jpg"
+      ]
     },
     {
       "id": "SW124",
@@ -1506,7 +1736,10 @@
       "cover_elev": 1565.38,
       "depth": 1.25,
       "diameter": 1.0,
-      "images": []
+      "images": [
+        "images/sw124.jpg",
+        "images/sw124 (2).jpg"
+      ]
     },
     {
       "id": "SW125",
@@ -1517,7 +1750,10 @@
       "cover_elev": 1564.41,
       "depth": 2.0,
       "diameter": 1.0,
-      "images": []
+      "images": [
+        "images/sw125.jpg",
+        "images/sw125 (2).jpg"
+      ]
     },
     {
       "id": "SW126",
@@ -1528,7 +1764,10 @@
       "cover_elev": 1564.93,
       "depth": 2.26,
       "diameter": 1.0,
-      "images": []
+      "images": [
+        "images/sw126.jpg",
+        "images/sw126 (2).jpg"
+      ]
     },
     {
       "id": "SW127",
@@ -1539,7 +1778,10 @@
       "cover_elev": 1564.72,
       "depth": 0.4,
       "diameter": 1.0,
-      "images": []
+      "images": [
+        "images/sw127.jpg",
+        "images/sw127 (2).jpg"
+      ]
     },
     {
       "id": "SW128",
@@ -1561,7 +1803,10 @@
       "cover_elev": 1564.27,
       "depth": 0.0,
       "diameter": 1.0,
-      "images": []
+      "images": [
+        "images/sw129.jpg",
+        "images/sw129 (2).jpg"
+      ]
     },
     {
       "id": "SW130",
@@ -1660,7 +1905,9 @@
       "cover_elev": 1563.27,
       "depth": 0.0,
       "diameter": 1.0,
-      "images": []
+      "images": [
+        "images/sw138.jpg"
+      ]
     },
     {
       "id": "SW139",
@@ -1682,7 +1929,9 @@
       "cover_elev": 1563.21,
       "depth": 0.0,
       "diameter": 1.0,
-      "images": []
+      "images": [
+        "images/sw140.jpg"
+      ]
     },
     {
       "id": "SW141",
@@ -1737,7 +1986,9 @@
       "cover_elev": 1565.03,
       "depth": 1.45,
       "diameter": 1.0,
-      "images": []
+      "images": [
+        "images/sw145.jpg"
+      ]
     },
     {
       "id": "SW146",
@@ -1748,7 +1999,9 @@
       "cover_elev": 1564.78,
       "depth": 0.45,
       "diameter": 1.0,
-      "images": []
+      "images": [
+        "images/sw146.jpg"
+      ]
     },
     {
       "id": "SW147",
@@ -1770,7 +2023,9 @@
       "cover_elev": 1565.42,
       "depth": 1.9,
       "diameter": 1.0,
-      "images": []
+      "images": [
+        "images/sw148.jpg"
+      ]
     },
     {
       "id": "SW149",
@@ -1803,7 +2058,10 @@
       "cover_elev": 1562.02,
       "depth": 4.2,
       "diameter": 1.0,
-      "images": []
+      "images": [
+        "images/sw151.jpg",
+        "images/sw151 (2).jpg"
+      ]
     },
     {
       "id": "SW152",
@@ -1902,7 +2160,9 @@
       "cover_elev": 1559.5,
       "depth": 1.1,
       "diameter": 1.0,
-      "images": []
+      "images": [
+        "images/sw160.jpg"
+      ]
     },
     {
       "id": "SW161",
@@ -1913,7 +2173,11 @@
       "cover_elev": 1559.64,
       "depth": 1.9,
       "diameter": 1.0,
-      "images": []
+      "images": [
+        "images/sw161.jpg",
+        "images/sw161 (2).jpg",
+        "images/sw161 (3).jpg"
+      ]
     },
     {
       "id": "SW162",
@@ -2629,7 +2893,7 @@
       "depth": 0.0,
       "diameter": 1.0,
       "images": [
-        "images/SE001(1).JPG"
+        "images/SE001.JPG"
       ]
     },
     {
@@ -2642,8 +2906,8 @@
       "depth": 1.47,
       "diameter": 1.0,
       "images": [
-        "images/SE002(1).JPG",
-        "images/SE002(2).JPG"
+        "images/SE002.JPG",
+        "images/SE002 (2).JPG"
       ]
     },
     {
@@ -2656,8 +2920,8 @@
       "depth": 0.0,
       "diameter": 1.0,
       "images": [
-        "images/SE003(1).JPG",
-        "images/SE003(2).JPG"
+        "images/SE003.JPG",
+        "images/SE003 (2).JPG"
       ]
     },
     {
@@ -2670,8 +2934,8 @@
       "depth": 2.66,
       "diameter": 1.0,
       "images": [
-        "images/SE004(1).JPG",
-        "images/SE004(2).JPG"
+        "images/SE004.JPG",
+        "images/SE004 (2).JPG"
       ]
     },
     {
@@ -2684,8 +2948,8 @@
       "depth": 2.0,
       "diameter": 1.0,
       "images": [
-        "images/SE005(1) (1).JPG",
-        "images/SE005(2).JPG"
+        "images/SE005.JPG",
+        "images/SE005 (2).JPG"
       ]
     },
     {
@@ -2709,8 +2973,8 @@
       "depth": 1.9,
       "diameter": 1.0,
       "images": [
-        "images/SE007(1).JPG",
-        "images/SE007(2).JPG"
+        "images/SE007.JPG",
+        "images/SE007 (2).JPG"
       ]
     },
     {
@@ -2722,7 +2986,10 @@
       "cover_elev": 1552.22,
       "depth": 0.0,
       "diameter": 1.0,
-      "images": []
+      "images": [
+        "images/SE008.JPG",
+        "images/SE008 (2).JPG"
+      ]
     },
     {
       "id": "SE009",
@@ -2734,8 +3001,8 @@
       "depth": 0.0,
       "diameter": 1.0,
       "images": [
-        "images/SE009(1).JPG",
-        "images/SE009(2).JPG"
+        "images/SE009 (1).JPG",
+        "images/SE009 (2).JPG"
       ]
     },
     {
@@ -2748,8 +3015,8 @@
       "depth": 0.0,
       "diameter": 1.0,
       "images": [
-        "images/SE010(1).JPG",
-        "images/SE010(2).JPG"
+        "images/SE010.JPG",
+        "images/SE010 (2).JPG"
       ]
     },
     {
@@ -2762,8 +3029,8 @@
       "depth": 0.0,
       "diameter": 1.0,
       "images": [
-        "images/SE011(1).JPG",
-        "images/SE011(2).JPG"
+        "images/SE011 (1).JPG",
+        "images/SE011 (2).JPG"
       ]
     },
     {
@@ -2776,8 +3043,8 @@
       "depth": 0.0,
       "diameter": 1.0,
       "images": [
-        "images/SE012(1).JPG",
-        "images/SE012(2).JPG"
+        "images/SE012 (1).JPG",
+        "images/SE012 (2).JPG"
       ]
     },
     {
@@ -2790,8 +3057,8 @@
       "depth": 0.0,
       "diameter": 1.0,
       "images": [
-        "images/SE013(1).JPG",
-        "images/SE013(2).JPG"
+        "images/SE013 (1).JPG",
+        "images/SE013 (2).JPG"
       ]
     },
     {
@@ -2804,8 +3071,8 @@
       "depth": 0.0,
       "diameter": 1.0,
       "images": [
-        "images/SE014(1).JPG",
-        "images/SE014(2).JPG"
+        "images/SE014 (1).JPG",
+        "images/SE014 (2).JPG"
       ]
     },
     {
@@ -2818,8 +3085,8 @@
       "depth": 0.0,
       "diameter": 1.0,
       "images": [
-        "images/SE015(1).JPG",
-        "images/SE015(2).JPG"
+        "images/SE015 (1).JPG",
+        "images/SE015 (2).JPG"
       ]
     },
     {
@@ -2831,7 +3098,10 @@
       "cover_elev": 1549.15,
       "depth": 3.28,
       "diameter": 1.0,
-      "images": []
+      "images": [
+        "images/SE016 (1).JPG",
+        "images/SE016 (2).JPG"
+      ]
     },
     {
       "id": "SE017",
@@ -2843,8 +3113,8 @@
       "depth": 2.6,
       "diameter": 1.0,
       "images": [
-        "images/SE017(1).JPG",
-        "images/SE017(2).JPG"
+        "images/SE017 (1).JPG",
+        "images/SE017 (2).JPG"
       ]
     },
     {
@@ -2857,8 +3127,8 @@
       "depth": 1.2,
       "diameter": 1.0,
       "images": [
-        "images/SE018(1).JPG",
-        "images/SE018(2).JPG"
+        "images/SE018 (1).JPG",
+        "images/SE018 (2).JPG"
       ]
     },
     {
@@ -2871,8 +3141,8 @@
       "depth": 1.7,
       "diameter": 1.0,
       "images": [
-        "images/SE019(1).JPG",
-        "images/SE019(2).JPG"
+        "images/SE019 (1).JPG",
+        "images/SE019 (2).JPG"
       ]
     },
     {
@@ -2885,8 +3155,8 @@
       "depth": 1.55,
       "diameter": 1.0,
       "images": [
-        "images/SE020(1).JPG",
-        "images/SE020(2).JPG"
+        "images/SE020.JPG",
+        "images/SE020 (2).JPG"
       ]
     },
     {
@@ -2899,8 +3169,8 @@
       "depth": 2.2,
       "diameter": 1.0,
       "images": [
-        "images/SE021(1).JPG",
-        "images/SE021(2).JPG"
+        "images/SE021 (1).JPG",
+        "images/SE021 (2).JPG"
       ]
     },
     {
@@ -2913,8 +3183,8 @@
       "depth": 1.7,
       "diameter": 1.0,
       "images": [
-        "images/SE022(1).JPG",
-        "images/SE022(2).JPG"
+        "images/SE022 (1).JPG",
+        "images/SE022 (2).JPG"
       ]
     },
     {
@@ -2927,8 +3197,8 @@
       "depth": 2.7,
       "diameter": 1.0,
       "images": [
-        "images/SE023(1).JPG",
-        "images/SE023(2).JPG"
+        "images/SE023 (1).JPG",
+        "images/SE023 (2).JPG"
       ]
     },
     {
@@ -2941,8 +3211,8 @@
       "depth": 3.75,
       "diameter": 1.0,
       "images": [
-        "images/SE024(1).JPG",
-        "images/SE024(2).JPG"
+        "images/SE024 (1).JPG",
+        "images/SE024 (2).JPG"
       ]
     },
     {
@@ -2955,8 +3225,8 @@
       "depth": 3.6,
       "diameter": 1.0,
       "images": [
-        "images/SE025(1).JPG",
-        "images/SE025(2).JPG"
+        "images/SE025 (1).JPG",
+        "images/SE025 (2).JPG"
       ]
     },
     {
@@ -2969,8 +3239,10 @@
       "depth": 2.5,
       "diameter": 1.0,
       "images": [
-        "images/SE026(1).JPG",
-        "images/SE026(2).JPG"
+        "images/se026.JPG",
+        "images/SE026 (1).JPG",
+        "images/SE026 (2).JPG",
+        "images/se026 (3).JPG"
       ]
     },
     {
@@ -2996,7 +3268,10 @@
       "cover_elev": 1554.36,
       "depth": 2.58,
       "diameter": 1.0,
-      "images": []
+      "images": [
+        "images/SE028 (1).JPG",
+        "images/SE028 (2).JPG"
+      ]
     },
     {
       "id": "SE029",
@@ -3008,8 +3283,7 @@
       "depth": 1.77,
       "diameter": 1.0,
       "images": [
-        "images/SE029(1).JPG",
-        "images/SE029(2).JPG"
+        "images/SE029 (2).JPG"
       ]
     },
     {
@@ -3033,8 +3307,9 @@
       "depth": 2.4,
       "diameter": 1.0,
       "images": [
-        "images/SE031(1).JPG",
-        "images/SE031(2).JPG"
+        "images/SE031 (1).JPG",
+        "images/SE031 (2).JPG",
+        "images/SE031 (3).JPG"
       ]
     },
     {
@@ -3047,8 +3322,10 @@
       "depth": 1.56,
       "diameter": 1.0,
       "images": [
-        "images/SE032(1).JPG",
-        "images/SE032(2).JPG"
+        "images/SE032 (1).JPG",
+        "images/SE032 (2).JPG",
+        "images/SE032 (3).JPG",
+        "images/SE032 (4).JPG"
       ]
     },
     {
@@ -3061,8 +3338,8 @@
       "depth": 2.6,
       "diameter": 1.0,
       "images": [
-        "images/SE033(1).JPG",
-        "images/SE033(2).JPG"
+        "images/SE033 (1).JPG",
+        "images/SE033 (2).JPG"
       ]
     },
     {
@@ -3088,7 +3365,10 @@
       "cover_elev": 1551.56,
       "depth": 2.4,
       "diameter": 1.0,
-      "images": []
+      "images": [
+        "images/SE035 (1).JPG",
+        "images/SE035 (2).JPG"
+      ]
     },
     {
       "id": "SE036",
@@ -3100,8 +3380,8 @@
       "depth": 1.7,
       "diameter": 1.0,
       "images": [
-        "images/SE036(1).JPG",
-        "images/SE036(2).JPG"
+        "images/SE036 (1).JPG",
+        "images/SE036 (2).JPG"
       ]
     },
     {
@@ -3113,7 +3393,10 @@
       "cover_elev": 1559.36,
       "depth": 1.7,
       "diameter": 1.0,
-      "images": []
+      "images": [
+        "images/se037.JPG",
+        "images/se037 (2).JPG"
+      ]
     },
     {
       "id": "SE038",
@@ -3124,7 +3407,10 @@
       "cover_elev": 1558.43,
       "depth": 1.9,
       "diameter": 1.0,
-      "images": []
+      "images": [
+        "images/se038.JPG",
+        "images/se038 (2).JPG"
+      ]
     },
     {
       "id": "SE039",
@@ -3135,7 +3421,10 @@
       "cover_elev": 1557.49,
       "depth": 1.4,
       "diameter": 1.0,
-      "images": []
+      "images": [
+        "images/se039.JPG",
+        "images/se039 (2).JPG"
+      ]
     },
     {
       "id": "SE041",
@@ -3146,7 +3435,10 @@
       "cover_elev": 1557.3,
       "depth": 0.0,
       "diameter": 1.0,
-      "images": []
+      "images": [
+        "images/se041.JPG",
+        "images/se041 (2).JPG"
+      ]
     },
     {
       "id": "SE042",
@@ -3201,7 +3493,10 @@
       "cover_elev": 1560.69,
       "depth": 1.3,
       "diameter": 1.0,
-      "images": []
+      "images": [
+        "images/se052.jpg",
+        "images/se052 (2).jpg"
+      ]
     },
     {
       "id": "SE054",
@@ -3212,7 +3507,10 @@
       "cover_elev": 1560.63,
       "depth": 1.4,
       "diameter": 1.0,
-      "images": []
+      "images": [
+        "images/se054.jpg",
+        "images/se054 (2).jpg"
+      ]
     },
     {
       "id": "SE055",
@@ -3223,7 +3521,10 @@
       "cover_elev": 1560.67,
       "depth": 1.2,
       "diameter": 1.0,
-      "images": []
+      "images": [
+        "images/se055.jpg",
+        "images/se055 (2).jpg"
+      ]
     },
     {
       "id": "SE056",
@@ -3245,7 +3546,10 @@
       "cover_elev": 1560.37,
       "depth": 2.0,
       "diameter": 1.0,
-      "images": []
+      "images": [
+        "images/se057.jpg",
+        "images/se057 (2).jpg"
+      ]
     },
     {
       "id": "SE060",
