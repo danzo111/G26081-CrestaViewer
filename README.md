@@ -4,7 +4,9 @@
 
 NetView is a dual-mode web application for viewing stormwater and sewer infrastructure networks. It features both a **simple 2D Map View** for daily use by facility managers and a **full 3D technical view** for engineers and contractors.
 
-The current dataset covers **406 manholes** and **303 pipes**, including surveyed manholes and dummy junction nodes used to represent polyline bends.
+The current dataset covers **321 surveyed manholes** (234 stormwater, 75 sewer, 3 water, 9 unknown) and **419 pipes** (302 stormwater, 115 sewer, 2 water), plus **175 dummy junction nodes** used to represent polyline bends and pipe stubs. **160 manholes** are linked to on-site inspection photos.
+
+The network is reconciled against the surveyed DXF linework (`data/dxf_overlay.json`). Every pipe records where it came from in a `diameter_source` field — surveyed deliverable, DXF-derived (auto stubs, uncovered linework, audited stubs), CSV import, or manual. The reconciliation, audit, and rendering scripts live in [`tools/`](tools/).
 
 ## File Structure
 
@@ -14,10 +16,12 @@ The current dataset covers **406 manholes** and **303 pipes**, including surveye
 ├── style.css               # All styles (5DGeo branded)
 ├── main.js                 # Application entry point (Map + 3D views)
 ├── data/
-│   ├── network.json            # Primary network data
+│   ├── network.json            # Primary network data (manholes + pipes)
+│   ├── dxf_overlay.json        # Surveyed DXF wet-services linework (reconciliation source)
 │   └── network_with_dummies.json  # Extended network (includes dummy nodes)
-├── images/                 # Manhole inspection photos (JPG)
+├── images/                 # Manhole inspection photos (JPG, ~1400px)
 │   └── MAIN INDEX.html     # Photo index
+├── tools/                  # Reconciliation, audit & rendering scripts (Python)
 └── modules/
     ├── AppState.js             # Central state management
     ├── CoordinateSystem.js     # Survey-to-scene transforms
@@ -123,6 +127,8 @@ toInvert   = toMH.cover_elev   − pipe.to_depth
 ```
 
 Dummy manholes (intermediate polyline nodes with no physical cover) inherit their elevation from their `parent_mh`, ensuring invert calculations remain consistent across segmented pipes. Flow arrows and animated chevrons both follow this same direction logic.
+
+**Overriding direction:** a pipe with `"flow_override": true` (or any pipe touching a dummy node) ignores the invert gradient and flows in its authored `from_mh → to_mh` order. Use this where survey inverts are unreliable or a direction is known — to reverse an arrow, swap the pipe's `from_mh`/`to_mh` (and its `path`).
 
 ---
 
